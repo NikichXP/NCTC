@@ -6,5 +6,6 @@
   </head>
   <body>
     Hello teamC m8s!
+  <a href="testServlet">get access levels from DB</a>
   </body>
 </html>
