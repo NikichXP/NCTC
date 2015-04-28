@@ -10,6 +10,8 @@
 
 #netbeans IDE
 *nbproject*
+dist/
+build.xml
 
 #is it needed?
 *MANIFEST.MF
@@ -63,3 +65,6 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+/moduleEJB/build/
+/moduleWEB/build/
+/build/
