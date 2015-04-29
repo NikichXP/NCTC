@@ -12,6 +12,7 @@
 *nbproject*
 dist/
 build.xml
+moduleEJB/src/java/*
 
 #is it needed?
 *MANIFEST.MF
