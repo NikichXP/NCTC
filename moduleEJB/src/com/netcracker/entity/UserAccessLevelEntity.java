@@ -1,15 +1,17 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:13 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user_access_level", schema = "public", catalog = "postgres")
 public class UserAccessLevelEntity {
 	private BigInteger id;
 	private String name;
+	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -49,5 +51,14 @@ public class UserAccessLevelEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
+	}
+
+	@OneToMany(mappedBy = "userAccessLevelByUserAccessLevelId")
+	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
+		return userUserAccessLevelsById;
+	}
+
+	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
+		this.userUserAccessLevelsById = userUserAccessLevelsById;
 	}
 }

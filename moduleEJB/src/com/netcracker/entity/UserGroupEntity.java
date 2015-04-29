@@ -1,9 +1,10 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:13 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user_group", schema = "public", catalog = "postgres")
@@ -11,6 +12,7 @@ public class UserGroupEntity {
 	private BigInteger id;
 	private String name;
 	private BigInteger tariffMultiplier;
+	private Collection<UserEntity> usersById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -63,5 +65,14 @@ public class UserGroupEntity {
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (tariffMultiplier != null ? tariffMultiplier.hashCode() : 0);
 		return result;
+	}
+
+	@OneToMany(mappedBy = "userGroupByGroupId")
+	public Collection<UserEntity> getUsersById() {
+		return usersById;
+	}
+
+	public void setUsersById(Collection<UserEntity> usersById) {
+		this.usersById = usersById;
 	}
 }

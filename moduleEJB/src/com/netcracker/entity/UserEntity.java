@@ -1,10 +1,11 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:12 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "public", catalog = "postgres")
@@ -23,7 +24,11 @@ public class UserEntity {
 	private Boolean animalFriendly;
 	private Boolean smokingFriendly;
 	private Boolean blocked;
+	private Collection<FavouriteAddressEntity> favouriteAddressesById;
 	private CarEntity carByCarId;
+	private UserGroupEntity userGroupByGroupId;
+	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
+	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -214,6 +219,15 @@ public class UserEntity {
 		return result;
 	}
 
+	@OneToMany(mappedBy = "userByCustomerId")
+	public Collection<FavouriteAddressEntity> getFavouriteAddressesById() {
+		return favouriteAddressesById;
+	}
+
+	public void setFavouriteAddressesById(Collection<FavouriteAddressEntity> favouriteAddressesById) {
+		this.favouriteAddressesById = favouriteAddressesById;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
 	public CarEntity getCarByCarId() {
@@ -222,5 +236,33 @@ public class UserEntity {
 
 	public void setCarByCarId(CarEntity carByCarId) {
 		this.carByCarId = carByCarId;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
+	public UserGroupEntity getUserGroupByGroupId() {
+		return userGroupByGroupId;
+	}
+
+	public void setUserGroupByGroupId(UserGroupEntity userGroupByGroupId) {
+		this.userGroupByGroupId = userGroupByGroupId;
+	}
+
+	@OneToMany(mappedBy = "userByUserId")
+	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
+		return userDriverCategoriesById;
+	}
+
+	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
+		this.userDriverCategoriesById = userDriverCategoriesById;
+	}
+
+	@OneToMany(mappedBy = "userByUserId")
+	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
+		return userUserAccessLevelsById;
+	}
+
+	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
+		this.userUserAccessLevelsById = userUserAccessLevelsById;
 	}
 }

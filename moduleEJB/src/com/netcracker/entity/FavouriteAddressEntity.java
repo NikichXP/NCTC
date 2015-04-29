@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:12 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -10,6 +10,7 @@ import java.math.BigInteger;
 public class FavouriteAddressEntity {
 	private BigInteger id;
 	private String address;
+	private UserEntity userByCustomerId;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -49,5 +50,15 @@ public class FavouriteAddressEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (address != null ? address.hashCode() : 0);
 		return result;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+	public UserEntity getUserByCustomerId() {
+		return userByCustomerId;
+	}
+
+	public void setUserByCustomerId(UserEntity userByCustomerId) {
+		this.userByCustomerId = userByCustomerId;
 	}
 }

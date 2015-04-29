@@ -1,10 +1,11 @@
 package com.netcracker.entity;
 
-/* 18:34 28.04.2015 by Viktor Taranenko */
+/* 16:12 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "car", schema = "public", catalog = "postgres")
@@ -14,6 +15,9 @@ public class CarEntity {
 	private BigInteger seatsCount;
 	private String licencePlate;
 	private Date dateManufactured;
+	private CarClassEntity carClassByClassId;
+	private DriverCategoryEntity driverCategoryByRequiredDriverCategoryId;
+	private Collection<UserEntity> usersById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -91,5 +95,34 @@ public class CarEntity {
 		result = 31 * result + (licencePlate != null ? licencePlate.hashCode() : 0);
 		result = 31 * result + (dateManufactured != null ? dateManufactured.hashCode() : 0);
 		return result;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
+	public CarClassEntity getCarClassByClassId() {
+		return carClassByClassId;
+	}
+
+	public void setCarClassByClassId(CarClassEntity carClassByClassId) {
+		this.carClassByClassId = carClassByClassId;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
+	public DriverCategoryEntity getDriverCategoryByRequiredDriverCategoryId() {
+		return driverCategoryByRequiredDriverCategoryId;
+	}
+
+	public void setDriverCategoryByRequiredDriverCategoryId(DriverCategoryEntity driverCategoryByRequiredDriverCategoryId) {
+		this.driverCategoryByRequiredDriverCategoryId = driverCategoryByRequiredDriverCategoryId;
+	}
+
+	@OneToMany(mappedBy = "carByCarId")
+	public Collection<UserEntity> getUsersById() {
+		return usersById;
+	}
+
+	public void setUsersById(Collection<UserEntity> usersById) {
+		this.usersById = usersById;
 	}
 }

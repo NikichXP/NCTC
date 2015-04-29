@@ -1,9 +1,10 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:12 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "path", schema = "public", catalog = "postgres")
@@ -19,6 +20,7 @@ public class PathEntity {
 	private BigInteger length;
 	private BigInteger price;
 	private PathEntity pathByNextPathId;
+	private Collection<PathEntity> pathsById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -164,5 +166,14 @@ public class PathEntity {
 
 	public void setPathByNextPathId(PathEntity pathByNextPathId) {
 		this.pathByNextPathId = pathByNextPathId;
+	}
+
+	@OneToMany(mappedBy = "pathByNextPathId")
+	public Collection<PathEntity> getPathsById() {
+		return pathsById;
+	}
+
+	public void setPathsById(Collection<PathEntity> pathsById) {
+		this.pathsById = pathsById;
 	}
 }

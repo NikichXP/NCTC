@@ -1,9 +1,10 @@
 package com.netcracker.entity;
 
-/* 18:35 28.04.2015 by Viktor Taranenko */
+/* 16:12 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "driver_category", schema = "public", catalog = "postgres")
@@ -12,6 +13,8 @@ public class DriverCategoryEntity {
 	private String name;
 	private String description;
 	private BigInteger tariffMultiplier;
+	private Collection<CarEntity> carsById;
+	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -76,5 +79,23 @@ public class DriverCategoryEntity {
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		result = 31 * result + (tariffMultiplier != null ? tariffMultiplier.hashCode() : 0);
 		return result;
+	}
+
+	@OneToMany(mappedBy = "driverCategoryByRequiredDriverCategoryId")
+	public Collection<CarEntity> getCarsById() {
+		return carsById;
+	}
+
+	public void setCarsById(Collection<CarEntity> carsById) {
+		this.carsById = carsById;
+	}
+
+	@OneToMany(mappedBy = "driverCategoryByDriverCategoryId")
+	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
+		return userDriverCategoriesById;
+	}
+
+	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
+		this.userDriverCategoriesById = userDriverCategoriesById;
 	}
 }
