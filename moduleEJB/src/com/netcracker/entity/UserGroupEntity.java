@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 16:13 29.04.2015 by Viktor Taranenko */
+/* 16:38 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -35,7 +35,7 @@ public class UserGroupEntity {
 	}
 
 	@Basic
-	@Column(name = "tariff_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}

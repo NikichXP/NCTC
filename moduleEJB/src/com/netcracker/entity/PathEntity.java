@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 16:12 29.04.2015 by Viktor Taranenko */
+/* 16:38 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -16,7 +16,7 @@ public class PathEntity {
 	private BigInteger endY;
 	private String startAddress;
 	private String endAddress;
-	private Boolean completed;
+	private boolean completed;
 	private BigInteger length;
 	private BigInteger price;
 	private PathEntity pathByNextPathId;
@@ -93,12 +93,12 @@ public class PathEntity {
 	}
 
 	@Basic
-	@Column(name = "completed", nullable = true, insertable = true, updatable = true)
-	public Boolean getCompleted() {
+	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
+	public boolean isCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(Boolean completed) {
+	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
 
@@ -113,7 +113,7 @@ public class PathEntity {
 	}
 
 	@Basic
-	@Column(name = "price", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getPrice() {
 		return price;
 	}
@@ -129,6 +129,7 @@ public class PathEntity {
 
 		PathEntity that = (PathEntity) o;
 
+		if (completed != that.completed) return false;
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (startX != null ? !startX.equals(that.startX) : that.startX != null) return false;
 		if (startY != null ? !startY.equals(that.startY) : that.startY != null) return false;
@@ -136,7 +137,6 @@ public class PathEntity {
 		if (endY != null ? !endY.equals(that.endY) : that.endY != null) return false;
 		if (startAddress != null ? !startAddress.equals(that.startAddress) : that.startAddress != null) return false;
 		if (endAddress != null ? !endAddress.equals(that.endAddress) : that.endAddress != null) return false;
-		if (completed != null ? !completed.equals(that.completed) : that.completed != null) return false;
 		if (length != null ? !length.equals(that.length) : that.length != null) return false;
 		if (price != null ? !price.equals(that.price) : that.price != null) return false;
 
@@ -152,14 +152,14 @@ public class PathEntity {
 		result = 31 * result + (endY != null ? endY.hashCode() : 0);
 		result = 31 * result + (startAddress != null ? startAddress.hashCode() : 0);
 		result = 31 * result + (endAddress != null ? endAddress.hashCode() : 0);
-		result = 31 * result + (completed != null ? completed.hashCode() : 0);
+		result = 31 * result + (completed ? 1 : 0);
 		result = 31 * result + (length != null ? length.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "next_path_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
 	public PathEntity getPathByNextPathId() {
 		return pathByNextPathId;
 	}

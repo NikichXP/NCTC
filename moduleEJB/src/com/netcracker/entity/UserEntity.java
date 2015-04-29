@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 16:12 29.04.2015 by Viktor Taranenko */
+/* 16:38 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -23,7 +23,7 @@ public class UserEntity {
 	private BigInteger accessLevelId;
 	private Boolean animalFriendly;
 	private Boolean smokingFriendly;
-	private Boolean blocked;
+	private boolean blocked;
 	private Collection<FavouriteAddressEntity> favouriteAddressesById;
 	private CarEntity carByCarId;
 	private UserGroupEntity userGroupByGroupId;
@@ -41,7 +41,7 @@ public class UserEntity {
 	}
 
 	@Basic
-	@Column(name = "password", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "password", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getPassword() {
 		return password;
 	}
@@ -101,7 +101,7 @@ public class UserEntity {
 	}
 
 	@Basic
-	@Column(name = "email", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "email", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getEmail() {
 		return email;
 	}
@@ -161,12 +161,12 @@ public class UserEntity {
 	}
 
 	@Basic
-	@Column(name = "blocked", nullable = true, insertable = true, updatable = true)
-	public Boolean getBlocked() {
+	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
+	public boolean isBlocked() {
 		return blocked;
 	}
 
-	public void setBlocked(Boolean blocked) {
+	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 	}
 
@@ -177,6 +177,7 @@ public class UserEntity {
 
 		UserEntity that = (UserEntity) o;
 
+		if (blocked != that.blocked) return false;
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (password != null ? !password.equals(that.password) : that.password != null) return false;
 		if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
@@ -195,7 +196,6 @@ public class UserEntity {
 			return false;
 		if (smokingFriendly != null ? !smokingFriendly.equals(that.smokingFriendly) : that.smokingFriendly != null)
 			return false;
-		if (blocked != null ? !blocked.equals(that.blocked) : that.blocked != null) return false;
 
 		return true;
 	}
@@ -215,7 +215,7 @@ public class UserEntity {
 		result = 31 * result + (accessLevelId != null ? accessLevelId.hashCode() : 0);
 		result = 31 * result + (animalFriendly != null ? animalFriendly.hashCode() : 0);
 		result = 31 * result + (smokingFriendly != null ? smokingFriendly.hashCode() : 0);
-		result = 31 * result + (blocked != null ? blocked.hashCode() : 0);
+		result = 31 * result + (blocked ? 1 : 0);
 		return result;
 	}
 
@@ -229,7 +229,7 @@ public class UserEntity {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "car_id", referencedColumnName = "id")
 	public CarEntity getCarByCarId() {
 		return carByCarId;
 	}
@@ -239,7 +239,7 @@ public class UserEntity {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "group_id", referencedColumnName = "id")
 	public UserGroupEntity getUserGroupByGroupId() {
 		return userGroupByGroupId;
 	}
