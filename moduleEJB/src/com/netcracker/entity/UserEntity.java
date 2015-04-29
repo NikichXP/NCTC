@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 16:38 29.04.2015 by Viktor Taranenko */
+/* 19:59 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -20,7 +20,6 @@ public class UserEntity {
 	private String email;
 	private String phone;
 	private String alternativePhone;
-	private BigInteger accessLevelId;
 	private Boolean animalFriendly;
 	private Boolean smokingFriendly;
 	private boolean blocked;
@@ -131,16 +130,6 @@ public class UserEntity {
 	}
 
 	@Basic
-	@Column(name = "access_level_id", nullable = false, insertable = true, updatable = true, precision = 0)
-	public BigInteger getAccessLevelId() {
-		return accessLevelId;
-	}
-
-	public void setAccessLevelId(BigInteger accessLevelId) {
-		this.accessLevelId = accessLevelId;
-	}
-
-	@Basic
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
@@ -190,8 +179,6 @@ public class UserEntity {
 		if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
 		if (alternativePhone != null ? !alternativePhone.equals(that.alternativePhone) : that.alternativePhone != null)
 			return false;
-		if (accessLevelId != null ? !accessLevelId.equals(that.accessLevelId) : that.accessLevelId != null)
-			return false;
 		if (animalFriendly != null ? !animalFriendly.equals(that.animalFriendly) : that.animalFriendly != null)
 			return false;
 		if (smokingFriendly != null ? !smokingFriendly.equals(that.smokingFriendly) : that.smokingFriendly != null)
@@ -212,7 +199,6 @@ public class UserEntity {
 		result = 31 * result + (email != null ? email.hashCode() : 0);
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
 		result = 31 * result + (alternativePhone != null ? alternativePhone.hashCode() : 0);
-		result = 31 * result + (accessLevelId != null ? accessLevelId.hashCode() : 0);
 		result = 31 * result + (animalFriendly != null ? animalFriendly.hashCode() : 0);
 		result = 31 * result + (smokingFriendly != null ? smokingFriendly.hashCode() : 0);
 		result = 31 * result + (blocked ? 1 : 0);

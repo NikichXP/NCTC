@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 16:38 29.04.2015 by Viktor Taranenko */
+/* 19:59 29.04.2015 by Viktor Taranenko */
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
