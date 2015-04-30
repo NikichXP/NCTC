@@ -1,10 +1,10 @@
 package com.netcracker.entity;
 
-/* 19:59 29.04.2015 by Viktor Taranenko */
+/* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tariff", schema = "public", catalog = "postgres")
@@ -12,8 +12,8 @@ public class TariffEntity {
 	private BigInteger id;
 	private BigInteger perHour;
 	private BigInteger perKilometer;
-	private Date timeStarts;
-	private Date timeEnds;
+	private Timestamp timeStarts;
+	private Timestamp timeEnds;
 	private Boolean animalFriendly;
 	private Boolean wifi;
 	private String sex;
@@ -53,21 +53,21 @@ public class TariffEntity {
 
 	@Basic
 	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
-	public Date getTimeStarts() {
+	public Timestamp getTimeStarts() {
 		return timeStarts;
 	}
 
-	public void setTimeStarts(Date timeStarts) {
+	public void setTimeStarts(Timestamp timeStarts) {
 		this.timeStarts = timeStarts;
 	}
 
 	@Basic
 	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
-	public Date getTimeEnds() {
+	public Timestamp getTimeEnds() {
 		return timeEnds;
 	}
 
-	public void setTimeEnds(Date timeEnds) {
+	public void setTimeEnds(Timestamp timeEnds) {
 		this.timeEnds = timeEnds;
 	}
 

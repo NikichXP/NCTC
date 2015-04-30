@@ -1,10 +1,11 @@
 package com.netcracker.entity;
 
-/* 19:59 29.04.2015 by Viktor Taranenko */
+/* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
@@ -16,7 +17,7 @@ public class UserEntity {
 	private String lastName;
 	private Date birthday;
 	private String sex;
-	private Date dateRegistered;
+	private Timestamp dateRegistered;
 	private String email;
 	private String phone;
 	private String alternativePhone;
@@ -24,7 +25,6 @@ public class UserEntity {
 	private Boolean smokingFriendly;
 	private boolean blocked;
 	private Collection<FavouriteAddressEntity> favouriteAddressesById;
-	private CarEntity carByCarId;
 	private UserGroupEntity userGroupByGroupId;
 	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
 	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
@@ -91,11 +91,11 @@ public class UserEntity {
 
 	@Basic
 	@Column(name = "date_registered", nullable = false, insertable = true, updatable = true)
-	public Date getDateRegistered() {
+	public Timestamp getDateRegistered() {
 		return dateRegistered;
 	}
 
-	public void setDateRegistered(Date dateRegistered) {
+	public void setDateRegistered(Timestamp dateRegistered) {
 		this.dateRegistered = dateRegistered;
 	}
 
@@ -212,16 +212,6 @@ public class UserEntity {
 
 	public void setFavouriteAddressesById(Collection<FavouriteAddressEntity> favouriteAddressesById) {
 		this.favouriteAddressesById = favouriteAddressesById;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "car_id", referencedColumnName = "id")
-	public CarEntity getCarByCarId() {
-		return carByCarId;
-	}
-
-	public void setCarByCarId(CarEntity carByCarId) {
-		this.carByCarId = carByCarId;
 	}
 
 	@ManyToOne

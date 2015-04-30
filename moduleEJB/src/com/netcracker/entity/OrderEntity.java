@@ -1,12 +1,12 @@
 package com.netcracker.entity;
 
-/* 19:59 29.04.2015 by Viktor Taranenko */
+/* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigInteger;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @javax.persistence.Table(name = "order", schema = "public", catalog = "postgres")
@@ -59,63 +59,63 @@ public class OrderEntity {
 		this.contactName = contactName;
 	}
 
-	private Date timeCreated;
+	private Timestamp timeCreated;
 
 	@Basic
 	@javax.persistence.Column(name = "time_created", nullable = false, insertable = true, updatable = true)
-	public Date getTimeCreated() {
+	public Timestamp getTimeCreated() {
 		return timeCreated;
 	}
 
-	public void setTimeCreated(Date timeCreated) {
+	public void setTimeCreated(Timestamp timeCreated) {
 		this.timeCreated = timeCreated;
 	}
 
-	private Date timeRequested;
+	private Timestamp timeRequested;
 
 	@Basic
 	@javax.persistence.Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
-	public Date getTimeRequested() {
+	public Timestamp getTimeRequested() {
 		return timeRequested;
 	}
 
-	public void setTimeRequested(Date timeRequested) {
+	public void setTimeRequested(Timestamp timeRequested) {
 		this.timeRequested = timeRequested;
 	}
 
-	private Date timeOfDriverArrival;
+	private Timestamp timeOfDriverArrival;
 
 	@Basic
 	@javax.persistence.Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
-	public Date getTimeOfDriverArrival() {
+	public Timestamp getTimeOfDriverArrival() {
 		return timeOfDriverArrival;
 	}
 
-	public void setTimeOfDriverArrival(Date timeOfDriverArrival) {
+	public void setTimeOfDriverArrival(Timestamp timeOfDriverArrival) {
 		this.timeOfDriverArrival = timeOfDriverArrival;
 	}
 
-	private Date timeStarted;
+	private Timestamp timeStarted;
 
 	@Basic
 	@javax.persistence.Column(name = "time_started", nullable = true, insertable = true, updatable = true)
-	public Date getTimeStarted() {
+	public Timestamp getTimeStarted() {
 		return timeStarted;
 	}
 
-	public void setTimeStarted(Date timeStarted) {
+	public void setTimeStarted(Timestamp timeStarted) {
 		this.timeStarted = timeStarted;
 	}
 
-	private Date timeCompleted;
+	private Timestamp timeCompleted;
 
 	@Basic
 	@javax.persistence.Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
-	public Date getTimeCompleted() {
+	public Timestamp getTimeCompleted() {
 		return timeCompleted;
 	}
 
-	public void setTimeCompleted(Date timeCompleted) {
+	public void setTimeCompleted(Timestamp timeCompleted) {
 		this.timeCompleted = timeCompleted;
 	}
 
