@@ -3,23 +3,23 @@
 
     <persistence-unit name="TaxiPU">
         <jta-data-source>jdbc/RemotePostgresDS</jta-data-source>
-        <class>java.com.netcracker.entity.CarEntity</class>
-        <class>java.com.netcracker.entity.CarClassEntity</class>
-        <class>java.com.netcracker.entity.DriverCategoryEntity</class>
-        <class>java.com.netcracker.entity.FavouriteAddressEntity</class>
-        <class>java.com.netcracker.entity.MusicTypeEntity</class>
-        <class>java.com.netcracker.entity.OrderEntity</class>
-        <class>java.com.netcracker.entity.OrderCustomerRefuseCauseEntity</class>
-        <class>java.com.netcracker.entity.OrderDriverRefuseCauseEntity</class>
-        <class>java.com.netcracker.entity.OrderStateEntity</class>
-        <class>java.com.netcracker.entity.OrderTypeEntity</class>
-        <class>java.com.netcracker.entity.PathEntity</class>
-        <class>java.com.netcracker.entity.TariffEntity</class>
-        <class>java.com.netcracker.entity.UserEntity</class>
-        <class>java.com.netcracker.entity.UserDriverCategoryEntity</class>
-        <class>java.com.netcracker.entity.UserUserAccessLevelEntity</class>
-        <class>java.com.netcracker.entity.UserAccessLevelEntity</class>
-        <class>java.com.netcracker.entity.UserGroupEntity</class>
+        <class>com.netcracker.entity.CarEntity</class>
+        <class>com.netcracker.entity.CarClassEntity</class>
+        <class>com.netcracker.entity.DriverCategoryEntity</class>
+        <class>com.netcracker.entity.FavouriteAddressEntity</class>
+        <class>com.netcracker.entity.MusicTypeEntity</class>
+        <class>com.netcracker.entity.OrderEntity</class>
+        <class>com.netcracker.entity.OrderCustomerRefuseCauseEntity</class>
+        <class>com.netcracker.entity.OrderDriverRefuseCauseEntity</class>
+        <class>com.netcracker.entity.OrderStateEntity</class>
+        <class>com.netcracker.entity.OrderTypeEntity</class>
+        <class>com.netcracker.entity.PathEntity</class>
+        <class>com.netcracker.entity.TariffEntity</class>
+        <class>com.netcracker.entity.UserEntity</class>
+        <class>com.netcracker.entity.UserDriverCategoryEntity</class>
+        <class>com.netcracker.entity.UserUserAccessLevelEntity</class>
+        <class>com.netcracker.entity.UserAccessLevelEntity</class>
+        <class>com.netcracker.entity.UserGroupEntity</class>
         <properties>
         </properties>
     </persistence-unit>
