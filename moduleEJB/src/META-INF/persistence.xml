@@ -19,7 +19,7 @@
         <class>java.com.netcracker.entity.UserDriverCategoryEntity</class>
         <class>java.com.netcracker.entity.UserUserAccessLevelEntity</class>
         <class>java.com.netcracker.entity.UserAccessLevelEntity</class>
-        <class>java.com.netcracker.entity.UserGroupEntity</class>
+        <class>com.netcracker.entity.UserGroupEntity</class>
         <properties>
         </properties>
     </persistence-unit>
