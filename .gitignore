@@ -12,6 +12,7 @@
 *nbproject*
 dist/
 build.xml
+moduleEJB/src/META-INF/persistence.xml
 
 #is it needed?
 *MANIFEST.MF
