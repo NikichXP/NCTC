@@ -12,7 +12,7 @@
 *nbproject*
 dist/
 build.xml
-persistence.xml
+**/persistence.xml
 
 #is it needed?
 *MANIFEST.MF
