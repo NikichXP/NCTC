@@ -1,7 +1,7 @@
 package com.netcracker.servlet;/* 17:11 28.04.2015 by Viktor Taranenko */
 
 import com.netcracker.entity.UserAccessLevelEntity;
-import com.netcracker.facade.UserAccessLevelEntityFacade;
+import com.netcracker.facade.impl.UserAccessLevelEntityFacade;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

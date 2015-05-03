@@ -1,16 +1,14 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.CarClassEntity;
-import com.netcracker.facade.local_int.CarClass;
-
+import com.netcracker.entity.DriverCategoryEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class CarClassEntityFacade extends AbstractFacade<CarClassEntity> implements CarClass {
+public class DriverCategoryEntityFacade extends AbstractFacade<DriverCategoryEntity> implements com.netcracker.facade.local_int.DriverCategory {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -19,8 +17,8 @@ public class CarClassEntityFacade extends AbstractFacade<CarClassEntity> impleme
         return em;
     }
 
-    public CarClassEntityFacade() {
-        super(CarClassEntity.class);
+    public DriverCategoryEntityFacade() {
+        super(DriverCategoryEntity.class);
     }
     
 }

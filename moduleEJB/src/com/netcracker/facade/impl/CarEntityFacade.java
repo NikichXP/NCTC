@@ -1,16 +1,14 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.UserAccessLevelEntity;
-import com.netcracker.facade.local_int.UserAccessLevel;
-
+import com.netcracker.entity.CarEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class UserAccessLevelEntityFacade extends AbstractFacade<UserAccessLevelEntity> implements UserAccessLevel {
+public class CarEntityFacade extends AbstractFacade<CarEntity> implements com.netcracker.facade.local_int.Car {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -19,8 +17,8 @@ public class UserAccessLevelEntityFacade extends AbstractFacade<UserAccessLevelE
         return em;
     }
 
-    public UserAccessLevelEntityFacade() {
-        super(UserAccessLevelEntity.class);
+    public CarEntityFacade() {
+        super(CarEntity.class);
     }
     
 }

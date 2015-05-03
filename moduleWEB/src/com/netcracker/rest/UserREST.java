@@ -1,7 +1,7 @@
 package com.netcracker.rest;
 
 import com.netcracker.entity.UserEntity;
-import com.netcracker.facade.UserEntityFacade;
+import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -16,7 +16,7 @@ import java.util.*;
 @Path("user")
 public class UserREST {
     @EJB
-    UserEntityFacade uef;
+    User uef;
 
     /**
      * Login method

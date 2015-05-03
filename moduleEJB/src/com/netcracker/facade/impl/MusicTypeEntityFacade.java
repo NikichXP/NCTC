@@ -1,14 +1,14 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.OrderTypeEntity;
+import com.netcracker.entity.MusicTypeEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class OrderTypeEntityFacade extends AbstractFacade<OrderTypeEntity> implements com.netcracker.facade.local_int.OrderType {
+public class MusicTypeEntityFacade extends AbstractFacade<MusicTypeEntity> implements com.netcracker.facade.local_int.MusicType {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -17,8 +17,8 @@ public class OrderTypeEntityFacade extends AbstractFacade<OrderTypeEntity> imple
         return em;
     }
 
-    public OrderTypeEntityFacade() {
-        super(OrderTypeEntity.class);
+    public MusicTypeEntityFacade() {
+        super(MusicTypeEntity.class);
     }
     
 }
