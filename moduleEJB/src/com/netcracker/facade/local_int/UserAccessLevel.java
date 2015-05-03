@@ -2,20 +2,22 @@ package com.netcracker.facade.local_int;
 
 /* 0:25 04.05.2015 by Viktor Taranenko */
 
+import com.netcracker.entity.UserAccessLevelEntity;
+
 import java.util.List;
 
 public interface UserAccessLevel {
-	public void create(UserAccessLevel entity);
+	public void create(UserAccessLevelEntity entity);
 
-	public UserAccessLevel read(Object id);
+	public UserAccessLevelEntity read(Object id);
 
-	public void update(UserAccessLevel entity);
+	public void update(UserAccessLevelEntity entity);
 
-	public void delete(UserAccessLevel entity);
+	public void delete(UserAccessLevelEntity entity);
 
-	public List<UserAccessLevel> findAll();
+	public List<UserAccessLevelEntity> findAll();
 
-	public List<UserAccessLevel> findRange(int[] range);
+	public List<UserAccessLevelEntity> findRange(int[] range);
 
 	public int count();
 }

@@ -2,20 +2,22 @@ package com.netcracker.facade.local_int;
 
 /* 0:27 04.05.2015 by Viktor Taranenko */
 
+import com.netcracker.entity.UserGroupEntity;
+
 import java.util.List;
 
 public interface UserGroup {
-	public void create(UserGroup entity);
+	public void create(UserGroupEntity entity);
 
-	public UserGroup read(Object id);
+	public UserGroupEntity read(Object id);
 
-	public void update(UserGroup entity);
+	public void update(UserGroupEntity entity);
 
-	public void delete(UserGroup entity);
+	public void delete(UserGroupEntity entity);
 
-	public List<UserGroup> findAll();
+	public List<UserGroupEntity> findAll();
 
-	public List<UserGroup> findRange(int[] range);
+	public List<UserGroupEntity> findRange(int[] range);
 
 	public int count();
 }
