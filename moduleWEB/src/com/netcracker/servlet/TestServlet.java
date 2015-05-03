@@ -1,7 +1,7 @@
 package com.netcracker.servlet;/* 17:11 28.04.2015 by Viktor Taranenko */
 
 import com.netcracker.entity.UserAccessLevelEntity;
-import com.netcracker.facade.impl.UserAccessLevelEntityFacade;
+import com.netcracker.facade.local_int.UserAccessLevel;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.util.List;
 @WebServlet(name = "TestServlet", urlPatterns = "/testServlet")
 public class TestServlet extends HttpServlet {
 	@EJB
-	private UserAccessLevelEntityFacade userAccessLevel;
+	private UserAccessLevel userAccessLevel;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
