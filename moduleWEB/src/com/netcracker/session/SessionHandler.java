@@ -8,9 +8,17 @@ import java.util.*;
  */
 @Singleton
 public class SessionHandler {
-    public static final long DEFAULT_SESSION_TIME = 30; //minutes
+    /**
+     * Default session time (in minutes)
+     */
+    public static final int DEFAULT_SESSION_TIME = 30; //minutes
     private static LinkedList<Session> activeSessions = new LinkedList<Session>();
 
+    /**
+     * Creates session
+     * @param sessionToken - unique session token
+     * @return - flag of success
+     */
     public boolean createSession (String sessionToken) {
         try {
             activeSessions.add(new Session(sessionToken));
@@ -19,6 +27,12 @@ public class SessionHandler {
             return false;
         }
     }
+
+    /**
+     * Check if session is valid
+     * @param sessionToken - session token to be checked
+     * @return - result of validity
+     */
     public boolean validateSession (String sessionToken) {
         while (!activeSessions.get(0).validate()) {
             activeSessions.remove(0);
@@ -34,6 +48,10 @@ public class SessionHandler {
         return false;
     }
 
+    /**
+     * Session stops being valid
+     * @param sessionToken - Session to stop being valid
+     */
     public void unvalidate (String sessionToken) {
         Iterator<Session> it = activeSessions.iterator();
         Session ptr;
@@ -46,5 +64,27 @@ public class SessionHandler {
             }
             i++;
         }
+    }
+
+    /**
+     * Extends session validity up to 30 minutes
+     * @param sessionToken - session to be refreshed
+     * @return - result
+     */
+    public boolean refresh (String sessionToken) {
+        Iterator<Session> it = activeSessions.iterator();
+        Session ptr;
+        int i = 0;
+        while (it.hasNext()) {
+            ptr = it.next();
+            if (ptr.getSessionToken().equals(sessionToken)) {
+                activeSessions.remove(i);
+                ptr.refresh();
+                activeSessions.add(ptr);
+                return true;
+            }
+            i++;
+        }
+        return false;
     }
 }
