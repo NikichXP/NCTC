@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "TestServlet", urlPatterns = "/testServlet")
@@ -26,7 +25,7 @@ public class TestServlet extends HttpServlet {
 		List<UserAccessLevelEntity> levels = userAccessLevel.findAll();
 		response.getWriter().write("TestServlet output: ");
 		for (UserAccessLevelEntity level : levels) {
-			response.getWriter().write(level.getId() + " " + level.getName());
+			response.getWriter().write(level.getId() + " " + level.getName() + " ");
 		}
 	}
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.netcracker.rest.config;
- 
+
 import java.util.Set;
 import javax.ws.rs.core.Application;
 import com.netcracker.rest.*;
@@ -13,7 +13,7 @@ import com.netcracker.rest.*;
  *
  * @author NikichXP
  */
-@javax.ws.rs.ApplicationPath("api")
+//@javax.ws.rs.ApplicationPath("api")
 public class ApplicationConfig extends Application {
  
     @Override
