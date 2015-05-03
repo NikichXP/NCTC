@@ -6,14 +6,15 @@
 package com.netcracker.rest.config;
 
 import java.util.Set;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import com.netcracker.rest.*;
  
 /**
  *
  * @author NikichXP
  */
-//@javax.ws.rs.ApplicationPath("api")
+@ApplicationPath("api")
 public class ApplicationConfig extends Application {
  
     @Override

@@ -1,9 +1,12 @@
 package com.netcracker.rest;
 
+import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.UserEntityFacade;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
+import java.util.*;
 
 /**
  * User facade for ReST 
@@ -13,13 +16,13 @@ import javax.ws.rs.*;
 @Path("user")
 public class UserREST {
     @EJB
-    private UserEntityFacade userEntityFacade;
-    
+    UserEntityFacade uef;
+
     /**
      * Login method
-     * @param name
-     * @param pass
-     * @return 
+     * @param name - login name to auth
+     * @param pass - password
+     * @return -
      */
     @GET
     @Path ("login/{username}/{pass}")
@@ -27,7 +30,13 @@ public class UserREST {
     @Produces("text/plain")
     public String getUserID (@PathParam("username") String name, @PathParam("pass") String pass) {
         //TODO Ask Victor how to "speak" with DB
-        return "wololo"; //should be changed later
+        List<UserEntity> user = uef.findAll();
+        String ret = new String();
+        for (int i = 0; i < user.size(); i++) {
+            ret += user.get(i).toString();
+        }
+        return ret + name + " | " + pass; //should be changed later
+
     }
     
 }
