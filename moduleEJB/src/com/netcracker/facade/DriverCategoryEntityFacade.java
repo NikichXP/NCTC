@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class DriverCategoryEntityFacade extends AbstractFacade<DriverCategoryEntity> {
+public class DriverCategoryEntityFacade extends AbstractFacade<DriverCategoryEntity> implements com.netcracker.facade.local_int.DriverCategory {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 

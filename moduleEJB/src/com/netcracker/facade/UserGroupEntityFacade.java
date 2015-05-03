@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> {
+public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> implements com.netcracker.facade.local_int.UserGroup {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
