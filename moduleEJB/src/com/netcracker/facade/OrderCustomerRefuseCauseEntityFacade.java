@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class OrderCustomerRefuseCauseEntityFacade extends AbstractFacade<OrderCustomerRefuseCauseEntity> {
+public class OrderCustomerRefuseCauseEntityFacade extends AbstractFacade<OrderCustomerRefuseCauseEntity> implements com.netcracker.facade.local_int.OrderCustomerRefuseCause {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 

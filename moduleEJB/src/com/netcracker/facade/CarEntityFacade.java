@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class CarEntityFacade extends AbstractFacade<CarEntity> {
+public class CarEntityFacade extends AbstractFacade<CarEntity> implements com.netcracker.facade.local_int.Car {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 

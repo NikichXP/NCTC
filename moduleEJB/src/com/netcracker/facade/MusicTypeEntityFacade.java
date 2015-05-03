@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class MusicTypeEntityFacade extends AbstractFacade<MusicTypeEntity> {
+public class MusicTypeEntityFacade extends AbstractFacade<MusicTypeEntity> implements com.netcracker.facade.local_int.MusicType {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
