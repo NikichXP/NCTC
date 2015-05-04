@@ -26,7 +26,7 @@ public class TestServlet2 extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<UserAccessLevelEntity> levels = userAccessLevel.findAll();
-        response.getWriter().write("TestServlet2");
+        response.getWriter().write("TestServlet: Hello Everybody.");
 
     }
 }
