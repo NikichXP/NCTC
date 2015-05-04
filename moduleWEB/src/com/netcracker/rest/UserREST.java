@@ -14,7 +14,7 @@ import java.util.*;
  */
 @Stateless
 @Path("user")
-public class UserREST {
+public class UserRest {
     @EJB
     User uef;
 
@@ -33,10 +33,9 @@ public class UserREST {
         List<UserEntity> user = uef.findAll();
         String ret = new String();
         for (int i = 0; i < user.size(); i++) {
-            ret += user.get(i).toString();
+            ret += user.get(i).toString() + "\n";
         }
         return ret + name + " | " + pass; //should be changed later
 
     }
-    
 }

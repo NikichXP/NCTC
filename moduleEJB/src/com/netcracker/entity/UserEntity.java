@@ -205,6 +205,11 @@ public class UserEntity {
 		return result;
 	}
 
+	@Override
+	public String toString () {
+		return firstName + " " + lastName + " " + email + " " + phone;
+	}
+
 	@OneToMany(mappedBy = "userByCustomerId")
 	public Collection<FavouriteAddressEntity> getFavouriteAddressesById() {
 		return favouriteAddressesById;

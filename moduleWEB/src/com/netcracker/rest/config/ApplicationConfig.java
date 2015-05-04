@@ -28,7 +28,10 @@ public class ApplicationConfig extends Application {
      * Method contains java classes which are included to ReST service
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(UserREST.class);
+        resources.add(UserRest.class);
+        resources.add(DriverRest.class);
+        resources.add(OrderRest.class);
+        resources.add(AuthRest.class);
     }
      
 }
