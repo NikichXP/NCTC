@@ -6,6 +6,7 @@ import com.netcracker.facade.local_int.User;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -38,4 +39,43 @@ public class UserRest {
         return ret + name + " | " + pass; //should be changed later
 
     }
+
+    @GET
+    @Path ("login/{id}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public UserEntity getUserByID (@PathParam("id") BigInteger id) {
+        return uef.read(id);
+    }
+
+    @POST
+    @Path("/create/{firstName}/{lastName}/{password}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public UserEntity createUser(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName, @PathParam("password") String pass){
+        UserEntity ue = new UserEntity();
+        ue.setFirstName(firstName);
+        ue.setLastName(lastName);
+        ue.setPassword(pass);
+        return ue;
+    }
+
+    @PUT
+    @Path("/update/{id}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public UserEntity updateByIdUser(@PathParam("id") BigInteger id){
+        UserEntity ue = uef.read(id);
+        //some to do
+        return ue;
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public void deleteByIdUser(@PathParam("id") BigInteger id){
+        uef.delete(uef.read(id));
+    }
+
 }
