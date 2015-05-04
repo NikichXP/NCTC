@@ -12,6 +12,7 @@ public class SessionHandler {
      * Default session time (in minutes)
      */
     public static final int DEFAULT_SESSION_TIME = 30; //minutes
+    public static final int TOKEN_SIZE = 64;
     private static LinkedList<Session> activeSessions = new LinkedList<Session>();
 
     /**
@@ -19,7 +20,7 @@ public class SessionHandler {
      * @param sessionToken - unique session token
      * @return - flag of success
      */
-    public boolean createSession (String sessionToken) {
+    public static boolean createSession (String sessionToken) {
         try {
             activeSessions.add(new Session(sessionToken));
             return true;
@@ -52,7 +53,7 @@ public class SessionHandler {
      * Session stops being valid
      * @param sessionToken - Session to stop being valid
      */
-    public void unvalidate (String sessionToken) {
+    public static void unvalidate (String sessionToken) {
         Iterator<Session> it = activeSessions.iterator();
         Session ptr;
         int i = 0;
