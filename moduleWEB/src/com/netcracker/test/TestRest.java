@@ -1,5 +1,7 @@
 package com.netcracker.test;
 
+import com.google.gson.Gson;
+
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 
@@ -11,12 +13,14 @@ import javax.ws.rs.*;
 public class TestRest {
 
     @GET
-    @Path("user/{name}")
-    @Produces("application/json")
-    @Consumes("text/plain")
-    public User getUser(@PathParam("name")String m) {
-        User u = new User(m);
-        return u;
+    @Path("user")
+    @Produces("text/plain")
+    @Consumes("application/json")
+    public String getUser(User user) {
+       // Gson gson = new Gson();
+       // User user = gson.fromJson(m, User.class);
+        //User u = new User(m);
+        return  user.toString(); //user.toString();
     }
 
     @GET
