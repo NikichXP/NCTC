@@ -12,7 +12,8 @@ import java.util.Collection;
 @Table(name = "user", schema = "public", catalog = "postgres")
 @NamedQueries({
 		@NamedQuery(name = "User.findByEmailIgnoreCase", query = "SELECT f FROM UserEntity f WHERE UPPER(f.email) = UPPER(:email)"),
-		@NamedQuery(name = "User.findByPhoneCase", query = "SELECT f FROM UserEntity f WHERE f.phone = :phone"),
+		@NamedQuery(name = "User.findByPhone", query = "SELECT f FROM UserEntity f WHERE f.phone = :phone"),
+		@NamedQuery(name = "User.deleteById", query = "DELETE FROM UserEntity f WHERE f.id = :id"),
 		@NamedQuery(name = "User.findByEmailIgnoreCaseAndPassword",	query = "SELECT f FROM UserEntity f " +
 				"WHERE UPPER(f.email) = UPPER(:email) AND f.password = :password"),
 		@NamedQuery(name = "User.findByPhoneAndPassword",	query = "SELECT f FROM UserEntity f " +

@@ -8,6 +8,7 @@ import com.netcracker.facade.local_int.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.util.List;
 
 @Stateless
@@ -27,6 +28,12 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
     @Override
     public boolean isEmailUsed(String email) {
         List results = em.createNamedQuery("User.findByEmailIgnoreCase").setParameter("email", email).getResultList();
+        return !results.isEmpty();
+    }
+
+    @Override
+    public boolean isPhoneUsed(String phone) {
+        List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
         return !results.isEmpty();
     }
 

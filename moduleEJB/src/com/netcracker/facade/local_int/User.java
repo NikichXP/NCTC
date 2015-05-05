@@ -23,7 +23,9 @@ public interface User {
 
 	boolean isEmailUsed(String name);
 
-	UserEntity loginByEmail(String name, String password);
+	boolean isPhoneUsed(String phone);
+
+	UserEntity loginByEmail(String email, String password);
 
 	UserEntity loginByPhone(String phone, String password);
 }
