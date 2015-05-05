@@ -20,4 +20,10 @@ public interface User {
 	public List<UserEntity> findRange(int[] range);
 
 	public int count();
+
+	boolean isEmailUsed(String name);
+
+	UserEntity loginByEmail(String name, String password);
+
+	UserEntity loginByPhone(String phone, String password);
 }
