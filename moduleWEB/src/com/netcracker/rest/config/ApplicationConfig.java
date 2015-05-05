@@ -9,6 +9,7 @@ import java.util.Set;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import com.netcracker.rest.*;
+import com.netcracker.test.*;
  
 /**
  *
@@ -30,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(UserRest.class);
         resources.add(AuthRest.class);
+        resources.add(TestRest.class);
     }
      
 }
