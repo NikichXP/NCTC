@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "order_customer_refuse_cause", schema = "public", catalog = "postgres")
-public class OrderCustomerRefuseCauseEntity {
+@Table(name = "order_driver_refuse_cause", schema = "public", catalog = "postgres")
+public class RefuseCauseByDriverEntity {
 	private BigInteger id;
 	private String message;
 
@@ -36,7 +36,7 @@ public class OrderCustomerRefuseCauseEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		OrderCustomerRefuseCauseEntity that = (OrderCustomerRefuseCauseEntity) o;
+		RefuseCauseByDriverEntity that = (RefuseCauseByDriverEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (message != null ? !message.equals(that.message) : that.message != null) return false;

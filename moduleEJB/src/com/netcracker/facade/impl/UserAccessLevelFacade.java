@@ -2,13 +2,15 @@ package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.UserGroupEntity;
+import com.netcracker.entity.UserAccessLevelEntity;
+import com.netcracker.facade.local_int.UserAccessLevel;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> implements com.netcracker.facade.local_int.UserGroup {
+public class UserAccessLevelFacade extends AbstractFacade<UserAccessLevelEntity> implements UserAccessLevel {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -17,8 +19,8 @@ public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> imple
         return em;
     }
 
-    public UserGroupEntityFacade() {
-        super(UserGroupEntity.class);
+    public UserAccessLevelFacade() {
+        super(UserAccessLevelEntity.class);
     }
     
 }
