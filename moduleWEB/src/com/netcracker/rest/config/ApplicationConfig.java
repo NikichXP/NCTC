@@ -29,8 +29,6 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(UserRest.class);
-        resources.add(DriverRest.class);
-        resources.add(OrderRest.class);
         resources.add(AuthRest.class);
     }
      
