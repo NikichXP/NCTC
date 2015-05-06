@@ -1,7 +1,5 @@
 package com.netcracker.test;
 
-import com.google.gson.Gson;
-
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -16,7 +14,7 @@ public class TestRest {
     @POST
     @Path("user")
     @Consumes("application/json")
-    public Response getUser(User user) {
+    public Response getUser(UserJson user) {
         String result = "User saved: " + user.toString();
         return Response.status(201).entity(result).build();
     }

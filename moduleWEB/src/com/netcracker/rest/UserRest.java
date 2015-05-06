@@ -2,10 +2,12 @@ package com.netcracker.rest;
 
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
+import com.netcracker.test.UserJson;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.math.BigInteger;
 
 /**
@@ -17,6 +19,15 @@ import java.math.BigInteger;
 public class UserRest {
 	@EJB
 	User user;
+
+
+	@POST
+	@Path ("login")
+	@Consumes("application/json")
+	public Response getUser(UserJson user) {
+		String result = "User saved: " + user.toString();
+		return Response.status(201).entity(user.toString()).build();
+	}
 
 	/**
 	 * Login method

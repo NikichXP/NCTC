@@ -6,7 +6,7 @@ var user = {
 };
 jQuery.ajax({
     type: "POST",
-    url: "api/test/user",
+    url: "api/user/login",
     contentType: "application/json; charset=utf-8",
     data: JSON.stringify(user),
     dataType: "json",

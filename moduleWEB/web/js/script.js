@@ -20,21 +20,22 @@ $('#toggle-anon-order').click(function(){
 
 //AJAX section
 //test url variable
-var url = 'localhost:8081/moduleWEB_war_archive/api/user/login';
+var url = 'api/user/login';
 var JSONdata;
 //AJAX POST for
 $('#login-submit').click(function(){
 	JSONdata = {
-		'name': $("#login-cred").val(),
-		'pass': $("#login-pass").val()
+		name: $("#login-cred").val(),
+		pass: $("#login-pass").val()
 	};
 	$.ajax({
 		method: 'POST',
 		url: url,
-		data: JSONdata,
+		contentType: "application/json; charset=utf-8",
+		data: JSON.stringify(JSONdata),
 		dataType:'json'
 	})
-	.done(function(){alert("nice!");})
+		.done(function(){alert("nice!");})
 	.fail(function(){alert("fail!");});
 });
 //AJAX POST for
