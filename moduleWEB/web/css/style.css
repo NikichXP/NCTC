@@ -1,30 +1,30 @@
 .logo {
-	height: 100px;
-	width: 200px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	background: red;
-	font-color: white;
-	text-align: center;
+  height: 100px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background: red;
+  font-color: white;
+  text-align: center;
 }
 .logo h1 {
-	padding-top: 10px;
-	padding-bottom: 5px;
-	font-size: 250%;
-	color: white;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-size: 250%;
+  color: white;
 }
 .logo h6 {
-	color: white;
+  color: white;
 }
 
 .myspan div {
-	height: 100px;
-	color: white;
+  height: 100px;
+  color: white;
 }
 .inputfield {
-	position: center;
+  position: center;
 }
 
 /*And now CSS for dropdown reg form*/
@@ -35,101 +35,141 @@
 
   body{
 
-  	font-family:'Open Sans',sans-serif;
+    font-family:'Open Sans',sans-serif;
   }
 
   .button{
-  	width:50%;
-  	background:#3399cc;
-  	display:block;
-  	margin:0 auto;
-  	margin-top:1px;
-  	padding:10px;
-  	text-align:center;
-  	text-decoration:none;
-  	color:#fff;
-  	cursor:pointer;
-  	transition:background .3s;
-  	-webkit-transition:background .3s;
+    width:50%;
+    background:#3399cc;
+    display:block;
+    margin:0 auto;
+    margin-top:1px;
+    padding:10px;
+    text-align:center;
+    text-decoration:none;
+    color:#fff;
+    cursor:pointer;
+    transition:background .3s;
+    -webkit-transition:background .3s;
   }
 
   .button:hover{
-  	background:#2288bb;
+    background:#2288bb;
   }
 
   #login{
-  	width:40%;
-  	margin:0 auto;
-  	margin-top:8px;
-  	margin-bottom:2%;
-  	transition:opacity 1s;
-  	-webkit-transition:opacity 1s;
+    width:40%;
+    margin:0 auto;
+    margin-top:8px;
+    margin-bottom:2%;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
   }
 
   #login h1{
-  	background:#3399cc;
-  	padding:20px 0;
-  	font-size:140%;
-  	font-weight:300;
-  	text-align:center;
-  	color:#fff;
+    background:#3399cc;
+    padding:20px 0;
+    font-size:140%;
+    font-weight:300;
+    text-align:center;
+    color:#fff;
   }
 
   form{
-  	background:#f0f0f0;
-  	padding:1% 1%;
+    background:#f0f0f0;
+    padding:1% 1%;
   }
 
   input[type="email"],input[type="password"], input[type="text-field"]{
-  	width:100%;
-  	background:#fff;
-  	margin-bottom:1px;
-  	border:1px solid #ccc;
-  	padding:4%;
-  	font-family:'Open Sans',sans-serif;
-  	font-size:95%;
-  	color:#555;
+    width:100%;
+    background:#fff;
+    margin-bottom:1px;
+    border:1px solid #ccc;
+    padding:4%;
+    font-family:'Open Sans',sans-serif;
+    font-size:95%;
+    color:#555;
   }
 
-  input[type="submit"]{
-  	width:100%;
-  	background:#3399cc;
-  	border:0;
-  	padding:4%;
-  	font-family:'Open Sans',sans-serif;
-  	font-size:100%;
-  	color:#fff;
-  	cursor:pointer;
-  	transition:background .3s;
-  	-webkit-transition:background .3s;
+  .submit{
+    width:100%;
+    background:#3399cc;
+    border:0;
+    padding:4%;
+    font-family:'Open Sans',sans-serif;
+    font-size:100%;
+    color:#fff;
+    cursor:pointer;
+    text-align: center;
+    transition:background .3s;
+    -webkit-transition:background .3s;
   }
 
-  input[type="submit"]:hover{
-  	background:#2288bb;
+  .submit:hover{
+    background:#2288bb;
   }
 
 /*custom*/
 
   #no-reg-order {
-  	background: orange;
+    background: orange;
   }
 
   #registration {
 
-  	width:40%;
-  	margin:0 auto;
-  	margin-top:8px;
-  	margin-bottom:2%;
-  	transition:opacity 1s;
-  	-webkit-transition:opacity 1s;
+    width:40%;
+    margin:0 auto;
+    margin-top:8px;
+    margin-bottom:2%;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
   }
 
   #anon-order {
 
-  	width:40%;
-  	margin:0 auto;
-  	margin-top:8px;
-  	margin-bottom:2%;
-  	transition:opacity 1s;
-  	-webkit-transition:opacity 1s;
+    width:40%;
+    margin:0 auto;
+    margin-top:8px;
+    margin-bottom:2%;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
+  }
+
+  /*header css rules */
+  html, body {
+    height: 100%;
+  }
+  .header {
+    height: 20%;
+    width:100%;
+    background-color: #333;
+
+  }
+  .header-text {
+    height: 95%;
+    width: 75%;
+    float: left;
+    background-color: green;
+    margin-left: 10px;
+    margin-top: 4px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+  }
+  .header-text h1, h5 {
+    color: white;
+  }
+  .header-logout {
+    height: 95%;
+    line-height: 100%;
+    text-align: center;
+    width: 20%;
+    float: right;
+    background-color: red;
+    margin-right: 10px;
+    margin-top: 4px;
+  }
+  .header-logout h2 {
+    padding-top: 30px;
+    color: white;
   }

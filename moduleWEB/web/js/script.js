@@ -1,3 +1,4 @@
+
 $(function(){
 	$('#login').toggle();
 	$('#registration').toggle();
@@ -8,26 +9,73 @@ $(function(){
 $('#toggle-login').click(function(){
 	$('#login').toggle();
 });
+
 $('#toggle-registration').click(function(){
 	$('#registration').toggle();
 });
+
 $('#toggle-anon-order').click(function(){
 	$('#anon-order').toggle();
 });
 
+//AJAX section
+//test url variable
+var url = 'localhost:8081/moduleWEB_war_archive/api/user/login';
+var JSONdata;
+//AJAX POST for
+$('#login-submit').click(function(){
+	JSONdata = {
+		'name': $("#login-cred").val(),
+		'pass': $("#login-pass").val()
+	};
+	$.ajax({
+		method: 'POST',
+		url: url,
+		data: JSONdata,
+		dataType:'json'
+	})
+	.done(function(){alert("nice!");})
+	.fail(function(){alert("fail!");});
+});
+//AJAX POST for
+$('#registration-submit').click(function(){
+	JSONdata = {
+		'firstname': $("#firstname").val(),
+		'lastname': $("#lastname").val(),
+		'phone': $("#firstname").val(),
+		'email': $("#firstname").val(),
+		'pass': $("#firstname").val()
+	};
+	$.ajax({
+		method: 'POST',
+		url: url,
+		data: JSONdata,
+		dataType:'json'
+	})
+	.done(function(){alert("good! good!!!");})
+	.fail(function(){alert("fail!");});
+	
+});
+//AJAX POST for
+$('#track-TO-submit').click(function(){
+	JSONdata = {
+		'orderid': $("#tracking-id").val(),
+	};
+	$.ajax({
+		method: 'POST',
+		url: url,
+		data: JSONdata,
+		dataType:'json'
+	})
+	.done(function(){alert("success!!");})
+	.fail(function(){alert("fail!");});
+});
+//AJAX POST for
+$('#order-wo-reg-submit').click(function(){
+	
+	alert("Hold on, not yet functionlal!");
+});
 
-$('#reg-submit').click(function(){
-	alert("Hold on, not yet functionlal!");
-	alert("But coming soon.");
-});
-$('#track-to-submit').click(function(){
-	
-	alert("Hold on, not yet functionlal!");
-});
-$('#no-reg-order').click(function(){
-	
-	alert("Hold on, not yet functionlal!");
-});
-$('#login').click(function(){
-	alert("Hold on, not yet functionlal!");
-});
+
+
+

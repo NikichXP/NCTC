@@ -21,6 +21,8 @@
 
 
     <body>
+      
+
       <div class="container">
         <div class="row">
 
@@ -39,7 +41,7 @@
             <form>
               <input type="text-field" placeholder="Email or phone number" id="login-cred"/>
               <input type="password" placeholder="Password" id="login-pass"/>
-              <input type="submit" value="Log in" />
+              <div class="submit" id="login-submit">Log in</div>
             </form>
           </div>
         </div>
@@ -52,9 +54,9 @@
               <input type="text-field" placeholder="Last name" id="lastname"/>
               <input type="text-field" placeholder="Phone number" id="phone"/>
               <input type="text-field" placeholder="E-mail" id="email"/>
-              <input type="password" placeholder="Password" id="pass"/>
+              <input type="password" placeholder="Password" id="reg-pass"/>
               <input type="password" placeholder="Confirm password" id="pass-confirm"/>
-              <input type="submit" value="Submit" id="reg-submit"/>
+              <div class="submit" id="registration-submit">Registration</div>
             </form>
           </div>
         </div>
@@ -63,17 +65,21 @@
           <span href="#" class="button" id="toggle-anon-order">Order without registration</span>
           <div id="anon-order">
             <form>
-              <input type="password" placeholder="Orders tracking number" />
-              <input type="submit" value="Show active order" id="track-to-submit"/>
-              <input type="submit" value="Make order" id="no-reg-order"/>
+              <input type="text-field" placeholder="Orders tracking number" id="tracking-id"/>
+              <div class="submit" id="track-TO-submit">Show active order</div>
+              <div class="submit" id="order-wo-reg-submit">Order without registration</div>
             </form>
           </div>
         </div>
-      </div>      
+      </div>
+
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="js/bootstrap.js"></script>
-      <script src="js/script.js"></script>
+      <!--Validator plugin link will be here (now it crashes all script if added, will fix it later)-->
+    
+      <script src="js/script1.js"></script>      
+      
     </body>
     </html>
