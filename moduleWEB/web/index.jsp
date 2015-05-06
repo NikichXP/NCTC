@@ -7,7 +7,7 @@
   <body>
     <h2>Hello teamC m8s!</h2>
     <a href="testServlet">get access levels from DB</a> <br>
-    <a href="api/user/login/afasfas/fafasfas">Test REST</a>
-    <script src="test.js" type="text/javascript"></script>
+    <a href="api/user/login/afasfas/fafasfas">Test REST</a> <br>
+    <a href="post_queryjson.html">Send POST request for TestRest.</a>
   </body>
 </html>

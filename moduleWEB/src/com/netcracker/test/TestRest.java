@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by NikichXP on 05.05.2015.
@@ -12,15 +13,12 @@ import javax.ws.rs.*;
 @Path("test")
 public class TestRest {
 
-    @GET
+    @POST
     @Path("user")
-    @Produces("text/plain")
     @Consumes("application/json")
-    public String getUser(User user) {
-       // Gson gson = new Gson();
-       // User user = gson.fromJson(m, User.class);
-        //User u = new User(m);
-        return  user.toString(); //user.toString();
+    public Response getUser(User user) {
+        String result = "User saved: " + user.toString();
+        return Response.status(201).entity(result).build();
     }
 
     @GET
