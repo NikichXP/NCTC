@@ -33,10 +33,17 @@ $('#login-submit').click(function(){
 		url: url,
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
-		dataType:'json'
+		dataType:'json',
+		success: function (result) {
+			alert('Time: ' + result.time
+			+ ', message: ' + result.message);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert(jqXHR.status + ' ' + jqXHR.responseText);
+		}
 	})
-		.done(function(){alert("nice!");})
-	.fail(function(){alert("fail!");});
+	//	.done(function(){alert("nice!");})
+	//.fail(function(){alert("fail!");});
 });
 //AJAX POST for
 $('#registration-submit').click(function(){
