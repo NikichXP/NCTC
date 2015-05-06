@@ -11,8 +11,8 @@ jQuery.ajax({
     data: JSON.stringify(user),
     dataType: "json",
     success: function (result) {
-        alert('Время: ' + result.time
-        + ', сообщенеи: ' + result.message);
+        alert('Time: ' + result.time
+        + ', message: ' + result.message);
     },
     error: function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.status + ' ' + jqXHR.responseText);
