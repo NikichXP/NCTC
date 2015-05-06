@@ -1,4 +1,4 @@
-package com.netcracker.test;
+package com.netcracker.classes;
 
 import java.io.Serializable;
 

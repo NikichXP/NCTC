@@ -19,7 +19,7 @@ $('#toggle-anon-order').click(function(){
 });
 
 //AJAX section
-//test url variable
+//classes url variable
 var url = 'api/user/login';
 var JSONdata;
 //AJAX POST for
@@ -67,7 +67,7 @@ $('#registration-submit').click(function(){
 //AJAX POST for
 $('#track-TO-submit').click(function(){
 	JSONdata = {
-		'orderid': $("#tracking-id").val(),
+		'orderid': $("#tracking-id").val()
 	};
 	$.ajax({
 		method: 'POST',

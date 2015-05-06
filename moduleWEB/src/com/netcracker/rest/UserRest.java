@@ -2,7 +2,7 @@ package com.netcracker.rest;
 
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
-import com.netcracker.test.UserJson;
+import com.netcracker.classes.UserJson;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -26,7 +26,7 @@ public class UserRest {
 	@Consumes("application/json")
 	public Response getUser(UserJson user) {
 		String result = "User saved: " + user.toString();
-		return Response.status(201).entity(user.toString()).build();
+		return Response.status(200).entity(result).build();
 	}
 
 	/**
