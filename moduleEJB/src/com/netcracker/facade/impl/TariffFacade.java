@@ -1,14 +1,16 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.PathEntity;
+import com.netcracker.entity.TariffEntity;
+import com.netcracker.facade.local_int.Tariff;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class PathEntityFacade extends AbstractFacade<PathEntity> {
+public class TariffFacade extends AbstractFacade<TariffEntity> implements Tariff {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -17,8 +19,8 @@ public class PathEntityFacade extends AbstractFacade<PathEntity> {
         return em;
     }
 
-    public PathEntityFacade() {
-        super(PathEntity.class);
+    public TariffFacade() {
+        super(TariffEntity.class);
     }
     
 }

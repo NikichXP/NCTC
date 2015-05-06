@@ -1,14 +1,14 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.UserGroupEntity;
+import com.netcracker.entity.CarEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> {
+public class CarFacade extends AbstractFacade<CarEntity> implements com.netcracker.facade.local_int.Car {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -17,8 +17,8 @@ public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> {
         return em;
     }
 
-    public UserGroupEntityFacade() {
-        super(UserGroupEntity.class);
+    public CarFacade() {
+        super(CarEntity.class);
     }
     
 }

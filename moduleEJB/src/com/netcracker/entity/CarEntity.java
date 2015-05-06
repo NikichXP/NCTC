@@ -1,11 +1,10 @@
 package com.netcracker.entity;
 
-/* 19:59 29.04.2015 by Viktor Taranenko */
+/* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Date;
-import java.util.Collection;
 
 @Entity
 @Table(name = "car", schema = "public", catalog = "postgres")
@@ -15,9 +14,9 @@ public class CarEntity {
 	private BigInteger seatsCount;
 	private String licencePlate;
 	private Date dateManufactured;
+	private BigInteger userId;
 	private CarClassEntity carClassByClassId;
 	private DriverCategoryEntity driverCategoryByRequiredDriverCategoryId;
-	private Collection<UserEntity> usersById;
 
 	@Id
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
@@ -69,6 +68,16 @@ public class CarEntity {
 		this.dateManufactured = dateManufactured;
 	}
 
+	@Basic
+	@Column(name = "user_id", nullable = true, insertable = true, updatable = true, precision = 0)
+	public BigInteger getUserId() {
+		return userId;
+	}
+
+	public void setUserId(BigInteger userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -83,6 +92,7 @@ public class CarEntity {
 			return false;
 		if (dateManufactured != null ? !dateManufactured.equals(carEntity.dateManufactured) : carEntity.dateManufactured != null)
 			return false;
+		if (userId != null ? !userId.equals(carEntity.userId) : carEntity.userId != null) return false;
 
 		return true;
 	}
@@ -94,6 +104,7 @@ public class CarEntity {
 		result = 31 * result + (seatsCount != null ? seatsCount.hashCode() : 0);
 		result = 31 * result + (licencePlate != null ? licencePlate.hashCode() : 0);
 		result = 31 * result + (dateManufactured != null ? dateManufactured.hashCode() : 0);
+		result = 31 * result + (userId != null ? userId.hashCode() : 0);
 		return result;
 	}
 
@@ -115,14 +126,5 @@ public class CarEntity {
 
 	public void setDriverCategoryByRequiredDriverCategoryId(DriverCategoryEntity driverCategoryByRequiredDriverCategoryId) {
 		this.driverCategoryByRequiredDriverCategoryId = driverCategoryByRequiredDriverCategoryId;
-	}
-
-	@OneToMany(mappedBy = "carByCarId")
-	public Collection<UserEntity> getUsersById() {
-		return usersById;
-	}
-
-	public void setUsersById(Collection<UserEntity> usersById) {
-		this.usersById = usersById;
 	}
 }

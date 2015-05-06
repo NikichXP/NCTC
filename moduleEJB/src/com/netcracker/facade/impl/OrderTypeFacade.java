@@ -1,14 +1,14 @@
-package com.netcracker.facade;
+package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.OrderEntity;
+import com.netcracker.entity.OrderTypeEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Stateless
-public class OrderEntityFacade extends AbstractFacade<OrderEntity> {
+public class OrderTypeFacade extends AbstractFacade<OrderTypeEntity> implements com.netcracker.facade.local_int.OrderType {
     @PersistenceContext(unitName = "TaxiPU")
     private EntityManager em;
 
@@ -17,8 +17,8 @@ public class OrderEntityFacade extends AbstractFacade<OrderEntity> {
         return em;
     }
 
-    public OrderEntityFacade() {
-        super(OrderEntity.class);
+    public OrderTypeFacade() {
+        super(OrderTypeEntity.class);
     }
     
 }
