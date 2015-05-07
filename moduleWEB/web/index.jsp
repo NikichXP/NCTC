@@ -71,8 +71,8 @@
 
         <div id="registration">
             <form>
-                <input type="text-field" placeholder="First name" id="firstname"/>
-                <input type="text-field" placeholder="Last name" id="lastname"/>
+                <input type="text-field" placeholder="First name" id="firstName"/>
+                <input type="text-field" placeholder="Last name" id="lastName"/>
                 <input type="text-field" placeholder="Phone number" id="phone"/>
                 <input type="text-field" placeholder="E-mail" id="email"/>
                 <input type="password" placeholder="Password" id="reg-pass"/>

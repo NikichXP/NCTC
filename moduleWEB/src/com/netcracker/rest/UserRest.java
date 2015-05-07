@@ -4,16 +4,17 @@ import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.classes.UserJson;
 import com.netcracker.rest.utilize.Registration;
+import com.netcracker.session.SessionHandler;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
+import java.util.UUID;
 
 /**
- * User facade for ReST
- *
+ * User facade for ReST 
  * @author NikichXP
  */
 @Stateless
@@ -22,19 +23,29 @@ public class UserRest {
 	@EJB
 	User user;
 
+
+	@GET
+	@Path("auth")
+	@Produces("text/plain")
+	public static String generateAuth() {
+		return SessionHandler.generateSession(); //our session token
+	}
+
 	@POST
-	@Path("login")
+	@Path ("login")
 	@Consumes("application/json")
 	public Response getUser(UserJson userJson) {
 		UserEntity userEntity = null;
 		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
 			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
-		} else if (userJson.getCred().matches("\\d+")) {
+		}
+		else if (userJson.getCred().matches("\\d+")) {
 			userEntity = user.loginByPhone(userJson.getCred(), userJson.getPass());
 		}
-		if (userEntity != null) {
-			return Response.status(200).entity(user.toString()).build();
-		} else {
+		if(userEntity != null){
+			return Response.status(200).entity(userEntity.toString()).build();
+		}
+		else{
 			return Response.status(404).entity("Bad login credentials").build();
 		}
 	}
@@ -42,14 +53,14 @@ public class UserRest {
 	@POST
 	@Path("/create")
 	@Consumes("text/json")
-	public Response createUser(UserJson userJsone) {
+	public Response createUser(UserJson userJsone){
 		UserEntity userEntity = new UserEntity();
 		userEntity.setFirstName(userJsone.getFirstName());
 		userEntity.setLastName(userJsone.getLastName());
 		userEntity.setPassword(userJsone.getLastName());
 		userEntity.setPhone(userJsone.getPhone());
 		userEntity.setEmail(userJsone.getEmail());
-		if (Registration.isNotFound(userEntity) == null) {
+		if(Registration.isNotFound(userEntity) == null){
 			return Response.status(200).build();
 		} else {
 			return Response.status(404).entity(Registration.isNotFound(userEntity)).build();

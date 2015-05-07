@@ -7,26 +7,37 @@ import java.io.Serializable;
  */
 public class UserJson implements Serializable {
 
-    private String Pass;
+    private String cred;
+
+    private String pass;
     private String email;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String phone;
 
     public UserJson() {
 
     }
 
-    public UserJson(String pass, String email, String firstname, String lastname, String phone) {
+    public UserJson(String cred, String pass, String email, String lastName, String phone, String firstName) {
+        this.cred = cred;
+        this.pass = pass;
         this.email = email;
-        this.Pass = pass;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.phone = phone;
+        this.firstName = firstName;
+    }
+
+    public String getCred() {
+        return cred;
+    }
+
+    public void setCred(String cred) {
+        this.cred = cred;
     }
 
     public String getPass() {
-        return Pass;
+        return pass;
     }
 
     public String getEmail() {
@@ -34,11 +45,11 @@ public class UserJson implements Serializable {
     }
 
     public String getFirstName() {
-        return firstname;
+        return firstName;
     }
 
     public String getLastName() {
-        return lastname;
+        return lastName;
     }
 
     public String getPhone() {
@@ -46,21 +57,21 @@ public class UserJson implements Serializable {
     }
 
     public void setPass(String pass) {
-        this.Pass = pass;
+        this.pass = pass;
     }
 
     public void setEmail(String email){this.email = email;}
 
-    public void setFirstName(String firstname){this.firstname = firstname;}
+    public void setFirstName(String firstname){this.firstName = firstname;}
 
-    public void setLastName(String lastname){this.lastname = lastname;}
+    public void setLastName(String lastname){this.lastName = lastname;}
 
     public void setPhone(String phone){this.phone=phone;}
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", Pass='" + Pass + '\'' +
+                "cred='" + cred + '\'' +
+                ", pass='" + pass + '\'' +
                 '}';
     }
 }
