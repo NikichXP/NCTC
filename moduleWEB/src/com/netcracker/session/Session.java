@@ -31,7 +31,7 @@ public class Session {
      * Getter for token
      * @return
      */
-    protected String getSessionToken () {
+    public String getSessionToken () {
         if (LocalDateTime.now().isBefore(expireTime)) {
             return token;
         } else {
