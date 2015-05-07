@@ -34,16 +34,19 @@ public class UserRest {
 	@POST
 	@Path ("login")
 	@Consumes("application/json")
-	public Response getUser(UserJson userJsone) {
-		UserEntity userEntity = user.loginByEmail(userJsone.getEmail(), userJsone.getPass());
-		if(userEntity == null) {
-			userEntity = user.loginByPhone(userJsone.getPhone(), userJsone.getPass());
+	public Response getUser(UserJson userJson) {
+		UserEntity userEntity = null;
+		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
+			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
+		}
+		else if (userJson.getCred().matches("\\d+")) {
+			userEntity = user.loginByPhone(userJson.getCred(), userJson.getPass());
 		}
 		if(userEntity != null){
-			return Response.status(200).entity(user.toString()).build();
+			return Response.status(200).entity(userEntity.toString()).build();
 		}
 		else{
-			return Response.status(404).entity("user not found").build();
+			return Response.status(404).entity("Bad login credentials").build();
 		}
 	}
 

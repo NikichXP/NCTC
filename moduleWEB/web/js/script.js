@@ -25,7 +25,7 @@ var JSONdata;
 //AJAX POST for log in
 $('#login-submit').click(function(){
 	JSONdata = {
-		email: $("#login-cred").val(),
+		cred: $("#login-cred").val(),
 		pass: $("#login-pass").val()
 	};
 	$.ajax({
@@ -35,8 +35,8 @@ $('#login-submit').click(function(){
 		data: JSON.stringify(JSONdata),
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			//alert(textStatus + " " + jqXHR.responseText);
-			document.location.href = "http://habrahabr.ru/post/123314/";
+			alert(textStatus + " " + jqXHR.responseText);
+			//document.location.href = "http://habrahabr.ru/post/123314/";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
