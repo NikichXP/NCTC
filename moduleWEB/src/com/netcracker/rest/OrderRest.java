@@ -37,6 +37,27 @@ public class OrderRest {
     @Produces("application/json")
     public OrderJson createOrder(OrderJson orderJson){
 
+        CarEntity carEntity = new CarEntity();
+        CarClassEntity carClassEntity = new CarClassEntity();
+        PathEntity pathEntity = new PathEntity();
+        OrderEntity orderEntity = new OrderEntity();
+        carClassEntity.setName(orderJson.getCarType());
+        carEntity.setCarClassByClassId(carClassEntity);
+        pathEntity.setStartAddress(orderJson.getFrom());
+        pathEntity.setEndAddress(orderJson.getTo());
+
+        orderEntity.setDriverSex(orderJson.getGender());
+        orderEntity.setWifi(orderJson.isWifi());
+        orderEntity.setContactPhone(orderJson.getPhone());
+        orderEntity.setAnimalFriendly(orderJson.isPetFriendly());
+        orderEntity.setSmokingFriendly(orderJson.isSmoking());
+
+        //TODO Victor add to db cargo and conditioner!!!
+        pathEntity.setOrderId(orderEntity.getId());
+        order.create(orderEntity);
+        path.create(pathEntity);
+        car.create(carEntity);
+        carClass.create(carClassEntity);
         return orderJson;
     }
 }
