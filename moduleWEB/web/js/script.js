@@ -35,7 +35,8 @@ $('#login-submit').click(function(){
 		data: JSON.stringify(JSONdata),
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			alert(textStatus + " " + jqXHR.responseText);
+			//alert(textStatus + " " + jqXHR.responseText);
+			document.location.href = "http://habrahabr.ru/post/123314/";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
@@ -59,7 +60,8 @@ $('#registration-submit').click(function(){
 		data: JSON.stringify(JSONdata),
 		dataType:'json',
 		success: function (data,textStatus,jqXHR ) {
-			alert(textStatus + ": " + jqXHR.responseText);
+			//alert(textStatus + ": " + jqXHR.responseText);
+
 
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
