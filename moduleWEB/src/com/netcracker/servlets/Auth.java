@@ -41,6 +41,8 @@ public class Auth extends HttpServlet {
         if (res != null) {
             response.addCookie(new Cookie("sessionID", SessionHandler.generateSession()));
             response.sendRedirect("createOrder.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
         }
 
     }

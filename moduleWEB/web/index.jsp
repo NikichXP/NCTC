@@ -1,3 +1,4 @@
+<%@ page import="com.netcracker.session.SessionHandler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,17 @@
 
 
 <body>
+<%! Cookie[] cookie;%>
+<%
+  cookie = request.getCookies();
+  for (Cookie c : cookie) {
+    if (c.getName().equals("sessionID")) {
+      if (SessionHandler.isValidSession(c.getValue())) {
+        response.sendRedirect("order.jsp");
+      }
+    }
+  }
+%>
 
 
 <div class="container">
