@@ -47,22 +47,20 @@ $('#login-submit').click(function(){
 //AJAX POST for registration
 $('#registration-submit').click(function(){
 	JSONdata = {
-		firstname: $("#firstname").val(),
-		lastname: $("#lastname").val(),
-		phone: $("#firstname").val(),
-		email: $("#firstname").val(),
-		pass: $("#firstname").val()
+		firstName: $("#firstname").val(),
+		lastName: $("#lastname").val(),
+		phone: $("#phone").val(),
+		email: $("#email").val(),
+		pass: $("#reg-pass").val()
 	};
 	$.ajax({
 		method: 'POST',
 		url: 'api/user/create',
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
-		dataType:'json',
+		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			//alert(textStatus + ": " + jqXHR.responseText);
-
-
+			alert(textStatus + ": " + jqXHR.responseText);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);

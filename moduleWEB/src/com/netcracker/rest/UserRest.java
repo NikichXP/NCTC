@@ -1,17 +1,16 @@
 package com.netcracker.rest;
 
+import com.netcracker.classes.UserJson;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
-import com.netcracker.classes.UserJson;
-import com.netcracker.rest.utilize.Registration;
 import com.netcracker.session.SessionHandler;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.math.BigInteger;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * User facade for ReST 
@@ -51,19 +50,24 @@ public class UserRest {
 	}
 
 	@POST
-	@Path("/create")
-	@Consumes("text/json")
-	public Response createUser(UserJson userJsone){
-		UserEntity userEntity = new UserEntity();
-		userEntity.setFirstName(userJsone.getFirstName());
-		userEntity.setLastName(userJsone.getLastName());
-		userEntity.setPassword(userJsone.getLastName());
-		userEntity.setPhone(userJsone.getPhone());
-		userEntity.setEmail(userJsone.getEmail());
-		if(Registration.isNotFound(userEntity) == null){
-			return Response.status(200).build();
+	@Path("create")
+	@Consumes("application/json")
+	public Response createUser(UserJson userJson){
+		UserEntity userEntity = null;
+		if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+			userEntity = new UserEntity();
+			userEntity.setFirstName(userJson.getFirstName());
+			userEntity.setLastName(userJson.getLastName());
+			userEntity.setPassword(userJson.getPass());
+			userEntity.setPhone(userJson.getPhone());
+			userEntity.setEmail(userJson.getEmail());
+			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
+			user.create(userEntity);
+		}
+		if (userEntity == null){
+			return Response.status(404).entity("Pass or email is already in use").build();
 		} else {
-			return Response.status(404).entity(Registration.isNotFound(userEntity)).build();
+			return Response.status(201).entity("test").build();
 		}
 	}
 

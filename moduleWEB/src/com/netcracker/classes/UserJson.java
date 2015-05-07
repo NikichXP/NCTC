@@ -1,6 +1,7 @@
 package com.netcracker.classes;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by NikichXP on 05.05.2015.
@@ -30,10 +31,6 @@ public class UserJson implements Serializable {
 
     public String getCred() {
         return cred;
-    }
-
-    public void setCred(String cred) {
-        this.cred = cred;
     }
 
     public String getPass() {
