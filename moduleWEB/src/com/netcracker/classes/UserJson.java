@@ -7,42 +7,38 @@ import java.io.Serializable;
  */
 public class UserJson implements Serializable {
 
-    private String pass;
+    private String Pass;
     private String email;
-    private String cred;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String phone;
+
     public UserJson() {
 
     }
 
-    public UserJson(String pass, String email, String firstName, String lastName, String phone) {
+    public UserJson(String pass, String email, String firstname, String lastname, String phone) {
         this.email = email;
-        this.pass = pass;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.Pass = pass;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.phone = phone;
     }
 
     public String getPass() {
-        return pass;
+        return Pass;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public String getCred() {
-        return cred;
-    }
-
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public String getPhone() {
@@ -50,21 +46,21 @@ public class UserJson implements Serializable {
     }
 
     public void setPass(String pass) {
-        this.pass = pass;
+        this.Pass = pass;
     }
 
     public void setEmail(String email){this.email = email;}
 
-    public void setFirstName(String firstName){this.firstName=firstName;}
+    public void setFirstName(String firstname){this.firstname = firstname;}
 
-    public void setLastName(String lastName){this.lastName = lastName;}
+    public void setLastName(String lastname){this.lastname = lastname;}
 
     public void setPhone(String phone){this.phone=phone;}
     @Override
     public String toString() {
         return "User{" +
                 "email='" + email + '\'' +
-                ", pass='" + pass + '\'' +
+                ", Pass='" + Pass + '\'' +
                 '}';
     }
 }
