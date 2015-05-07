@@ -25,38 +25,15 @@ public class UserRest {
 	@POST
 	@Path ("login")
 	@Consumes("application/json")
-<<<<<<< HEAD
 	public Response getUser(UserJson userJsone) {
 		UserEntity userEntity = user.loginByEmail(userJsone.getEmail(), userJsone.getPass());
-		if(userEntity == null){
+		if(userEntity == null) {
 			userEntity = user.loginByPhone(userJsone.getPhone(), userJsone.getPass());
-=======
-	@Produces("application/json")
-	public UserJson getUser(UserJson user) {
-		//String result = "User saved: " + user.toString();
-		return user;
-	}
-
-	/**
-	 * Login method
-	 * @param email - login email to auth
-	 * @param password
-	 * @return - text
-	 */
-	@GET
-	@Path ("loginByEmail/{email}/{password}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String getUserIdByEmail (@PathParam("email") String email, @PathParam("password") String password) {
-		UserEntity userEntity = user.loginByEmail(email, password);
-		if (userEntity != null) {
-			return String.format("%s got by %s %s", userEntity.toString(), email, password); //should be changed later
->>>>>>> origin/master
 		}
-		if (userEntity != null) {
-			return Response.status(200).entity(userJsone.toString()).build();
-			//we use session
-		} else {
+		if(userEntity != null){
+			return Response.status(200).entity(user.toString()).build();
+		}
+		else{
 			return Response.status(404).entity("user not found").build();
 		}
 	}
