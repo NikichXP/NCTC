@@ -22,15 +22,15 @@ $('#toggle-anon-order').click(function(){
 //classes url variable
 var url = 'api/user/login';
 var JSONdata;
-//AJAX POST for
+//AJAX POST for log in
 $('#login-submit').click(function(){
 	JSONdata = {
-		name: $("#login-cred").val(),
+		email: $("#login-cred").val(),
 		pass: $("#login-pass").val()
 	};
 	$.ajax({
 		method: 'POST',
-		url: url,
+		url: 'api/user/login',
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
 		dataType:'json',
@@ -45,7 +45,7 @@ $('#login-submit').click(function(){
 	//	.done(function(){alert("nice!");})
 	//.fail(function(){alert("fail!");});
 });
-//AJAX POST for
+//AJAX POST for registration
 $('#registration-submit').click(function(){
 	JSONdata = {
 		'firstname': $("#firstname").val(),
@@ -56,9 +56,17 @@ $('#registration-submit').click(function(){
 	};
 	$.ajax({
 		method: 'POST',
-		url: url,
-		data: JSONdata,
-		dataType:'json'
+		url: 'api/user/create',
+		contentType: "application/json; charset=utf-8",
+		data: JSON.stringify(JSONdata),
+		dataType:'json',
+		success: function (result) {
+			alert('Time: ' + result.time
+			+ ', message: ' + result.message);
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert(jqXHR.status + ' ' + jqXHR.responseText);
+		}
 	})
 	.done(function(){alert("good! good!!!");})
 	.fail(function(){alert("fail!");});

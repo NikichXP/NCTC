@@ -3,6 +3,7 @@ package com.netcracker.rest;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.classes.UserJson;
+import com.netcracker.rest.utilize.Registration;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,91 +25,35 @@ public class UserRest {
 	@POST
 	@Path ("login")
 	@Consumes("application/json")
-	public Response getUser(UserJson user) {
-		String result = "User saved: " + user.toString();
-		return Response.status(200).entity(result).build();
-	}
-
-	/**
-	 * Login method
-	 * @param email - login email to auth
-	 * @param password
-	 * @return - text
-	 */
-	@GET
-	@Path ("loginByEmail/{email}/{password}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String getUserIdByEmail (@PathParam("email") String email, @PathParam("password") String password) {
-		UserEntity userEntity = user.loginByEmail(email, password);
+	public Response getUser(UserJson userJsone) {
+		UserEntity userEntity = user.loginByEmail(userJsone.getEmail(), userJsone.getPass());
+		if(userEntity == null){
+			userEntity = user.loginByPhone(userJsone.getPhone(), userJsone.getPass());
+		}
 		if (userEntity != null) {
-			return String.format("%s got by %s %s", userEntity.toString(), email, password); //should be changed later
+			return Response.status(200).entity(userJsone.toString()).build();
+			//we use session
+		} else {
+			return Response.status(404).entity("user not found").build();
 		}
-		return "Wrong login credentials";
-	}
-
-	/**
-	 * Login method
-	 * @param phone - phone number to auth
-	 * @param password
-	 * @return - text
-	 */
-	@GET
-	@Path ("loginByPhone/{phone}/{password}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String getUserIdByPhone (@PathParam("phone") String phone, @PathParam("password") String password) {
-		UserEntity userEntity = user.loginByPhone(phone, password);
-		if (userEntity != null) {
-			return String.format("%s got by %s %s", userEntity.toString(), phone, password); //should be changed later
-		}
-		return "Wrong login credentials";
-	}
-
-	@GET
-	@Path ("login/{id}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String getUserById (@PathParam("id") BigInteger id) throws Exception{
-		UserEntity userEntity = user.read(id);
-		if (user != null) {
-			return userEntity.toString();
-		}
-		return "No such user in DB";
 	}
 
 	@POST
-	@Path("/create/{firstName}/{lastName}/{password}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String createUser(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName, @PathParam("password") String pass){
+	@Path("/create")
+	@Consumes("text/json")
+	public Response createUser(UserJson userJsone){
 		UserEntity userEntity = new UserEntity();
-		userEntity.setFirstName(firstName);
-		userEntity.setLastName(lastName);
-		userEntity.setPassword(pass);
-		return userEntity.toString();
-	}
-
-	@PUT
-	@Path("/update/{id}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String updateByIdUser(@PathParam("id") BigInteger id){
-		UserEntity userEntity = user.read(id);
-		//some to do
-		return userEntity.toString();
-	}
-
-	@DELETE
-	@Path("/delete/{id}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public void deleteByIdUser(@PathParam("id") BigInteger id){
-		try {
-			user.delete(user.read(id));
-		} catch (Exception e) {
-			e.printStackTrace();
+		userEntity.setFirstName(userJsone.getFirstName());
+		userEntity.setLastName(userJsone.getLastName());
+		userEntity.setPassword(userJsone.getLastName());
+		userEntity.setPhone(userJsone.getPhone());
+		userEntity.setEmail(userJsone.getEmail());
+		if(Registration.isNotFound(userEntity) == null){
+			return Response.status(200).build();
+		} else {
+			return Response.status(404).entity(Registration.isNotFound(userEntity)).build();
 		}
 	}
+
 
 }
