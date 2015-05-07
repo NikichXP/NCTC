@@ -1,5 +1,9 @@
 package com.netcracker.session;
 
+import com.netcracker.entity.UserEntity;
+import com.netcracker.facade.local_int.User;
+
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import java.util.*;
 
@@ -8,6 +12,18 @@ import java.util.*;
  */
 @Singleton
 public class SessionHandler {
+    /**
+     * @return instance of singleton
+     */
+    public static SessionHandler getInstance() {
+        return instance;
+    }
+    private SessionHandler () {
+    }
+    private static SessionHandler instance = new SessionHandler();
+
+    @EJB
+    private User u;
     /**
      * Default session time (in minutes)
      */
@@ -19,9 +35,10 @@ public class SessionHandler {
      * @param sessionToken - unique session token
      * @return - flag of success
      */
-    public static boolean createSession (String sessionToken) {
+    public boolean createSession (String sessionToken, String email) {
         try {
-            activeSessions.add(new Session(sessionToken));
+            UserEntity user = u.findByEmail(email);
+            activeSessions.add(new Session(sessionToken, user));
             return true;
         } catch (Exception e) {
             return false;
@@ -88,9 +105,9 @@ public class SessionHandler {
         return false;
     }
 
-    public static String generateSession() {
+    public String generateSession(String email) {
         UUID uuid = UUID.randomUUID();
-        createSession(uuid.toString());
+        createSession(uuid.toString(), email);
         return uuid.toString();
     }
 }

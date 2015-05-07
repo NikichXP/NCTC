@@ -1,5 +1,7 @@
 package com.netcracker.session;
 
+import com.netcracker.entity.UserEntity;
+
 import java.time.*;
 
 /**
@@ -8,6 +10,8 @@ import java.time.*;
 public class Session {
     /** Session token */
     private final String token;
+    /** Link to user entity */
+    private final UserEntity userEntity;
     /** Session expiration time */
     private LocalDateTime expireTime;
 
@@ -15,9 +19,14 @@ public class Session {
      * Session can only be constructed by it's own unique token id
      * @param sessionToken - session token id
      */
-    protected Session(String sessionToken) {
+    protected Session(String sessionToken, UserEntity userEntity) {
+        this.userEntity = userEntity;
         this.token = sessionToken;
         expireTime = LocalDateTime.now().plusMinutes(SessionHandler.DEFAULT_SESSION_TIME);
+    }
+
+    public UserEntity getUserEntity (){
+        return userEntity;
     }
 
     /**
