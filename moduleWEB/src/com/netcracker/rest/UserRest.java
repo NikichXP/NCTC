@@ -22,12 +22,13 @@ public class UserRest {
 	@EJB
 	User user;
 
-
 	@GET
-	@Path("auth")
+	@Path("auth/{loginData}")
+	@Consumes("text/plain")
 	@Produces("text/plain")
-	public static String generateAuth() {
-		return SessionHandler.generateSession(); //our session token
+	public String generateAuth(@PathParam("loginData") String loginData) {
+		SessionHandler sh = new SessionHandler();
+		return sh.generateSession(loginData); //our session token
 	}
 
 	@POST

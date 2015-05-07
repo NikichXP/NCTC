@@ -4,9 +4,7 @@ import com.netcracker.entity.UserEntity;
 
 import java.time.*;
 
-/**
- * Created by NikichXP on 04.05.2015.
- */
+/** Created by NikichXP on 04.05.2015. */
 public class Session {
     /** Session token */
     private final String token;
@@ -53,6 +51,9 @@ public class Session {
         }
     }
 
+    /**
+     * Refresh session active time
+     */
     protected void refresh () {
         this.expireTime = LocalDateTime.now().plusMinutes(SessionHandler.DEFAULT_SESSION_TIME + 1);
     }
