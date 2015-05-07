@@ -1,7 +1,6 @@
 package com.netcracker.rest;
 
-import com.netcracker.entity.OrderEntity;
-import com.netcracker.entity.UserEntity;
+import com.netcracker.classes.OrderJson;
 import com.netcracker.facade.local_int.Order;
 
 import javax.ejb.EJB;
@@ -28,15 +27,11 @@ public class OrderRest {
     }
 
     @POST
-    @Path("/create/{phone}")
-    @Consumes("text/plain")
-    @Produces("text/plain")
-    public String createOrder(@PathParam("phone")    String phone,
-                              @PathParam("lastName") String lastName,
-                              @PathParam("password") String pass){
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setContactPhone(phone);
+    @Path("create")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public OrderJson createOrder(OrderJson orderJson){
         //vova ya sam dopishu))
-        return orderEntity.toString();
+        return orderJson;
     }
 }
