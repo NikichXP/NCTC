@@ -87,4 +87,10 @@ public class SessionHandler {
         }
         return false;
     }
+
+    public static String generateSession() {
+        UUID uuid = UUID.randomUUID();
+        createSession(uuid.toString());
+        return uuid.toString();
+    }
 }

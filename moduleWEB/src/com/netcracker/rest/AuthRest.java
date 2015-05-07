@@ -15,7 +15,7 @@ public class AuthRest {
     @GET
     @Path("auth")
     @Produces("text/plain")
-    public String generateAuth() {
+    public static String generateAuth() {
         UUID uuid = UUID.randomUUID();
         SessionHandler.createSession(uuid.toString());
         return uuid.toString();
