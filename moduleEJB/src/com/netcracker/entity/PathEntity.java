@@ -10,6 +10,7 @@ import java.util.Collection;
 @Table(name = "path", schema = "public", catalog = "postgres")
 public class PathEntity {
 	private BigInteger id;
+	private BigInteger orderId;
 	private BigInteger startX;
 	private BigInteger startY;
 	private BigInteger endX;
@@ -36,6 +37,15 @@ public class PathEntity {
 
 	public void setId(BigInteger id) {
 		this.id = id;
+	}
+
+	@Column(name = "order_id", nullable = false, insertable = true, updatable = true, precision = 0)
+	public BigInteger getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(BigInteger orderId) {
+		this.orderId = orderId;
 	}
 
 	@Basic
@@ -182,4 +192,6 @@ public class PathEntity {
 	public void setPathsById(Collection<PathEntity> pathsById) {
 		this.pathsById = pathsById;
 	}
+
+
 }

@@ -13,6 +13,7 @@ public class OrderJson implements Serializable {
     private String phone;
     private String gender;
     private String carType;
+
     private boolean wifi;
     private boolean petFriendly;
     private boolean smoking;
