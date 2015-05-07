@@ -9,10 +9,10 @@ public class UserJson implements Serializable {
 
     private String pass;
     private String email;
+    private String cred;
     private String firstName;
     private String lastName;
     private String phone;
-
     public UserJson() {
 
     }
@@ -31,6 +31,10 @@ public class UserJson implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getCred() {
+        return cred;
     }
 
     public String getFirstName() {

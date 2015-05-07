@@ -25,7 +25,7 @@ var JSONdata;
 //AJAX POST for log in
 $('#login-submit').click(function(){
 	JSONdata = {
-		email: $("#login-cred").val(),
+		cred: $("#login-cred").val(),
 		pass: $("#login-pass").val()
 	};
 	$.ajax({
