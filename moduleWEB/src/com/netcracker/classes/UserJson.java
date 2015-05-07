@@ -15,7 +15,6 @@ public class UserJson implements Serializable {
     private String firstName;
     private String lastName;
     private String phone;
-
     public UserJson() {
 
     }
@@ -32,6 +31,12 @@ public class UserJson implements Serializable {
     public String getCred() {
         return cred;
     }
+
+    public void setCred(String cred) {
+        this.cred = cred;
+    }
+
+
 
     public String getPass() {
         return pass;

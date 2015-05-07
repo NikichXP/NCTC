@@ -34,6 +34,7 @@ public class UserRest {
 	@Path ("login")
 	@Consumes("application/json")
 	public Response getUser(UserJson userJson) {
+
 		UserEntity userEntity = null;
 		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
 			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
@@ -47,6 +48,7 @@ public class UserRest {
 		else{
 			return Response.status(404).entity("Bad login credentials").build();
 		}
+
 	}
 
 	@POST
