@@ -33,26 +33,24 @@ $('#login-submit').click(function(){
 		url: 'api/user/login',
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
-		dataType:'json',
+		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			alert(textStatus);
+			alert(textStatus + " " + jqXHR.responseText);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
 			//alert(eval("(" + data + ")"));
 		}
 	})
-	//	.done(function(){alert("nice!");})
-	//.fail(function(){alert("fail!");});
 });
 //AJAX POST for registration
 $('#registration-submit').click(function(){
 	JSONdata = {
-		'firstname': $("#firstname").val(),
-		'lastname': $("#lastname").val(),
-		'phone': $("#firstname").val(),
-		'email': $("#firstname").val(),
-		'pass': $("#firstname").val()
+		firstname: $("#firstname").val(),
+		lastname: $("#lastname").val(),
+		phone: $("#firstname").val(),
+		email: $("#firstname").val(),
+		pass: $("#firstname").val()
 	};
 	$.ajax({
 		method: 'POST',
@@ -60,17 +58,14 @@ $('#registration-submit').click(function(){
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
 		dataType:'json',
-		success: function (result) {
-			alert('Time: ' + result.time
-			+ ', message: ' + result.message);
+		success: function (data,textStatus,jqXHR ) {
+			alert(textStatus + ": " + jqXHR.responseText);
+
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
 		}
 	})
-	.done(function(){alert("good! good!!!");})
-	.fail(function(){alert("fail!");});
-	
 });
 //AJAX POST for
 $('#track-TO-submit').click(function(){
