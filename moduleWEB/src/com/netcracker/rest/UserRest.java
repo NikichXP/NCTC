@@ -23,12 +23,28 @@ public class UserRest {
 	User user;
 
 	@GET
-	@Path("auth/{loginData}")
+	@Path("auth/{loginData}/{pass}")
 	@Consumes("text/plain")
 	@Produces("text/plain")
-	public String generateAuth(@PathParam("loginData") String loginData) {
-		SessionHandler sh = new SessionHandler();
-		return sh.generateSession(loginData); //our session token
+	public String generateAuth(@PathParam("loginData") String login, @PathParam("pass") String pass) {
+		UserEntity ue = null;
+		if (login.matches("0[0-9]{9}")) {
+			login = "+38" + login;
+		}
+		if (login.matches("\\+380[0-9]{9}")) {
+			ue = user.loginByPhone(login, pass);
+		} else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
+			ue = user.loginByEmail(login, pass);
+		}
+		return SessionHandler.generateSession(ue, pass); //our session token
+	}
+
+	@GET
+	@Path("checkAuth/{sid}")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public String checkAuth(@PathParam("sid") String sid) {
+		return Boolean.toString(SessionHandler.isValidSession(sid));
 	}
 
 	@POST

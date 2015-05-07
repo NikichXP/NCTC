@@ -1,9 +1,6 @@
 package com.netcracker.session;
 
 import com.netcracker.entity.UserEntity;
-import com.netcracker.facade.local_int.User;
-
-import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import java.util.*;
 
@@ -13,37 +10,26 @@ import java.util.*;
 @Singleton
 public class SessionHandler {
 
-    @EJB
-    User u;
     /**
      * Default session time (in minutes)
      */
     public static final int DEFAULT_SESSION_TIME = 30; //minutes
-    private static LinkedList<Session> activeSessions = new LinkedList<>();
+    private static LinkedList<Session> activeSessions = null;
+
+    protected SessionHandler () {
+        if (this.activeSessions == null) {
+            this.activeSessions = new LinkedList<>();
+        }
+    }
 
     /**
      * Creates session
-     * @param sessionToken - unique session token
+     * @param session - is a session
      * @return - flag of success
      */
-    public boolean createSession (String sessionToken, String login) {
-        try {
-            UserEntity user = null;
-            if (login.matches("0[0-9]{9}")) {
-                login = "+38" + login;
-            }
-            if (login.matches("\\+380[0-9]{9}")) {
-                user = u.findByPhone(login);
-            } else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
-                user = u.findByEmail(login);
-            } else {
-                throw new Exception();
-            }
-            activeSessions.add(new Session(sessionToken, user));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public static boolean createSession(Session session) {
+        activeSessions.add(session);
+        return true;
     }
 
     /**
@@ -70,7 +56,7 @@ public class SessionHandler {
      * Session stops being valid
      * @param sessionToken - Session to stop being valid
      */
-    public static void invalidate (String sessionToken) {
+    public void invalidate (String sessionToken) {
         Iterator<Session> it = activeSessions.iterator();
         Session ptr;
         int i = 0;
@@ -106,9 +92,10 @@ public class SessionHandler {
         return false;
     }
 
-    public String generateSession(String loginData) {
+
+    public static String generateSession(UserEntity user, String pass) {
         UUID uuid = UUID.randomUUID();
-        createSession(uuid.toString(), loginData);
-        return uuid.toString();
+
+        return uuid.toString() + SessionHandler.createSession(new Session(uuid.toString(), user));
     }
 }

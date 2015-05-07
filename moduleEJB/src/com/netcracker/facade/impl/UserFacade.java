@@ -25,18 +25,29 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         super(UserEntity.class);
     }
 
+    /**
+     * @param email user email
+     * @return <b>true</b> if user with this email already exists
+     */
     @Override
     public boolean isEmailUsed(String email) {
         List results = em.createNamedQuery("User.findByEmailIgnoreCase").setParameter("email", email).getResultList();
         return !results.isEmpty();
     }
 
+    /**
+     * @param phone user phone number
+     * @return <b>true</b> if user with this phone number already exists
+     */
     @Override
     public boolean isPhoneUsed(String phone) {
         List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
         return !results.isEmpty();
     }
-
+    /**
+     * @param email unique user email
+     * @return <b>UserEntity</b> object or <b>null</b> if not found
+     */
     @Override
     public UserEntity findByEmail(String email) {
         List results = em.createNamedQuery("User.findByEmailIgnoreCase").setParameter("email", email).getResultList();
@@ -46,6 +57,10 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         return null;
     }
 
+    /**
+     * @param phone unique user phone
+     * @return <b>UserEntity</b> object or <b>null</b> if not found
+     */
     @Override
     public UserEntity findByPhone(String phone) {
         List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
@@ -55,28 +70,31 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         return null;
     }
 
+    /**
+     * @param email unique user email
+     * @param password user password
+     * @return <b>UserEntity object</b> or <b>null</b> if not found
+     */
     @Override
     public UserEntity loginByEmail(String email, String password) {
         List results = em.createNamedQuery("User.findByEmailIgnoreCaseAndPassword")
                 .setParameter("email", email).setParameter("password", password).getResultList();
-        System.out.println(results.size());
-
         if (results.isEmpty()) {
-            System.out.println("Returned null");
             return null;
         }
         return (UserEntity)results.get(0);
     }
 
-
+    /**
+     * @param phone unique user phone
+     * @param password user password
+     * @return <b>UserEntity</b> object or <b>null</b> if not found
+     */
     @Override
     public UserEntity loginByPhone(String phone, String password) {
         List results = em.createNamedQuery("User.findByPhoneAndPassword")
                 .setParameter("phone", phone).setParameter("password", password).getResultList();
-        System.out.println(results.size());
-
         if (results.isEmpty()) {
-            System.out.println("Returned null");
             return null;
         }
         return (UserEntity)results.get(0);
