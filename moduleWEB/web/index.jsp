@@ -1,77 +1,100 @@
+<%@ page import="com.netcracker.session.SessionHandler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>YATS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>YATS</title>
 
-  <!-- Bootstrap -->
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 
 <body>
+<%! Cookie[] cookie;%>
+<%
+    try {
+        cookie = request.getCookies();
+        for (Cookie c : cookie) {
+            if (c.getName().equals("sessionID")) {
+                if (SessionHandler.isValidSession(c.getValue())) {
+                    response.sendRedirect("order.jsp");
+                }
+            }
+        }
+
+    } catch (Exception e) {
+        //lol, do nothing
+    }
+%>
 
 
 <div class="container">
-  <div class="row">
+    <div class="row">
 
-    <!--Logo header section-->
-    <div class="logo text-center">
-      <h1>YATS</h1>
-      <h6>yet another taxi service</h6>
+        <!--Logo header section-->
+        <div class="logo text-center">
+            <h1>YATS</h1>
+            <h6>yet another taxi service</h6>
+        </div>
     </div>
-  </div>
 
-  <!--Log in section-->
-  <div class="row">
-    <span href="#" class="button" id="toggle-login">Log in</span>
-    <div id="login">
+    <!--Log in section-->
+    <div class="row">
+        <span href="#" class="button" id="toggle-login">Log in</span>
 
-      <form>
-        <input type="text-field" placeholder="Email or phone number" id="login-cred"/>
-        <input type="password" placeholder="Password" id="login-pass"/>
-        <div class="submit" id="login-submit">Log in</div>
-      </form>
+        <div id="login">
+
+            <form>
+                <input type="text-field" placeholder="Email or phone number" id="login-cred"/>
+                <input type="password" placeholder="Password" id="login-pass"/>
+
+                <div class="submit" id="login-submit">Log in</div>
+            </form>
+        </div>
     </div>
-  </div>
-  <!--Registration section-->
-  <div class="row">
-    <span href="#" class="button" id="toggle-registration">Registration</span>
-    <div id="registration">
-      <form>
-        <input type="text-field" placeholder="First name" id="firstname"/>
-        <input type="text-field" placeholder="Last name" id="lastname"/>
-        <input type="text-field" placeholder="Phone number" id="phone"/>
-        <input type="text-field" placeholder="E-mail" id="email"/>
-        <input type="password" placeholder="Password" id="reg-pass"/>
-        <input type="password" placeholder="Confirm password" id="pass-confirm"/>
-        <div class="submit" id="registration-submit">Registration</div>
-      </form>
+    <!--Registration section-->
+    <div class="row">
+        <span href="#" class="button" id="toggle-registration">Registration</span>
+
+        <div id="registration">
+            <form>
+                <input type="text-field" placeholder="First name" id="firstname"/>
+                <input type="text-field" placeholder="Last name" id="lastname"/>
+                <input type="text-field" placeholder="Phone number" id="phone"/>
+                <input type="text-field" placeholder="E-mail" id="email"/>
+                <input type="password" placeholder="Password" id="reg-pass"/>
+                <input type="password" placeholder="Confirm password" id="pass-confirm"/>
+
+                <div class="submit" id="registration-submit">Registration</div>
+            </form>
+        </div>
     </div>
-  </div>
-  <!--Order without registration section-->
-  <div class="row">
-    <span href="#" class="button" id="toggle-anon-order">Order without registration</span>
-    <div id="anon-order">
-      <form>
-        <input type="text-field" placeholder="Orders tracking number" id="tracking-id"/>
-        <div class="submit" id="track-TO-submit">Show active order</div>
-        <div class="submit" id="order-wo-reg-submit">Order without registration</div>
-      </form>
+    <!--Order without registration section-->
+    <div class="row">
+        <span href="#" class="button" id="toggle-anon-order">Order without registration</span>
+
+        <div id="anon-order">
+            <form>
+                <input type="text-field" placeholder="Orders tracking number" id="tracking-id"/>
+
+                <div class="submit" id="track-TO-submit">Show active order</div>
+                <div class="submit" id="order-wo-reg-submit">Order without registration</div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

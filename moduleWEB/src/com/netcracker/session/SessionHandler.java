@@ -33,7 +33,7 @@ public class SessionHandler {
      * @param sessionToken - session token to be checked
      * @return - result of validity
      */
-    public boolean validateSession (String sessionToken) {
+    public static boolean isValidSession(String sessionToken) {
         while (!activeSessions.get(0).validate()) {
             activeSessions.remove(0);
         }

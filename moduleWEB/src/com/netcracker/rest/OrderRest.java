@@ -31,9 +31,9 @@ public class OrderRest {
     @Path("/create/{phone}")
     @Consumes("text/plain")
     @Produces("text/plain")
-    public String createOrder(@PathParam("phone") String phone,
-                             @PathParam("lastName") String lastName,
-                             @PathParam("password") String pass){
+    public String createOrder(@PathParam("phone")    String phone,
+                              @PathParam("lastName") String lastName,
+                              @PathParam("password") String pass){
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setContactPhone(phone);
         //vova ya sam dopishu))

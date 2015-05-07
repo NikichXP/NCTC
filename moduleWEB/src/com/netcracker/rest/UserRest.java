@@ -4,12 +4,14 @@ import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.classes.UserJson;
 import com.netcracker.rest.utilize.Registration;
+import com.netcracker.session.SessionHandler;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
+import java.util.UUID;
 
 /**
  * User facade for ReST 
@@ -21,6 +23,13 @@ public class UserRest {
 	@EJB
 	User user;
 
+
+	@GET
+	@Path("auth")
+	@Produces("text/plain")
+	public static String generateAuth() {
+		return SessionHandler.generateSession(); //our session token
+	}
 
 	@POST
 	@Path ("login")

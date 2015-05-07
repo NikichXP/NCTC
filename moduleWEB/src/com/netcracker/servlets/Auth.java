@@ -2,7 +2,7 @@ package com.netcracker.servlets;
 
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
-import com.netcracker.rest.AuthRest;
+import com.netcracker.rest.UserRest;
 import com.netcracker.session.SessionHandler;
 
 import javax.ejb.EJB;
@@ -41,6 +41,8 @@ public class Auth extends HttpServlet {
         if (res != null) {
             response.addCookie(new Cookie("sessionID", SessionHandler.generateSession()));
             response.sendRedirect("createOrder.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
         }
 
     }
