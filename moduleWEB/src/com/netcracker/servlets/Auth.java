@@ -28,7 +28,7 @@ public class Auth extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
+/*        String login = request.getParameter("login");
         UserEntity res = null;
         if (login.matches("0[0-9]{9}")) {
             login = "+38" + login;
@@ -44,6 +44,6 @@ public class Auth extends HttpServlet {
         } else {
             response.sendRedirect("index.jsp");
         }
-
+*/
     }
 }

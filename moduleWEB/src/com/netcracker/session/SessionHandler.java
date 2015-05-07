@@ -1,5 +1,9 @@
 package com.netcracker.session;
 
+import com.netcracker.entity.UserEntity;
+import com.netcracker.facade.local_int.User;
+
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import java.util.*;
 
@@ -8,20 +12,34 @@ import java.util.*;
  */
 @Singleton
 public class SessionHandler {
+
+    @EJB
+    User u;
     /**
      * Default session time (in minutes)
      */
     public static final int DEFAULT_SESSION_TIME = 30; //minutes
-    private static LinkedList<Session> activeSessions = new LinkedList<Session>();
+    private static LinkedList<Session> activeSessions = new LinkedList<>();
 
     /**
      * Creates session
      * @param sessionToken - unique session token
      * @return - flag of success
      */
-    public static boolean createSession (String sessionToken) {
+    public boolean createSession (String sessionToken, String login) {
         try {
-            activeSessions.add(new Session(sessionToken));
+            UserEntity user = null;
+            if (login.matches("0[0-9]{9}")) {
+                login = "+38" + login;
+            }
+            if (login.matches("\\+380[0-9]{9}")) {
+                user = u.findByPhone(login);
+            } else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
+                user = u.findByEmail(login);
+            } else {
+                throw new Exception();
+            }
+            activeSessions.add(new Session(sessionToken, user));
             return true;
         } catch (Exception e) {
             return false;
@@ -88,9 +106,9 @@ public class SessionHandler {
         return false;
     }
 
-    public static String generateSession() {
+    public String generateSession(String loginData) {
         UUID uuid = UUID.randomUUID();
-        createSession(uuid.toString());
+        createSession(uuid.toString(), loginData);
         return uuid.toString();
     }
 }

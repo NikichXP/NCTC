@@ -1,85 +1,64 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>YATS</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+
+
+  <link rel="stylesheet" href="./static/css/selectize.bootstrap3.css">
+
+  <link rel="stylesheet" href="./static/css/main.css">
+
 </head>
-
-
-<body>
-
-
-<div class="container">
-    <div class="row">
-
-        <!--Logo header section-->
-        <div class="logo text-center">
-            <h1>YATS (HTML)</h1>
-            <h6>yet another taxi service</h6>
-        </div>
+<body ng-app="taxiApp">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Taxi service</a>
     </div>
-
-    <!--Log in section-->
-    <div class="row">
-        <span href="#" class="button" id="toggle-login">Log in</span>
-        <div id="login">
-
-            <form>
-                <input type="text-field" placeholder="Email or phone number" id="login-cred"/>
-                <input type="password" placeholder="Password" id="login-pass"/>
-                <div class="submit" id="login-submit">Log in</div>
-            </form>
-        </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
-    <!--Registration section-->
-    <div class="row">
-        <span href="#" class="button" id="toggle-registration">Registration</span>
-        <div id="registration">
-            <form>
-                <input type="text-field" placeholder="First name" id="firstname"/>
-                <input type="text-field" placeholder="Last name" id="lastname"/>
-                <input type="text-field" placeholder="Phone number" id="phone"/>
-                <input type="text-field" placeholder="E-mail" id="email"/>
-                <input type="password" placeholder="Password" id="reg-pass"/>
-                <input type="password" placeholder="Confirm password" id="pass-confirm"/>
-                <div class="submit" id="registration-submit">Registration</div>
-            </form>
-        </div>
-    </div>
-    <!--Order without registration section-->
-    <div class="row">
-        <span href="#" class="button" id="toggle-anon-order">Order without registration</span>
-        <div id="anon-order">
-            <form>
-                <input type="text-field" placeholder="Orders tracking number" id="tracking-id"/>
-                <div class="submit" id="track-TO-submit">Show active order</div>
-                <div class="submit" id="order-wo-reg-submit">Order without registration</div>
-            </form>
-        </div>
-    </div>
-</div>
+  </div>
+</nav>
+<div class="container" ng-view=""></div>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.js"></script>
-<!--Validator plugin link will be here (now it crashes all script if added, will fix it later)-->
 
-<script src="js/script.js"></script>
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./static/js/standalone/selectize.min.js"></script>
+
+<script src="./static/js/angular.min.js"></script>
+<script src="./static/js/angular-route.min.js"></script>
+
+<script src="./static/js/main.js"></script>
+<script src="./static/js/app.js"></script>
+<script src="./static/js/controllers.js"></script>
+<script src="./static/js/services.js"></script>
 
 </body>
 </html>
