@@ -14,7 +14,13 @@ public class UserGroupEntity {
 	private BigInteger tariffMultiplier;
 	private Collection<UserEntity> usersById;
 
+	@SequenceGenerator(
+			name = "user_group_SEQUENCE_GENERATOR",
+			sequenceName = "user_group_id_seq",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_group_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

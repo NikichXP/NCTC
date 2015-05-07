@@ -11,7 +11,13 @@ public class OrderStateEntity {
 	private BigInteger id;
 	private String name;
 
+	@SequenceGenerator(
+			name = "ORDER_STATE_SEQUENCE_GENERATOR",
+			sequenceName = "ORDER_STATE_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_STATE_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

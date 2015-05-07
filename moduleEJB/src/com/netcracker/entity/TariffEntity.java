@@ -21,7 +21,13 @@ public class TariffEntity {
 	private BigInteger toSeatsCount;
 	private BigInteger multiplier;
 
+	@SequenceGenerator(
+			name = "tariff_SEQUENCE_GENERATOR",
+			sequenceName = "tariff_id_seq",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tariff_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

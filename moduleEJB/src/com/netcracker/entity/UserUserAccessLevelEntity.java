@@ -12,7 +12,13 @@ public class UserUserAccessLevelEntity {
 	private UserEntity userByUserId;
 	private UserAccessLevelEntity userAccessLevelByUserAccessLevelId;
 
+	@SequenceGenerator(
+			name = "user-user_access_level_SEQUENCE_GENERATOR",
+			sequenceName = "user-user_access_level_id_seq",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user-user_access_level_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

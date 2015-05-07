@@ -11,7 +11,13 @@ public class MusicTypeEntity {
 	private BigInteger id;
 	private String name;
 
+	@SequenceGenerator(
+			name = "MUSIC_TYPE_SEQUENCE_GENERATOR",
+			sequenceName = "MUSIC_TYPE_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MUSIC_TYPE_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

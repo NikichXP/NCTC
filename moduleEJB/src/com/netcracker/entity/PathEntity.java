@@ -22,7 +22,13 @@ public class PathEntity {
 	private PathEntity pathByNextPathId;
 	private Collection<PathEntity> pathsById;
 
+	@SequenceGenerator(
+			name = "PATH_SEQUENCE_GENERATOR",
+			sequenceName = "PATH_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATH_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

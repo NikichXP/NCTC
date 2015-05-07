@@ -38,6 +38,24 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
     }
 
     @Override
+    public UserEntity findByEmail(String email) {
+        List results = em.createNamedQuery("User.findByEmailIgnoreCase").setParameter("email", email).getResultList();
+        if (!results.isEmpty()) {
+            return (UserEntity)results.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public UserEntity findByPhone(String phone) {
+        List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
+        if (!results.isEmpty()) {
+            return (UserEntity)results.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public UserEntity loginByEmail(String email, String password) {
         List results = em.createNamedQuery("User.findByEmailIgnoreCaseAndPassword")
                 .setParameter("email", email).setParameter("password", password).getResultList();

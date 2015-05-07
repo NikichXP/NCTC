@@ -11,7 +11,13 @@ public class RefuseCauseByDriverEntity {
 	private BigInteger id;
 	private String message;
 
+	@SequenceGenerator(
+			name = "driver_refuse_cause_SEQUENCE_GENERATOR",
+			sequenceName = "driver_refuse_cause_id_seq",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driver_refuse_cause_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

@@ -16,7 +16,13 @@ public class DriverCategoryEntity {
 	private Collection<CarEntity> carsById;
 	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
 
+	@SequenceGenerator(
+			name = "DRIVER_CATEGORY_SEQUENCE_GENERATOR",
+			sequenceName = "DRIVER_CATEGORY_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DRIVER_CATEGORY_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;

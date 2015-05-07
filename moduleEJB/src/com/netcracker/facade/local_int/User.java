@@ -25,6 +25,10 @@ public interface User {
 
 	boolean isPhoneUsed(String phone);
 
+	UserEntity findByEmail(String email);
+
+	UserEntity findByPhone(String phone);
+
 	UserEntity loginByEmail(String email, String password);
 
 	UserEntity loginByPhone(String phone, String password);

@@ -2,19 +2,23 @@ package com.netcracker.entity;
 
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
-@javax.persistence.Table(name = "order", schema = "public", catalog = "postgres")
+@Table(name = "order", schema = "public", catalog = "postgres")
 public class OrderEntity {
 	private BigInteger id;
 
+	@SequenceGenerator(
+			name = "ORDER_SEQUENCE_GENERATOR",
+			sequenceName = "ORDER_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
-	@javax.persistence.Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQUENCE_GENERATOR")
+	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;
 	}
@@ -26,7 +30,7 @@ public class OrderEntity {
 	private String publicToken;
 
 	@Basic
-	@javax.persistence.Column(name = "public_token", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "public_token", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getPublicToken() {
 		return publicToken;
 	}
@@ -38,7 +42,7 @@ public class OrderEntity {
 	private String contactPhone;
 
 	@Basic
-	@javax.persistence.Column(name = "contact_phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "contact_phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getContactPhone() {
 		return contactPhone;
 	}
@@ -50,7 +54,7 @@ public class OrderEntity {
 	private String contactName;
 
 	@Basic
-	@javax.persistence.Column(name = "contact_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "contact_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getContactName() {
 		return contactName;
 	}
@@ -62,7 +66,7 @@ public class OrderEntity {
 	private Timestamp timeCreated;
 
 	@Basic
-	@javax.persistence.Column(name = "time_created", nullable = false, insertable = true, updatable = true)
+	@Column(name = "time_created", nullable = false, insertable = true, updatable = true)
 	public Timestamp getTimeCreated() {
 		return timeCreated;
 	}
@@ -74,7 +78,7 @@ public class OrderEntity {
 	private Timestamp timeRequested;
 
 	@Basic
-	@javax.persistence.Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
+	@Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
 	public Timestamp getTimeRequested() {
 		return timeRequested;
 	}
@@ -86,7 +90,7 @@ public class OrderEntity {
 	private Timestamp timeOfDriverArrival;
 
 	@Basic
-	@javax.persistence.Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
+	@Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeOfDriverArrival() {
 		return timeOfDriverArrival;
 	}
@@ -98,7 +102,7 @@ public class OrderEntity {
 	private Timestamp timeStarted;
 
 	@Basic
-	@javax.persistence.Column(name = "time_started", nullable = true, insertable = true, updatable = true)
+	@Column(name = "time_started", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeStarted() {
 		return timeStarted;
 	}
@@ -110,7 +114,7 @@ public class OrderEntity {
 	private Timestamp timeCompleted;
 
 	@Basic
-	@javax.persistence.Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
+	@Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeCompleted() {
 		return timeCompleted;
 	}
@@ -122,7 +126,7 @@ public class OrderEntity {
 	private BigInteger requestedSeatsCount;
 
 	@Basic
-	@javax.persistence.Column(name = "requested_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "requested_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getRequestedSeatsCount() {
 		return requestedSeatsCount;
 	}
@@ -134,7 +138,7 @@ public class OrderEntity {
 	private String driverSex;
 
 	@Basic
-	@javax.persistence.Column(name = "driver_sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "driver_sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getDriverSex() {
 		return driverSex;
 	}
@@ -146,7 +150,7 @@ public class OrderEntity {
 	private Boolean smokingFriendly;
 
 	@Basic
-	@javax.persistence.Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
+	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getSmokingFriendly() {
 		return smokingFriendly;
 	}
@@ -158,7 +162,7 @@ public class OrderEntity {
 	private Boolean animalFriendly;
 
 	@Basic
-	@javax.persistence.Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
+	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
 	}
@@ -170,7 +174,7 @@ public class OrderEntity {
 	private Boolean wifi;
 
 	@Basic
-	@javax.persistence.Column(name = "wifi", nullable = true, insertable = true, updatable = true)
+	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	public Boolean getWifi() {
 		return wifi;
 	}
@@ -182,7 +186,7 @@ public class OrderEntity {
 	private String customerPreCreateComment;
 
 	@Basic
-	@javax.persistence.Column(name = "customer_pre_create_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "customer_pre_create_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerPreCreateComment() {
 		return customerPreCreateComment;
 	}
@@ -194,7 +198,7 @@ public class OrderEntity {
 	private String customerPostCompleteComment;
 
 	@Basic
-	@javax.persistence.Column(name = "customer_post_complete_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "customer_post_complete_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerPostCompleteComment() {
 		return customerPostCompleteComment;
 	}
@@ -206,7 +210,7 @@ public class OrderEntity {
 	private String customerRefuseComment;
 
 	@Basic
-	@javax.persistence.Column(name = "customer_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "customer_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerRefuseComment() {
 		return customerRefuseComment;
 	}
@@ -218,7 +222,7 @@ public class OrderEntity {
 	private String driverRefuseComment;
 
 	@Basic
-	@javax.persistence.Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getDriverRefuseComment() {
 		return driverRefuseComment;
 	}
@@ -230,7 +234,7 @@ public class OrderEntity {
 	private BigInteger totalLength;
 
 	@Basic
-	@javax.persistence.Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTotalLength() {
 		return totalLength;
 	}
@@ -242,7 +246,7 @@ public class OrderEntity {
 	private BigInteger totalMultiplier;
 
 	@Basic
-	@javax.persistence.Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTotalMultiplier() {
 		return totalMultiplier;
 	}
@@ -254,7 +258,7 @@ public class OrderEntity {
 	private BigInteger finalPrice;
 
 	@Basic
-	@javax.persistence.Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getFinalPrice() {
 		return finalPrice;
 	}

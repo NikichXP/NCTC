@@ -12,7 +12,13 @@ public class FavouriteAddressEntity {
 	private String address;
 	private UserEntity userByCustomerId;
 
+	@SequenceGenerator(
+			name = "FAVOURITE_ADDRESS_SEQUENCE_GENERATOR",
+			sequenceName = "FAVOURITE_ADDRESS_ID_SEQ",
+			allocationSize = 1, initialValue = 1
+	)
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FAVOURITE_ADDRESS_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;
