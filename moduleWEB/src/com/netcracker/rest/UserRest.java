@@ -69,7 +69,7 @@ public class UserRest {
 		if (userEntity == null){
 			return Response.status(404).entity("Pass or email is already in use").build();
 		} else {
-			return Response.status(201).entity("test").build();
+			return Response.status(201).entity(userEntity.toString()).build();
 		}
 	}
 
