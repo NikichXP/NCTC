@@ -24,9 +24,10 @@ public class UserRest {
 	@POST
 	@Path ("login")
 	@Consumes("application/json")
-	public Response getUser(UserJson user) {
-		String result = "User saved: " + user.toString();
-		return Response.status(200).entity(result).build();
+	@Produces("application/json")
+	public UserJson getUser(UserJson user) {
+		//String result = "User saved: " + user.toString();
+		return user;
 	}
 
 	/**

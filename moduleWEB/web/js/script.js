@@ -34,12 +34,12 @@ $('#login-submit').click(function(){
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(JSONdata),
 		dataType:'json',
-		success: function (result) {
-			alert('Time: ' + result.time
-			+ ', message: ' + result.message);
+		success: function (data,textStatus,jqXHR ) {
+			alert(textStatus);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
+			//alert(eval("(" + data + ")"));
 		}
 	})
 	//	.done(function(){alert("nice!");})
