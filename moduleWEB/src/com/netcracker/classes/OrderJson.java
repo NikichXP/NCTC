@@ -6,6 +6,7 @@ import java.lang.String;
 import java.lang.StringBuilder;
 
 public class OrderJson implements Serializable {
+
     private String from;
     private String to;
 

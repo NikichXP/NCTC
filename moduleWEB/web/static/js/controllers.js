@@ -5,7 +5,7 @@
     controller('CreateOrderController', ['$scope', '$http', '$location', function($scope, $http, $location){
         $scope.order = {
             'phone': '',
-            'gender': 'any',
+            'gender': 'any'
         };
 
         $scope.createOrder = function() {
