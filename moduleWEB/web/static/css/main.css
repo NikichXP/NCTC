@@ -58,26 +58,26 @@ input[type=checkbox]:checked + label:after {
 }
 
 .wifi {
-    background: url("/static/icons/wifi-128.png") 50% 0% transparent no-repeat;
+    background: url("/moduleWEB_war_archive/static/icons/wifi-128.png") 50% 0% transparent no-repeat;
     background-size: 50px 50px;
 }
 
 .animal {
-    background: url("/static/icons/animal-64.png") 50% 0% transparent no-repeat;
+    background: url("/moduleWEB_war_archive/static/icons/animal-64.png") 50% 0% transparent no-repeat;
     background-size: 50px 50px;
 }
 
 .cargo {
-    background: url("/static/icons/cargo-128.png") 50% 0% transparent no-repeat;
+    background: url("/moduleWEB_war_archive/static/icons/cargo-128.png") 50% 0% transparent no-repeat;
     background-size: 50px 50px;
 }
 
 .smoking {
-    background: url("/static/icons/smoke-128.png") 50% 0% transparent no-repeat;
+    background: url("/moduleWEB_war_archive/static/icons/smoke-128.png") 50% 0% transparent no-repeat;
     background-size: 50px 50px;
 }
 .air-conditioner {
-    background: url("/static/icons/air-conditioner-128.png") 50% 0% transparent no-repeat;
+    background: url("/moduleWEB_war_archive/static/icons/air-conditioner-128.png") 50% 0% transparent no-repeat;
     background-size: 50px 50px;
 }
 
