@@ -30,8 +30,8 @@
         });
 
         var myMap = new ymaps.Map('map', {
-            center: [56.399625, 36.71120],
-            zoom: 7,
+            center: [50.44967122, 30.52208984],
+            zoom: 11,
             controls: [buttonEditor]
         }, {
             buttonMaxWidth: 300
