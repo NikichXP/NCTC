@@ -87,7 +87,7 @@ public class DriverCategoryEntity {
 		return result;
 	}
 
-	@OneToMany(mappedBy = "driverCategoryByRequiredDriverCategoryId")
+	@OneToMany(mappedBy = "driverCategoryEntity")
 	public Collection<CarEntity> getCarsById() {
 		return carsById;
 	}
