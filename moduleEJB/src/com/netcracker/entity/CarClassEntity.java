@@ -21,7 +21,7 @@ public class CarClassEntity {
 	)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_CLASS_SEQUENCE_GENERATOR")
-	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "id", nullable = false, insertable = false, updatable = false, precision = 0)
 	public BigInteger getId() {
 		return id;
 	}
@@ -31,7 +31,7 @@ public class CarClassEntity {
 	}
 
 	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	@Column(name = "name", nullable = false, insertable = false, updatable = false, length = 2147483647)
 	public String getName() {
 		return name;
 	}
@@ -41,7 +41,7 @@ public class CarClassEntity {
 	}
 
 	@Basic
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "tariff_multiplier", nullable = false, insertable = false, updatable = false, precision = 0)
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}
@@ -73,7 +73,7 @@ public class CarClassEntity {
 		return result;
 	}
 
-	@OneToMany(mappedBy = "carClassByClassId")
+	@OneToMany(mappedBy = "carClassEntity")
 	public Collection<CarEntity> getCarsById() {
 		return carsById;
 	}

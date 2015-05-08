@@ -36,7 +36,7 @@ $('#login-submit').click(function(){
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
 			//alert(textStatus + " " + jqXHR.responseText);
-			document.location.href = "CustomerTo.html";
+			document.location.href = "CustomerTO.html";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);

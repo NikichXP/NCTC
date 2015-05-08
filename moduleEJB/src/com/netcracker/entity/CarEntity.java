@@ -15,8 +15,8 @@ public class CarEntity {
 	private String licencePlate;
 	private Date dateManufactured;
 	private BigInteger userId;
-	private CarClassEntity carClassByClassId;
-	private DriverCategoryEntity driverCategoryByRequiredDriverCategoryId;
+	private CarClassEntity carClassEntity;
+	private DriverCategoryEntity driverCategoryEntity;
 
 	@SequenceGenerator(
 			name = "CAR_SEQUENCE_GENERATOR",
@@ -116,21 +116,21 @@ public class CarEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
-	public CarClassEntity getCarClassByClassId() {
-		return carClassByClassId;
+	public CarClassEntity getCarClassEntity() {
+		return carClassEntity;
 	}
 
-	public void setCarClassByClassId(CarClassEntity carClassByClassId) {
-		this.carClassByClassId = carClassByClassId;
+	public void setCarClassEntity(CarClassEntity carClassEntity) {
+		this.carClassEntity = carClassEntity;
 	}
 
 	@ManyToOne
 	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
-	public DriverCategoryEntity getDriverCategoryByRequiredDriverCategoryId() {
-		return driverCategoryByRequiredDriverCategoryId;
+	public DriverCategoryEntity getDriverCategoryEntity() {
+		return driverCategoryEntity;
 	}
 
-	public void setDriverCategoryByRequiredDriverCategoryId(DriverCategoryEntity driverCategoryByRequiredDriverCategoryId) {
-		this.driverCategoryByRequiredDriverCategoryId = driverCategoryByRequiredDriverCategoryId;
+	public void setDriverCategoryEntity(DriverCategoryEntity driverCategoryEntity) {
+		this.driverCategoryEntity = driverCategoryEntity;
 	}
 }
