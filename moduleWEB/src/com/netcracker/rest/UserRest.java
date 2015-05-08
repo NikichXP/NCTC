@@ -13,7 +13,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * User facade for ReST 
+ * User facade for ReST
+ *
  * @author NikichXP
  */
 @Stateless
@@ -21,23 +22,6 @@ import java.util.Date;
 public class UserRest {
 	@EJB
 	User user;
-
-	@GET
-	@Path("auth/{loginData}/{pass}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String generateAuth(@PathParam("loginData") String login, @PathParam("pass") String pass) {
-		UserEntity ue = null;
-		if (login.matches("0[0-9]{9}")) {
-			login = "+38" + login;
-		}
-		if (login.matches("\\+380[0-9]{9}")) {
-			ue = user.loginByPhone(login, pass);
-		} else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
-			ue = user.loginByEmail(login, pass);
-		}
-		return SessionHandler.generateSession(ue, pass); //our session token
-	}
 
 	@GET
 	@Path("checkAuth/{sid}")
@@ -48,21 +32,19 @@ public class UserRest {
 	}
 
 	@POST
-	@Path ("login")
+	@Path("login")
 	@Consumes("application/json")
 	public Response getUser(UserJson userJson) {
-
 		UserEntity userEntity = null;
 		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
 			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
-		}
-		else if (userJson.getCred().matches("\\d+")) {
+		} else if (userJson.getCred().matches("\\d+")) {
 			userEntity = user.loginByPhone(userJson.getCred(), userJson.getPass());
 		}
-		if(userEntity != null){
+
+		if (userEntity != null) {
 			return Response.status(200).entity(userEntity.toString()).build();
-		}
-		else{
+		} else {
 			return Response.status(404).entity("Bad login credentials").build();
 		}
 
@@ -71,7 +53,7 @@ public class UserRest {
 	@POST
 	@Path("create")
 	@Consumes("application/json")
-	public Response createUser(UserJson userJson){
+	public Response createUser(UserJson userJson) {
 		UserEntity userEntity = null;
 		if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
 			userEntity = new UserEntity();
@@ -83,7 +65,8 @@ public class UserRest {
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
 			user.create(userEntity);
 		}
-		if (userEntity == null){
+
+		if (userEntity == null) {
 			return Response.status(404).entity("Pass or email is already in use").build();
 		} else {
 			return Response.status(201).entity(userEntity.toString()).build();
