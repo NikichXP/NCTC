@@ -36,7 +36,9 @@ $('#login-submit').click(function(){
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
 			//alert(textStatus + " " + jqXHR.responseText);
-			document.location.href = "CustomerTO.html";
+			document.cookie = "uuid="+jqXHR.responseText;
+			alert("uuid="+jqXHR.responseText);
+			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
@@ -60,7 +62,10 @@ $('#registration-submit').click(function(){
 		data: JSON.stringify(JSONdata),
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			alert(textStatus + ": " + jqXHR.responseText);
+			//alert(textStatus + ": " + jqXHR.responseText);
+			document.cookie = "uuid="+jqXHR.responseText;
+			alert("uuid="+jqXHR.responseText);
+			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);

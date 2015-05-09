@@ -3,14 +3,21 @@ package com.netcracker.rest;
 import com.netcracker.classes.UserJson;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
+import com.netcracker.rest.utils.SecuritySettings;
 import com.netcracker.session.SessionHandler;
 
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * User facade for ReST
@@ -74,7 +81,7 @@ public class UserRest {
 		SessionHandler.generateSession(userEntity, userJson.getPass());
 		//TODO: Add returning of session token id to response (Nikita)
 		if (userEntity != null) {
-			return Response.status(200).entity(userEntity.toString()).build();
+			return Response.status(200).entity(userEntity.getUuid()).build();
 		} else {
 			return Response.status(404).entity("Bad login credentials").build();
 		}
@@ -105,6 +112,7 @@ public class UserRest {
 	@Consumes("application/json")
 	public Response createUser(UserJson userJson) {
 		UserEntity userEntity = null;
+		String randomUuid = UUID.randomUUID().toString();
 		if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
 			userEntity = new UserEntity();
 			userEntity.setFirstName(userJson.getFirstName());
@@ -113,22 +121,23 @@ public class UserRest {
 			userEntity.setPhone(userJson.getPhone());
 			userEntity.setEmail(userJson.getEmail());
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
+			userEntity.setUuid(randomUuid);
 			user.create(userEntity);
 			//TODO Send confirmation email here (Viktor)
+//			SecuritySettings.encrypt(randomUuid);
 		}
 		if (userEntity == null) {
-			return Response.status(404).entity("Pass or email is already in use").build();
+			return Response.status(404).entity("Phone or email is already in use").build();
 		} else {
-			return Response.status(201).entity(userEntity.toString()).build();
+			return Response.status(201).entity(randomUuid + " encryptedUuid: " + SecuritySettings.encrypt(randomUuid)).build();
 		}
 	}
 
 	@GET
-	@Path("confirm/{uuid}")
-	@Consumes("text/plain")
+	@Path("confirm")
 	@Produces("text/plain")
-	public String confirm(@PathParam("uuid")String uuid) {
-		UserEntity userEntity = user.findByUuid(uuid);
+	public String confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
+		UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
 		userEntity.setConfirmed(true);
 		user.update(userEntity);
 		if (userEntity != null) return "Email confirmed";

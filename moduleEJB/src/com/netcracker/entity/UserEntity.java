@@ -50,7 +50,7 @@ public class UserEntity {
 	private Boolean smokingFriendly;
 	@Basic
 	@Column(name = "confirmed", nullable = false, insertable = true, updatable = true)
-	private Boolean confirmed;
+	private Boolean confirmed = false;
 	@Basic
 	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
 	private boolean blocked;
