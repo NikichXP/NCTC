@@ -5,33 +5,11 @@ package com.netcracker.entity;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "order", schema = "public", catalog = "postgres")
 public class OrderEntity {
-	private BigInteger id;
-	private String publicToken;
-	private String contactPhone;
-	private String contactName;
-	private BigInteger requestedSeatsCount;
-	private String driverSex;
-	private Boolean smokingFriendly;
-	private Boolean animalFriendly;
-	private Boolean airConditioner;
-	private Timestamp timeCreated;
-	private Timestamp timeRequested;
-	private Timestamp timeOfDriverArrival;
-	private Timestamp timeStarted;
-	private Timestamp timeCompleted;
-	private Boolean wifi;
-	private String customerPostCompleteComment;
-	private String driverRefuseComment;
-	private String customerPreCreateComment;
-	private String customerRefuseComment;
-	private BigInteger totalLength;
-	private BigInteger totalMultiplier;
-	private BigInteger finalPrice;
-
 	@SequenceGenerator(
 			name = "ORDER_SEQUENCE_GENERATOR",
 			sequenceName = "ORDER_ID_SEQ",
@@ -40,6 +18,152 @@ public class OrderEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+
+	@ManyToOne
+	@JoinColumn(name = "customer_refuse_cause_id", referencedColumnName = "id")
+	private RefuseCauseByCustomerEntity refuseCauseByCustomerEntity;
+	@ManyToOne
+	@JoinColumn(name = "driver_refuse_cause_id", referencedColumnName = "id")
+	private RefuseCauseByDriverEntity refuseCauseByDriverEntity;
+	@ManyToOne
+	@JoinColumn(name = "car_class_id", referencedColumnName = "id")
+	private CarClassEntity carClassEntity;
+	@ManyToOne
+	@JoinColumn(name = "music_type_id", referencedColumnName = "id")
+	private MusicTypeEntity musicTypeEntity;
+	@ManyToOne
+	@JoinColumn(name = "type_id", referencedColumnName = "id")
+	private OrderTypeEntity orderTypeEntity;
+	@ManyToOne
+	@JoinColumn(name = "state_id", referencedColumnName = "id")
+	private OrderStateEntity orderStateEntity;
+	@ManyToOne
+	@JoinColumn(name = "customer_user_id", referencedColumnName = "id")
+	private UserEntity customerUserEntity;
+	@ManyToOne
+	@JoinColumn(name = "driver_user_id", referencedColumnName = "id")
+	private UserEntity driverUserEntity;
+	@Basic
+	@Column(name = "public_token", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String publicToken;
+	@Basic
+	@Column(name = "contact_phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String contactPhone;
+	@Basic
+	@Column(name = "contact_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String contactName;
+	@Basic
+	@Column(name = "time_created", nullable = false, insertable = true, updatable = true)
+	private Timestamp timeCreated;
+	@Basic
+	@Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
+	private Timestamp timeRequested;
+	@Basic
+	@Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
+	private Timestamp timeOfDriverArrival;
+	@Basic
+	@Column(name = "time_started", nullable = true, insertable = true, updatable = true)
+	private Timestamp timeStarted;
+	@Basic
+	@Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
+	private Timestamp timeCompleted;
+	@Basic
+	@Column(name = "requested_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger requestedSeatsCount;
+	@Basic
+	@Column(name = "driver_sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String driverSex;
+	@Basic
+	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean smokingFriendly;
+	@Basic
+	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
+	private Boolean airConditioner;
+	@Basic
+	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean animalFriendly;
+	@Basic
+	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
+	private Boolean wifi;
+	@Basic
+	@Column(name = "customer_pre_create_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String customerPreCreateComment;
+	@Basic
+	@Column(name = "customer_post_complete_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String customerPostCompleteComment;
+	@Basic
+	@Column(name = "customer_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String customerRefuseComment;
+	@Basic
+	@Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String driverRefuseComment;
+	@Basic
+	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger totalLength;
+	@Basic
+	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger totalMultiplier;
+	@Basic
+	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger finalPrice;
+
+	public RefuseCauseByCustomerEntity getRefuseCauseByCustomerEntity() {
+		return refuseCauseByCustomerEntity;
+	}
+
+	public void setRefuseCauseByCustomerEntity(RefuseCauseByCustomerEntity refuseCauseByCustomerEntity) {
+		this.refuseCauseByCustomerEntity = refuseCauseByCustomerEntity;
+	}
+
+	public RefuseCauseByDriverEntity getRefuseCauseByDriverEntity() {
+		return refuseCauseByDriverEntity;
+	}
+
+	public void setRefuseCauseByDriverEntity(RefuseCauseByDriverEntity refuseCauseByDriverEntity) {
+		this.refuseCauseByDriverEntity = refuseCauseByDriverEntity;
+	}
+
+	public MusicTypeEntity getMusicTypeEntity() {
+		return musicTypeEntity;
+	}
+
+	public void setMusicTypeEntity(MusicTypeEntity musicTypeEntity) {
+		this.musicTypeEntity = musicTypeEntity;
+	}
+
+	public OrderTypeEntity getOrderTypeEntity() {
+		return orderTypeEntity;
+	}
+
+	public void setOrderTypeEntity(OrderTypeEntity orderTypeEntity) {
+		this.orderTypeEntity = orderTypeEntity;
+	}
+
+	public OrderStateEntity getOrderStateEntity() {
+		return orderStateEntity;
+	}
+
+	public void setOrderStateEntity(OrderStateEntity orderStateEntity) {
+		this.orderStateEntity = orderStateEntity;
+	}
+
+	public UserEntity getCustomerUserEntity() {
+		return customerUserEntity;
+	}
+
+	public void setCustomerUserEntity(UserEntity customerUserEntity) {
+		this.customerUserEntity = customerUserEntity;
+	}
+
+	public UserEntity getDriverUserEntity() {
+		return driverUserEntity;
+	}
+
+	public void setDriverUserEntity(UserEntity driverUserEntity) {
+		this.driverUserEntity = driverUserEntity;
+	}
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -48,8 +172,6 @@ public class OrderEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "public_token", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getPublicToken() {
 		return publicToken;
 	}
@@ -58,8 +180,6 @@ public class OrderEntity {
 		this.publicToken = publicToken;
 	}
 
-	@Basic
-	@Column(name = "contact_phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getContactPhone() {
 		return contactPhone;
 	}
@@ -68,8 +188,6 @@ public class OrderEntity {
 		this.contactPhone = contactPhone;
 	}
 
-	@Basic
-	@Column(name = "contact_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getContactName() {
 		return contactName;
 	}
@@ -78,8 +196,6 @@ public class OrderEntity {
 		this.contactName = contactName;
 	}
 
-	@Basic
-	@Column(name = "time_created", nullable = false, insertable = true, updatable = true)
 	public Timestamp getTimeCreated() {
 		return timeCreated;
 	}
@@ -88,8 +204,6 @@ public class OrderEntity {
 		this.timeCreated = timeCreated;
 	}
 
-	@Basic
-	@Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
 	public Timestamp getTimeRequested() {
 		return timeRequested;
 	}
@@ -98,8 +212,6 @@ public class OrderEntity {
 		this.timeRequested = timeRequested;
 	}
 
-	@Basic
-	@Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeOfDriverArrival() {
 		return timeOfDriverArrival;
 	}
@@ -108,8 +220,6 @@ public class OrderEntity {
 		this.timeOfDriverArrival = timeOfDriverArrival;
 	}
 
-	@Basic
-	@Column(name = "time_started", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeStarted() {
 		return timeStarted;
 	}
@@ -118,8 +228,6 @@ public class OrderEntity {
 		this.timeStarted = timeStarted;
 	}
 
-	@Basic
-	@Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeCompleted() {
 		return timeCompleted;
 	}
@@ -128,8 +236,6 @@ public class OrderEntity {
 		this.timeCompleted = timeCompleted;
 	}
 
-	@Basic
-	@Column(name = "requested_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getRequestedSeatsCount() {
 		return requestedSeatsCount;
 	}
@@ -138,8 +244,6 @@ public class OrderEntity {
 		this.requestedSeatsCount = requestedSeatsCount;
 	}
 
-	@Basic
-	@Column(name = "driver_sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getDriverSex() {
 		return driverSex;
 	}
@@ -148,8 +252,6 @@ public class OrderEntity {
 		this.driverSex = driverSex;
 	}
 
-	@Basic
-	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getSmokingFriendly() {
 		return smokingFriendly;
 	}
@@ -158,8 +260,6 @@ public class OrderEntity {
 		this.smokingFriendly = smokingFriendly;
 	}
 
-	@Basic
-	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
 	public Boolean getAirConditioner() {
 		return airConditioner;
 	}
@@ -168,8 +268,6 @@ public class OrderEntity {
 		this.airConditioner = airConditioner;
 	}
 
-	@Basic
-	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
 	}
@@ -178,8 +276,6 @@ public class OrderEntity {
 		this.animalFriendly = animalFriendly;
 	}
 
-	@Basic
-	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	public Boolean getWifi() {
 		return wifi;
 	}
@@ -188,8 +284,6 @@ public class OrderEntity {
 		this.wifi = wifi;
 	}
 
-	@Basic
-	@Column(name = "customer_pre_create_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerPreCreateComment() {
 		return customerPreCreateComment;
 	}
@@ -198,8 +292,6 @@ public class OrderEntity {
 		this.customerPreCreateComment = customerPreCreateComment;
 	}
 
-	@Basic
-	@Column(name = "customer_post_complete_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerPostCompleteComment() {
 		return customerPostCompleteComment;
 	}
@@ -208,8 +300,6 @@ public class OrderEntity {
 		this.customerPostCompleteComment = customerPostCompleteComment;
 	}
 
-	@Basic
-	@Column(name = "customer_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getCustomerRefuseComment() {
 		return customerRefuseComment;
 	}
@@ -218,8 +308,6 @@ public class OrderEntity {
 		this.customerRefuseComment = customerRefuseComment;
 	}
 
-	@Basic
-	@Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getDriverRefuseComment() {
 		return driverRefuseComment;
 	}
@@ -228,8 +316,6 @@ public class OrderEntity {
 		this.driverRefuseComment = driverRefuseComment;
 	}
 
-	@Basic
-	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTotalLength() {
 		return totalLength;
 	}
@@ -238,8 +324,6 @@ public class OrderEntity {
 		this.totalLength = totalLength;
 	}
 
-	@Basic
-	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTotalMultiplier() {
 		return totalMultiplier;
 	}
@@ -248,8 +332,6 @@ public class OrderEntity {
 		this.totalMultiplier = totalMultiplier;
 	}
 
-	@Basic
-	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getFinalPrice() {
 		return finalPrice;
 	}

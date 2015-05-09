@@ -9,20 +9,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "path", schema = "public", catalog = "postgres")
 public class PathEntity {
-	private BigInteger id;
-	private BigInteger orderId;
-	private BigInteger startX;
-	private BigInteger startY;
-	private BigInteger endX;
-	private BigInteger endY;
-	private String startAddress;
-	private String endAddress;
-	private boolean completed;
-	private BigInteger length;
-	private BigInteger price;
-	private PathEntity pathByNextPathId;
-	private Collection<PathEntity> pathsById;
-
 	@SequenceGenerator(
 			name = "PATH_SEQUENCE_GENERATOR",
 			sequenceName = "PATH_ID_SEQ",
@@ -31,6 +17,42 @@ public class PathEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATH_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Column(name = "order_id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger orderId;
+	@Basic
+	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger startX;
+	@Basic
+	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger startY;
+	@Basic
+	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger endX;
+	@Basic
+	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger endY;
+	@Basic
+	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String startAddress;
+	@Basic
+	@Column(name = "end_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String endAddress;
+	@Basic
+	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
+	private boolean completed;
+	@Basic
+	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger length;
+	@Basic
+	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger price;
+	@ManyToOne
+	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
+	private PathEntity pathByNextPathId;
+	@OneToMany(mappedBy = "pathByNextPathId")
+	private Collection<PathEntity> pathsById;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -39,7 +61,6 @@ public class PathEntity {
 		this.id = id;
 	}
 
-	@Column(name = "order_id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getOrderId() {
 		return orderId;
 	}
@@ -48,8 +69,6 @@ public class PathEntity {
 		this.orderId = orderId;
 	}
 
-	@Basic
-	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getStartX() {
 		return startX;
 	}
@@ -58,8 +77,6 @@ public class PathEntity {
 		this.startX = startX;
 	}
 
-	@Basic
-	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getStartY() {
 		return startY;
 	}
@@ -68,8 +85,6 @@ public class PathEntity {
 		this.startY = startY;
 	}
 
-	@Basic
-	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getEndX() {
 		return endX;
 	}
@@ -78,8 +93,6 @@ public class PathEntity {
 		this.endX = endX;
 	}
 
-	@Basic
-	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getEndY() {
 		return endY;
 	}
@@ -88,8 +101,6 @@ public class PathEntity {
 		this.endY = endY;
 	}
 
-	@Basic
-	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getStartAddress() {
 		return startAddress;
 	}
@@ -98,8 +109,6 @@ public class PathEntity {
 		this.startAddress = startAddress;
 	}
 
-	@Basic
-	@Column(name = "end_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getEndAddress() {
 		return endAddress;
 	}
@@ -108,8 +117,6 @@ public class PathEntity {
 		this.endAddress = endAddress;
 	}
 
-	@Basic
-	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
 	public boolean isCompleted() {
 		return completed;
 	}
@@ -118,8 +125,6 @@ public class PathEntity {
 		this.completed = completed;
 	}
 
-	@Basic
-	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getLength() {
 		return length;
 	}
@@ -128,14 +133,28 @@ public class PathEntity {
 		this.length = length;
 	}
 
-	@Basic
-	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getPrice() {
 		return price;
 	}
 
 	public void setPrice(BigInteger price) {
 		this.price = price;
+	}
+
+	public PathEntity getPathByNextPathId() {
+		return pathByNextPathId;
+	}
+
+	public void setPathByNextPathId(PathEntity pathByNextPathId) {
+		this.pathByNextPathId = pathByNextPathId;
+	}
+
+	public Collection<PathEntity> getPathsById() {
+		return pathsById;
+	}
+
+	public void setPathsById(Collection<PathEntity> pathsById) {
+		this.pathsById = pathsById;
 	}
 
 	@Override
@@ -173,25 +192,4 @@ public class PathEntity {
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
 	}
-
-	@ManyToOne
-	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
-	public PathEntity getPathByNextPathId() {
-		return pathByNextPathId;
-	}
-
-	public void setPathByNextPathId(PathEntity pathByNextPathId) {
-		this.pathByNextPathId = pathByNextPathId;
-	}
-
-	@OneToMany(mappedBy = "pathByNextPathId")
-	public Collection<PathEntity> getPathsById() {
-		return pathsById;
-	}
-
-	public void setPathsById(Collection<PathEntity> pathsById) {
-		this.pathsById = pathsById;
-	}
-
-
 }

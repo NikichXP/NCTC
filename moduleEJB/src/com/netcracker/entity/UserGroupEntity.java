@@ -9,11 +9,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "user_group", schema = "public", catalog = "postgres")
 public class UserGroupEntity {
-	private BigInteger id;
-	private String name;
-	private BigInteger tariffMultiplier;
-	private Collection<UserEntity> usersById;
-
 	@SequenceGenerator(
 			name = "user_group_SEQUENCE_GENERATOR",
 			sequenceName = "user_group_id_seq",
@@ -22,6 +17,8 @@ public class UserGroupEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_group_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -32,6 +29,8 @@ public class UserGroupEntity {
 
 	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+
 	public String getName() {
 		return name;
 	}
@@ -42,12 +41,25 @@ public class UserGroupEntity {
 
 	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger tariffMultiplier;
+
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}
 
 	public void setTariffMultiplier(BigInteger tariffMultiplier) {
 		this.tariffMultiplier = tariffMultiplier;
+	}
+
+	@OneToMany(mappedBy = "userGroupByGroupId")
+	private Collection<UserEntity> usersById;
+
+	public Collection<UserEntity> getUsersById() {
+		return usersById;
+	}
+
+	public void setUsersById(Collection<UserEntity> usersById) {
+		this.usersById = usersById;
 	}
 
 	@Override
@@ -71,14 +83,5 @@ public class UserGroupEntity {
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (tariffMultiplier != null ? tariffMultiplier.hashCode() : 0);
 		return result;
-	}
-
-	@OneToMany(mappedBy = "userGroupByGroupId")
-	public Collection<UserEntity> getUsersById() {
-		return usersById;
-	}
-
-	public void setUsersById(Collection<UserEntity> usersById) {
-		this.usersById = usersById;
 	}
 }

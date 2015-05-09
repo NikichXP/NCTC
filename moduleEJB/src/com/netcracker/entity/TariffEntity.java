@@ -9,18 +9,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "tariff", schema = "public", catalog = "postgres")
 public class TariffEntity {
-	private BigInteger id;
-	private BigInteger perHour;
-	private BigInteger perKilometer;
-	private Timestamp timeStarts;
-	private Timestamp timeEnds;
-	private Boolean animalFriendly;
-	private Boolean wifi;
-	private String sex;
-	private BigInteger fromSeatsCount;
-	private BigInteger toSeatsCount;
-	private BigInteger multiplier;
-
 	@SequenceGenerator(
 			name = "tariff_SEQUENCE_GENERATOR",
 			sequenceName = "tariff_id_seq",
@@ -29,6 +17,38 @@ public class TariffEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tariff_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Basic
+	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger perHour;
+	@Basic
+	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger perKilometer;
+	@Basic
+	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
+	private Timestamp timeStarts;
+	@Basic
+	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
+	private Timestamp timeEnds;
+	@Basic
+	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean animalFriendly;
+	@Basic
+	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
+	private Boolean wifi;
+	@Basic
+	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String sex;
+	@Basic
+	@Column(name = "from_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger fromSeatsCount;
+	@Basic
+	@Column(name = "to_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
+	private BigInteger toSeatsCount;
+	@Basic
+	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger multiplier;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -37,8 +57,6 @@ public class TariffEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getPerHour() {
 		return perHour;
 	}
@@ -47,8 +65,6 @@ public class TariffEntity {
 		this.perHour = perHour;
 	}
 
-	@Basic
-	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getPerKilometer() {
 		return perKilometer;
 	}
@@ -57,8 +73,6 @@ public class TariffEntity {
 		this.perKilometer = perKilometer;
 	}
 
-	@Basic
-	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeStarts() {
 		return timeStarts;
 	}
@@ -67,8 +81,6 @@ public class TariffEntity {
 		this.timeStarts = timeStarts;
 	}
 
-	@Basic
-	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
 	public Timestamp getTimeEnds() {
 		return timeEnds;
 	}
@@ -77,8 +89,6 @@ public class TariffEntity {
 		this.timeEnds = timeEnds;
 	}
 
-	@Basic
-	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
 	}
@@ -87,8 +97,6 @@ public class TariffEntity {
 		this.animalFriendly = animalFriendly;
 	}
 
-	@Basic
-	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	public Boolean getWifi() {
 		return wifi;
 	}
@@ -97,8 +105,6 @@ public class TariffEntity {
 		this.wifi = wifi;
 	}
 
-	@Basic
-	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getSex() {
 		return sex;
 	}
@@ -107,8 +113,6 @@ public class TariffEntity {
 		this.sex = sex;
 	}
 
-	@Basic
-	@Column(name = "from_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getFromSeatsCount() {
 		return fromSeatsCount;
 	}
@@ -117,8 +121,6 @@ public class TariffEntity {
 		this.fromSeatsCount = fromSeatsCount;
 	}
 
-	@Basic
-	@Column(name = "to_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	public BigInteger getToSeatsCount() {
 		return toSeatsCount;
 	}
@@ -127,8 +129,6 @@ public class TariffEntity {
 		this.toSeatsCount = toSeatsCount;
 	}
 
-	@Basic
-	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getMultiplier() {
 		return multiplier;
 	}

@@ -9,11 +9,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "car_class", schema = "public", catalog = "postgres")
 public class CarClassEntity {
-	private BigInteger id;
-	private String name;
-	private BigInteger tariffMultiplier;
-	private Collection<CarEntity> carsById;
-
 	@SequenceGenerator(
 			name = "CAR_CLASS_SEQUENCE_GENERATOR",
 			sequenceName = "CAR_CLASS_ID_SEQ",
@@ -22,6 +17,18 @@ public class CarClassEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_CLASS_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@OneToMany (mappedBy = "carClassEntity")
+	private Collection<OrderEntity> orderEntities;
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+	@Basic
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger tariffMultiplier;
+	@OneToMany(mappedBy = "carClassEntity")
+	private Collection<CarEntity> carsById;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -30,8 +37,14 @@ public class CarClassEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	public Collection<OrderEntity> getOrderEntities() {
+		return orderEntities;
+	}
+
+	public void setOrderEntities(Collection<OrderEntity> orderEntities) {
+		this.orderEntities = orderEntities;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -40,8 +53,6 @@ public class CarClassEntity {
 		this.name = name;
 	}
 
-	@Basic
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}
@@ -73,7 +84,6 @@ public class CarClassEntity {
 		return result;
 	}
 
-	@OneToMany(mappedBy = "carClassEntity")
 	public Collection<CarEntity> getCarsById() {
 		return carsById;
 	}

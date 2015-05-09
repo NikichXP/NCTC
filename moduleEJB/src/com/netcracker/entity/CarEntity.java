@@ -9,15 +9,6 @@ import java.sql.Date;
 @Entity
 @Table(name = "car", schema = "public", catalog = "postgres")
 public class CarEntity {
-	private BigInteger id;
-	private String model;
-	private BigInteger seatsCount;
-	private String licencePlate;
-	private Date dateManufactured;
-	private BigInteger userId;
-	private CarClassEntity carClassEntity;
-	private DriverCategoryEntity driverCategoryEntity;
-
 	@SequenceGenerator(
 			name = "CAR_SEQUENCE_GENERATOR",
 			sequenceName = "CAR_ID_SEQ",
@@ -26,6 +17,29 @@ public class CarEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private UserEntity userEntity;
+	@Basic
+	@Column(name = "model", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String model;
+	@Basic
+	@Column(name = "seats_count", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger seatsCount;
+	@Basic
+	@Column(name = "licence_plate", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String licencePlate;
+	@Basic
+	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
+	private Date dateManufactured;
+	@ManyToOne
+	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
+	private CarClassEntity carClassEntity;
+	@ManyToOne
+	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
+	private DriverCategoryEntity driverCategoryEntity;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -34,8 +48,14 @@ public class CarEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "model", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
 	public String getModel() {
 		return model;
 	}
@@ -44,8 +64,6 @@ public class CarEntity {
 		this.model = model;
 	}
 
-	@Basic
-	@Column(name = "seats_count", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getSeatsCount() {
 		return seatsCount;
 	}
@@ -54,8 +72,6 @@ public class CarEntity {
 		this.seatsCount = seatsCount;
 	}
 
-	@Basic
-	@Column(name = "licence_plate", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getLicencePlate() {
 		return licencePlate;
 	}
@@ -64,8 +80,6 @@ public class CarEntity {
 		this.licencePlate = licencePlate;
 	}
 
-	@Basic
-	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
 	public Date getDateManufactured() {
 		return dateManufactured;
 	}
@@ -74,14 +88,20 @@ public class CarEntity {
 		this.dateManufactured = dateManufactured;
 	}
 
-	@Basic
-	@Column(name = "user_id", nullable = true, insertable = true, updatable = true, precision = 0)
-	public BigInteger getUserId() {
-		return userId;
+	public CarClassEntity getCarClassEntity() {
+		return carClassEntity;
 	}
 
-	public void setUserId(BigInteger userId) {
-		this.userId = userId;
+	public void setCarClassEntity(CarClassEntity carClassEntity) {
+		this.carClassEntity = carClassEntity;
+	}
+
+	public DriverCategoryEntity getDriverCategoryEntity() {
+		return driverCategoryEntity;
+	}
+
+	public void setDriverCategoryEntity(DriverCategoryEntity driverCategoryEntity) {
+		this.driverCategoryEntity = driverCategoryEntity;
 	}
 
 	@Override
@@ -98,9 +118,12 @@ public class CarEntity {
 			return false;
 		if (dateManufactured != null ? !dateManufactured.equals(carEntity.dateManufactured) : carEntity.dateManufactured != null)
 			return false;
-		if (userId != null ? !userId.equals(carEntity.userId) : carEntity.userId != null) return false;
+		if (carClassEntity != null ? !carClassEntity.equals(carEntity.carClassEntity) : carEntity.carClassEntity != null)
+			return false;
+		if (driverCategoryEntity != null ? !driverCategoryEntity.equals(carEntity.driverCategoryEntity) : carEntity.driverCategoryEntity != null)
+			return false;
+		return !(userEntity != null ? !userEntity.equals(carEntity.userEntity) : carEntity.userEntity != null);
 
-		return true;
 	}
 
 	@Override
@@ -110,27 +133,9 @@ public class CarEntity {
 		result = 31 * result + (seatsCount != null ? seatsCount.hashCode() : 0);
 		result = 31 * result + (licencePlate != null ? licencePlate.hashCode() : 0);
 		result = 31 * result + (dateManufactured != null ? dateManufactured.hashCode() : 0);
-		result = 31 * result + (userId != null ? userId.hashCode() : 0);
+		result = 31 * result + (carClassEntity != null ? carClassEntity.hashCode() : 0);
+		result = 31 * result + (driverCategoryEntity != null ? driverCategoryEntity.hashCode() : 0);
+		result = 31 * result + (userEntity != null ? userEntity.hashCode() : 0);
 		return result;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
-	public CarClassEntity getCarClassEntity() {
-		return carClassEntity;
-	}
-
-	public void setCarClassEntity(CarClassEntity carClassEntity) {
-		this.carClassEntity = carClassEntity;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
-	public DriverCategoryEntity getDriverCategoryEntity() {
-		return driverCategoryEntity;
-	}
-
-	public void setDriverCategoryEntity(DriverCategoryEntity driverCategoryEntity) {
-		this.driverCategoryEntity = driverCategoryEntity;
 	}
 }

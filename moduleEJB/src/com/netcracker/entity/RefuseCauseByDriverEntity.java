@@ -4,13 +4,11 @@ package com.netcracker.entity;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "order_driver_refuse_cause", schema = "public", catalog = "postgres")
 public class RefuseCauseByDriverEntity {
-	private BigInteger id;
-	private String message;
-
 	@SequenceGenerator(
 			name = "driver_refuse_cause_SEQUENCE_GENERATOR",
 			sequenceName = "driver_refuse_cause_id_seq",
@@ -19,6 +17,13 @@ public class RefuseCauseByDriverEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driver_refuse_cause_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@OneToMany (mappedBy = "refuseCauseByDriverEntity")
+	private Collection<OrderEntity> orderEntities;
+	@Basic
+	@Column(name = "message", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String message;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -27,8 +32,14 @@ public class RefuseCauseByDriverEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "message", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	public Collection<OrderEntity> getOrderEntities() {
+		return orderEntities;
+	}
+
+	public void setOrderEntities(Collection<OrderEntity> orderEntities) {
+		this.orderEntities = orderEntities;
+	}
+
 	public String getMessage() {
 		return message;
 	}

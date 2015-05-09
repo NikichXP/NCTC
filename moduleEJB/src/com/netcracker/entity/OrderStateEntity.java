@@ -4,13 +4,12 @@ package com.netcracker.entity;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "order_state", schema = "public", catalog = "postgres")
 public class OrderStateEntity {
-	private BigInteger id;
-	private String name;
-
 	@SequenceGenerator(
 			name = "ORDER_STATE_SEQUENCE_GENERATOR",
 			sequenceName = "ORDER_STATE_ID_SEQ",
@@ -19,6 +18,13 @@ public class OrderStateEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_STATE_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+	@OneToMany(mappedBy="orderStateEntity")
+	private Collection<OrderEntity> orderEntities;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -27,14 +33,20 @@ public class OrderStateEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Collection<OrderEntity> getOrderEntities() {
+		return orderEntities;
+	}
+
+	public void setOrderEntities(Collection<OrderEntity> orderEntities) {
+		this.orderEntities = orderEntities;
 	}
 
 	@Override

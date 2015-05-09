@@ -9,10 +9,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "user_access_level", schema = "public", catalog = "postgres")
 public class UserAccessLevelEntity {
-	private BigInteger id;
-	private String name;
-	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
-
 	@SequenceGenerator(
 			name = "user-user_access_level_SEQUENCE_GENERATOR",
 			sequenceName = "user-user_access_level_id_seq",
@@ -21,6 +17,15 @@ public class UserAccessLevelEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_access_level_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+	@OneToMany(mappedBy = "userAccessLevelByUserAccessLevelId")
+	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
+	@ManyToMany (mappedBy = "userAccessLevelEntities")
+	private Collection<UserEntity> userEntities;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -29,14 +34,20 @@ public class UserAccessLevelEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
+		return userUserAccessLevelsById;
+	}
+
+	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
+		this.userUserAccessLevelsById = userUserAccessLevelsById;
 	}
 
 	@Override
@@ -59,12 +70,11 @@ public class UserAccessLevelEntity {
 		return result;
 	}
 
-	@OneToMany(mappedBy = "userAccessLevelByUserAccessLevelId")
-	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
-		return userUserAccessLevelsById;
+	public Collection<UserEntity> getUserEntities() {
+		return userEntities;
 	}
 
-	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
-		this.userUserAccessLevelsById = userUserAccessLevelsById;
+	public void setUserEntities(Collection<UserEntity> userEntities) {
+		this.userEntities = userEntities;
 	}
 }

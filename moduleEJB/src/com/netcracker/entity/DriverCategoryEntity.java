@@ -9,13 +9,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "driver_category", schema = "public", catalog = "postgres")
 public class DriverCategoryEntity {
-	private BigInteger id;
-	private String name;
-	private String description;
-	private BigInteger tariffMultiplier;
-	private Collection<CarEntity> carsById;
-	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
-
 	@SequenceGenerator(
 			name = "DRIVER_CATEGORY_SEQUENCE_GENERATOR",
 			sequenceName = "DRIVER_CATEGORY_ID_SEQ",
@@ -24,6 +17,23 @@ public class DriverCategoryEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DRIVER_CATEGORY_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+	@Basic
+	@Column(name = "description", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String description;
+	@Basic
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger tariffMultiplier;
+	@OneToMany(mappedBy = "driverCategoryEntity")
+	private Collection<CarEntity> carsById;
+	@OneToMany(mappedBy = "driverCategoryByDriverCategoryId")
+	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
+	@ManyToMany (mappedBy = "driverCategoryEntities")
+	private Collection<UserEntity> userEntities;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -32,8 +42,6 @@ public class DriverCategoryEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getName() {
 		return name;
 	}
@@ -42,8 +50,6 @@ public class DriverCategoryEntity {
 		this.name = name;
 	}
 
-	@Basic
-	@Column(name = "description", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getDescription() {
 		return description;
 	}
@@ -52,14 +58,28 @@ public class DriverCategoryEntity {
 		this.description = description;
 	}
 
-	@Basic
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}
 
 	public void setTariffMultiplier(BigInteger tariffMultiplier) {
 		this.tariffMultiplier = tariffMultiplier;
+	}
+
+	public Collection<CarEntity> getCarsById() {
+		return carsById;
+	}
+
+	public void setCarsById(Collection<CarEntity> carsById) {
+		this.carsById = carsById;
+	}
+
+	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
+		return userDriverCategoriesById;
+	}
+
+	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
+		this.userDriverCategoriesById = userDriverCategoriesById;
 	}
 
 	@Override
@@ -85,23 +105,5 @@ public class DriverCategoryEntity {
 		result = 31 * result + (description != null ? description.hashCode() : 0);
 		result = 31 * result + (tariffMultiplier != null ? tariffMultiplier.hashCode() : 0);
 		return result;
-	}
-
-	@OneToMany(mappedBy = "driverCategoryEntity")
-	public Collection<CarEntity> getCarsById() {
-		return carsById;
-	}
-
-	public void setCarsById(Collection<CarEntity> carsById) {
-		this.carsById = carsById;
-	}
-
-	@OneToMany(mappedBy = "driverCategoryByDriverCategoryId")
-	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
-		return userDriverCategoriesById;
-	}
-
-	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
-		this.userDriverCategoriesById = userDriverCategoriesById;
 	}
 }

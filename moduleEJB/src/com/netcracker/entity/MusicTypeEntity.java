@@ -4,13 +4,11 @@ package com.netcracker.entity;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Collection;
 
 @Entity
 @Table(name = "music_type", schema = "public", catalog = "postgres")
 public class MusicTypeEntity {
-	private BigInteger id;
-	private String name;
-
 	@SequenceGenerator(
 			name = "MUSIC_TYPE_SEQUENCE_GENERATOR",
 			sequenceName = "MUSIC_TYPE_ID_SEQ",
@@ -19,6 +17,13 @@ public class MusicTypeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MUSIC_TYPE_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@OneToMany(mappedBy="musicTypeEntity")
+	private Collection<OrderEntity> orderEntities;
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -27,8 +32,14 @@ public class MusicTypeEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	public Collection<OrderEntity> getOrderEntities() {
+		return orderEntities;
+	}
+
+	public void setOrderEntities(Collection<OrderEntity> orderEntities) {
+		this.orderEntities = orderEntities;
+	}
+
 	public String getName() {
 		return name;
 	}

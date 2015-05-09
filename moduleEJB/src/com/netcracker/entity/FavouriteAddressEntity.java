@@ -8,10 +8,6 @@ import java.math.BigInteger;
 @Entity
 @Table(name = "favourite_address", schema = "public", catalog = "postgres")
 public class FavouriteAddressEntity {
-	private BigInteger id;
-	private String address;
-	private UserEntity userByCustomerId;
-
 	@SequenceGenerator(
 			name = "FAVOURITE_ADDRESS_SEQUENCE_GENERATOR",
 			sequenceName = "FAVOURITE_ADDRESS_ID_SEQ",
@@ -19,6 +15,14 @@ public class FavouriteAddressEntity {
 	)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FAVOURITE_ADDRESS_SEQUENCE_GENERATOR")
+	private BigInteger id;
+	@Basic
+	@Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String address;
+	@ManyToOne
+	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+	private UserEntity userByCustomerId;
+
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;
@@ -28,14 +32,20 @@ public class FavouriteAddressEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getAddress() {
 		return address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public UserEntity getUserByCustomerId() {
+		return userByCustomerId;
+	}
+
+	public void setUserByCustomerId(UserEntity userByCustomerId) {
+		this.userByCustomerId = userByCustomerId;
 	}
 
 	@Override
@@ -56,15 +66,5 @@ public class FavouriteAddressEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (address != null ? address.hashCode() : 0);
 		return result;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-	public UserEntity getUserByCustomerId() {
-		return userByCustomerId;
-	}
-
-	public void setUserByCustomerId(UserEntity userByCustomerId) {
-		this.userByCustomerId = userByCustomerId;
 	}
 }

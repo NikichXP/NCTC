@@ -14,29 +14,11 @@ import java.util.Collection;
 		@NamedQuery(name = "User.findByEmailIgnoreCase", query = "SELECT f FROM UserEntity f WHERE UPPER(f.email) = UPPER(:email)"),
 		@NamedQuery(name = "User.findByPhone", query = "SELECT f FROM UserEntity f WHERE f.phone = :phone"),
 		@NamedQuery(name = "User.deleteById", query = "DELETE FROM UserEntity f WHERE f.id = :id"),
-		@NamedQuery(name = "User.findByEmailIgnoreCaseAndPassword",	query = "SELECT f FROM UserEntity f " +
+		@NamedQuery(name = "User.findByEmailIgnoreCaseAndPassword", query = "SELECT f FROM UserEntity f " +
 				"WHERE UPPER(f.email) = UPPER(:email) AND f.password = :password"),
-		@NamedQuery(name = "User.findByPhoneAndPassword",	query = "SELECT f FROM UserEntity f " +
-		"WHERE f.phone = :phone AND f.password = :password")})
+		@NamedQuery(name = "User.findByPhoneAndPassword", query = "SELECT f FROM UserEntity f " +
+				"WHERE f.phone = :phone AND f.password = :password")})
 public class UserEntity {
-	private BigInteger id;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private Date birthday;
-	private String sex;
-	private Timestamp dateRegistered;
-	private String email;
-	private String phone;
-	private String alternativePhone;
-	private Boolean animalFriendly;
-	private Boolean smokingFriendly;
-	private boolean blocked;
-	private Collection<FavouriteAddressEntity> favouriteAddressesById;
-	private UserGroupEntity userGroupByGroupId;
-	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
-	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
-
 	@SequenceGenerator(
 			name = "USER_SEQUENCE_GENERATOR",
 			sequenceName = "USER_ID_SEQ",
@@ -45,6 +27,87 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger id;
+	@Basic
+	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String sex;
+	@Basic
+	@Column(name = "date_registered", nullable = false, insertable = true, updatable = true)
+	private Timestamp dateRegistered;
+	@Basic
+	@Column(name = "email", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String email;
+	@Basic
+	@Column(name = "phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String phone;
+	@Basic
+	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean animalFriendly;
+	@Basic
+	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean smokingFriendly;
+	@Basic
+	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
+	private boolean blocked;
+	@OneToMany(mappedBy = "userByCustomerId")
+	private Collection<FavouriteAddressEntity> favouriteAddressesById;
+	@ManyToOne
+	@JoinColumn(name = "group_id", referencedColumnName = "id")
+	private UserGroupEntity userGroupByGroupId;
+	@OneToMany(mappedBy = "userByUserId")
+	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
+	@OneToMany(mappedBy = "userByUserId")
+	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
+	@OneToMany(mappedBy = "customerUserEntity")
+	private Collection<OrderEntity> customerOrderEntities;
+	@OneToMany(mappedBy = "driverUserEntity")
+	private Collection<OrderEntity> driverOrderEntities;
+	@OneToOne(mappedBy = "userEntity")
+	private CarEntity carEntity;
+	@Basic
+	@Column(name = "password", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String password;
+	@Basic
+	@Column(name = "first_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String firstName;
+	@Basic
+	@Column(name = "last_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String lastName;
+	@Basic
+	@Column(name = "birthday", nullable = true, insertable = true, updatable = true)
+	private Date birthday;
+	@Basic
+	@Column(name = "alternative_phone", nullable = true, insertable = true, updatable = true, length = 2147483647)
+	private String alternativePhone;
+	@ManyToMany
+	@JoinTable(
+			name="user-user_access_level",
+			joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+			inverseJoinColumns={@JoinColumn(name="user_access_level_id", referencedColumnName="id")})
+	private Collection<UserAccessLevelEntity> userAccessLevelEntities;
+	@ManyToMany
+	@JoinTable(
+			name="user-driver_category",
+			joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+			inverseJoinColumns={@JoinColumn(name="driver_category_id", referencedColumnName="id")})
+	private Collection<DriverCategoryEntity> driverCategoryEntities;
+
+	public Collection<DriverCategoryEntity> getDriverCategoryEntities() {
+		return driverCategoryEntities;
+	}
+
+	public void setDriverCategoryEntities(Collection<DriverCategoryEntity> driverCategoryEntities) {
+		this.driverCategoryEntities = driverCategoryEntities;
+	}
+
+	public Collection<UserAccessLevelEntity> getUserAccessLevelEntities() {
+		return userAccessLevelEntities;
+	}
+
+	public void setUserAccessLevelEntities(Collection<UserAccessLevelEntity> userAccessLevelEntities) {
+		this.userAccessLevelEntities = userAccessLevelEntities;
+	}
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -53,8 +116,30 @@ public class UserEntity {
 		this.id = id;
 	}
 
-	@Basic
-	@Column(name = "password", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	public Collection<OrderEntity> getCustomerOrderEntities() {
+		return customerOrderEntities;
+	}
+
+	public void setCustomerOrderEntities(Collection<OrderEntity> orderEntities) {
+		this.customerOrderEntities = orderEntities;
+	}
+
+	public Collection<OrderEntity> getDriverOrderEntities() {
+		return driverOrderEntities;
+	}
+
+	public void setDriverOrderEntities(Collection<OrderEntity> driverOrderEntities) {
+		this.driverOrderEntities = driverOrderEntities;
+	}
+
+	public CarEntity getCarEntity() {
+		return carEntity;
+	}
+
+	public void setCarEntity(CarEntity carEntity) {
+		this.carEntity = carEntity;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -63,8 +148,6 @@ public class UserEntity {
 		this.password = password;
 	}
 
-	@Basic
-	@Column(name = "first_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -73,8 +156,6 @@ public class UserEntity {
 		this.firstName = firstName;
 	}
 
-	@Basic
-	@Column(name = "last_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getLastName() {
 		return lastName;
 	}
@@ -83,8 +164,6 @@ public class UserEntity {
 		this.lastName = lastName;
 	}
 
-	@Basic
-	@Column(name = "birthday", nullable = true, insertable = true, updatable = true)
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -93,8 +172,6 @@ public class UserEntity {
 		this.birthday = birthday;
 	}
 
-	@Basic
-	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getSex() {
 		return sex;
 	}
@@ -103,8 +180,6 @@ public class UserEntity {
 		this.sex = sex;
 	}
 
-	@Basic
-	@Column(name = "date_registered", nullable = false, insertable = true, updatable = true)
 	public Timestamp getDateRegistered() {
 		return dateRegistered;
 	}
@@ -113,8 +188,6 @@ public class UserEntity {
 		this.dateRegistered = dateRegistered;
 	}
 
-	@Basic
-	@Column(name = "email", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getEmail() {
 		return email;
 	}
@@ -123,8 +196,6 @@ public class UserEntity {
 		this.email = email;
 	}
 
-	@Basic
-	@Column(name = "phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	public String getPhone() {
 		return phone;
 	}
@@ -133,8 +204,6 @@ public class UserEntity {
 		this.phone = phone;
 	}
 
-	@Basic
-	@Column(name = "alternative_phone", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public String getAlternativePhone() {
 		return alternativePhone;
 	}
@@ -143,8 +212,6 @@ public class UserEntity {
 		this.alternativePhone = alternativePhone;
 	}
 
-	@Basic
-	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
 	}
@@ -153,8 +220,6 @@ public class UserEntity {
 		this.animalFriendly = animalFriendly;
 	}
 
-	@Basic
-	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	public Boolean getSmokingFriendly() {
 		return smokingFriendly;
 	}
@@ -163,14 +228,44 @@ public class UserEntity {
 		this.smokingFriendly = smokingFriendly;
 	}
 
-	@Basic
-	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
 	public boolean isBlocked() {
 		return blocked;
 	}
 
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
+	}
+
+	public Collection<FavouriteAddressEntity> getFavouriteAddressesById() {
+		return favouriteAddressesById;
+	}
+
+	public void setFavouriteAddressesById(Collection<FavouriteAddressEntity> favouriteAddressesById) {
+		this.favouriteAddressesById = favouriteAddressesById;
+	}
+
+	public UserGroupEntity getUserGroupByGroupId() {
+		return userGroupByGroupId;
+	}
+
+	public void setUserGroupByGroupId(UserGroupEntity userGroupByGroupId) {
+		this.userGroupByGroupId = userGroupByGroupId;
+	}
+
+	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
+		return userDriverCategoriesById;
+	}
+
+	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
+		this.userDriverCategoriesById = userDriverCategoriesById;
+	}
+
+	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
+		return userUserAccessLevelsById;
+	}
+
+	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
+		this.userUserAccessLevelsById = userUserAccessLevelsById;
 	}
 
 	@Override
@@ -220,44 +315,7 @@ public class UserEntity {
 	}
 
 	@Override
-	public String toString () {
+	public String toString() {
 		return firstName + " " + lastName + " " + email + " " + phone;
-	}
-
-	@OneToMany(mappedBy = "userByCustomerId")
-	public Collection<FavouriteAddressEntity> getFavouriteAddressesById() {
-		return favouriteAddressesById;
-	}
-
-	public void setFavouriteAddressesById(Collection<FavouriteAddressEntity> favouriteAddressesById) {
-		this.favouriteAddressesById = favouriteAddressesById;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "group_id", referencedColumnName = "id")
-	public UserGroupEntity getUserGroupByGroupId() {
-		return userGroupByGroupId;
-	}
-
-	public void setUserGroupByGroupId(UserGroupEntity userGroupByGroupId) {
-		this.userGroupByGroupId = userGroupByGroupId;
-	}
-
-	@OneToMany(mappedBy = "userByUserId")
-	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
-		return userDriverCategoriesById;
-	}
-
-	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
-		this.userDriverCategoriesById = userDriverCategoriesById;
-	}
-
-	@OneToMany(mappedBy = "userByUserId")
-	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
-		return userUserAccessLevelsById;
-	}
-
-	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
-		this.userUserAccessLevelsById = userUserAccessLevelsById;
 	}
 }
