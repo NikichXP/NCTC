@@ -1,4 +1,4 @@
-
+//todo review for removal
 $(function(){
 	$('#login').toggle();
 	$('#registration').toggle();

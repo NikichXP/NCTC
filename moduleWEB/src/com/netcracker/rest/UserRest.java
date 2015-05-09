@@ -124,17 +124,15 @@ public class UserRest {
 	}
 
 	@GET
-	@Path("confirmUser/{uuid}")
+	@Path("confirm/{uuid}")
 	@Consumes("text/plain")
-	public Response confirm(@PathParam("uuid")String uuid) {
+	@Produces("text/plain")
+	public String confirm(@PathParam("uuid")String uuid) {
 		UserEntity userEntity = user.findByUuid(uuid);
 		userEntity.setConfirmed(true);
 		user.update(userEntity);
-		if (userEntity == null) {
-			return Response.status(404).entity("Wrong user uuid passed").build();
-		} else {
-			return Response.status(201).entity("Email confirmed").build();
-		}
+		if (userEntity != null) return "Email confirmed";
+		return "Wrong user uuid passed";
 	}
 
 
