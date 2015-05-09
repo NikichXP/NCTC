@@ -11,7 +11,8 @@ import java.util.Collection;
 @Entity
 @Table(name = "user", schema = "public", catalog = "postgres")
 @NamedQueries({
-		@NamedQuery(name = "User.findByEmailIgnoreCase", query = "SELECT f FROM UserEntity f WHERE UPPER(f.email) = UPPER(:email)"),
+		@NamedQuery(name = "User.findByEmailIgnoreCase", query = "SELECT f FROM UserEntity f " +
+				"WHERE UPPER(f.email) = UPPER(:email)"),
 		@NamedQuery(name = "User.findByPhone", query = "SELECT f FROM UserEntity f WHERE f.phone = :phone"),
 		@NamedQuery(name = "User.deleteById", query = "DELETE FROM UserEntity f WHERE f.id = :id"),
 		@NamedQuery(name = "User.findByEmailIgnoreCaseAndPassword", query = "SELECT f FROM UserEntity f " +
@@ -47,8 +48,14 @@ public class UserEntity {
 	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean smokingFriendly;
 	@Basic
+	@Column(name = "confirmed", nullable = false, insertable = true, updatable = true)
+	private Boolean confirmed;
+	@Basic
 	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
 	private boolean blocked;
+	@Basic
+	@Column(name = "uuid", nullable = true, insertable = true, updatable = false, length = 2147483647)
+	private String uuid;
 	@OneToMany(mappedBy = "userByCustomerId")
 	private Collection<FavouriteAddressEntity> favouriteAddressesById;
 	@ManyToOne
@@ -81,15 +88,15 @@ public class UserEntity {
 	private String alternativePhone;
 	@ManyToMany
 	@JoinTable(
-			name="user-user_access_level",
-			joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-			inverseJoinColumns={@JoinColumn(name="user_access_level_id", referencedColumnName="id")})
+			name = "user-user_access_level",
+			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "user_access_level_id", referencedColumnName = "id")})
 	private Collection<UserAccessLevelEntity> userAccessLevelEntities;
 	@ManyToMany
 	@JoinTable(
-			name="user-driver_category",
-			joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-			inverseJoinColumns={@JoinColumn(name="driver_category_id", referencedColumnName="id")})
+			name = "user-driver_category",
+			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "driver_category_id", referencedColumnName = "id")})
 	private Collection<DriverCategoryEntity> driverCategoryEntities;
 
 	public Collection<DriverCategoryEntity> getDriverCategoryEntities() {
@@ -106,6 +113,14 @@ public class UserEntity {
 
 	public void setUserAccessLevelEntities(Collection<UserAccessLevelEntity> userAccessLevelEntities) {
 		this.userAccessLevelEntities = userAccessLevelEntities;
+	}
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 
 	public BigInteger getId() {
@@ -266,6 +281,14 @@ public class UserEntity {
 
 	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
 		this.userUserAccessLevelsById = userUserAccessLevelsById;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 	@Override
