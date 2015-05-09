@@ -81,7 +81,7 @@ public class UserRest {
 		SessionHandler.generateSession(userEntity, userJson.getPass());
 		//TODO: Add returning of session token id to response (Nikita)
 		if (userEntity != null) {
-			return Response.status(200).entity(userEntity).build();
+			return Response.status(200).entity(userEntity.getUuid()).build();
 		} else {
 			return Response.status(404).entity("Bad login credentials").build();
 		}
