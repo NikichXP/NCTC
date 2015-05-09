@@ -81,7 +81,7 @@ public class UserRest {
 		SessionHandler.generateSession(userEntity, userJson.getPass());
 		//TODO: Add returning of session token id to response (Nikita)
 		if (userEntity != null) {
-			return Response.status(200).entity(userEntity.getUuid()).build();
+			return Response.status(200).entity(userEntity).build();
 		} else {
 			return Response.status(404).entity("Bad login credentials").build();
 		}
@@ -135,13 +135,14 @@ public class UserRest {
 
 	@GET
 	@Path("confirm")
-	@Produces("text/plain")
-	public String confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
+	public Response confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
 		UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
 		userEntity.setConfirmed(true);
 		user.update(userEntity);
-		if (userEntity != null) return "Email confirmed";
-		return "Wrong user uuid passed";
+		if (userEntity == null) {
+			return Response.status(404).entity("Wrong user uuid passed").build();
+		}
+		return Response.status(201).entity("Email confirmed").build();
 	}
 
 
