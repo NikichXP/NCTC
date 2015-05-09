@@ -71,6 +71,19 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
     }
 
     /**
+     * @param uuid sent to email
+     * @return <b>UserEntity</b> object or <b>null</b> if not found
+     */
+    @Override
+    public UserEntity findByUuid(String uuid) {
+        List results = em.createNamedQuery("User.findByUuid").setParameter("uuid", uuid).getResultList();
+        if (!results.isEmpty()) {
+            return (UserEntity)results.get(0);
+        }
+        return null;
+    }
+
+    /**
      * @param email unique user email
      * @param password user password
      * @return <b>UserEntity object</b> or <b>null</b> if not found

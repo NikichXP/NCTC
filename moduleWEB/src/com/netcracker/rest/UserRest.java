@@ -114,12 +114,26 @@ public class UserRest {
 			userEntity.setEmail(userJson.getEmail());
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
 			user.create(userEntity);
+			//TODO Send confirmation email here (Viktor)
 		}
-
 		if (userEntity == null) {
 			return Response.status(404).entity("Pass or email is already in use").build();
 		} else {
 			return Response.status(201).entity(userEntity.toString()).build();
+		}
+	}
+
+	@GET
+	@Path("confirmUser/{uuid}")
+	@Consumes("text/plain")
+	public Response confirm(@PathParam("uuid")String uuid) {
+		UserEntity userEntity = user.findByUuid(uuid);
+		userEntity.setConfirmed(true);
+		user.update(userEntity);
+		if (userEntity == null) {
+			return Response.status(404).entity("Wrong user uuid passed").build();
+		} else {
+			return Response.status(201).entity("Email confirmed").build();
 		}
 	}
 

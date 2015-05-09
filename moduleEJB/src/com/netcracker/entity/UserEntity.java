@@ -18,7 +18,8 @@ import java.util.Collection;
 		@NamedQuery(name = "User.findByEmailIgnoreCaseAndPassword", query = "SELECT f FROM UserEntity f " +
 				"WHERE UPPER(f.email) = UPPER(:email) AND f.password = :password"),
 		@NamedQuery(name = "User.findByPhoneAndPassword", query = "SELECT f FROM UserEntity f " +
-				"WHERE f.phone = :phone AND f.password = :password")})
+				"WHERE f.phone = :phone AND f.password = :password"),
+		@NamedQuery(name = "User.findByUuid", query = "SELECT f FROM UserEntity f WHERE f.uuid = :uuid")})
 public class UserEntity {
 	@SequenceGenerator(
 			name = "USER_SEQUENCE_GENERATOR",

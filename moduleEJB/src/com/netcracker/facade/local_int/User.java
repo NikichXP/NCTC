@@ -29,6 +29,8 @@ public interface User {
 
 	UserEntity findByPhone(String phone);
 
+	UserEntity findByUuid(String uuid);
+
 	UserEntity loginByEmail(String email, String password);
 
 	UserEntity loginByPhone(String phone, String password);
