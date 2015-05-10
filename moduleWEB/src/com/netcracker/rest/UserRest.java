@@ -123,13 +123,13 @@ public class UserRest {
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
 			userEntity.setUuid(randomUuid);
 			user.create(userEntity);
+//			Send email with text "confirm"+SecuritySettings.encrypt(randomUuid);
 			//TODO Send confirmation email here (Viktor)
-//			SecuritySettings.encrypt(randomUuid);
 		}
 		if (userEntity == null) {
 			return Response.status(404).entity("Phone or email is already in use").build();
 		} else {
-			return Response.status(201).entity(randomUuid + " encryptedUuid: " + SecuritySettings.encrypt(randomUuid)).build();
+			return Response.status(201).entity(randomUuid).build();
 		}
 	}
 
