@@ -38,6 +38,7 @@ $('#login-submit').click(function(){
 			//alert(textStatus + " " + jqXHR.responseText);
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
+			//todo for Alexander: return from "login" REST useful UserJson and @POST it to next REST method
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -65,6 +66,7 @@ $('#registration-submit').click(function(){
 			//alert(textStatus + ": " + jqXHR.responseText);
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
+			//todo for Alexander: return from "create" REST useful UserJson and @POST it to next REST method
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
