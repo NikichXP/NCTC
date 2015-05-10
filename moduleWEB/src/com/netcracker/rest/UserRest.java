@@ -100,15 +100,15 @@ public class UserRest {
 		System.out.println(uuid);
 		UserEntity userEntity = user.findByUuid(uuid);
 		Collection<UserAccessLevelEntity> userAccessLevels = userEntity.getUserAccessLevelEntities();
-		StringBuilder sb = new StringBuilder("{");
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"userAccessLevel\":[");
 		for (UserAccessLevelEntity userAccessLevel : userAccessLevels) {
-			sb.append("\"")
-					.append(userAccessLevel.getId())
-					.append("\":\"")
-					.append(userAccessLevel.getName())
-					.append("\"");
+			sb.append("{\"id\":\""+userAccessLevel.getId()+"\",\"level\":\""+userAccessLevel.getName()+"\" },");
 		}
-		sb.append("}");
+		sb.replace(sb.length()-1,sb.length(),"");
+		sb.append("]}");
+
 		if (!userAccessLevels.isEmpty()) {
 			return Response.status(200).entity(sb.toString()).build();
 		} else {
