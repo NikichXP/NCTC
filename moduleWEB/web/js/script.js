@@ -38,23 +38,21 @@ $('#login-submit').click(function(){
 			//alert(textStatus + " " + jqXHR.responseText);
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
-			//todo for Alexander: return from "login" REST useful UserJson and @POST it to next REST method
-			//todo: I done, how i understood it.
+			uuid = jqXHR.responseText;
 			$.ajax({
 				method: 'POST',
-				url: 'api/user/nextAfterLogin',
+				url: 'api/user/nextAfterSubmit',
 				contentType: "text/plain; charset=utf-8",
-				data: JSON.stringify(JSONdata),
+				data: uuid,
 				dataType:'text',
 				success: function (data,textStatus,jqXHR ) {
-					alert("AJAX login submethod: " + jqXHR.responseText);
+					alert("User access levels: " + jqXHR.responseText);
+					document.location.href = "access_level.jsp";
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-
+					alert(uuid + " Error!");
 				}
 			})
-
-			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);
@@ -65,8 +63,8 @@ $('#login-submit').click(function(){
 //AJAX POST for registration
 $('#registration-submit').click(function(){
 	JSONdata = {
-		firstName: $("#firstname").val(),
-		lastName: $("#lastname").val(),
+		firstName: $("#firstName").val(),
+		lastName: $("#lastName").val(),
 		phone: $("#phone").val(),
 		email: $("#email").val(),
 		pass: $("#reg-pass").val()
@@ -81,22 +79,21 @@ $('#registration-submit').click(function(){
 			//alert(textStatus + ": " + jqXHR.responseText);
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
-			//todo for Alexander: return from "create" REST useful UserJson and @POST it to next REST method
-			//todo: I done, how i understood it.
+			uuid = jqXHR.responseText;
 			$.ajax({
 				method: 'POST',
-				url: 'api/user/nextAfterReg',
+				url: 'api/user/nextAfterSubmit',
 				contentType: "text/plain; charset=utf-8",
-				data: JSON.stringify(JSONdata),
+				data: uuid,
 				dataType:'text',
 				success: function (data,textStatus,jqXHR ) {
-					alert("AJAX REG submethod: " + jqXHR.responseText);
+					alert("User access levels: " + jqXHR.responseText);
+					document.location.href = "access_level.jsp";
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-
+					alert(uuid + " Error!");
 				}
 			})
-			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert(jqXHR.status + ' ' + jqXHR.responseText);

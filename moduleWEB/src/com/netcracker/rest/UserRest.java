@@ -1,8 +1,10 @@
 package com.netcracker.rest;
 
 import com.netcracker.classes.UserJson;
+import com.netcracker.entity.UserAccessLevelEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
+import com.netcracker.facade.local_int.UserAccessLevel;
 import com.netcracker.rest.utils.SecuritySettings;
 import com.netcracker.session.SessionHandler;
 
@@ -12,12 +14,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.math.BigInteger;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * User facade for ReST
@@ -29,12 +31,15 @@ import java.util.UUID;
 public class UserRest {
 	@EJB
 	User user;
+	@EJB
+	UserAccessLevel userAccessLevel;
 
 
 	/**
 	 * Auth method. Generates unique session token linked to userdata.
+	 *
 	 * @param login - phone or e-mail
-	 * @param pass - password
+	 * @param pass  - password
 	 * @return - token UUID
 	 */
 	@GET
@@ -57,6 +62,7 @@ public class UserRest {
 
 	/**
 	 * Checks if session is valid
+	 *
 	 * @param sid - session id
 	 * @return - true of false
 	 */
@@ -88,33 +94,32 @@ public class UserRest {
 	}
 
 	@POST
-	@Path("nextAfterLogin")
+	@Path("nextAfterSubmit")
 	@Consumes("text/plain")
-	public Response getNextU(String requestFromClient) {
-
-		if (requestFromClient != null) {
-			return Response.status(200).entity(requestFromClient).build();
+	public Response getNextU(String uuid) {
+		System.out.println(uuid);
+		UserEntity userEntity = user.findByUuid(uuid);
+		Collection<UserAccessLevelEntity> userAccessLevels = userEntity.getUserAccessLevelEntities();
+		StringBuilder sb = new StringBuilder("{");
+		for (UserAccessLevelEntity userAccessLevel : userAccessLevels) {
+			sb.append("\"")
+					.append(userAccessLevel.getId())
+					.append("\":\"")
+					.append(userAccessLevel.getName())
+					.append("\"");
+		}
+		sb.append("}");
+		if (!userAccessLevels.isEmpty()) {
+			return Response.status(200).entity(sb.toString()).build();
 		} else {
 			return Response.status(404).entity("Bad response.").build();
 		}
 	}
-
-	@POST
-	@Path("nextAfterReg")
-	@Consumes("text/plain")
-	public Response getNextR(String requestFromClient) {
-
-		if (requestFromClient != null) {
-			return Response.status(200).entity(requestFromClient).build();
-		} else {
-			return Response.status(404).entity("Bad response.").build();
-		}
-	}
-
 
 
 	/**
 	 * Get user permission category
+	 *
 	 * @param sid - session UUID
 	 * @return - level of permission
 	 * @see com.netcracker.entity.UserUserAccessLevelEntity
@@ -130,6 +135,7 @@ public class UserRest {
 
 	/**
 	 * Creates a new user
+	 *
 	 * @param userJson - JSON mapping of user
 	 * @return - Response
 	 */
@@ -148,6 +154,7 @@ public class UserRest {
 			userEntity.setEmail(userJson.getEmail());
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
 			userEntity.setUuid(randomUuid);
+			userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
 			user.create(userEntity);
 //			Send email with text "confirm"+SecuritySettings.encrypt(randomUuid);
 			//TODO Send confirmation email here (Viktor)

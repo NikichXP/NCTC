@@ -69,11 +69,17 @@ public class UserJson implements Serializable {
     public void setLastName(String lastname){this.lastName = lastname;}
 
     public void setPhone(String phone){this.phone=phone;}
+
     @Override
     public String toString() {
-        return "User{" +
-                "cred='" + cred + '\'' +
-                ", pass='" + pass + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("UserJson{");
+        sb.append("cred='").append(cred).append('\'');
+        sb.append(", pass='").append(pass).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

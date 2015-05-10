@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "user-user_access_level", schema = "public", catalog = "postgres")
+@Table(name = "user$user_access_level", schema = "public", catalog = "postgres")
 public class UserUserAccessLevelEntity {
 	@SequenceGenerator(
 			name = "user-user_access_level_SEQUENCE_GENERATOR",

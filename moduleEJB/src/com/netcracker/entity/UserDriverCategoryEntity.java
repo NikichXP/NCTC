@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "user-driver_category", schema = "public", catalog = "postgres")
+@Table(name = "user$driver_category", schema = "public", catalog = "postgres")
 public class UserDriverCategoryEntity {
 	@SequenceGenerator(
 			name = "user-driver_category_SEQUENCE_GENERATOR",

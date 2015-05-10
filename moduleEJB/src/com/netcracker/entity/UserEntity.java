@@ -89,13 +89,13 @@ public class UserEntity {
 	private String alternativePhone;
 	@ManyToMany
 	@JoinTable(
-			name = "user-user_access_level",
+			name = "user$user_access_level",
 			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
 			inverseJoinColumns = {@JoinColumn(name = "user_access_level_id", referencedColumnName = "id")})
 	private Collection<UserAccessLevelEntity> userAccessLevelEntities;
 	@ManyToMany
 	@JoinTable(
-			name = "user-driver_category",
+			name = "user$driver_category",
 			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
 			inverseJoinColumns = {@JoinColumn(name = "driver_category_id", referencedColumnName = "id")})
 	private Collection<DriverCategoryEntity> driverCategoryEntities;
