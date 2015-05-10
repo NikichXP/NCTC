@@ -87,6 +87,32 @@ public class UserRest {
 		}
 	}
 
+	@POST
+	@Path("nextAfterLogin")
+	@Consumes("text/plain")
+	public Response getNextU(String requestFromClient) {
+
+		if (requestFromClient != null) {
+			return Response.status(200).entity(requestFromClient).build();
+		} else {
+			return Response.status(404).entity("Bad response.").build();
+		}
+	}
+
+	@POST
+	@Path("nextAfterReg")
+	@Consumes("text/plain")
+	public Response getNextR(String requestFromClient) {
+
+		if (requestFromClient != null) {
+			return Response.status(200).entity(requestFromClient).build();
+		} else {
+			return Response.status(404).entity("Bad response.").build();
+		}
+	}
+
+
+
 	/**
 	 * Get user permission category
 	 * @param sid - session UUID

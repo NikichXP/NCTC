@@ -39,6 +39,21 @@ $('#login-submit').click(function(){
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
 			//todo for Alexander: return from "login" REST useful UserJson and @POST it to next REST method
+			//todo: I done, how i understood it.
+			$.ajax({
+				method: 'POST',
+				url: 'api/user/nextAfterLogin',
+				contentType: "text/plain; charset=utf-8",
+				data: JSON.stringify(JSONdata),
+				dataType:'text',
+				success: function (data,textStatus,jqXHR ) {
+					alert("AJAX login submethod: " + jqXHR.responseText);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+
+				}
+			})
+
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -67,6 +82,20 @@ $('#registration-submit').click(function(){
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
 			//todo for Alexander: return from "create" REST useful UserJson and @POST it to next REST method
+			//todo: I done, how i understood it.
+			$.ajax({
+				method: 'POST',
+				url: 'api/user/nextAfterReg',
+				contentType: "text/plain; charset=utf-8",
+				data: JSON.stringify(JSONdata),
+				dataType:'text',
+				success: function (data,textStatus,jqXHR ) {
+					alert("AJAX REG submethod: " + jqXHR.responseText);
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+
+				}
+			})
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
