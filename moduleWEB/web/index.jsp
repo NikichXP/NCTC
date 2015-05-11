@@ -1,4 +1,4 @@
-<%@ page import="com.netcracker.session.SessionHandler" %>
+<%@ page import="com.netcracker.service.SessionHandler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">

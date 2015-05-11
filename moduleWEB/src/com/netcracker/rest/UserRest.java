@@ -6,18 +6,14 @@ import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.facade.local_int.UserAccessLevel;
 import com.netcracker.rest.utils.SecuritySettings;
-import com.netcracker.session.SessionHandler;
+import com.netcracker.service.Mail;
+import com.netcracker.service.SessionHandler;
 
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -36,7 +32,7 @@ public class UserRest {
 
 
 	/**
-	 * Auth method. Generates unique session token linked to userdata.
+	 * Auth method. Generates unique service token linked to userdata.
 	 *
 	 * @param login - phone or e-mail
 	 * @param pass  - password
@@ -57,13 +53,13 @@ public class UserRest {
 		} else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
 			ue = user.loginByEmail(login, pass);
 		}
-		return SessionHandler.generateSession(ue, pass); //our session token
+		return SessionHandler.generateSession(ue, pass); //our service token
 	}
 
 	/**
-	 * Checks if session is valid
+	 * Checks if service is valid
 	 *
-	 * @param sid - session id
+	 * @param sid - service id
 	 * @return - true of false
 	 */
 	@GET
@@ -72,6 +68,16 @@ public class UserRest {
 	@Produces("text/plain")
 	public String checkAuth(@PathParam("sid") String sid) {
 		return Boolean.toString(SessionHandler.isValidSession(sid));
+	}
+
+	@GET
+	@Path("sendMail/{email}/{theme}/{text}")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public String sendMail (@PathParam("email") String email,
+							@PathParam("theme") String theme,
+							@PathParam("text") String text) {
+		return Mail.testSend(email, theme, text);
 	}
 
 	@POST
@@ -85,7 +91,7 @@ public class UserRest {
 			userEntity = user.loginByPhone(userJson.getCred(), userJson.getPass());
 		}
 		SessionHandler.generateSession(userEntity, userJson.getPass());
-		//TODO: Add returning of session token id to response (Nikita)
+		//TODO: Add returning of service token id to response (Nikita)
 		if (userEntity != null) {
 			return Response.status(200).entity(userEntity.getUuid()).build();
 		} else {
@@ -120,7 +126,7 @@ public class UserRest {
 	/**
 	 * Get user permission category
 	 *
-	 * @param sid - session UUID
+	 * @param sid - service UUID
 	 * @return - level of permission
 	 * @see com.netcracker.entity.UserUserAccessLevelEntity
 	 */

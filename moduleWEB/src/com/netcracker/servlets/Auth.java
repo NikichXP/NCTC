@@ -1,14 +1,10 @@
 package com.netcracker.servlets;
 
-import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
-import com.netcracker.rest.UserRest;
-import com.netcracker.session.SessionHandler;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
