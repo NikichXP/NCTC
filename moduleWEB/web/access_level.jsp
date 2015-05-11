@@ -8,15 +8,20 @@
 <html>
 <head>
     <title></title>
+
 </head>
-<body>
-<h1>Choose access level</h1>
+<body onload="getAccessLevels()">
+<script>
+    document.write('<h1 style="text-align: center">Choose access level</h1><br>');
+    document.write('<p id="accessLevel" style="text-align: center"></p>');
+</script>
 
 <%!
     @EJB
     User user;
     Cookie[] cookie;
 %>
+
 <%
     try {
         cookie = request.getCookies();
@@ -33,6 +38,8 @@
         e.printStackTrace();
     }
 %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+<script src="js/accesslevel.js"></script>
 </body>
 </html>

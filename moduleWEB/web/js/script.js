@@ -72,8 +72,6 @@ function getAccessLevels(uuid) {
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
 			alert("User access levels: " + jqXHR.responseText);
-			obj = JSON.parse(data);
-			alert(obj.userAccessLevel[0].id + " " + obj.userAccessLevel[0].level);
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -81,6 +79,7 @@ function getAccessLevels(uuid) {
 		}
 	})
 }
+
 //AJAX POST for
 $('#track-TO-submit').click(function(){
 	JSONdata = {
