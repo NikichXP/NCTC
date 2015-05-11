@@ -1,0 +1,33 @@
+/*header css rules */
+.header {
+  position: relative;
+  line-height: 90%;
+  width: 99.9%;
+  background-color: #254B6F;
+  color: white;
+  float: left;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  padding: 10px;
+  padding-bottom: 20px;
+}
+.header .header-logout {
+  background-color: #297A32;
+  color: white;
+  float: right;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  padding: 20px;
+  padding-top: 15px;
+  margin-top: 20px;
+  margin-right: 20px;
+  text-align: center;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+}
+.header .header-logout:hover {
+  background:#C9C85E;
+}
