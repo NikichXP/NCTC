@@ -162,8 +162,9 @@ public class UserRest {
 			userEntity.setUuid(randomUuid);
 			userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
 			user.create(userEntity);
-//			Send email with text "confirm"+SecuritySettings.encrypt(randomUuid);
-			//TODO Send confirmation email here (Viktor)
+			Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
+					"http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="+SecuritySettings.encrypt(randomUuid));
+			//TODO Replace with real URL
 		}
 		if (userEntity == null) {
 			return Response.status(404).entity("Phone or email is already in use").build();
@@ -176,11 +177,11 @@ public class UserRest {
 	@Path("confirm")
 	public Response confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
 		UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
-		userEntity.setConfirmed(true);
-		user.update(userEntity);
 		if (userEntity == null) {
 			return Response.status(404).entity("Wrong user uuid passed").build();
 		}
+		userEntity.setConfirmed(true);
+		user.update(userEntity);
 		return Response.status(201).entity("Email confirmed").build();
 	}
 

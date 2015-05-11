@@ -15,8 +15,8 @@ import javax.mail.internet.MimeMessage;
 
 public class Mail {
 
-    private final static String username = "somemail@gmail.com";
-    private final static String password = "someOne'sPassword123456"; //Special password for an application
+    private final static String username = "nctc.taxi.service@gmail.com";
+    private final static String password = "9asdfq00"; //Special password for an application
 
     public static String testSend(String email, String theme, String text) {
 
@@ -34,7 +34,7 @@ public class Mail {
                 });
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("nikichx2@gmail.com"));
+            message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
             message.setSubject(theme);
