@@ -102,6 +102,9 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.js"></script>
 <!--Validator plugin link will be here (now it crashes all script if added, will fix it later)-->
+<script src="js/recent%20scripts/buttons-script.js"></script>
+<script src="js/recent%20scripts/validator-script.js"></script>
+
 
 <script src="js/script.js"></script>
 

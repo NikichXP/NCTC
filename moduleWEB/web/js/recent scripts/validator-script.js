@@ -73,16 +73,16 @@ $("body").focusout(function(event){
 		break;
 
 		//validates registration section
-		case "firstname" :
-		if(validateNames($("#firstname").val(), namesRegEx)){
+		case "firstName" :
+		if(validateNames($("#firstName").val(), namesRegEx)){
 		RegistrationForm.firstname = true;
 		}
 		else{
 			alert("Please, use only a-z or A-Z characters!");
 		}
 		break;
-		case "lastname":
-		if(validateNames($("#lastname").val(), namesRegEx)){
+		case "lastName":
+		if(validateNames($("#lastName").val(), namesRegEx)){
 		RegistrationForm.lastname = true;
 		}
 		else{

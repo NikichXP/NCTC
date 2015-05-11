@@ -1,22 +1,4 @@
 //todo review for removal
-$(function(){
-	$('#login').toggle();
-	$('#registration').toggle();
-	$('#anon-order').toggle();
-});
-
-
-$('#toggle-login').click(function(){
-	$('#login').toggle();
-});
-
-$('#toggle-registration').click(function(){
-	$('#registration').toggle();
-});
-
-$('#toggle-anon-order').click(function(){
-	$('#anon-order').toggle();
-});
 
 //AJAX section
 //classes url variable
