@@ -88,7 +88,7 @@ public class UserRest {
 		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
 			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
 		} else if (userJson.getCred().matches("\\d+")) {
-			userEntity = user.loginByPhone(userJson.getCred(), userJson.getPass());
+			userEntity = user.loginByPhone(userJson.getCred().replace("+", "").replace(" ", ""), userJson.getPass());
 		}
 		SessionHandler.generateSession(userEntity, userJson.getPass());
 		//TODO: Add returning of service token id to response (Nikita)
@@ -156,7 +156,7 @@ public class UserRest {
 			userEntity.setFirstName(userJson.getFirstName());
 			userEntity.setLastName(userJson.getLastName());
 			userEntity.setPassword(userJson.getPass());
-			userEntity.setPhone(userJson.getPhone());
+			userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
 			userEntity.setEmail(userJson.getEmail());
 			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
 			userEntity.setUuid(randomUuid);
