@@ -4,80 +4,252 @@ import java.io.Serializable;
 import java.lang.Override;
 import java.lang.String;
 import java.lang.StringBuilder;
+import java.util.Arrays;
 
 public class OrderJson implements Serializable {
 
-    private String from;
-    private String to;
+    private String id;
+    private String publicToken;
+    private String customerUserId;
+    private String driverUserId;
+    private String contactName;
+    private String contactPhone;
+    private String requestedSeatsCount;
 
-    private String phone;
-    private String gender;
-    private String carType;
+    private String type;
+    private String state;
 
+    private String timeCreated;
+    private String timeRequested;
+    private String timeOfDriverArrival;
+    private String timeStarted;
+    private String timeCompleted;
+
+    private String[] fromAddress;
+    private String[] fromX;
+    private String[] fromY;
+    private String[] toAddress;
+    private String[] toX;
+    private String[] toY;
+
+    private String sex;
+    private String carClass;
+    private String musicType;
+    private boolean smokingFriendly;
+    private boolean aminalFriendly;
     private boolean wifi;
-    private boolean petFriendly;
-    private boolean smoking;
-    private boolean cargo;
     private boolean airConditioner;
 
-    public OrderJson() {
+    private String customerPreCreateComment;
+    private String customerPostCompleteComment;
+    private String customerRefuseCause;
+    private String driverRefuseCause;
+    private String customerRefuseComment;
+    private String driverRefuseComment;
 
+    private String totalLength;
+    private String totalMultiplier;
+    private String totalPrice;
+
+
+    public String getId() {
+        return id;
     }
 
-    public OrderJson(String from, String to, String phone,
-                     String gender, String carType, boolean wifi,
-                     boolean petFriendly, boolean smoking,
-                     boolean cargo, boolean airConditioner) {
-        this.from = from;
-        this.to = to;
-        this.phone = phone;
-        this.gender = gender;
-        this.carType = carType;
-        this.wifi = wifi;
-        this.petFriendly = petFriendly;
-        this.smoking = smoking;
-        this.cargo = cargo;
-        this.airConditioner = airConditioner;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getPublicToken() {
+        return publicToken;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setPublicToken(String publicToken) {
+        this.publicToken = publicToken;
     }
 
-    public String getTo() {
-        return to;
+    public String getCustomerUserId() {
+        return customerUserId;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setCustomerUserId(String customerUserId) {
+        this.customerUserId = customerUserId;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getDriverUserId() {
+        return driverUserId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDriverUserId(String driverUserId) {
+        this.driverUserId = driverUserId;
     }
 
-    public String getGender() {
-        return gender;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    public String getCarType() {
-        return carType;
+    public String getContactPhone() {
+        return contactPhone;
     }
 
-    public void setCarType(String carType) {
-        this.carType = carType;
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
+
+    public String getRequestedSeatsCount() {
+        return requestedSeatsCount;
+    }
+
+    public void setRequestedSeatsCount(String requestedSeatsCount) {
+        this.requestedSeatsCount = requestedSeatsCount;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setTimeCreated(String timeCreated) {
+        this.timeCreated = timeCreated;
+    }
+
+    public String getTimeRequested() {
+        return timeRequested;
+    }
+
+    public void setTimeRequested(String timeRequested) {
+        this.timeRequested = timeRequested;
+    }
+
+    public String getTimeOfDriverArrival() {
+        return timeOfDriverArrival;
+    }
+
+    public void setTimeOfDriverArrival(String timeOfDriverArrival) {
+        this.timeOfDriverArrival = timeOfDriverArrival;
+    }
+
+    public String getTimeStarted() {
+        return timeStarted;
+    }
+
+    public void setTimeStarted(String timeStarted) {
+        this.timeStarted = timeStarted;
+    }
+
+    public String getTimeCompleted() {
+        return timeCompleted;
+    }
+
+    public void setTimeCompleted(String timeCompleted) {
+        this.timeCompleted = timeCompleted;
+    }
+
+    public String[] getFromAddress() {
+        return fromAddress;
+    }
+
+    public void setFromAddress(String[] fromAddress) {
+        this.fromAddress = fromAddress;
+    }
+
+    public String[] getFromX() {
+        return fromX;
+    }
+
+    public void setFromX(String[] fromX) {
+        this.fromX = fromX;
+    }
+
+    public String[] getFromY() {
+        return fromY;
+    }
+
+    public void setFromY(String[] fromY) {
+        this.fromY = fromY;
+    }
+
+    public String[] getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String[] toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    public String[] getToX() {
+        return toX;
+    }
+
+    public void setToX(String[] toX) {
+        this.toX = toX;
+    }
+
+    public String[] getToY() {
+        return toY;
+    }
+
+    public void setToY(String[] toY) {
+        this.toY = toY;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getCarClass() {
+        return carClass;
+    }
+
+    public void setCarClass(String carClass) {
+        this.carClass = carClass;
+    }
+
+    public String getMusicType() {
+        return musicType;
+    }
+
+    public void setMusicType(String musicType) {
+        this.musicType = musicType;
+    }
+
+    public boolean isSmokingFriendly() {
+        return smokingFriendly;
+    }
+
+    public void setSmokingFriendly(boolean smokingFriendly) {
+        this.smokingFriendly = smokingFriendly;
+    }
+
+    public boolean isAminalFriendly() {
+        return aminalFriendly;
+    }
+
+    public void setAminalFriendly(boolean aminalFriendly) {
+        this.aminalFriendly = aminalFriendly;
     }
 
     public boolean isWifi() {
@@ -88,30 +260,6 @@ public class OrderJson implements Serializable {
         this.wifi = wifi;
     }
 
-    public boolean isPetFriendly() {
-        return petFriendly;
-    }
-
-    public void setPetFriendly(boolean petFriendly) {
-        this.petFriendly = petFriendly;
-    }
-
-    public boolean isSmoking() {
-        return smoking;
-    }
-
-    public void setSmoking(boolean smoking) {
-        this.smoking = smoking;
-    }
-
-    public boolean isCargo() {
-        return cargo;
-    }
-
-    public void setCargo(boolean cargo) {
-        this.cargo = cargo;
-    }
-
     public boolean isAirConditioner() {
         return airConditioner;
     }
@@ -120,20 +268,117 @@ public class OrderJson implements Serializable {
         this.airConditioner = airConditioner;
     }
 
+    public String getCustomerPreCreateComment() {
+        return customerPreCreateComment;
+    }
+
+    public void setCustomerPreCreateComment(String customerPreCreateComment) {
+        this.customerPreCreateComment = customerPreCreateComment;
+    }
+
+    public String getCustomerPostCompleteComment() {
+        return customerPostCompleteComment;
+    }
+
+    public void setCustomerPostCompleteComment(String customerPostCompleteComment) {
+        this.customerPostCompleteComment = customerPostCompleteComment;
+    }
+
+    public String getCustomerRefuseCause() {
+        return customerRefuseCause;
+    }
+
+    public void setCustomerRefuseCause(String customerRefuseCause) {
+        this.customerRefuseCause = customerRefuseCause;
+    }
+
+    public String getDriverRefuseCause() {
+        return driverRefuseCause;
+    }
+
+    public void setDriverRefuseCause(String driverRefuseCause) {
+        this.driverRefuseCause = driverRefuseCause;
+    }
+
+    public String getCustomerRefuseComment() {
+        return customerRefuseComment;
+    }
+
+    public void setCustomerRefuseComment(String customerRefuseComment) {
+        this.customerRefuseComment = customerRefuseComment;
+    }
+
+    public String getDriverRefuseComment() {
+        return driverRefuseComment;
+    }
+
+    public void setDriverRefuseComment(String driverRefuseComment) {
+        this.driverRefuseComment = driverRefuseComment;
+    }
+
+    public String getTotalLength() {
+        return totalLength;
+    }
+
+    public void setTotalLength(String totalLength) {
+        this.totalLength = totalLength;
+    }
+
+    public String getTotalMultiplier() {
+        return totalMultiplier;
+    }
+
+    public void setTotalMultiplier(String totalMultiplier) {
+        this.totalMultiplier = totalMultiplier;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderJson{");
-        sb.append("from=").append(from);
-        sb.append(", to=").append(to);
-        sb.append(", phone=").append(phone);
-        sb.append(", gender=").append(gender);
-        sb.append(", carType=").append(carType);
-        sb.append(", wifi=").append(wifi);
-        sb.append(", petFriendly=").append(petFriendly);
-        sb.append(", smoking=").append(smoking);
-        sb.append(", cargo=").append(cargo);
-        sb.append(", airConditioner=").append(airConditioner);
-        sb.append('}');
-        return sb.toString();
+        return "{\"_class\":\"OrderJson\", " +
+                "\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
+                "\"publicToken\":" + (publicToken == null ? "null" : "\"" + publicToken + "\"") + ", " +
+                "\"customerUserId\":" + (customerUserId == null ? "null" : "\"" + customerUserId + "\"") + ", " +
+                "\"driverUserId\":" + (driverUserId == null ? "null" : "\"" + driverUserId + "\"") + ", " +
+                "\"contactName\":" + (contactName == null ? "null" : "\"" + contactName + "\"") + ", " +
+                "\"contactPhone\":" + (contactPhone == null ? "null" : "\"" + contactPhone + "\"") + ", " +
+                "\"requestedSeatsCount\":" + (requestedSeatsCount == null ? "null" : "\"" + requestedSeatsCount + "\"") + ", " +
+                "\"type\":" + (type == null ? "null" : "\"" + type + "\"") + ", " +
+                "\"state\":" + (state == null ? "null" : "\"" + state + "\"") + ", " +
+                "\"timeCreated\":" + (timeCreated == null ? "null" : "\"" + timeCreated + "\"") + ", " +
+                "\"timeRequested\":" + (timeRequested == null ? "null" : "\"" + timeRequested + "\"") + ", " +
+                "\"timeOfDriverArrival\":" + (timeOfDriverArrival == null ? "null" : "\"" + timeOfDriverArrival + "\"") + ", " +
+                "\"timeStarted\":" + (timeStarted == null ? "null" : "\"" + timeStarted + "\"") + ", " +
+                "\"timeCompleted\":" + (timeCompleted == null ? "null" : "\"" + timeCompleted + "\"") + ", " +
+                "\"fromAddress\":" + Arrays.toString(fromAddress) + ", " +
+                "\"fromX\":" + Arrays.toString(fromX) + ", " +
+                "\"fromY\":" + Arrays.toString(fromY) + ", " +
+                "\"toAddress\":" + Arrays.toString(toAddress) + ", " +
+                "\"toX\":" + Arrays.toString(toX) + ", " +
+                "\"toY\":" + Arrays.toString(toY) + ", " +
+                "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +
+                "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
+                "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +
+                "\"smokingFriendly\":\"" + smokingFriendly + "\"" + ", " +
+                "\"aminalFriendly\":\"" + aminalFriendly + "\"" + ", " +
+                "\"wifi\":\"" + wifi + "\"" + ", " +
+                "\"airConditioner\":\"" + airConditioner + "\"" + ", " +
+                "\"customerPreCreateComment\":" + (customerPreCreateComment == null ? "null" : "\"" + customerPreCreateComment + "\"") + ", " +
+                "\"customerPostCompleteComment\":" + (customerPostCompleteComment == null ? "null" : "\"" + customerPostCompleteComment + "\"") + ", " +
+                "\"customerRefuseCause\":" + (customerRefuseCause == null ? "null" : "\"" + customerRefuseCause + "\"") + ", " +
+                "\"driverRefuseCause\":" + (driverRefuseCause == null ? "null" : "\"" + driverRefuseCause + "\"") + ", " +
+                "\"customerRefuseComment\":" + (customerRefuseComment == null ? "null" : "\"" + customerRefuseComment + "\"") + ", " +
+                "\"driverRefuseComment\":" + (driverRefuseComment == null ? "null" : "\"" + driverRefuseComment + "\"") + ", " +
+                "\"totalLength\":" + (totalLength == null ? "null" : "\"" + totalLength + "\"") + ", " +
+                "\"totalMultiplier\":" + (totalMultiplier == null ? "null" : "\"" + totalMultiplier + "\"") + ", " +
+                "\"totalPrice\":" + (totalPrice == null ? "null" : "\"" + totalPrice + "\"") +
+                "\"}\"";
     }
 }
