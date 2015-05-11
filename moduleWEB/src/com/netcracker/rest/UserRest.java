@@ -110,7 +110,11 @@ public class UserRest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"userAccessLevel\":[");
 		for (UserAccessLevelEntity userAccessLevel : userAccessLevels) {
-			sb.append("{\"id\":\""+userAccessLevel.getId()+"\",\"level\":\""+userAccessLevel.getName()+"\" },");
+			sb.append("{\"id\":\"")
+					.append(userAccessLevel.getId())
+					.append("\",\"level\":\"")
+					.append(userAccessLevel.getName())
+					.append("\" },");
 		}
 		sb.replace(sb.length()-1,sb.length(),"");
 		sb.append("]}");
@@ -163,7 +167,8 @@ public class UserRest {
 			userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
 			user.create(userEntity);
 			Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
-					"http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="+SecuritySettings.encrypt(randomUuid));
+					"http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
+							+SecuritySettings.encrypt(randomUuid));
 			//TODO Replace with real URL
 		}
 		if (userEntity == null) {

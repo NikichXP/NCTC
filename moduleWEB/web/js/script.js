@@ -23,13 +23,10 @@ $('#toggle-anon-order').click(function(){
 });
 
 //AJAX section
-//classes url variable
-var url = 'api/user/login';
-var JSONdata;
-//AJAX POST for log in
+//AJAX POST for login
 $('#login-submit').click(function(){
 	if (!validateLoginData()) return;
-	JSONdata = {
+	var JSONdata = {
 		cred: $("#login-cred").val(),
 		pass: $("#login-pass").val()
 	};
@@ -38,7 +35,7 @@ $('#login-submit').click(function(){
 //AJAX POST for registration
 $('#registration-submit').click(function(){
 	if (!validateRegistrationData()) return;
-    JSONdata = {
+	var JSONdata = {
 		firstName: $("#firstName").val(),
 		lastName: $("#lastName").val(),
 		phone: $("#phone").val(),
@@ -56,15 +53,13 @@ function redirectWithAccessLevels(userData, url) {
 		data: userData,
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			//alert(textStatus + " " + jqXHR.responseText);
 			document.cookie = "uuid="+jqXHR.responseText;
 			alert("uuid="+jqXHR.responseText);
 			uuid = jqXHR.responseText;
 			getAccessLevels(uuid);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert(jqXHR.status + ' ' + jqXHR.responseText);
-			//alert(eval("(" + data + ")"));
+			alert("Wrong user credentials.");
 		}
 	})
 }
@@ -81,10 +76,29 @@ function getAccessLevels(uuid) {
 			document.location.href = "access_level.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert(uuid + " Error!");
+			alert("Seems like DB error.");
 		}
 	})
 }
+//AJAX POST for
+$('#track-TO-submit').click(function(){
+	JSONdata = {
+		'orderid': $("#tracking-id").val()
+	};
+	$.ajax({
+		method: 'POST',
+		url: url,
+		data: JSONdata,
+		dataType:'json'
+	})
+		.done(function(){alert("success!!");})
+		.fail(function(){alert("fail!");});
+});
+//AJAX POST for
+$('#order-wo-reg-submit').click(function(){
+
+	alert("Hold on, not yet functionlal!");
+});
 
 var phoneRegEx = /^\+?[0-9]{6,12}$/;
 var namesRegEx = /^[a-zA-Z\s'\-]+$/;
@@ -142,26 +156,6 @@ function validateNames (input, regEx) {
 	}
 	return false;
 }
-
-//AJAX POST for
-$('#track-TO-submit').click(function(){
-	JSONdata = {
-		'orderid': $("#tracking-id").val()
-	};
-	$.ajax({
-		method: 'POST',
-		url: url,
-		data: JSONdata,
-		dataType:'json'
-	})
-	.done(function(){alert("success!!");})
-	.fail(function(){alert("fail!");});
-});
-//AJAX POST for
-$('#order-wo-reg-submit').click(function(){
-
-	alert("Hold on, not yet functionlal!");
-});
 
 
 
