@@ -100,7 +100,7 @@ public class UserRest {
 	}
 
 	@POST
-	@Path("nextAfterSubmit")
+	@Path("getAccessLevelsByUuid")
 	@Consumes("text/plain")
 	public Response getNextU(String uuid) {
 		System.out.println(uuid);

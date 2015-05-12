@@ -67,7 +67,7 @@ function redirectWithAccessLevels(userData, url) {
 function getAccessLevels(uuid) {
 	$.ajax({
 		method: 'POST',
-		url: 'api/user/nextAfterSubmit',
+		url: 'api/user/getAccessLevelsByUuid',
 		contentType: "text/plain; charset=utf-8",
 		data: uuid,
 		dataType:'text',
