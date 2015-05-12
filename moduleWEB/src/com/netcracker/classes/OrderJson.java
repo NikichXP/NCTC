@@ -37,7 +37,7 @@ public class OrderJson implements Serializable {
     private String carClass;
     private String musicType;
     private boolean smokingFriendly;
-    private boolean aminalFriendly;
+    private boolean animalFriendly;
     private boolean wifi;
     private boolean airConditioner;
 
@@ -253,12 +253,12 @@ public class OrderJson implements Serializable {
         this.smokingFriendly = smokingFriendly;
     }
 
-    public boolean isAminalFriendly() {
-        return aminalFriendly;
+    public boolean isAnimalFriendly() {
+        return animalFriendly;
     }
 
-    public void setAminalFriendly(boolean aminalFriendly) {
-        this.aminalFriendly = aminalFriendly;
+    public void setAnimalFriendly(boolean animalFriendly) {
+        this.animalFriendly = animalFriendly;
     }
 
     public boolean isWifi() {
@@ -376,7 +376,7 @@ public class OrderJson implements Serializable {
                 "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
                 "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +
                 "\"smokingFriendly\":\"" + smokingFriendly + "\"" + ", " +
-                "\"aminalFriendly\":\"" + aminalFriendly + "\"" + ", " +
+                "\"animalFriendly\":\"" + animalFriendly + "\"" + ", " +
                 "\"wifi\":\"" + wifi + "\"" + ", " +
                 "\"airConditioner\":\"" + airConditioner + "\"" + ", " +
                 "\"customerPreCreateComment\":" + (customerPreCreateComment == null ? "null" : "\"" + customerPreCreateComment + "\"") + ", " +

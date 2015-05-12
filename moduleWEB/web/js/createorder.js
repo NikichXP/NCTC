@@ -3,8 +3,7 @@
  */
 
 //AJAX POST for registration
-$('#basic-order-submit').click(function(){
-    if (!validateRegistrationData()) return;
+$("#basic-order-submit").click(function(){
     var JSONdata = {
         customerUserUuid: $("#customerUserUuid").val(),
         contactName: $("#contactName").val(),
@@ -19,20 +18,19 @@ $('#basic-order-submit').click(function(){
         toX: getArrayOfToAdresses("toX"),
         toY: getArrayOfToAdresses("toY"),
 
-        sex: $("#sex").val(),
-        carClass: $("#carClass").val(),
-        musicType: $("#musicType").val(),
-        smokingFriendly: $("#smokingFriendly").val(),
-        aminalFriendly: $("#aminalFriendly").val(),
-        wifi: $("#wifi").val(),
-        airConditioner: $("#airConditioner").val(),
+        sex: $("input[name=sex]:checked").attr("data-value"),
+        carClass: $("input[name=carClass]:checked").attr("data-value"),
+        musicType: $( "#musicType option:selected" ).text(),
+        smokingFriendly: $("#smokingFriendly").is(':checked') ,
+        animalFriendly: $("#animalFriendly").is(':checked') ,
+        wifi: $("#wifi").is(':checked') ,
+        airConditioner: $("#airConditioner").is(':checked') ,
 
         customerPreCreateComment: $("#customerPreCreateComment").val(),
         totalLength: $("#totalLength").val(),
+        totalMultiplier: $("#totalMultiplier").val(),
         totalPrice: $("#totalPrice").val()
     };
-    redirectWithAccessLevels(JSON.stringify(JSONdata), "api/user/create");
-
     function getArrayOfToAdresses(idWithoutNumber) {
         var arr = [];
         for (var i = 0; i < $("[id^="+idWithoutNumber+"]").length; i++) {
@@ -40,54 +38,11 @@ $('#basic-order-submit').click(function(){
         }
         return arr;
     }
-});
-
-var dataJson = {
-    "id": "1",
-    "publicToken": "",
-    "customerUserId": "1",
-    "customerUserUuid": "1",
-    "driverUserId": "1",
-    "contactName": "",
-    "contactPhone": "",
-    "requestedSeatsCount": "",
-    "type": "",
-    "state": "",
-    "timeCreated": "",
-    "timeRequested": "",
-    "timeOfDriverArrival": "",
-    "timeStarted": "",
-    "timeCompleted": "",
-    "fromAddress": "",
-    "fromX": "",
-    "fromY": "",
-    "toAddress": ["", ""],
-    "toX": ["", ""],
-    "toY": ["", ""],
-    "sex": "",
-    "carClass": "",
-    "musicType": "",
-    "smokingFriendly": false,
-    "aminalFriendly": false,
-    "wifi": false,
-    "airConditioner": false,
-    "customerPreCreateComment": "",
-    "customerPostCompleteComment": "",
-    "customerRefuseCause": "",
-    "driverRefuseCause": "",
-    "customerRefuseComment": "",
-    "driverRefuseComment": "",
-    "totalLength": "",
-    "totalMultiplier": "",
-    "totalPrice": ""
-};
-
-function createOrder() {
     $.ajax({
         method: 'POST',
         url: 'api/order/create',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(dataJson),
+        data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert(textStatus + "\n" + data);
@@ -96,4 +51,4 @@ function createOrder() {
             alert("Bad response from server.");
         }
     })
-}
+});

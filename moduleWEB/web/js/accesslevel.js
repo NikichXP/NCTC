@@ -11,8 +11,8 @@ function getAccessLevels() {
         data: uuid,
         dataType:'text',
         success: function (data,textStatus,jqXHR ) {
-            obj = JSON.parse(data);
-            str = "";
+            var obj = JSON.parse(data);
+            var str = "";
             for (var i = 0; i < obj.userAccessLevel.length; i++) {
                 str = str + '<a href="' + obj.userAccessLevel[i].level
                     + '.jsp">Login like: '

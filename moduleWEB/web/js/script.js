@@ -73,7 +73,7 @@ function getAccessLevels(uuid) {
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
 			alert("User access levels: " + jqXHR.responseText);
-			document.location.href = "access_level.jsp";
+			document.location.href = "accessLevel.jsp";
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert("Seems like DB error.");
