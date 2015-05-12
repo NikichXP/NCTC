@@ -1,4 +1,5 @@
-<%@ page import="java.util.Collection" %>
+<%@ page import="javax.ejb.EJB" %>
+<%@ page import="com.netcracker.facade.local_int.User" %>
 <%-- 22:04 09.05.2015 by Viktor Taranenko --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -7,6 +8,28 @@
 
 </head>
 <body onload="getAccessLevels()">
+<%!
+    Cookie[] c;
+    boolean flag;
+    @EJB
+    User user;
+%>
+<%
+  /*  flag = false;
+    c = request.getCookies();
+    for (Cookie cook:c) {
+        if (cook.getName().equals("uuid")) {
+            if (user.findByUuid(cook.getValue()) == null) {
+
+            } else {
+                flag = true;
+            }
+        }
+    }
+    if (!flag) {
+        response.sendRedirect("index.jsp");
+    }*/
+%>
 <h1 style="text-align: center">Choose access level</h1><br>
 <p id="accessLevel" style="text-align: center"></p>
 

@@ -1,4 +1,6 @@
 <%@ page import="com.netcracker.service.SessionHandler" %>
+<%@ page import="com.netcracker.facade.local_int.User" %>
+<%@ page import="javax.ejb.EJB" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,20 +25,28 @@
 
 
 <body>
-<%! Cookie[] cookie;%>
+<%!
+    Cookie[] c;
+    boolean flag;
+    @EJB
+    User user;
+%>
 <%
+    flag = false;
     try {
-        cookie = request.getCookies();
-        for (Cookie c : cookie) {
-            if (c.getName().equals("sessionID")) {
-                if (SessionHandler.isValidSession(c.getValue())) {
-                    response.sendRedirect("order.jsp");
-                }
-            }
+        c = request.getCookies();
+        out.write("test");
+        out.write(Integer.toString(c.length));
+        for (Cookie cook:c) {
+            out.write(cook.getName()+"\n");
+            out.write(cook.getPath()+"\n");
+            out.write(cook.getValue()+"\n");
         }
-
+        if (!flag) {
+            out.write("noFlag");
+        }
     } catch (Exception e) {
-        //lol, do nothing
+        out.write(e.toString());
     }
 %>
 
