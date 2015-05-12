@@ -9,6 +9,9 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "order", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "Order.getOrdersByStateAndCustomerUuid", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.orderStateEntity = :orderStateEntity AND f.customerUserEntity.uuid = :customerUuid")})
 public class OrderEntity {
 	@SequenceGenerator(
 			name = "ORDER_SEQUENCE_GENERATOR",
