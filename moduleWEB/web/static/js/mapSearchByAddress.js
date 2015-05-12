@@ -20,7 +20,7 @@ function init () {
         zoom: 10
     });
 
-ymaps.geocode('Киев', {
+ymaps.geocode('Kyiv', {
     /**
      * Опции запроса
      * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/geocode.xml
