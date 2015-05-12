@@ -11,9 +11,9 @@
     <title></title>
 </head>
 <body>
-<center>
+<div style="text-align: center">
     <button onclick="createOrder()">Create test Order.</button>
-</center>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
 </body>

@@ -11,6 +11,7 @@ public class OrderJson implements Serializable {
     private String id;
     private String publicToken;
     private String customerUserId;
+    private String customerUserUuid;
     private String driverUserId;
     private String contactName;
     private String contactPhone;
@@ -25,9 +26,9 @@ public class OrderJson implements Serializable {
     private String timeStarted;
     private String timeCompleted;
 
-    private String[] fromAddress;
-    private String[] fromX;
-    private String[] fromY;
+    private String fromAddress;
+    private String fromX;
+    private String fromY;
     private String[] toAddress;
     private String[] toX;
     private String[] toY;
@@ -74,6 +75,14 @@ public class OrderJson implements Serializable {
 
     public void setCustomerUserId(String customerUserId) {
         this.customerUserId = customerUserId;
+    }
+
+    public String getCustomerUserUuid() {
+        return customerUserUuid;
+    }
+
+    public void setCustomerUserUuid(String customerUserUuid) {
+        this.customerUserUuid = customerUserUuid;
     }
 
     public String getDriverUserId() {
@@ -164,27 +173,27 @@ public class OrderJson implements Serializable {
         this.timeCompleted = timeCompleted;
     }
 
-    public String[] getFromAddress() {
+    public String getFromAddress() {
         return fromAddress;
     }
 
-    public void setFromAddress(String[] fromAddress) {
+    public void setFromAddress(String fromAddress) {
         this.fromAddress = fromAddress;
     }
 
-    public String[] getFromX() {
+    public String getFromX() {
         return fromX;
     }
 
-    public void setFromX(String[] fromX) {
+    public void setFromX(String fromX) {
         this.fromX = fromX;
     }
 
-    public String[] getFromY() {
+    public String getFromY() {
         return fromY;
     }
 
-    public void setFromY(String[] fromY) {
+    public void setFromY(String fromY) {
         this.fromY = fromY;
     }
 
@@ -342,10 +351,10 @@ public class OrderJson implements Serializable {
 
     @Override
     public String toString() {
-        return "{\"_class\":\"OrderJson\", " +
-                "\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
+        return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
                 "\"publicToken\":" + (publicToken == null ? "null" : "\"" + publicToken + "\"") + ", " +
                 "\"customerUserId\":" + (customerUserId == null ? "null" : "\"" + customerUserId + "\"") + ", " +
+                "\"customerUserUuid\":" + (customerUserUuid == null ? "null" : "\"" + customerUserUuid + "\"") + ", " +
                 "\"driverUserId\":" + (driverUserId == null ? "null" : "\"" + driverUserId + "\"") + ", " +
                 "\"contactName\":" + (contactName == null ? "null" : "\"" + contactName + "\"") + ", " +
                 "\"contactPhone\":" + (contactPhone == null ? "null" : "\"" + contactPhone + "\"") + ", " +
@@ -357,9 +366,9 @@ public class OrderJson implements Serializable {
                 "\"timeOfDriverArrival\":" + (timeOfDriverArrival == null ? "null" : "\"" + timeOfDriverArrival + "\"") + ", " +
                 "\"timeStarted\":" + (timeStarted == null ? "null" : "\"" + timeStarted + "\"") + ", " +
                 "\"timeCompleted\":" + (timeCompleted == null ? "null" : "\"" + timeCompleted + "\"") + ", " +
-                "\"fromAddress\":" + Arrays.toString(fromAddress) + ", " +
-                "\"fromX\":" + Arrays.toString(fromX) + ", " +
-                "\"fromY\":" + Arrays.toString(fromY) + ", " +
+                "\"fromAddress\":" + (fromAddress == null ? "null" : "\"" + fromAddress + "\"") + ", " +
+                "\"fromX\":" + (fromX == null ? "null" : "\"" + fromX + "\"") + ", " +
+                "\"fromY\":" + (fromY == null ? "null" : "\"" + fromY + "\"") + ", " +
                 "\"toAddress\":" + Arrays.toString(toAddress) + ", " +
                 "\"toX\":" + Arrays.toString(toX) + ", " +
                 "\"toY\":" + Arrays.toString(toY) + ", " +
@@ -379,6 +388,6 @@ public class OrderJson implements Serializable {
                 "\"totalLength\":" + (totalLength == null ? "null" : "\"" + totalLength + "\"") + ", " +
                 "\"totalMultiplier\":" + (totalMultiplier == null ? "null" : "\"" + totalMultiplier + "\"") + ", " +
                 "\"totalPrice\":" + (totalPrice == null ? "null" : "\"" + totalPrice + "\"") +
-                "\"}\"";
+                "}";
     }
 }
