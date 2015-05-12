@@ -10,6 +10,7 @@
 <head>
     <title>Order Test</title>
 </head>
+<body onload="getMusicType()">
 <form id="order-form">
     <input type="text" id="customerUserUuid" hidden="hidden"/>
     <input type="text" id="contactName" placeholder="Contact name"/><br>
@@ -32,13 +33,7 @@
     <input type="radio" name="carClass" data-value="Regular">Regular</input><br><%--TODO get from DB--%>
     <input type="radio" name="carClass" data-value="Elite">Elite</input><br>
 
-    Music type:&nbsp
-    <select id="musicType"><%--TODO get from DB--%>
-        <option value="1">Pop</option>
-        <option value="2">Classic</option>
-        <option value="3">Rock</option>
-        <option value="4">Reggae</option>
-    </select><br>
+    <p id="musicTypes"></p>
 
     <input type="checkbox" id="smokingFriendly">smokingFriendly</input><br>
     <input type="checkbox" id="animalFriendly">animalFriendly</input><br>
@@ -51,6 +46,9 @@
 
     <input type="button" id="basic-order-submit" value="Create test Order."/>
 </form>
+<br><br>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
 </body>

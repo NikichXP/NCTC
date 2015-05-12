@@ -3,7 +3,7 @@
  */
 
 //AJAX POST for registration
-$("#basic-order-submit").click(function(){
+$("#basic-order-submit").click(function () {
     var JSONdata = {
         customerUserUuid: $("#customerUserUuid").val(),
         contactName: $("#contactName").val(),
@@ -20,24 +20,26 @@ $("#basic-order-submit").click(function(){
 
         sex: $("input[name=sex]:checked").attr("data-value"),
         carClass: $("input[name=carClass]:checked").attr("data-value"),
-        musicType: $( "#musicType option:selected" ).text(),
-        smokingFriendly: $("#smokingFriendly").is(':checked') ,
-        animalFriendly: $("#animalFriendly").is(':checked') ,
-        wifi: $("#wifi").is(':checked') ,
-        airConditioner: $("#airConditioner").is(':checked') ,
+        musicType: $("#musicType option:selected").text(),
+        smokingFriendly: $("#smokingFriendly").is(':checked'),
+        animalFriendly: $("#animalFriendly").is(':checked'),
+        wifi: $("#wifi").is(':checked'),
+        airConditioner: $("#airConditioner").is(':checked'),
 
         customerPreCreateComment: $("#customerPreCreateComment").val(),
         totalLength: $("#totalLength").val(),
         totalMultiplier: $("#totalMultiplier").val(),
         totalPrice: $("#totalPrice").val()
     };
+
     function getArrayOfToAdresses(idWithoutNumber) {
         var arr = [];
-        for (var i = 0; i < $("[id^="+idWithoutNumber+"]").length; i++) {
+        for (var i = 0; i < $("[id^=" + idWithoutNumber + "]").length; i++) {
             arr[i] = $("#" + idWithoutNumber + i).val()
         }
         return arr;
     }
+
     $.ajax({
         method: 'POST',
         url: 'api/order/create',
@@ -52,3 +54,27 @@ $("#basic-order-submit").click(function(){
         }
     })
 });
+
+function getMusicType() {
+    $.ajax({
+        method: 'POST',
+        url: 'api/music/type',
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            var obj = JSON.parse(data);
+            var str = "";
+            //str = str + obj.musicType[i].id + " "
+            //    + obj.musicType[i].name;
+            str = str + 'Music type:&nbsp<select id="musicType">';
+            for (var i = 0; i < obj.musicType.length; i++) {
+                str = str + '<option value="' + obj.musicType[i].id
+                    +'">' + obj.musicType[i].name + '</option>';
+            }
+                str = str + '</select><br>';
+            document.getElementById("musicTypes").innerHTML = str;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Bad response from server.\n" + jqXHR.responseText);
+        }
+    })
+}
