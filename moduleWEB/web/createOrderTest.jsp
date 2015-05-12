@@ -11,7 +11,10 @@
     <title></title>
 </head>
 <body>
-<button onclick="createOrder()">The time is?</button>
+<center>
+    <button onclick="createOrder()">Create test Order.</button>
+</center>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
 </body>
 </html>
