@@ -5,7 +5,7 @@
 //AJAX POST for registration
 $("#basic-order-submit").click(function () {
     var JSONdata = {
-        customerUserUuid: $("#customerUserUuid").val(),
+        customerUserUuid: getCookie("uuid"),
         contactName: $("#contactName").val(),
         contactPhone: $("#contactPhone").val(),
         requestedSeatsCount: $("#requestedSeatsCount").val(),
@@ -21,6 +21,9 @@ $("#basic-order-submit").click(function () {
         sex: $("input[name=sex]:checked").attr("data-value"),
         carClass: $("input[name=carClass]:checked").attr("data-value"),
         musicType: $("#musicType option:selected").text(),
+        asSoonAsPossible: $("#asSoonAsPossible").is(':checked'),
+        timeRequested: $("#timeRequested").val(),
+
         smokingFriendly: $("#smokingFriendly").is(':checked'),
         animalFriendly: $("#animalFriendly").is(':checked'),
         wifi: $("#wifi").is(':checked'),
@@ -39,7 +42,7 @@ $("#basic-order-submit").click(function () {
         }
         return arr;
     }
-
+    if (!validateBasicOrderData()) return;
     $.ajax({
         method: 'POST',
         url: 'api/order/create',
@@ -77,4 +80,84 @@ function getMusicType() {
             alert("Bad response from server.\n" + jqXHR.responseText);
         }
     })
+}
+
+function showOrHideDatePicker() {
+    if (document.getElementById("timeRequested").style.visibility == "visible") {
+        document.getElementById("timeRequested").style.visibility = "hidden";
+    }
+    else {
+        document.getElementById("timeRequested").style.visibility = "visible";
+    }
+}
+
+var phoneRegEx = /^\+?[0-9]{6,12}$/;
+var namesRegEx = /^[a-zA-Z\s'\-]+$/;
+var dateTime = /^([1-9]|([012][0-9])|(3[01]))\/([0]?[1-9]|1[012])\/\d\d\d\d [012]?[0-9]:[0-6][0-9]$/;
+var seatsCount = /^\d+$/;
+
+function validateBasicOrderData() {
+    //validates login credentials (e-mail or phone number) field
+    if(getCookie("uuid").length != 36){
+        alert("Wrong uuid cookie");
+        return false;
+    }
+    if(!validateNames($("#contactName").val(), namesRegEx)){
+        alert("Contact name:\nPlease, use only alphabetic characters!");
+        return false;
+    }
+    var contactPhone = $("#contactPhone").val();
+    contactPhone = contactPhone.replace(/\s/g, "").replace(/\+/g, "");
+    if(!validateNames(contactPhone, phoneRegEx)){
+        alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
+        return false;
+    }
+    if(!validateNames($("#requestedSeatsCount").val(), seatsCount)){
+        alert("Requested seats count:\nDigits only.");
+        return false;
+    }
+    if($("#fromAddress").val().length == 0 || $("#fromX").val().length == 0 || $("#fromY").val().length == 0){
+        alert("Select start address.");
+        return false;
+    }
+    if($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0){
+        alert("Select distinition address.");
+        return false;
+    }
+    if(!validateNames($("#timeRequested").val(), dateTime)){
+        alert("Wrong requested time");
+        return false;
+    }
+    if($("#totalLength").val().length > 0 && $("#totalMultiplier").val().length > 0 && $("#totalPrice").val().length > 0){
+        alert("Bad totals.");
+        return false;
+    }
+    return true;
+}
+
+function validateNames (input, regEx) {
+    if(input.length > 0){
+        return regEx.test(input);
+    }
+    return false;
+}
+
+function getCookie(name) {
+    var cookie = " " + document.cookie;
+    var search = " " + name + "=";
+    var setStr = null;
+    var offset = 0;
+    var end = 0;
+    if (cookie.length > 0) {
+        offset = cookie.indexOf(search);
+        if (offset != -1) {
+            offset += search.length;
+            end = cookie.indexOf(";", offset)
+            if (end == -1) {
+                end = cookie.length;
+            }
+            setStr = unescape(cookie.substring(offset, end));
+        }
+    }
+    return(setStr);
 }
