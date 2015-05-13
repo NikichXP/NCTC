@@ -3,6 +3,7 @@ package com.netcracker.entity;
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 
@@ -27,7 +28,7 @@ public class CarClassEntity {
 	private String name;
 	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger tariffMultiplier;
+	private BigDecimal tariffMultiplier;
 	@OneToMany(mappedBy = "carClassEntity")
 	private Collection<CarEntity> carsById;
 
@@ -55,11 +56,11 @@ public class CarClassEntity {
 		this.name = name;
 	}
 
-	public BigInteger getTariffMultiplier() {
+	public BigDecimal getTariffMultiplier() {
 		return tariffMultiplier;
 	}
 
-	public void setTariffMultiplier(BigInteger tariffMultiplier) {
+	public void setTariffMultiplier(BigDecimal tariffMultiplier) {
 		this.tariffMultiplier = tariffMultiplier;
 	}
 

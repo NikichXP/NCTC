@@ -4,12 +4,15 @@ package com.netcracker.facade.impl;
 
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
+import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.Order;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
 
 @Stateless
 public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
@@ -32,5 +35,48 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
                 .getResultList();
         return results;
     }
+
+    public List<Point> getFirstAndLastPaths(OrderEntity orderEntity) {
+        List<Point> points = new ArrayList<>();
+        Comparator<PathEntity> pathEntityComparator = new Comparator<PathEntity>() {
+            @Override
+            public int compare(PathEntity o1, PathEntity o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        };
+        List<PathEntity> pathEntities = new ArrayList<>(orderEntity.getPathEntities());
+        pathEntities.sort(pathEntityComparator);
+        PathEntity firstPath = pathEntities.get(0);
+        PathEntity lastPath = pathEntities.get(pathEntities.size()-1);
+
+		points.add(new Point(firstPath.getStartAddress(), firstPath.getStartX(), firstPath.getStartY()));
+		points.add(new Point(lastPath.getEndAddress(), lastPath.getEndX(), lastPath.getEndY()));
+
+		return points;
+    }
+
+    private class Point {
+		private String address;
+        private BigDecimal x;
+        private BigDecimal y;
+
+		public Point(String address, BigDecimal x, BigDecimal y) {
+			this.address = address;
+			this.x = x;
+			this.y = y;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public BigDecimal getX() {
+			return x;
+		}
+
+		public BigDecimal getY() {
+			return y;
+		}
+	}
 
 }

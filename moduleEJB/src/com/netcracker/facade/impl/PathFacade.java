@@ -7,6 +7,8 @@ import com.netcracker.entity.PathEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigDecimal;
+import java.util.LinkedList;
 
 @Stateless
 public class PathFacade extends AbstractFacade<PathEntity> implements com.netcracker.facade.local_int.Path {
@@ -21,5 +23,5 @@ public class PathFacade extends AbstractFacade<PathEntity> implements com.netcra
     public PathFacade() {
         super(PathEntity.class);
     }
-    
+
 }

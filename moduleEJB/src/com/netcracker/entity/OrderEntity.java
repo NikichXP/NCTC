@@ -3,6 +3,7 @@ package com.netcracker.entity;
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -113,13 +114,13 @@ public class OrderEntity {
 	private String driverRefuseComment;
 	@Basic
 	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigInteger totalLength;
+	private BigDecimal totalLength;
 	@Basic
 	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigInteger totalMultiplier;
+	private BigDecimal totalMultiplier;
 	@Basic
 	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigInteger finalPrice;
+	private BigDecimal finalPrice;
 
 	public RefuseCauseByCustomerEntity getRefuseCauseByCustomerEntity() {
 		return refuseCauseByCustomerEntity;
@@ -329,27 +330,27 @@ public class OrderEntity {
 		this.driverRefuseComment = driverRefuseComment;
 	}
 
-	public BigInteger getTotalLength() {
+	public BigDecimal getTotalLength() {
 		return totalLength;
 	}
 
-	public void setTotalLength(BigInteger totalLength) {
+	public void setTotalLength(BigDecimal totalLength) {
 		this.totalLength = totalLength;
 	}
 
-	public BigInteger getTotalMultiplier() {
+	public BigDecimal getTotalMultiplier() {
 		return totalMultiplier;
 	}
 
-	public void setTotalMultiplier(BigInteger totalMultiplier) {
+	public void setTotalMultiplier(BigDecimal totalMultiplier) {
 		this.totalMultiplier = totalMultiplier;
 	}
 
-	public BigInteger getFinalPrice() {
+	public BigDecimal getFinalPrice() {
 		return finalPrice;
 	}
 
-	public void setFinalPrice(BigInteger finalPrice) {
+	public void setFinalPrice(BigDecimal finalPrice) {
 		this.finalPrice = finalPrice;
 	}
 
