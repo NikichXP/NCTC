@@ -6,6 +6,8 @@ $("#create-order-submit").click(function(){
 	document.location.href = "createOrderTest.jsp";
 });
 
+
+
 function setTableHistoryOrder(url) {
 	$.ajax({
 		method: 'POST',
@@ -35,3 +37,4 @@ function drawBody(rowData, table) {
 	row.append($("<td>" + rowData.endOrder + "</td>"));
 	row.append($("<td>" + rowData.price + "</td></tr></tbody>"));
 }
+
