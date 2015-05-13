@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -70,32 +71,32 @@ public class OrderRest {
 		List<PathEntity> pathEntities = new LinkedList<>();
 
 		PathEntity firstPathEntity = new PathEntity();
-		firstPathEntity.setLength(new BigInteger("999"));//TODO Replace with real Length
-		firstPathEntity.setPrice(new BigInteger("99999"));//TODO Replace with real Price
+		firstPathEntity.setLength(new BigDecimal("999"));//TODO Replace with real Length
+		firstPathEntity.setPrice(new BigDecimal("999.99"));//TODO Replace with real Price
 
 		firstPathEntity.setStartAddress(orderJson.getFromAddress());
-		firstPathEntity.setStartX(new BigInteger(orderJson.getFromX()));
-		firstPathEntity.setStartY(new BigInteger(orderJson.getFromY()));
+		firstPathEntity.setStartX(new BigDecimal(orderJson.getFromX()));
+		firstPathEntity.setStartY(new BigDecimal(orderJson.getFromY()));
 
 		firstPathEntity.setEndAddress(orderJson.getToAddress()[0]);
-		firstPathEntity.setEndX(new BigInteger(orderJson.getToX()[0]));
-		firstPathEntity.setEndY(new BigInteger(orderJson.getToY()[0]));
+		firstPathEntity.setEndX(new BigDecimal(orderJson.getToX()[0]));
+		firstPathEntity.setEndY(new BigDecimal(orderJson.getToY()[0]));
 		firstPathEntity.setOrderEntity(orderEntity);
 
 		pathEntities.add(firstPathEntity);
 
 		for (int i = 1; i < orderJson.getToAddress().length - 1; i++) {
 			PathEntity pathEntity = new PathEntity();
-			pathEntity.setLength(new BigInteger("999"));//TODO Replace with real Length
-			pathEntity.setPrice(new BigInteger("99999"));//TODO Replace with real Price
+			pathEntity.setLength(new BigDecimal("999.99"));//TODO Replace with real Length
+			pathEntity.setPrice(new BigDecimal("999.99"));//TODO Replace with real Price
 
 			pathEntity.setStartAddress(orderJson.getToAddress()[i]);
-			pathEntity.setStartX(new BigInteger(orderJson.getToX()[i]));
-			pathEntity.setStartY(new BigInteger(orderJson.getToY()[i]));
+			pathEntity.setStartX(new BigDecimal(orderJson.getToX()[i]));
+			pathEntity.setStartY(new BigDecimal(orderJson.getToY()[i]));
 
 			pathEntity.setEndAddress(orderJson.getToAddress()[i + 1]);
-			pathEntity.setEndX(new BigInteger(orderJson.getToX()[i + 1]));
-			pathEntity.setEndY(new BigInteger(orderJson.getToY()[i + 1]));
+			pathEntity.setEndX(new BigDecimal(orderJson.getToX()[i + 1]));
+			pathEntity.setEndY(new BigDecimal(orderJson.getToY()[i + 1]));
 
 			pathEntities.add(pathEntity);
 			pathEntities.get(i - 1).setPathByNextPathId(pathEntity);
@@ -112,15 +113,15 @@ public class OrderRest {
 
 		orderEntity.setCustomerPreCreateComment(orderJson.getCustomerPreCreateComment());
 
-		BigInteger totalPrice = new BigInteger("0");
-		BigInteger totalLength = new BigInteger("0");
+		BigDecimal totalPrice = new BigDecimal("0");
+		BigDecimal totalLength = new BigDecimal("0");
 		for (PathEntity pathEntity : pathEntities) {
 			pathEntity.setCompleted(false);
-			totalPrice = totalPrice.add(new BigInteger(pathEntity.getPrice() + ""));
-			totalLength = totalLength.add(new BigInteger(pathEntity.getLength() + ""));
+			totalPrice = totalPrice.add(new BigDecimal(pathEntity.getPrice() + ""));
+			totalLength = totalLength.add(new BigDecimal(pathEntity.getLength() + ""));
 		}
 		orderEntity.setFinalPrice(totalPrice);
-		orderEntity.setTotalMultiplier(new BigInteger("1"));//TODO Replace with real multiplier
+		orderEntity.setTotalMultiplier(new BigDecimal("1"));//TODO Replace with real multiplier
 		order.create(orderEntity);
 
 		if (orderJson == null) {
