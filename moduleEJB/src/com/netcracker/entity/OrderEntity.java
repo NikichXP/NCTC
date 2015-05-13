@@ -23,6 +23,24 @@ public class OrderEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
+	public Collection<PathEntity> getPathEntities() {
+		return pathEntities;
+	}
+
+	public void setPathEntities(Collection<PathEntity> pathEntities) {
+		this.pathEntities = pathEntities;
+	}
+
+	public CarClassEntity getCarClassEntity() {
+		return carClassEntity;
+	}
+
+	public void setCarClassEntity(CarClassEntity carClassEntity) {
+		this.carClassEntity = carClassEntity;
+	}
+
+	@OneToMany(mappedBy = "orderEntity")
+	private Collection<PathEntity> pathEntities;
 	@ManyToOne
 	@JoinColumn(name = "customer_refuse_cause_id", referencedColumnName = "id")
 	private RefuseCauseByCustomerEntity refuseCauseByCustomerEntity;
