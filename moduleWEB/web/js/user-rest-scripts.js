@@ -6,7 +6,7 @@ $("#current-order-submit").click(function(){
 	document.location.href = "createOrderTest.jsp";
 });
 
-function setTableHistoryOrder(userDasboardData, url) {
+function setTableHistoryOrder(url) {
 	$.ajax({
 		method: 'POST',
 		url: url,
