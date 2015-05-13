@@ -28,7 +28,7 @@
     <!--logo end-->
     <div class="top-menu">
       <ul class="nav pull-right top-menu">
-        <li><a class="logout" href="#">Logout</a></li>
+        <li><a class="logout" href="#" onclick="deleteAllCookies()">Logout</a></li>
       </ul>
     </div>
     <!--user information-->
