@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    chackCoockie("uuid");
+    checkCookie("uuid");
 });
 
 
-function chackCoockie(name) {
+function checkCookie(name) {
     var myCookie = getCookie(name);
     if (myCookie == null) {
         // do cookie doesn't exist stuff;
