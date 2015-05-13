@@ -2,6 +2,7 @@ package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
+import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.entity.PathEntity;
@@ -10,8 +11,6 @@ import com.netcracker.facade.local_int.Order;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.*;
 
 @Stateless
@@ -28,6 +27,7 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
         super(OrderEntity.class);
     }
 
+	@Override
     public List<OrderEntity> getOrdersByStateAndCustomerUuid(OrderStateEntity orderStateEntity, String customerUuid) {
         List results = em.createNamedQuery("Order.getOrdersByStateAndCustomerUuid")
                 .setParameter("customerUuid", customerUuid)
@@ -36,7 +36,8 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
         return results;
     }
 
-    public List<Point> getFirstAndLastPaths(OrderEntity orderEntity) {
+	@Override
+    public List<Point> getFirstAndLastPoints(OrderEntity orderEntity) {
         List<Point> points = new ArrayList<>();
         Comparator<PathEntity> pathEntityComparator = new Comparator<PathEntity>() {
             @Override
@@ -54,29 +55,5 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
 
 		return points;
     }
-
-    private class Point {
-		private String address;
-        private BigDecimal x;
-        private BigDecimal y;
-
-		public Point(String address, BigDecimal x, BigDecimal y) {
-			this.address = address;
-			this.x = x;
-			this.y = y;
-		}
-
-		public String getAddress() {
-			return address;
-		}
-
-		public BigDecimal getX() {
-			return x;
-		}
-
-		public BigDecimal getY() {
-			return y;
-		}
-	}
-
 }
+
