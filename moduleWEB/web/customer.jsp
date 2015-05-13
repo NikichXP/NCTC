@@ -33,9 +33,9 @@
     </div>
     <!--user information-->
     <div>
-      User :<p id="user_name">Juger</p>
-      phone :<p id="user_phone">+380988914963</p>
-      e-mail :<p id="user_mail">jugermaximus@gmail.com</p>
+      User :<p id="user_name"></p>
+      phone :<p id="user_phone"></p>
+      e-mail :<p id="user_mail"></p>
     </div>
   </header>
   <!--main content start-->
@@ -106,8 +106,9 @@
   </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/user-rest-scripts.js" type="text/javascript"></script>
   <script src="js/check_cookie.js" type="text/javascript"></script>
+  <script src="js/user-rest-scripts.js" type="text/javascript"></script>
+
 </section>
 </body>
 </html>

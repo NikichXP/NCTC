@@ -1,6 +1,9 @@
 package com.netcracker.rest;
 
+import com.netcracker.classes.UUIDJson;
+import com.netcracker.classes.UserDataJson;
 import com.netcracker.classes.UserJson;
+import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.entity.UserAccessLevelEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
@@ -25,173 +28,184 @@ import java.util.*;
 @Stateless
 @Path("user")
 public class UserRest {
-	@EJB
-	User user;
-	@EJB
-	UserAccessLevel userAccessLevel;
+    @EJB
+    User user;
+    @EJB
+    UserAccessLevel userAccessLevel;
 
 
-	/**
-	 * Auth method. Generates unique service token linked to userdata.
-	 *
-	 * @param login - phone or e-mail
-	 * @param pass  - password
-	 * @return - token UUID
-	 */
-	@GET
-	@Path("auth/{loginData}/{pass}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String generateAuth(@PathParam("loginData") String login, @PathParam("pass") String pass) {
-		UserEntity ue = null;
-		//Don't delete this method, it's for debugging (Nikita)
-		if (login.matches("0[0-9]{9}")) {
-			login = "+38" + login;
-		}
-		if (login.matches("\\+380[0-9]{9}")) {
-			ue = user.loginByPhone(login, pass);
-		} else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
-			ue = user.loginByEmail(login, pass);
-		}
-		return SessionHandler.generateSession(ue, pass); //our service token
-	}
+    /**
+     * Auth method. Generates unique service token linked to userdata.
+     *
+     * @param login - phone or e-mail
+     * @param pass  - password
+     * @return - token UUID
+     */
+    @GET
+    @Path("auth/{loginData}/{pass}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public String generateAuth(@PathParam("loginData") String login, @PathParam("pass") String pass) {
+        UserEntity ue = null;
+        //Don't delete this method, it's for debugging (Nikita)
+        if (login.matches("0[0-9]{9}")) {
+            login = "+38" + login;
+        }
+        if (login.matches("\\+380[0-9]{9}")) {
+            ue = user.loginByPhone(login, pass);
+        } else if (login.matches("[a-zA-Z0-9]+@[a-z0-9]+.[a-z0-9]{2,}")) {
+            ue = user.loginByEmail(login, pass);
+        }
+        return SessionHandler.generateSession(ue, pass); //our service token
+    }
 
-	/**
-	 * Checks if service is valid
-	 *
-	 * @param sid - service id
-	 * @return - true of false
-	 */
-	@GET
-	@Path("checkAuth/{sid}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String checkAuth(@PathParam("sid") String sid) {
-		return Boolean.toString(SessionHandler.isValidSession(sid));
-	}
+    /**
+     * Checks if service is valid
+     *
+     * @param sid - service id
+     * @return - true of false
+     */
+    @GET
+    @Path("checkAuth/{sid}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public String checkAuth(@PathParam("sid") String sid) {
+        return Boolean.toString(SessionHandler.isValidSession(sid));
+    }
 
-	@GET
-	@Path("sendMail/{email}/{theme}/{text}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String sendMail (@PathParam("email") String email,
-							@PathParam("theme") String theme,
-							@PathParam("text") String text) {
-		return Mail.testSend(email, theme, text);
-	}
+    @GET
+    @Path("sendMail/{email}/{theme}/{text}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public String sendMail(@PathParam("email") String email,
+                           @PathParam("theme") String theme,
+                           @PathParam("text") String text) {
+        return Mail.testSend(email, theme, text);
+    }
 
-	@POST
-	@Path("login")
-	@Consumes("application/json")
-	public Response getUser(UserJson userJson) {
-		UserEntity userEntity = null;
-		if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
-			userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
-		} else if (userJson.getCred().matches("\\d+")) {
-			userEntity = user.loginByPhone(userJson.getCred().replace("+", "").replace(" ", ""), userJson.getPass());
-		}
-		SessionHandler.generateSession(userEntity, userJson.getPass());
-		//TODO: Add returning of service token id to response (Nikita)
-		if (userEntity != null) {
-			return Response.status(200).entity(userEntity.getUuid()).build();
-		} else {
-			return Response.status(404).entity("Bad login credentials").build();
-		}
-	}
+    @POST
+    @Path("login")
+    @Consumes("application/json")
+    public Response getUser(UserJson userJson) {
+        UserEntity userEntity = null;
+        if (userJson.getCred().matches("^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$")) {
+            userEntity = user.loginByEmail(userJson.getCred(), userJson.getPass());
+        } else if (userJson.getCred().matches("\\d+")) {
+            userEntity = user.loginByPhone(userJson.getCred().replace("+", "").replace(" ", ""), userJson.getPass());
+        }
+        SessionHandler.generateSession(userEntity, userJson.getPass());
+        //TODO: Add returning of service token id to response (Nikita)
+        if (userEntity != null) {
+            return Response.status(200).entity(userEntity.getUuid()).build();
+        } else {
+            return Response.status(404).entity("Bad login credentials").build();
+        }
+    }
 
-	@POST
-	@Path("getAccessLevelsByUuid")
-	@Consumes("text/plain")
-	public Response getNextU(String uuid) {
-		System.out.println(uuid);
-		UserEntity userEntity = user.findByUuid(uuid);
-		Collection<UserAccessLevelEntity> userAccessLevels = userEntity.getUserAccessLevelEntities();
+    @POST
+    @Path("getAccessLevelsByUuid")
+    @Consumes("text/plain")
+    public Response getNextU(String uuid) {
+        System.out.println(uuid);
+        UserEntity userEntity = user.findByUuid(uuid);
+        Collection<UserAccessLevelEntity> userAccessLevels = userEntity.getUserAccessLevelEntities();
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("{\"userAccessLevel\":[");
-		for (UserAccessLevelEntity userAccessLevel : userAccessLevels) {
-			sb.append("{\"id\":\"")
-					.append(userAccessLevel.getId())
-					.append("\",\"level\":\"")
-					.append(userAccessLevel.getName())
-					.append("\" },");
-		}
-		sb.replace(sb.length()-1,sb.length(),"");
-		sb.append("]}");
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"userAccessLevel\":[");
+        for (UserAccessLevelEntity userAccessLevel : userAccessLevels) {
+            sb.append("{\"id\":\"")
+                    .append(userAccessLevel.getId())
+                    .append("\",\"level\":\"")
+                    .append(userAccessLevel.getName())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
 
-		if (!userAccessLevels.isEmpty()) {
-			return Response.status(200).entity(sb.toString()).build();
-		} else {
-			return Response.status(404).entity("Bad response.").build();
-		}
-	}
-
-
-	/**
-	 * Get user permission category
-	 *
-	 * @param sid - service UUID
-	 * @return - level of permission
-	 * @see com.netcracker.entity.UserUserAccessLevelEntity
-	 */
-	@GET
-	@Path("validPermission/{sid}")
-	@Consumes("text/plain")
-	@Produces("text/plain")
-	public String validatePermissions(@PathParam("sid") String sid) {
-		//TODO: Validation or checking of permission (Nikita)
-		return null;
-	}
-
-	/**
-	 * Creates a new user
-	 *
-	 * @param userJson - JSON mapping of user
-	 * @return - Response
-	 */
-	@POST
-	@Path("create")
-	@Consumes("application/json")
-	public Response createUser(UserJson userJson) {
-		UserEntity userEntity = null;
-		String randomUuid = UUID.randomUUID().toString();
-		if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
-			userEntity = new UserEntity();
-			userEntity.setFirstName(userJson.getFirstName());
-			userEntity.setLastName(userJson.getLastName());
-			userEntity.setPassword(userJson.getPass());
-			userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
-			userEntity.setEmail(userJson.getEmail());
-			userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
-			userEntity.setUuid(randomUuid);
-			userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
-			user.create(userEntity);
-			Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
-					"http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
-							+SecuritySettings.encrypt(randomUuid));
-			//TODO Replace with real URL
-		}
-		if (userEntity == null) {
-			return Response.status(404).entity("Phone or email is already in use").build();
-		} else {
-			return Response.status(201).entity(randomUuid).build();
-		}
-	}
-
-	@GET
-	@Path("confirm")
-	public Response confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
-		UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
-		if (userEntity == null) {
-			return Response.status(404).entity("Wrong user uuid passed").build();
-		}
-		userEntity.setConfirmed(true);
-		user.update(userEntity);
-		return Response.status(201).entity("Email confirmed").build();
-	}
+        if (!userAccessLevels.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
 
 
+    /**
+     * Get user permission category
+     *
+     * @param sid - service UUID
+     * @return - level of permission
+     * @see com.netcracker.entity.UserUserAccessLevelEntity
+     */
+    @GET
+    @Path("validPermission/{sid}")
+    @Consumes("text/plain")
+    @Produces("text/plain")
+    public String validatePermissions(@PathParam("sid") String sid) {
+        //TODO: Validation or checking of permission (Nikita)
+        return null;
+    }
+
+    /**
+     * Creates a new user
+     *
+     * @param userJson - JSON mapping of user
+     * @return - Response
+     */
+    @POST
+    @Path("create")
+    @Consumes("application/json")
+    public Response createUser(UserJson userJson) {
+        UserEntity userEntity = null;
+        String randomUuid = UUID.randomUUID().toString();
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+            userEntity = new UserEntity();
+            userEntity.setFirstName(userJson.getFirstName());
+            userEntity.setLastName(userJson.getLastName());
+            userEntity.setPassword(userJson.getPass());
+            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
+            userEntity.setEmail(userJson.getEmail());
+            userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
+            userEntity.setUuid(randomUuid);
+            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
+            user.create(userEntity);
+            Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
+                    "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
+                            + SecuritySettings.encrypt(randomUuid));
+            //TODO Replace with real URL
+        }
+        if (userEntity == null) {
+            return Response.status(404).entity("Phone or email is already in use").build();
+        } else {
+            return Response.status(201).entity(randomUuid).build();
+        }
+    }
+
+    @GET
+    @Path("confirm")
+    public Response confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
+        UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
+        if (userEntity == null) {
+            return Response.status(404).entity("Wrong user uuid passed").build();
+        }
+        userEntity.setConfirmed(true);
+        user.update(userEntity);
+        return Response.status(201).entity("Email confirmed").build();
+    }
 
 
+    @POST
+    @Path("cookie_user")
+    public Response getUserDataByUUID(String uuidJson) {
+        UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(uuidJson));
+        UserDataJson udj = new UserDataJson();
+        udj.setName(userEntity.getFirstName());
+        udj.setEmail(userEntity.getEmail());
+        udj.setPhone(userEntity.getPhone());
+        if(userEntity != null)
+            return Response.status(200).entity(udj.toString()).build();
+        else
+            return Response.status(400).build();
+    }
 
 }
