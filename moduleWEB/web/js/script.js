@@ -118,7 +118,7 @@ function validateRegistrationData() {
 	var phone = $("#phone").val();
 	phone = phone.replace(/\s/g, "").replace(/\+/g, "");
 	if(!validateNames(phone, phoneRegEx)){
-		alert("Phone number:\nPlease, use only digits. Length from 6 to 10.");
+		alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
 		return false;
 	}
 	if(!validateNames($("#email").val(), emailRegEx)){

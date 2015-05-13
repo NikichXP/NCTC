@@ -36,6 +36,7 @@ public class OrderJson implements Serializable {
     private String sex;
     private String carClass;
     private String musicType;
+    private boolean asSoonAsPossible;
     private boolean smokingFriendly;
     private boolean animalFriendly;
     private boolean wifi;
@@ -237,6 +238,14 @@ public class OrderJson implements Serializable {
         this.carClass = carClass;
     }
 
+    public boolean isAsSoonAsPossible() {
+        return asSoonAsPossible;
+    }
+
+    public void setAsSoonAsPossible(boolean asSoonAsPossible) {
+        this.asSoonAsPossible = asSoonAsPossible;
+    }
+
     public String getMusicType() {
         return musicType;
     }
@@ -375,6 +384,7 @@ public class OrderJson implements Serializable {
                 "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +
                 "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
                 "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +
+                "\"asSoonAsPossible\":\"" + asSoonAsPossible + "\"" + ", " +
                 "\"smokingFriendly\":\"" + smokingFriendly + "\"" + ", " +
                 "\"animalFriendly\":\"" + animalFriendly + "\"" + ", " +
                 "\"wifi\":\"" + wifi + "\"" + ", " +
