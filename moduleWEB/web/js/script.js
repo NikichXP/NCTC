@@ -29,6 +29,7 @@ $('#login-submit').click(function(){
 	var JSONdata = {
 		cred: $("#login-cred").val(),
 		pass: $("#login-pass").val()
+		
 	};
 	redirectWithAccessLevels(JSON.stringify(JSONdata), "api/user/login");
 });
@@ -162,6 +163,8 @@ function validateNames (input, regEx) {
 	}
 	return false;
 }
+
+
 
 
 
