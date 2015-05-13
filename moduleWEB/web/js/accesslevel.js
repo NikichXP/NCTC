@@ -12,7 +12,14 @@ function getAccessLevels() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
+            var str = "";
+            for (var i = 0; i < obj.userAccessLevel.length; i++) {
+                str = str + '<a href="' + obj.userAccessLevel[i].level
+                    + '.jsp">Login like: '
+                    + obj.userAccessLevel[i].level
+                    + '</a>' + '<br>';
+            }
+            document.getElementById("accessLevel").innerHTML = str;
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(uuid + " Error!");
