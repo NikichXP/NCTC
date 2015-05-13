@@ -1,6 +1,8 @@
 <%@ page import="com.netcracker.service.SessionHandler" %>
 <%@ page import="com.netcracker.facade.local_int.User" %>
 <%@ page import="javax.ejb.EJB" %>
+<%@ page import="com.netcracker.facade.impl.UserFacade" %>
+<%@ page import="com.netcracker.entity.UserEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,12 +35,19 @@
     flag = false;
     try {
         c = request.getCookies();
-        out.write("test");
-        out.write(Integer.toString(c.length));
         for (Cookie cook:c) {
-            out.write(cook.getName()+"\n");
-            out.write(cook.getPath()+"\n");
-            out.write(cook.getValue()+"\n");
+            if (cook.getName().equals("uuid")) {
+                UserFacade uf = new UserFacade();
+                out.print(uf.toString());
+                UserEntity ue = uf.findByUuid(cook.getName());
+                //TODO: Victor, please make normal validation (now it returns null)
+
+                //TODO: I will send redirect after normal validation (Nikita)
+                /*
+                responce.sendRedirect("order.jsp");
+                 */
+                out.print(ue.toString());
+            }
         }
         if (!flag) {
             out.write("noFlag");
