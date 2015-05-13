@@ -22,7 +22,7 @@ public class OrderEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
-	@OneToMany(mappedBy="orderEntity")
+	@OneToMany(mappedBy="orderEntity", cascade = CascadeType.ALL)
 	private Collection<PathEntity> pathEntities;
 	@ManyToOne
 	@JoinColumn(name = "customer_refuse_cause_id", referencedColumnName = "id")
@@ -33,6 +33,15 @@ public class OrderEntity {
 	@ManyToOne
 	@JoinColumn(name = "car_class_id", referencedColumnName = "id")
 	private CarClassEntity carClassEntity;
+
+	public CarClassEntity getCarClassEntity() {
+		return carClassEntity;
+	}
+
+	public void setCarClassEntity(CarClassEntity carClassEntity) {
+		this.carClassEntity = carClassEntity;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "music_type_id", referencedColumnName = "id")
 	private MusicTypeEntity musicTypeEntity;

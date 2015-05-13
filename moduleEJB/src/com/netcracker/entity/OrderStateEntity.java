@@ -5,10 +5,11 @@ package com.netcracker.entity;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Collection;
-import java.util.Collections;
 
 @Entity
 @Table(name = "order_state", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "OrderState.findByName", query = "SELECT f FROM OrderStateEntity f WHERE upper(f.name) = upper(:name)")})
 public class OrderStateEntity {
 	@SequenceGenerator(
 			name = "ORDER_STATE_SEQUENCE_GENERATOR",

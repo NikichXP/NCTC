@@ -8,6 +8,8 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "order_type", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "OrderType.findByName", query = "SELECT f FROM OrderTypeEntity f WHERE upper(f.name) = upper(:name)")})
 public class OrderTypeEntity {
 	@SequenceGenerator(
 			name = "ORDER_TYPE_SEQUENCE_GENERATOR",

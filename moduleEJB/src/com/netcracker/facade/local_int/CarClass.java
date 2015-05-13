@@ -20,4 +20,6 @@ public interface CarClass {
 	public List<CarClassEntity> findRange(int[] range);
 
 	public int count();
+
+	CarClassEntity findByName(String name);
 }
