@@ -1,5 +1,3 @@
-<%@ page import="javax.ejb.EJB" %>
-<%@ page import="com.netcracker.facade.local_int.User" %>
 <%-- 22:04 09.05.2015 by Viktor Taranenko --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

@@ -1,6 +1,3 @@
-<%@ page import="com.netcracker.service.SessionHandler" %>
-<%@ page import="com.netcracker.facade.local_int.User" %>
-<%@ page import="javax.ejb.EJB" %>
 <%@ page import="com.netcracker.facade.impl.UserFacade" %>
 <%@ page import="com.netcracker.entity.UserEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
