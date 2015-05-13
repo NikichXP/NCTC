@@ -2,7 +2,7 @@ $("#order-history-submit").click(function(){
 	setTableHistoryOrder("api/user_dash/history");
 });
 
-$("#current-order-submit").click(function(){
+$("#create-order-submit").click(function(){
 	document.location.href = "createOrderTest.jsp";
 });
 
@@ -12,15 +12,15 @@ function setTableHistoryOrder(url) {
 		url: url,
 		dataType: 'text',
 		success: function (data, textStatus, jqXHR) {
-			var obj = JSON.parse(data);
-			alert(data);
-			drawTable(obj.orderHistory ,"#historyOrderTable")
+			var obj;
+			obj = JSON.parse(data);
+			drawTable(obj.orderHistory, "#historyOrderTable");
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			alert("Bad response from server");
 		}
 	})
-};
+}
 //draw table
 function drawTable(data, table) {
 	for (var i = 0; i < data.length; i++) {
