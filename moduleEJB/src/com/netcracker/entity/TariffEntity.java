@@ -3,6 +3,7 @@ package com.netcracker.entity;
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
@@ -20,10 +21,10 @@ public class TariffEntity {
 	private BigInteger id;
 	@Basic
 	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigInteger perHour;
+	private BigDecimal perHour;
 	@Basic
 	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigInteger perKilometer;
+	private BigDecimal perKilometer;
 	@Basic
 	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeStarts;
@@ -57,19 +58,19 @@ public class TariffEntity {
 		this.id = id;
 	}
 
-	public BigInteger getPerHour() {
+	public BigDecimal getPerHour() {
 		return perHour;
 	}
 
-	public void setPerHour(BigInteger perHour) {
+	public void setPerHour(BigDecimal perHour) {
 		this.perHour = perHour;
 	}
 
-	public BigInteger getPerKilometer() {
+	public BigDecimal getPerKilometer() {
 		return perKilometer;
 	}
 
-	public void setPerKilometer(BigInteger perKilometer) {
+	public void setPerKilometer(BigDecimal perKilometer) {
 		this.perKilometer = perKilometer;
 	}
 

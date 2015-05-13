@@ -13,9 +13,7 @@ $('#toggle-login').click(function(){
 $('#toggle-registration').click(function(){
 	$('#registration').toggle();
 	$('#login').toggle(false);
-	$('#anon-order').toggle(false);
-});
-
+	$('#anon-order').toggle(false);});
 $('#toggle-anon-order').click(function(){
 	$('#anon-order').toggle();
 	$('#login').toggle(false);

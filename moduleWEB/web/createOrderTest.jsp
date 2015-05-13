@@ -19,11 +19,11 @@
     <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
     <input type="text" id="type" hidden/>
     <input type="text" id="fromAddress" placeholder="From address"/><br>
-    <input type="text" id="fromX" hidden value = "0.0"/>
-    <input type="text" id="fromY" hidden value = "0.0"/>
+    <input type="text" id="fromX" hidden value = "1"/>
+    <input type="text" id="fromY" hidden value = "1"/>
     <input type="text" id="toAddress0" placeholder="To address"/><br>
-    <input type="text" id="toX0" hidden value = "0.0"/>
-    <input type="text" id="toY0" hidden value = "0.0"/>
+    <input type="text" id="toX0" hidden value = "2"/>
+    <input type="text" id="toY0" hidden value = "2"/>
     <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
     <input id="timeRequested" style="visibility: visible" type="text"/><br>
 
@@ -33,8 +33,8 @@
     <input type="radio" name="sex" data-value="Female">Female</input><br>
 
     Car class:<br>
-    <input type="radio" checked name="carClass" data-value="Regular">Regular</input><br><%--TODO get from DB--%>
-    <input type="radio" name="carClass" data-value="Elite">Elite</input><br>
+    <input type="radio" checked name="carClass" data-value="Basic">Regular</input><br><%--TODO get from DB--%>
+    <input type="radio" name="carClass" data-value="Premium">Elite</input><br>
 
     <p id="musicTypes"></p>
 

@@ -20,4 +20,6 @@ public interface OrderType {
 	public List<OrderTypeEntity> findRange(int[] range);
 
 	public int count();
+
+	OrderTypeEntity findByName(String name);
 }

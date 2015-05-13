@@ -20,4 +20,6 @@ public interface MusicType {
 	public List<MusicTypeEntity> findRange(int[] range);
 
 	public int count();
+
+	MusicTypeEntity findByName(String name);
 }

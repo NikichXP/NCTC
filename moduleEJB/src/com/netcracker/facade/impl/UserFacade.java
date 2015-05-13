@@ -8,7 +8,6 @@ import com.netcracker.facade.local_int.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.math.BigInteger;
 import java.util.List;
 
 @Stateless
@@ -71,7 +70,7 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
     }
 
     /**
-     * @param uuid sent to email
+     * @param uuid
      * @return <b>UserEntity</b> object or <b>null</b> if not found
      */
     @Override

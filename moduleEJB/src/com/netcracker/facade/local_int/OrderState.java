@@ -20,4 +20,6 @@ public interface OrderState {
 	public List<OrderStateEntity> findRange(int[] range);
 
 	public int count();
+
+	OrderStateEntity findByName(String name);
 }

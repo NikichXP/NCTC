@@ -3,6 +3,7 @@ package com.netcracker.facade.impl;
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
 import com.netcracker.entity.UserGroupEntity;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

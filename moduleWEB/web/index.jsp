@@ -24,6 +24,8 @@
 
 
 <body>
+<%--
+
 <%!
     Cookie[] c;
     boolean flag;
@@ -53,7 +55,7 @@
         out.write(e.toString());
     }
 %>
-
+--%>
 
 <div class="container">
     <div class="row">

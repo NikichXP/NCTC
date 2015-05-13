@@ -3,6 +3,7 @@ package com.netcracker.entity;
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 
@@ -23,16 +24,16 @@ public class PathEntity {
 	private OrderEntity orderEntity;
 	@Basic
 	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger startX;
+	private BigDecimal startX;
 	@Basic
 	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger startY;
+	private BigDecimal startY;
 	@Basic
 	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger endX;
+	private BigDecimal endX;
 	@Basic
 	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger endY;
+	private BigDecimal endY;
 	@Basic
 	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String startAddress;
@@ -44,10 +45,10 @@ public class PathEntity {
 	private boolean completed;
 	@Basic
 	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger length;
+	private BigDecimal length;
 	@Basic
 	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger price;
+	private BigDecimal price;
 	@ManyToOne
 	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
 	private PathEntity pathByNextPathId;
@@ -65,35 +66,35 @@ public class PathEntity {
 		this.id = id;
 	}
 
-	public BigInteger getStartX() {
+	public BigDecimal getStartX() {
 		return startX;
 	}
 
-	public void setStartX(BigInteger startX) {
+	public void setStartX(BigDecimal startX) {
 		this.startX = startX;
 	}
 
-	public BigInteger getStartY() {
+	public BigDecimal getStartY() {
 		return startY;
 	}
 
-	public void setStartY(BigInteger startY) {
+	public void setStartY(BigDecimal startY) {
 		this.startY = startY;
 	}
 
-	public BigInteger getEndX() {
+	public BigDecimal getEndX() {
 		return endX;
 	}
 
-	public void setEndX(BigInteger endX) {
+	public void setEndX(BigDecimal endX) {
 		this.endX = endX;
 	}
 
-	public BigInteger getEndY() {
+	public BigDecimal getEndY() {
 		return endY;
 	}
 
-	public void setEndY(BigInteger endY) {
+	public void setEndY(BigDecimal endY) {
 		this.endY = endY;
 	}
 
@@ -121,19 +122,19 @@ public class PathEntity {
 		this.completed = completed;
 	}
 
-	public BigInteger getLength() {
+	public BigDecimal getLength() {
 		return length;
 	}
 
-	public void setLength(BigInteger length) {
+	public void setLength(BigDecimal length) {
 		this.length = length;
 	}
 
-	public BigInteger getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigInteger price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
