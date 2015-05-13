@@ -28,8 +28,6 @@
 <%!
     Cookie[] c;
     boolean flag;
-    @EJB
-    User user;
 %>
 <%
     flag = false;
