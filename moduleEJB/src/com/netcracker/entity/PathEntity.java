@@ -18,19 +18,6 @@ public class PathEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATH_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
-
-	public OrderEntity getOrderEntity() {
-		return orderEntity;
-	}
-
-	public void setOrderEntity(OrderEntity orderEntity) {
-		this.orderEntity = orderEntity;
-	}
-
-	@ManyToOne
-	@JoinColumn(name = "order_id", referencedColumnName = "id")
-	private OrderEntity orderEntity;
-
 	@Column(name = "order_id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger orderId;
 	@Basic
