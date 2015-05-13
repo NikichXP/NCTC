@@ -27,6 +27,7 @@
     }*/
 %>
 <h1 style="text-align: center">Choose access level</h1><br>
+
 <p id="accessLevel" style="text-align: center"></p>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

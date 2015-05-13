@@ -9,17 +9,23 @@ function getAccessLevels() {
         url: 'api/user/getAccessLevelsByUuid',
         contentType: "text/plain; charset=utf-8",
         data: uuid,
-        dataType:'text',
-        success: function (data,textStatus,jqXHR ) {
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
             var str = "";
+            var index = 0;
             for (var i = 0; i < obj.userAccessLevel.length; i++) {
                 str = str + '<a href="' + obj.userAccessLevel[i].level
                     + '.jsp">Login like: '
                     + obj.userAccessLevel[i].level
                     + '</a>' + '<br>';
+                index++;
             }
-            document.getElementById("accessLevel").innerHTML = str;
+            if (index == 1) {
+                document.location.href = obj.userAccessLevel[0].level + '.jsp';
+            } else {
+                document.getElementById("accessLevel").innerHTML = str;
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(uuid + " Error!");
@@ -44,5 +50,5 @@ function getCookie(name) {
             setStr = unescape(cookie.substring(offset, end));
         }
     }
-    return(setStr);
+    return (setStr);
 }
