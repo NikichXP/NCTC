@@ -19,11 +19,11 @@
     <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
     <input type="text" id="type" hidden/>
     <input type="text" id="fromAddress" placeholder="From address"/><br>
-    <input type="text" id="fromX" hidden/>
-    <input type="text" id="fromY" hidden/>
+    <input type="text" id="fromX" hidden value = "0.0"/>
+    <input type="text" id="fromY" hidden value = "0.0"/>
     <input type="text" id="toAddress0" placeholder="To address"/><br>
-    <input type="text" id="toX0" hidden/>
-    <input type="text" id="toY0" hidden/>
+    <input type="text" id="toX0" hidden value = "0.0"/>
+    <input type="text" id="toY0" hidden value = "0.0"/>
     <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
     <input id="timeRequested" style="visibility: visible" type="text"/><br>
 
