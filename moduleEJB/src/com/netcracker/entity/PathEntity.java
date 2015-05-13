@@ -18,8 +18,9 @@ public class PathEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATH_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
-	@Column(name = "order_id", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger orderId;
+	@ManyToOne
+	@JoinColumn(name = "order_id", referencedColumnName = "id")
+	private OrderEntity orderEntity;
 	@Basic
 	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger startX;
@@ -53,20 +54,15 @@ public class PathEntity {
 	@OneToMany(mappedBy = "pathByNextPathId")
 	private Collection<PathEntity> pathsById;
 
+	public PathEntity() {
+	}
+
 	public BigInteger getId() {
 		return id;
 	}
 
 	public void setId(BigInteger id) {
 		this.id = id;
-	}
-
-	public BigInteger getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(BigInteger orderId) {
-		this.orderId = orderId;
 	}
 
 	public BigInteger getStartX() {
@@ -191,5 +187,13 @@ public class PathEntity {
 		result = 31 * result + (length != null ? length.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
+	}
+
+	public OrderEntity getOrderEntity() {
+		return orderEntity;
+	}
+
+	public void setOrderEntity(OrderEntity orderEntity) {
+		this.orderEntity = orderEntity;
 	}
 }

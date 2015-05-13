@@ -22,7 +22,8 @@ public class OrderEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
-
+	@OneToMany(mappedBy="orderEntity")
+	private Collection<PathEntity> pathEntities;
 	@ManyToOne
 	@JoinColumn(name = "customer_refuse_cause_id", referencedColumnName = "id")
 	private RefuseCauseByCustomerEntity refuseCauseByCustomerEntity;
@@ -410,5 +411,13 @@ public class OrderEntity {
 		result = 31 * result + (totalMultiplier != null ? totalMultiplier.hashCode() : 0);
 		result = 31 * result + (finalPrice != null ? finalPrice.hashCode() : 0);
 		return result;
+	}
+
+	public Collection<PathEntity> getPathEntities() {
+		return pathEntities;
+	}
+
+	public void setPathEntities(Collection<PathEntity> pathEntities) {
+		this.pathEntities = pathEntities;
 	}
 }
