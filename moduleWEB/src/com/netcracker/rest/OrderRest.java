@@ -85,7 +85,7 @@ public class OrderRest {
 
 		pathEntities.add(firstPathEntity);
 
-		for (int i = 1; i < orderJson.getToAddress().length - 1; i++) {
+		for (int i = 0; i < orderJson.getToAddress().length - 1; i++) {
 			PathEntity pathEntity = new PathEntity();
 			pathEntity.setLength(new BigDecimal(orderJson.getTotalLength()));
 			pathEntity.setPrice(new BigDecimal("999.99"));//TODO Replace with real Price
@@ -97,9 +97,11 @@ public class OrderRest {
 			pathEntity.setEndAddress(orderJson.getToAddress()[i + 1]);
 			pathEntity.setEndX(new BigDecimal(orderJson.getToX()[i + 1]));
 			pathEntity.setEndY(new BigDecimal(orderJson.getToY()[i + 1]));
+			pathEntity.setOrderEntity(orderEntity);
 
 			pathEntities.add(pathEntity);
-			pathEntities.get(i - 1).setPathByNextPathId(pathEntity);
+
+			pathEntities.get(i).setPathByNextPathId(pathEntity);
 		}
 
 		orderEntity.setPathEntities(pathEntities);

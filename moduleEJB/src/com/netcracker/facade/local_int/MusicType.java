@@ -4,6 +4,7 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.MusicTypeEntity;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public interface MusicType {
@@ -22,4 +23,5 @@ public interface MusicType {
 	public int count();
 
 	MusicTypeEntity findByName(String name);
+	MusicTypeEntity findById(BigInteger id);
 }
