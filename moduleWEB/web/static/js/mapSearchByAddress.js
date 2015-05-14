@@ -50,7 +50,7 @@ function makeSearch(value, resultx,resulty){
             checkZoomRange: true // проверяем наличие тайлов на данном масштабе.
         });
     });
-    if (document.getElementById('fromAddress').value!='' && document.getElementById('toAddress').value!=''){
+    if (document.getElementById('fromAddress').value!='' && document.getElementById('toAddress0').value!=''){
         buildPath();
     }
     return false;
@@ -62,7 +62,7 @@ function buildPath(){
             return false;
     });
     var fromPoint=document.getElementById('fromAddress').value;
-    var toPoint=document.getElementById('toAddress').value;
+    var toPoint=document.getElementById('toAddress0').value;
     myPath= new ymaps.route([
         fromPoint,
         toPoint

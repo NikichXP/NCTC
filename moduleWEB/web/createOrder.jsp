@@ -22,7 +22,7 @@
   <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(document.getElementById('fromAddress').value, document.getElementById('fromX'), document.getElementById('fromY'))"/><br>
   <input type="text" id="fromX" hidden value = "1"/>
   <input type="text" id="fromY" hidden value = "1"/>
-  <input type="text" id="toAddress" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress').value, document.getElementById('toX0'), document.getElementById('toY0'))"/><br>
+  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress0').value, document.getElementById('toX0'), document.getElementById('toY0'))"/><br>
   <input type="text" id="toX0" hidden value = "2"/>
   <input type="text" id="toY0" hidden value = "2"/>
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
