@@ -16,9 +16,27 @@ import javax.mail.internet.MimeMessage;
 
 public class Mail {
 
+    //A LOT OF SHIT BELOW!!!!
+
     private final static String username = "nctc.taxi.service@gmail.com";
     private final static String password = "9asdfq00"; //Special password for an application
 
+    private final static String DASHBOARD_ADDR = "students2015.cloudapp.net/user/dashboard"; //TODO Set normal address for dashboard.
+    /* Constant mail patterns */
+    private final static String LOGINMSG = "Hello, dear user, to validate your e-mail click the link below:\n https://trello.com/c/C7eCyla3/21-tasks-mandatory";
+    private final static String CLIENTNOTIFY1 = "Your order changed status to \"in progress\". You can see all your orders in dashboard:" +
+             DASHBOARD_ADDR + " or link below to see full details: ";
+
+
+
+
+    public static String test2 () {
+        return testSend("nikichx2@gmail.com", "someTheme", LOGINMSG);
+    }
+
+    public static String notifyUser (String email, String orderId) {
+        return "not yet ready";
+    }
     public static String testSend(String email, String theme, String text) {
 
         Properties props = new Properties();
