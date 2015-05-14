@@ -57,22 +57,27 @@ function makeSearch(element) {
         //});
     });
     if (document.getElementById('fromAddress').value != '' && document.getElementById('toAddress0').value != '') {
-        buildPath();
+        buildPath(element.id.slice(-1));
     }
     return false;
 }
 
-function buildPath() {
+function buildPath(index) {
     myMap.geoObjects.each(function (geoObject) {
         myMap.geoObjects.remove(geoObject);
         return false;
     });
-    var fromPoint=document.getElementById('fromAddress').value;
-    var toPoint=document.getElementById('toAddress0').value;
-    myPath= new ymaps.route([
-        fromPoint,
-        toPoint
-    ], {
+    var pointsArray = [];
+    pointsArray.push(document.getElementById('fromAddress').value);
+    alert("from array " + pointsArray[0]);
+
+    for( var i = 0; i <= index; i++) {
+        pointsArray.push(document.getElementById('toAddress' + i).value);
+        alert(pointsArray);
+    }
+    myPath= new ymaps.route(
+        pointsArray
+    , {
         // Router options
         mapStateAutoApply: true // automatically position the map
     }).then(function (route) {
