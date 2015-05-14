@@ -71,7 +71,7 @@ public class OrderRest {
 		List<PathEntity> pathEntities = new LinkedList<>();
 
 		PathEntity firstPathEntity = new PathEntity();
-		firstPathEntity.setLength(new BigDecimal("999"));//TODO Replace with real Length
+		firstPathEntity.setLength(new BigDecimal(orderJson.getTotalLength()));
 		firstPathEntity.setPrice(new BigDecimal("999.99"));//TODO Replace with real Price
 
 		firstPathEntity.setStartAddress(orderJson.getFromAddress());
@@ -87,7 +87,7 @@ public class OrderRest {
 
 		for (int i = 1; i < orderJson.getToAddress().length - 1; i++) {
 			PathEntity pathEntity = new PathEntity();
-			pathEntity.setLength(new BigDecimal("999.99"));//TODO Replace with real Length
+			pathEntity.setLength(new BigDecimal(orderJson.getTotalLength()));
 			pathEntity.setPrice(new BigDecimal("999.99"));//TODO Replace with real Price
 
 			pathEntity.setStartAddress(orderJson.getToAddress()[i]);
