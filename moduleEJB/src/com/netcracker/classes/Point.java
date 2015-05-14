@@ -26,4 +26,16 @@ public class Point {
 	public BigDecimal getY() {
 		return y;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(address)
+				.append(": X = ")
+				.append(x)
+				.append("; Y = ")
+				.append(y)
+				.append(";");
+		return sb.toString();
+	}
 }

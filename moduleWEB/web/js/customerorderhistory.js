@@ -10,7 +10,6 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
             drawTable(obj.orderHistory, "#historyOrderTable");
         },
         error: function (jqXHR, textStatus, errorThrown) {

@@ -45,9 +45,9 @@ public class UserDashboardRest {
         for (OrderEntity orderEntity : list) {
             List<Point> points = order.getFirstAndLastPoints(orderEntity);
             sb.append("{\"startOrder\":\"")
-                    .append(points.get(0))
+                    .append(points.get(0).toString())
                     .append("\",\"endOrder\":\"")
-                    .append(points.get(1))
+                    .append(points.get(1).toString())
                     .append("\",\"price\":\"")
                     .append(orderEntity.getFinalPrice())
                     .append("\" },");
