@@ -9,7 +9,7 @@ $("#order-history-submit").click(function(){
 });
 
 $("#create-order-submit").click(function(){
-	document.location.href = "createOrderTest.jsp";
+	document.location.href = "createOrder.jsp";
 });
 
 function setTableHistoryOrder(url) {
