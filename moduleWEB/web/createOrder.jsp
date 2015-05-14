@@ -22,9 +22,11 @@
   <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(document.getElementById('fromAddress').value, document.getElementById('fromX'), document.getElementById('fromY'))"/><br>
   <input type="text" id="fromX" hidden value = "1"/>
   <input type="text" id="fromY" hidden value = "1"/>
-  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress0').value, document.getElementById('toX0'), document.getElementById('toY0'))"/><br>
+  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress0').value, document.getElementById('toX0'), document.getElementById('toY0'))"/>
   <input type="text" id="toX0" hidden value = "2"/>
   <input type="text" id="toY0" hidden value = "2"/>
+  <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
+
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
   <input id="timeRequested" style="visibility: visible" type="text"/><br>
 
@@ -56,6 +58,57 @@
   jQuery(function($){
     $("#timeRequested").mask("99/99/9999 99:99",{placeholder:"dd/mm/yyyy hh:mm"});
   });
+  var counter = 1;
+  var isDeleteExists = false;
+  function createToAddress() {
+      var outer = document.getElementById("order-form");
+      var br = document.createElement("br");
+      br.setAttribute("id", "br"+counter);
+
+      var input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("id", "toAddress"+counter);
+      input.setAttribute("placeholder", "To address "+counter);
+
+      var input2 = document.createElement("input");
+      input2.setAttribute("hidden", "hidden");
+      input2.setAttribute("type", "text");
+      input2.setAttribute("id", "toX"+counter);
+
+      var input3 = document.createElement("input");
+      input3.setAttribute("hidden", "hidden");
+      input3.setAttribute("type", "text");
+      input3.setAttribute("id", "toY"+counter);
+
+      var addressAdder = document.getElementById("addressAdder");
+      if (!isDeleteExists) {
+          var addressRemover = document.createElement("input");
+          addressRemover.setAttribute("id", "addressRemover");
+          addressRemover.setAttribute("type", "button");
+          addressRemover.setAttribute("onclick", "deleteToAddress()");
+          addressRemover.setAttribute("value", "Remove");
+          outer.insertBefore(addressRemover, addressAdder);
+          isDeleteExists = true;
+      }
+      var  addressRemover = document.getElementById("addressRemover");
+      outer.insertBefore(br, addressRemover);
+      outer.insertBefore(input, addressRemover);
+      outer.insertBefore(input2, addressRemover);
+      outer.insertBefore(input3, addressRemover);
+      counter++;
+  }
+
+  function deleteToAddress() {
+      document.getElementById("br" + (counter - 1)).remove();
+      document.getElementById("toAddress" + (counter - 1)).remove();
+      document.getElementById("toX" + (counter - 1)).remove();
+      document.getElementById("toY" + (counter - 1)).remove();
+      counter--;
+      if (counter == 1) {
+          document.getElementById("addressRemover").remove();
+          isDeleteExists = false;
+      }
+  }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
