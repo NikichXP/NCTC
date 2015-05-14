@@ -63,15 +63,15 @@ function makeSearch(element) {
 }
 
 function buildPath(index) {
+    myMap.geoObjects.removeAll();
     myMap.geoObjects.each(function (geoObject) {
         myMap.geoObjects.remove(geoObject);
         return false;
     });
     var pointsArray = [];
     pointsArray.push(document.getElementById('fromAddress').value);
-    alert("from array " + pointsArray[0]);
 
-    for( var i = 0; i <= index; i++) {
+    for(var i = 0; i <= index; i++) {
         pointsArray.push(document.getElementById('toAddress' + i).value);
         alert(pointsArray);
     }
@@ -86,15 +86,5 @@ function buildPath(index) {
     }, function (error) {
         alert("An error occurred: " + error.message);
     });
-    //var pointsArray = [];
-    //pointsArray.push(document.getElementById('fromAddress').value);
-    //alert("from array " + pointsArray[0]);
-    //var i = 0;
-    //alert("before while: " + document.getElementById('toAddress'+i).value);
-    //while (document.getElementById('toAddress'+i).value != "") {
-    //    pointsArray.push(document.getElementById('toAddress' + i).value);
-    //    i++;
-    //    alert("IN WHILE");
-    //}
     return false;
 }

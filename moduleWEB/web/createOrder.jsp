@@ -18,12 +18,12 @@
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
   <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
-  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(this)"/><br>
-  <input type="text" id="fromX" disabled value = "1"/><br>
-  <input type="text" id="fromY" disabled value = "1"/><br>
-  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(this)"/><br>
-  <input type="text" id="toX0" disabled value = "2"/><br>
-  <input type="text" id="toY0" disabled value = "2"/><br>
+  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(this)"/>
+  <input type="text" id="fromX" disabled/>
+  <input type="text" id="fromY" disabled/><br>
+  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(this)"/>
+  <input type="text" id="toX0" disabled/>
+  <input type="text" id="toY0" disabled/><br>
   <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
 
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
@@ -104,6 +104,7 @@
       document.getElementById("toX" + (counter - 1)).remove();
       document.getElementById("toY" + (counter - 1)).remove();
       counter--;
+      buildPath(counter - 1);
       if (counter == 1) {
           document.getElementById("addressRemover").remove();
           isDeleteExists = false;
