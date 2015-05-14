@@ -25,7 +25,7 @@ public class UserDashboardRest {
 
     @POST
     @Path("history")
-    public Response getUserDashboardData(UserJson userJson) {
+    public Response getUserDashboardData(String uuid) {
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (int i = 0; i < 10; i++) {
