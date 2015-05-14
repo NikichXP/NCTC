@@ -12,19 +12,18 @@
   <script src="js/jquery.js"></script>
   <script src="js/jquery.maskedinput.js"></script>
   <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"> </script>
-  <script src="static/js/mapSearchByAddress.js" type="text/javascript"></script>
 </head>
 <body onload="getMusicType()">
 <div id="order-form" style="float: left;">
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
   <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
-  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(document.getElementById('fromAddress').value, document.getElementById('fromX'), document.getElementById('fromY'))"/><br>
-  <input type="text" id="fromX" hidden value = "1"/>
-  <input type="text" id="fromY" hidden value = "1"/>
-  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress0').value, document.getElementById('toX0'), document.getElementById('toY0'))"/>
-  <input type="text" id="toX0" hidden value = "2"/>
-  <input type="text" id="toY0" hidden value = "2"/>
+  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(this)"/><br>
+  <input type="text" id="fromX" disabled value = "1"/><br>
+  <input type="text" id="fromY" disabled value = "1"/><br>
+  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(this)"/><br>
+  <input type="text" id="toX0" disabled value = "2"/><br>
+  <input type="text" id="toY0" disabled value = "2"/><br>
   <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
 
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
@@ -36,8 +35,8 @@
   <input type="radio" name="sex" data-value="Female">Female</input><br>
 
   Car class:<br>
-  <input type="radio" checked name="carClass" data-value="Basic">Regular</input><br><%--TODO get from DB--%>
-  <input type="radio" name="carClass" data-value="Premium">Elite</input><br>
+  <input type="radio" checked name="carClass" data-value="Basic">Basic</input><br><%--TODO get from DB--%>
+  <input type="radio" name="carClass" data-value="Premium">Premium</input><br>
 
   <p id="musicTypes"></p>
 
@@ -68,15 +67,16 @@
       var input = document.createElement("input");
       input.setAttribute("type", "text");
       input.setAttribute("id", "toAddress"+counter);
+      input.setAttribute("onchange", "makeSearch(this)");
       input.setAttribute("placeholder", "To address "+counter);
 
       var input2 = document.createElement("input");
-      input2.setAttribute("hidden", "hidden");
+      input2.setAttribute("disabled", "disabled");
       input2.setAttribute("type", "text");
       input2.setAttribute("id", "toX"+counter);
 
       var input3 = document.createElement("input");
-      input3.setAttribute("hidden", "hidden");
+      input3.setAttribute("disabled", "disabled");
       input3.setAttribute("type", "text");
       input3.setAttribute("id", "toY"+counter);
 
@@ -90,7 +90,7 @@
           outer.insertBefore(addressRemover, addressAdder);
           isDeleteExists = true;
       }
-      var  addressRemover = document.getElementById("addressRemover");
+      var addressRemover = document.getElementById("addressRemover");
       outer.insertBefore(br, addressRemover);
       outer.insertBefore(input, addressRemover);
       outer.insertBefore(input2, addressRemover);
@@ -110,6 +110,7 @@
       }
   }
 </script>
+<script src="static/js/mapSearchByAddress.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
 </body>
