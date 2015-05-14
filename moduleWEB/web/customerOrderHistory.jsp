@@ -75,4 +75,6 @@ blocks contain brief information about order-->
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
+
+<script src="js/customerorderhistory.js" type="text/javascript"></script>
 </body>
