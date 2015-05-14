@@ -22,7 +22,7 @@ function init () {
         zoom: 10
     });
 }
-function makeSearch(value, result){
+function makeSearch(value, resultx,resulty){
    // var value = document.getElementById("fromAddress0").value;
     console.log(value);
     ymaps.geocode(value, {
@@ -40,7 +40,8 @@ function makeSearch(value, result){
             coords = firstGeoObject.geometry.getCoordinates(),
         // Область видимости геообъекта.
             bounds = firstGeoObject.properties.get('boundedBy');
-        result.value=parseFloat(coords);
+        resultx.value=parseFloat(coords[0]);
+        resulty.value=parseFloat(coords[1]);
 
         // Добавляем первый найденный геообъект на карту.
         myMap.geoObjects.add(firstGeoObject);

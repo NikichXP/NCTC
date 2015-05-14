@@ -19,10 +19,10 @@
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
   <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
-  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(document.getElementById('fromAddress').value, document.getElementById('fromX'))"/><br>
+  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(document.getElementById('fromAddress').value, document.getElementById('fromX'), document.getElementById('fromY'))"/><br>
   <input type="text" id="fromX" hidden value = "1"/>
   <input type="text" id="fromY" hidden value = "1"/>
-  <input type="text" id="toAddress0" placeholder="To address"/><br>
+  <input type="text" id="toAddress" placeholder="To address" onchange="makeSearch(document.getElementById('toAddress').value, document.getElementById('toX0'), document.getElementById('toY0'))"/><br>
   <input type="text" id="toX0" hidden value = "2"/>
   <input type="text" id="toY0" hidden value = "2"/>
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
@@ -48,20 +48,8 @@
   Total length:&nbsp<input disabled type="text" id="totalLength"/><br>
   Total price:&nbsp<input disabled type="text" id="totalPrice"/><br>
 
-  <input type="button" id="basic-order-submit" value="Create test Order."/>
-</form>
-<form action="" method="get" onsubmit="return makeSearch(document.getElementById('fromAddress0').value, document.getElementById('fromCoord'))">
-  <input type="text" id="fromAddress0" placeholder="From address"/><br>
-  <input type="submit" style="display:none"/>
-</form>
-
-<form action="" method="get" onsubmit="return makeSearch(document.getElementById('toAddress0').value, document.getElementById('toCoord'))">
-  <input type="text" id="toAddress0" placeholder="To address"/><br>
-  <input type="submit" style="display:none"/>
-</form>
-<input type="text" id="fromCoord" hidden/>
-<input type="text" id="toCoord" hidden/>
-<div id="map" style="width:600px; height:600px">MAP</div>
+  <input type="button" id="basic-order-submit" value="Create test Order."/> <br>
+<div id="map" style="width:600px; height:600px"></div>
 <br><br>
 <script>
   jQuery(function($){
