@@ -17,7 +17,7 @@ function checkCookie(name) {
     }
     else {
         // do cookie exists stuff
-        alert(getCookie(name));
+        //alert(getCookie(name));
     }
 }
 

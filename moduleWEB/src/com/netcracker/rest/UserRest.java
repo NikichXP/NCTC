@@ -193,19 +193,29 @@ public class UserRest {
         return Response.status(201).entity("Email confirmed").build();
     }
 
-
     @POST
-    @Path("cookie_user")
-    public Response getUserDataByUUID(String uuidJson) {
-        UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(uuidJson));
-        UserDataJson udj = new UserDataJson();
-        udj.setName(userEntity.getFirstName());
-        udj.setEmail(userEntity.getEmail());
-        udj.setPhone(userEntity.getPhone());
-        if(userEntity != null)
-            return Response.status(200).entity(udj.toString()).build();
-        else
-            return Response.status(400).build();
+    @Path("getUserDataByUuid")
+    @Consumes("text/plain")
+    public Response getUserDataByUUID(String uuid) {
+        UserEntity userEntity = user.findByUuid(uuid);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"userData\":[");
+
+        sb.append("{\"name\":\"")
+                .append(userEntity.getFirstName())
+                .append("\",\"phone\":\"")
+                .append(userEntity.getPhone())
+                .append("\",\"myMail\":\"")
+                .append(userEntity.getEmail())
+                .append("\" },");
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (userEntity != null) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
     }
 
 }

@@ -32,9 +32,9 @@
   <!--RENAME CLASS AND ID ACCORDING TO TEAM CONVENTION-->
   <div class="header-text">
     <!--HARDCODED for now. AngularJS script will operate this section later-->
-    <h1 id="name-line">Hello, User!</h1>
-    <h5 id="phone-line">default phone number: 0937776661</h5>
-    <h5 id="email-line">default e-mail: user_ko@gmail.com</h5>
+    <h1 id="name-line"></h1>
+    <h5 id="phone-line"></h5>
+    <h5 id="email-line"></h5>
   </div>
   <!--RENAME CLASS AND ID ACCORDING TO TEAM CONVENTION-->
   <div class="header-logout" id="logout-button">
@@ -73,4 +73,6 @@ blocks contain brief information about order-->
 <script src="js/bootstrap.min.js"></script>
 <!--script check life cookie, end delete cookie on click logout-button-->
 <script src="js/cookie.js" type="text/javascript"></script>
+<!--set information about user-->
+<script src="js/userdatabyuuid.js" type="text/javascript"></script>
 </body>
