@@ -75,6 +75,4 @@ blocks contain brief information about order-->
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--script for menu batton-->
 <script src="js/admin-dashboard.js" type="text/javascript"></script>
-<!--handmade sript-->
-<script src="js/customer-script.js"></script>
 </body>

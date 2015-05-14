@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Juger
   Date: 14.05.2015
-  Time: 18:16
+  Time: 18:11
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -45,28 +45,32 @@
 <!--Main section. On this particular page Taxi Orders appear in this section in form of divs.
 blocks contain brief information about order-->
 <div class="mainSection" id="customerOrdersPanel">
-  <h4>CURRENT ORDERS:</h4>
+  <div class="col-md-12 mt">
+
+    <h4> History orders</h4>
+    <hr>
+    <table id="historyOrderTable" class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>StartOrder</th>
+        <th>EndOrder</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+
 </div>
+
 
 <!--footer-->
 <div class="footer">
 
-  <div class="button" id="leftButton">
-    HISTORY
-  </div>
-  <div class="button" id="centralButton">
-    MAKE ORDER
-  </div>
-  <div class="button" id="rightButton">
-    SETTINGS
-  </div>
-
 </div>
 <!--scripts provided by Bootstrap-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<!--handmade sript-->
-<script src="js/customer-script.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <!--script check life cookie, end delete cookie on click logout-button-->
 <script src="js/cookie.js" type="text/javascript"></script>
 </body>
