@@ -15,7 +15,7 @@
   <script src="static/js/mapSearchByAddress.js" type="text/javascript"></script>
 </head>
 <body onload="getMusicType()">
-<form id="order-form">
+<div id="order-form" style="float: left;">
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
   <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
@@ -48,9 +48,10 @@
   Total length:&nbsp<input disabled type="text" id="totalLength"/><br>
   Total price:&nbsp<input disabled type="text" id="totalPrice"/><br>
 
-  <input type="button" id="basic-order-submit" value="Create test Order."/> <br>
-<div id="map" style="width:600px; height:600px"></div>
-<br><br>
+  <input type="button" id="basic-order-submit" value="Create test Order."/>
+</div>
+<div id="map" style="width:600px; height:600px; float: right;"></div>
+
 <script>
   jQuery(function($){
     $("#timeRequested").mask("99/99/9999 99:99",{placeholder:"dd/mm/yyyy hh:mm"});
