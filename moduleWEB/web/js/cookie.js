@@ -2,6 +2,11 @@ $(document).ready(function(){
     checkCookie("uuid");
 });
 
+$("#logout-button").click(function(){
+    deleteAllCookies();
+});
+
+
 
 function checkCookie(name) {
     var myCookie = getCookie(name);
@@ -34,7 +39,6 @@ function getCookie(name) {
     }
     return unescape(dc.substring(begin + prefix.length, end));
 }
-
 
 function deleteAllCookies() {
     var cookies = document.cookie.split(";");
