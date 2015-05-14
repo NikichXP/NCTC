@@ -10,6 +10,10 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
+            //alert(obj.orderHistory[0].status);
+            //alert(obj.orderHistory[0].startOrder)
+            //alert(obj.orderHistory[0].endOrder)
+            //alert(obj.orderHistory[0].price)
             drawTable(obj.orderHistory, "#historyOrderTable");
         },
         error: function (jqXHR, textStatus, errorThrown) {

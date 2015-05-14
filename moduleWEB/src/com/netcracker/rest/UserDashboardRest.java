@@ -48,6 +48,8 @@ public class UserDashboardRest {
                     .append(points.get(0).toString())
                     .append("\",\"endOrder\":\"")
                     .append(points.get(1).toString())
+                    .append("\",\"status\":\"")
+                    .append("queued")
                     .append("\",\"price\":\"")
                     .append(orderEntity.getFinalPrice())
                     .append("\" },");
