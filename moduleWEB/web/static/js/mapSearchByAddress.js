@@ -35,7 +35,7 @@ function makeSearch(value, resultx,resulty){
         results: 1 // Если нужен только один результат, экономим трафик пользователей
     }).then(function (res) {
         // Выбираем первый результат геокодирования.
-        var firstGeoObject = res.geoObjects.get(0),
+        var firstGeoObject = myMap.geoObjects.get(0),
         // Координаты геообъекта.
             coords = firstGeoObject.geometry.getCoordinates(),
         // Область видимости геообъекта.
@@ -57,9 +57,10 @@ function makeSearch(value, resultx,resulty){
 }
 
 function buildPath(){
-    if (myPath!=undefined){
-        myMap.geoObjects.remove(myPath);
-    }
+    myMap.geoObjects.each(function (geoObject) {
+           myMap.geoObjects.remove(geoObject);
+            return false;
+    });
     var fromPoint=document.getElementById('fromAddress').value;
     var toPoint=document.getElementById('toAddress').value;
     myPath= new ymaps.route([
