@@ -1,5 +1,3 @@
-<%@ page import="com.netcracker.facade.impl.UserFacade" %>
-<%@ page import="com.netcracker.entity.UserEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,40 +20,7 @@
     <![endif]-->
 </head>
 
-
 <body>
-<%--
-
-<%!
-    Cookie[] c;
-    boolean flag;
-%>
-<%
-    flag = false;
-    try {
-        c = request.getCookies();
-        for (Cookie cook:c) {
-            if (cook.getName().equals("uuid")) {
-                UserFacade uf = new UserFacade();
-                out.print(uf.toString());
-                UserEntity ue = uf.findByUuid(cook.getName());
-                //TODO: Victor, please make normal validation (now it returns null)
-
-                //TODO: I will send redirect after normal validation (Nikita)
-                /*
-                responce.sendRedirect("order.jsp");
-                 */
-                out.print(ue.toString());
-            }
-        }
-        if (!flag) {
-            out.write("noFlag");
-        }
-    } catch (Exception e) {
-        out.write(e.toString());
-    }
-%>
---%>
 
 <div class="container">
     <div class="row">
