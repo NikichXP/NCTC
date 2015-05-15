@@ -2,32 +2,19 @@ package com.netcracker.rest.utils;
 
 /* 23:01 09.05.2015 by Viktor Taranenko */
 
+import javax.crypto.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-
-/**
- *
- * @author Cloud
- */
-
 
 public final class SecuritySettings {
 
 	private final static class MySecretKey implements SecretKey {
 
-		private byte[] key = new byte[]{0xC, 0xA, 0xF, 0xE, 0xB, 0xA, 0xB, 0xE}; // ключ
-		// не должен иметь длину более 8 байт, для безопасного шифрования его
-		// необходимо изменить
+		private byte[] key = new byte[]{0xC, 0xA, 0xF, 0xE, 0xB, 0xA, 0xB, 0xE}; // encryption key
 
 		public String getAlgorithm() {
 			return "DES";
@@ -54,20 +41,16 @@ public final class SecuritySettings {
 			dcipher = Cipher.getInstance("DES");
 			ecipher.init(Cipher.ENCRYPT_MODE, key);
 			dcipher.init(Cipher.DECRYPT_MODE, key);
-		} catch (InvalidKeyException ex) {
-			Logger.getLogger(SecuritySettings.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (NoSuchAlgorithmException ex) {
-			Logger.getLogger(SecuritySettings.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (NoSuchPaddingException ex) {
+		} catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException ex) {
 			Logger.getLogger(SecuritySettings.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
 
 	/**
-	 * Функция шифрования
-	 * @param str строка открытого текста
-	 * @return зашифрованная строка в формате Base64
+	 * encrypt function
+	 * @param str - String to encrypt
+	 * @return encrypted String in Base64 format
 	 */
 	public static String encrypt(String str) {
 		try {
@@ -85,9 +68,9 @@ public final class SecuritySettings {
 	}
 
 	/**
-	 * Функция расшифрования
-	 * @param str зашифрованная строка в формате Base64
-	 * @return расшифрованная строка
+	 * decrypt function
+	 * @param str - String to encrypt
+	 * @return deccrypted String
 	 */
 	public static String decrypt(String str)  {
 		try {

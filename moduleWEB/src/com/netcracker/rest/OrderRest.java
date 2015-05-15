@@ -1,14 +1,13 @@
 package com.netcracker.rest;
 
 import com.netcracker.classes.OrderJson;
-import com.netcracker.entity.*;
+import com.netcracker.entity.OrderEntity;
+import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.*;
-import com.netcracker.rest.utils.SecuritySettings;
-import com.netcracker.service.Mail;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
@@ -16,13 +15,15 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Juger on 05.05.2015.
  */
 
-@Stateless
 @Path("order")
 public class OrderRest {
 	@EJB

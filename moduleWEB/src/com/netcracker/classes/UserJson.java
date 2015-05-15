@@ -1,12 +1,9 @@
 package com.netcracker.classes;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * Created by NikichXP on 05.05.2015.
  */
-public class UserJson implements Serializable {
+public class UserJson {
 
     private String cred;
 

@@ -1,12 +1,8 @@
 package com.netcracker.classes;
 
-import java.io.Serializable;
-import java.lang.Override;
-import java.lang.String;
-import java.lang.StringBuilder;
 import java.util.Arrays;
 
-public class OrderJson implements Serializable {
+public class OrderJson {
 
     private String id;
     private String publicToken;

@@ -4,7 +4,6 @@ import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.facade.local_int.MusicType;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Ubuntu on 12.05.2015.
  */
-@Stateless
+
 @Path("music")
 public class MusicRest {
 

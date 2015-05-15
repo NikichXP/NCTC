@@ -1,9 +1,6 @@
 package com.netcracker.rest;
 
-import com.netcracker.classes.UUIDJson;
-import com.netcracker.classes.UserDataJson;
 import com.netcracker.classes.UserJson;
-import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.entity.UserAccessLevelEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
@@ -13,19 +10,21 @@ import com.netcracker.service.Mail;
 import com.netcracker.service.SessionHandler;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * User facade for ReST
  *
  * @author NikichXP
  */
-@Stateless
+
 @Path("user")
 public class UserRest {
     @EJB

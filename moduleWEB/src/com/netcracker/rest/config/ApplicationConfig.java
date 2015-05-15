@@ -5,10 +5,11 @@
  */
 package com.netcracker.rest.config;
 
-import java.util.Set;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
 import com.netcracker.rest.*;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+import java.util.Set;
 
 /**
  *
@@ -16,14 +17,14 @@ import com.netcracker.rest.*;
  */
 @ApplicationPath("api")
 public class ApplicationConfig extends Application {
- 
+
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
         return resources;
     }
- 
+
     /**
      * Method contains java classes which are included to ReST service
      */
@@ -34,5 +35,5 @@ public class ApplicationConfig extends Application {
         resources.add(UserDashboardRest.class);
         resources.add(TestRest.class);
     }
-     
+
 }

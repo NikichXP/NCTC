@@ -1,21 +1,16 @@
 package com.netcracker.rest;
 
 import com.netcracker.classes.Point;
-import com.netcracker.classes.UserDashboardJson;
-import com.netcracker.classes.UserJson;
-import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
-import com.netcracker.entity.UserEntity;
-import com.netcracker.facade.impl.OrderStateFacade;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
 import com.netcracker.facade.local_int.User;
-import com.netcracker.service.SessionHandler;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -23,7 +18,6 @@ import java.util.List;
  * Created by Juger on 12.05.2015.
  */
 
-@Stateless
 @Path("user_dash")
 public class UserDashboardRest {
 

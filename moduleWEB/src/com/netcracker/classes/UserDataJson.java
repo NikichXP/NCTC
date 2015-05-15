@@ -1,12 +1,9 @@
 package com.netcracker.classes;
 
-import java.io.Serializable;
-import java.util.Arrays;
-
 /**
  * Created by Juger on 13.05.2015.
  */
-public class UserDataJson implements Serializable{
+public class UserDataJson {
 
     private String name;
     private String phone;
