@@ -49,7 +49,7 @@
   Total length:&nbsp<input disabled type="text" id="totalLength"/><br>
   Total price:&nbsp<input disabled type="text" id="totalPrice"/><br>
 
-  <input type="button" id="basic-order-submit" value="Create test Order." onclick="goToCostumerDashboard()"/>
+  <input type="button" id="basic-order-submit" value="Create test Order."/>
 </div>
 <div id="map" style="width:600px; height:600px; float: right;"></div>
 
