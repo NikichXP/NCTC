@@ -1,6 +1,4 @@
-$(document).ready(function(){
-    checkCookie("uuid");
-});
+checkCookie("uuid");
 
 $("#logout-button").click(function(){
     deleteAllCookies();
@@ -37,7 +35,7 @@ function getCookie(name) {
             end = dc.length;
         }
     }
-    return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
 }
 
 function deleteAllCookies() {

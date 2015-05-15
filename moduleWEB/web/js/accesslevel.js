@@ -41,7 +41,7 @@ function getCookie(name) {
             if (end == -1) {
                 end = cookie.length;
             }
-            setStr = unescape(cookie.substring(offset, end));
+            setStr = decodeURI(cookie.substring(offset, end));
         }
     }
     return (setStr);
