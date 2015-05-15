@@ -50,7 +50,8 @@ $("#basic-order-submit").click(function () {
         data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert(textStatus + "\n" + data);
+            alert("Order successfully creared.\nOrder details were sent to your email.");
+            document.location.href = "customer.jsp";
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Bad response from server.");
@@ -63,12 +64,9 @@ function getMusicType() {
         method: 'POST',
         url: 'api/music/type',
         dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
+        success: function (data) {
             var obj = JSON.parse(data);
-            var str = "";
-            //str = str + obj.musicType[i].id + " "
-            //    + obj.musicType[i].name;
-            str = str + 'Music type:&nbsp<select id="musicType">';
+            var str = 'Music type:&nbsp<select id="musicType">';
             for (var i = 0; i < obj.musicType.length; i++) {
                 str = str + '<option value="' + obj.musicType[i].id
                     +'">' + obj.musicType[i].name + '</option>';
@@ -76,7 +74,7 @@ function getMusicType() {
                 str = str + '</select><br>';
             document.getElementById("musicTypes").innerHTML = str;
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert("Bad response from server.\n" + jqXHR.responseText);
         }
     })
@@ -97,7 +95,6 @@ var dateTime = /^([1-9]|([012][0-9])|(3[01]))\/([0]?[1-9]|1[012])\/\d\d\d\d [012
 var seatsCount = /^\d+$/;
 
 function validateBasicOrderData() {
-    //validates login credentials (e-mail or phone number) field
     if(getCookie("uuid").length != 36){
         alert("Wrong uuid cookie");
         return false;
@@ -152,7 +149,7 @@ function getCookie(name) {
         offset = cookie.indexOf(search);
         if (offset != -1) {
             offset += search.length;
-            end = cookie.indexOf(";", offset)
+            end = cookie.indexOf(";", offset);
             if (end == -1) {
                 end = cookie.length;
             }
@@ -160,8 +157,4 @@ function getCookie(name) {
         }
     }
     return(setStr);
-}
-
-function goToCostumerDashboard(){
-    document.location.href = "customer.jsp";
 }
