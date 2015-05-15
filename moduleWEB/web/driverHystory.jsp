@@ -77,7 +77,7 @@ blocks contain brief information about order-->
 
 <!--footer-->
 <div class="footer">
-  <div class="button" id="centralButtonBack">
+  <div class="button" id="centralButtonBack" onclick="goBack()">
     BACK
   </div>
 </div>

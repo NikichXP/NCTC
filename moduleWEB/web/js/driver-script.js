@@ -33,3 +33,6 @@ $(".mainSection").on('click', 'div.orderPlate', function(event) {
     $(this).remove();
 });
 
+function goBack () {
+	document.location.href = 'driver.jsp'
+}
