@@ -161,3 +161,7 @@ function getCookie(name) {
     }
     return(setStr);
 }
+
+function goToCostumerDashboard(){
+    document.location.href = "customer.jsp";
+}
