@@ -56,4 +56,10 @@ function drawBody(rowData, table) {
     row.append($("<td>" + rowData.price + "</td></tr></tbody>"));
 }
 
+function goBack(){
+
+    document.location.href = "customer.jsp"
+
+}
+
 
