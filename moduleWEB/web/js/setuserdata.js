@@ -21,8 +21,8 @@ function setUserDataInPlaceHolder(){
 }
 
 function setData(data){
-    document.getElementById("contactName").placeholder = data[0].name;
-    document.getElementById("contactPhone").placeholder = data[0].phone;
+    document.getElementById("contactName").value = data[0].name;
+    document.getElementById("contactPhone").value = data[0].phone;
 }
 
 function getCookie(name) {
