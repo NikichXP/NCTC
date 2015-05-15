@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    setUserDataInHeader();
+    setUserDataInPlaceHolder();
 });
 
-function setUserDataInHeader(){
+function setUserDataInPlaceHolder(){
     var uuid = getCookie("uuid");
     $.ajax({
         method: 'POST',
@@ -21,9 +21,8 @@ function setUserDataInHeader(){
 }
 
 function setData(data){
-    document.getElementById("name-line").innerHTML = "Hello " + data[0].name;
-    document.getElementById("phone-line").innerHTML = "phone " + data[0].phone;
-    document.getElementById("email-line").innerHTML = "email " + data[0].myMail;
+    document.getElementById("contactName").placeholder = data[0].name;
+    document.getElementById("contactPhone").placeholder = data[0].phone;
 }
 
 function getCookie(name) {

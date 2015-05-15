@@ -10,6 +10,10 @@ $("#centralButton").click(function () {
 	applyStyle (newOrderPlate);
 	document.getElementById('customerOrdersPanel').appendChild(newOrderPlate);
 });
+
+$("#leftButton").click(function(){
+	document.location.href = "driverHystory.jsp";
+})
 //Apply style to dynamically creater divs (Order Blocks).
 //TO BE COMPLETED. Style constant must be developed
 function applyStyle (elementToStyle){
