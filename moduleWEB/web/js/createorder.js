@@ -124,7 +124,7 @@ function validateBasicOrderData() {
         alert("Select distinition address.");
         return false;
     }
-    if(!$("#asSoonAsPossible").val() && !validateNames($("#timeRequested").val(), dateTime)){
+    if(!$("#asSoonAsPossible").is(':checked') && !validateNames($("#timeRequested").val(), dateTime)){
         alert("Wrong requested time");
         return false;
     }
