@@ -60,16 +60,20 @@
   var counter = 1;
   var isDeleteExists = false;
   function createToAddress() {
+      if(($("#fromAddress").attr("disabled") == "disabled") && ($("#toAddress0").attr("disabled") == "disabled")){
       var outer = document.getElementById("order-form");
       var br = document.createElement("br");
       br.setAttribute("id", "br"+counter);
 
       var input = document.createElement("input");
       input.setAttribute("type", "text");
-      input.setAttribute("disabled", "disabled");
+//      input.setAttribute("disabled", "disabled");
       input.setAttribute("id", "toAddress"+counter);
       input.setAttribute("onchange", "makeSearch(this)");
       input.setAttribute("placeholder", "To address "+counter);
+
+
+
 
       var input2 = document.createElement("input");
       input2.setAttribute("disabled", "disabled");
@@ -97,6 +101,7 @@
       outer.insertBefore(input2, addressRemover);
       outer.insertBefore(input3, addressRemover);
       counter++;
+      } else {alert("Enter fromAddress and toAddress.")}
   }
 
   function deleteToAddress() {
