@@ -53,9 +53,11 @@ blocks contain brief information about order-->
       <thead>
       <tr>
         <th>#</th>
+        <th>Date</th>
         <th>StartOrder</th>
         <th>EndOrder</th>
         <th>Price</th>
+        <th>Status</th>
       </tr>
       </thead>
     </table>
@@ -78,5 +80,5 @@ blocks contain brief information about order-->
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
 
-<script src="js/customerorderhistory.js" type="text/javascript"></script>
+<script src="js/order-history-list.js" type="text/javascript"></script>
 </body>
