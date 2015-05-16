@@ -21,7 +21,7 @@
   <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(this)"/>
   <input type="text" id="fromX" disabled/>
   <input type="text" id="fromY" disabled/><br>
-  <input type="text" id="toAddress0" placeholder="To address" onchange="makeSearch(this)"/>
+  <input type="text" id="toAddress0" disabled placeholder="To address" onchange="makeSearch(this)"/>
   <input type="text" id="toX0" disabled/>
   <input type="text" id="toY0" disabled/><br>
   <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
@@ -66,6 +66,7 @@
 
       var input = document.createElement("input");
       input.setAttribute("type", "text");
+      input.setAttribute("disabled", "disabled");
       input.setAttribute("id", "toAddress"+counter);
       input.setAttribute("onchange", "makeSearch(this)");
       input.setAttribute("placeholder", "To address "+counter);
@@ -111,9 +112,9 @@
       }
   }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/setuserdata.js" type="text/javascript"></script>
 <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/createorder.js"></script>
 </body>
 </html>
