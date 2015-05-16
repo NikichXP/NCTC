@@ -25,7 +25,6 @@ public class OrderStateEntity {
 	@OneToMany(mappedBy="orderStateEntity")
 	private Collection<OrderEntity> orderEntities;
 
-	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 

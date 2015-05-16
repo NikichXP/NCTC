@@ -31,39 +31,30 @@ public class PathEntity {
 	@OneToMany(mappedBy = "nextPathEntity")
 	private Collection<PathEntity> nextPathEntities;
 
-	@Basic
 	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal startX;
 
-	@Basic
 	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal startY;
 
-	@Basic
 	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal endX;
 
-	@Basic
 	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal endY;
 
-	@Basic
 	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String startAddress;
 
-	@Basic
 	@Column(name = "end_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String endAddress;
 
-	@Basic
 	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
 	private boolean completed;
 
-	@Basic
 	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal length;
 
-	@Basic
 	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal price;
 

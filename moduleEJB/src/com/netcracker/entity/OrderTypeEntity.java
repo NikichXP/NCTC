@@ -24,7 +24,6 @@ public class OrderTypeEntity {
 	@OneToMany(mappedBy="orderTypeEntity")
 	private Collection<OrderEntity> orderEntities;
 
-	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 
@@ -61,7 +60,6 @@ public class OrderTypeEntity {
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		return !(name != null ? !name.equals(that.name) : that.name != null);
-
 	}
 
 	@Override

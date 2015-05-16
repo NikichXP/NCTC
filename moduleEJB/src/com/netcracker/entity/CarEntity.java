@@ -31,19 +31,15 @@ public class CarEntity {
 	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
 	private DriverCategoryEntity driverCategoryEntity;
 
-	@Basic
 	@Column(name = "model", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String model;
 
-	@Basic
 	@Column(name = "seats_count", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger seatsCount;
 
-	@Basic
 	@Column(name = "licence_plate", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String licencePlate;
 
-	@Basic
 	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
 	private Date dateManufactured;
 

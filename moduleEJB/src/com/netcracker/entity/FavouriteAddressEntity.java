@@ -18,7 +18,6 @@ public class FavouriteAddressEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
-	@Basic
 	@Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String address;
 

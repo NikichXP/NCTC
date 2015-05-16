@@ -29,11 +29,9 @@ public class CarClassEntity {
 	@OneToMany(mappedBy = "carClassEntity")
 	private Collection<CarEntity> carEntities;
 
-	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 
-	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal tariffMultiplier;
 

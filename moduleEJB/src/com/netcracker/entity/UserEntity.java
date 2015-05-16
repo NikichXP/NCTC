@@ -67,59 +67,45 @@ public class UserEntity {
 	@OneToOne(mappedBy = "userEntity")
 	private CarEntity carEntity;
 
-	@Basic
 	@Column(name = "uuid", nullable = true, insertable = true, updatable = false, length = 2147483647)
 	private String uuid;
 
-	@Basic
 	@Column(name = "email", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String email;
 
-	@Basic
 	@Column(name = "password", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String password;
 
-	@Basic
 	@Column(name = "first_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String firstName;
 
-	@Basic
 	@Column(name = "last_name", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String lastName;
 
-	@Basic
 	@Column(name = "date_registered", nullable = false, insertable = true, updatable = true)
 	private Timestamp dateRegistered;
 
-	@Basic
 	@Column(name = "phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String phone;
 
-	@Basic
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
 
-	@Basic
 	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean smokingFriendly;
 
-	@Basic
 	@Column(name = "confirmed", nullable = false, insertable = true, updatable = true)
 	private Boolean confirmed = false;
 
-	@Basic
 	@Column(name = "blocked", nullable = false, insertable = true, updatable = true)
 	private boolean blocked;
 
-	@Basic
 	@Column(name = "birthday", nullable = true, insertable = true, updatable = true)
 	private Date birthday;
 
-	@Basic
 	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String sex;
 
-	@Basic
 	@Column(name = "alternative_phone", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String alternativePhone;
 

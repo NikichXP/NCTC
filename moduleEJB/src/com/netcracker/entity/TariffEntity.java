@@ -9,6 +9,18 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tariff", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "Tariff.findAnimalMultiplier", query = "SELECT f FROM TariffEntity f " +
+				"WHERE f.animalFriendly = true"),
+		@NamedQuery(name = "Tariff.findWifiMultiplier", query = "SELECT f FROM TariffEntity f " +
+				"WHERE f.wifi = true"),
+		@NamedQuery(name = "Tariff.findSexMultiplier", query = "SELECT f FROM TariffEntity f " +
+				"WHERE f.sex = :sex"),
+		@NamedQuery(name = "Tariff.findPerHourByRequestedTime", query = "SELECT f FROM TariffEntity f " +
+				"WHERE :requestedTimeHHmm BETWEEN f.timeStarts AND f.timeEnds"),
+		@NamedQuery(name = "Tariff.findPerKmByRequestedTime", query = "SELECT f FROM TariffEntity f " +
+				"WHERE :requestedTimeHHmm BETWEEN f.timeStarts AND f.timeEnds")
+})
 public class TariffEntity {
 	@SequenceGenerator(
 			name = "tariff_SEQUENCE_GENERATOR",
@@ -17,46 +29,36 @@ public class TariffEntity {
 	)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tariff_SEQUENCE_GENERATOR")
-	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 3)
 	private BigInteger id;
 
-	@Basic
-	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigDecimal perHour;
+	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 3)
+	private boolean perHour;
 
-	@Basic
-	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 0)
-	private BigDecimal perKilometer;
+	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 3)
+	private boolean perKilometer;
 
-	@Basic
 	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeStarts;
 
-	@Basic
 	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeEnds;
 
-	@Basic
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
 
-	@Basic
 	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	private Boolean wifi;
 
-	@Basic
 	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String sex;
 
-	@Basic
 	@Column(name = "from_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger fromSeatsCount;
 
-	@Basic
 	@Column(name = "to_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger toSeatsCount;
 
-	@Basic
 	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger multiplier;
 
@@ -68,19 +70,19 @@ public class TariffEntity {
 		this.id = id;
 	}
 
-	public BigDecimal getPerHour() {
+	public boolean getPerHour() {
 		return perHour;
 	}
 
-	public void setPerHour(BigDecimal perHour) {
+	public void setPerHour(boolean perHour) {
 		this.perHour = perHour;
 	}
 
-	public BigDecimal getPerKilometer() {
+	public boolean getPerKilometer() {
 		return perKilometer;
 	}
 
-	public void setPerKilometer(BigDecimal perKilometer) {
+	public void setPerKilometer(boolean perKilometer) {
 		this.perKilometer = perKilometer;
 	}
 
@@ -155,9 +157,9 @@ public class TariffEntity {
 
 		TariffEntity that = (TariffEntity) o;
 
+		if (perHour != that.perHour) return false;
+		if (perKilometer != that.perKilometer) return false;
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
-		if (perHour != null ? !perHour.equals(that.perHour) : that.perHour != null) return false;
-		if (perKilometer != null ? !perKilometer.equals(that.perKilometer) : that.perKilometer != null) return false;
 		if (timeStarts != null ? !timeStarts.equals(that.timeStarts) : that.timeStarts != null) return false;
 		if (timeEnds != null ? !timeEnds.equals(that.timeEnds) : that.timeEnds != null) return false;
 		if (animalFriendly != null ? !animalFriendly.equals(that.animalFriendly) : that.animalFriendly != null)
@@ -168,14 +170,13 @@ public class TariffEntity {
 			return false;
 		if (toSeatsCount != null ? !toSeatsCount.equals(that.toSeatsCount) : that.toSeatsCount != null) return false;
 		return !(multiplier != null ? !multiplier.equals(that.multiplier) : that.multiplier != null);
-
 	}
 
 	@Override
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (perHour != null ? perHour.hashCode() : 0);
-		result = 31 * result + (perKilometer != null ? perKilometer.hashCode() : 0);
+		result = 31 * result + (perHour ? 1 : 0);
+		result = 31 * result + (perKilometer ? 1 : 0);
 		result = 31 * result + (timeStarts != null ? timeStarts.hashCode() : 0);
 		result = 31 * result + (timeEnds != null ? timeEnds.hashCode() : 0);
 		result = 31 * result + (animalFriendly != null ? animalFriendly.hashCode() : 0);

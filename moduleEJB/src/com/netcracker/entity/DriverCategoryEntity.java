@@ -29,15 +29,12 @@ public class DriverCategoryEntity {
 	@ManyToMany (mappedBy = "driverCategoryEntities")
 	private Collection<UserEntity> userEntities;
 
-	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 
-	@Basic
 	@Column(name = "description", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String description;
 
-	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal tariffMultiplier;
 
@@ -108,7 +105,6 @@ public class DriverCategoryEntity {
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		if (description != null ? !description.equals(that.description) : that.description != null) return false;
 		return !(tariffMultiplier != null ? !tariffMultiplier.equals(that.tariffMultiplier) : that.tariffMultiplier != null);
-
 	}
 
 	@Override

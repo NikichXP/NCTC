@@ -25,7 +25,6 @@ public class UserAccessLevelEntity {
 	@ManyToMany (mappedBy = "userAccessLevelEntities")
 	private Collection<UserEntity> userEntities;
 
-	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 

@@ -59,87 +59,66 @@ public class OrderEntity {
 	@JoinColumn(name = "driver_user_id", referencedColumnName = "id")
 	private UserEntity driverUserEntity;
 
-	@Basic
 	@Column(name = "public_token", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String publicToken;
 
-	@Basic
 	@Column(name = "contact_phone", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String contactPhone;
 
-	@Basic
 	@Column(name = "contact_name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String contactName;
 
-	@Basic
 	@Column(name = "time_created", nullable = false, insertable = true, updatable = true)
 	private Timestamp timeCreated;
 
-	@Basic
 	@Column(name = "time_requested", nullable = false, insertable = true, updatable = true)
 	private Timestamp timeRequested;
 
-	@Basic
 	@Column(name = "time_of_driver_arrival", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeOfDriverArrival;
 
-	@Basic
 	@Column(name = "time_started", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeStarted;
 
-	@Basic
 	@Column(name = "time_completed", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeCompleted;
 
-	@Basic
 	@Column(name = "requested_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger requestedSeatsCount;
 
-	@Basic
 	@Column(name = "driver_sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String driverSex;
 
-	@Basic
 	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean smokingFriendly;
 
-	@Basic
 	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
 	private Boolean airConditioner;
 
-	@Basic
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
 
-	@Basic
 	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	private Boolean wifi;
 
-	@Basic
 	@Column(name = "customer_pre_create_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String customerPreCreateComment;
 
-	@Basic
 	@Column(name = "customer_post_complete_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String customerPostCompleteComment;
 
-	@Basic
 	@Column(name = "customer_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String customerRefuseComment;
 
-	@Basic
 	@Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String driverRefuseComment;
 
-	@Basic
 	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigDecimal totalLength;
 
-	@Basic
 	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigDecimal totalMultiplier;
 
-	@Basic
 	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigDecimal finalPrice;
 
@@ -432,7 +411,6 @@ public class OrderEntity {
 		if (totalMultiplier != null ? !totalMultiplier.equals(that.totalMultiplier) : that.totalMultiplier != null)
 			return false;
 		return !(finalPrice != null ? !finalPrice.equals(that.finalPrice) : that.finalPrice != null);
-
 	}
 
 	@Override

@@ -22,7 +22,6 @@ public class RefuseCauseByDriverEntity {
 	@OneToMany (mappedBy = "refuseCauseByDriverEntity")
 	private Collection<OrderEntity> orderEntities;
 
-	@Basic
 	@Column(name = "message", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String message;
 
@@ -59,7 +58,6 @@ public class RefuseCauseByDriverEntity {
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		return !(message != null ? !message.equals(that.message) : that.message != null);
-
 	}
 
 	@Override
