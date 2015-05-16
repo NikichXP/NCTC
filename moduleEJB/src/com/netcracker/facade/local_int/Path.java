@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.PathEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface Path {
-	public void create(PathEntity entity);
+	void create(PathEntity entity);
 
-	public PathEntity read(Object id);
+	PathEntity read(Object id);
 
-	public void update(PathEntity entity);
+	void update(PathEntity entity);
 
-	public void delete(PathEntity entity);
+	void delete(PathEntity entity);
 
-	public List<PathEntity> findAll();
+	List<PathEntity> findAll();
 
-	public List<PathEntity> findRange(int[] range);
+	List<PathEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

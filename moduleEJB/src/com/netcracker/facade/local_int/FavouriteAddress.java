@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.FavouriteAddressEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface FavouriteAddress {
-	public void create(FavouriteAddressEntity entity);
+	void create(FavouriteAddressEntity entity);
 
-	public FavouriteAddressEntity read(Object id);
+	FavouriteAddressEntity read(Object id);
 
-	public void update(FavouriteAddressEntity entity);
+	void update(FavouriteAddressEntity entity);
 
-	public void delete(FavouriteAddressEntity entity);
+	void delete(FavouriteAddressEntity entity);
 
-	public List<FavouriteAddressEntity> findAll();
+	List<FavouriteAddressEntity> findAll();
 
-	public List<FavouriteAddressEntity> findRange(int[] range);
+	List<FavouriteAddressEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

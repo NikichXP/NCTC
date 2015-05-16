@@ -19,41 +19,53 @@ public class PathEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PATH_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
 	@ManyToOne
 	@JoinColumn(name = "order_id", referencedColumnName = "id")
 	private OrderEntity orderEntity;
+
+	@ManyToOne
+	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
+	private PathEntity nextPathEntity;
+
+	@OneToMany(mappedBy = "nextPathEntity")
+	private Collection<PathEntity> nextPathEntities;
+
 	@Basic
 	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal startX;
+
 	@Basic
 	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal startY;
+
 	@Basic
 	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal endX;
+
 	@Basic
 	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal endY;
+
 	@Basic
 	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String startAddress;
+
 	@Basic
 	@Column(name = "end_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String endAddress;
+
 	@Basic
 	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
 	private boolean completed;
+
 	@Basic
 	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal length;
+
 	@Basic
 	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal price;
-	@ManyToOne
-	@JoinColumn(name = "next_path_id", referencedColumnName = "id")
-	private PathEntity pathByNextPathId;
-	@OneToMany(mappedBy = "pathByNextPathId")
-	private Collection<PathEntity> pathsById;
 
 	public PathEntity() {
 	}
@@ -138,20 +150,28 @@ public class PathEntity {
 		this.price = price;
 	}
 
-	public PathEntity getPathByNextPathId() {
-		return pathByNextPathId;
+	public PathEntity getNextPathEntity() {
+		return nextPathEntity;
 	}
 
-	public void setPathByNextPathId(PathEntity pathByNextPathId) {
-		this.pathByNextPathId = pathByNextPathId;
+	public void setNextPathEntity(PathEntity nextPathEntity) {
+		this.nextPathEntity = nextPathEntity;
 	}
 
-	public Collection<PathEntity> getPathsById() {
-		return pathsById;
+	public Collection<PathEntity> getNextPathEntities() {
+		return nextPathEntities;
 	}
 
-	public void setPathsById(Collection<PathEntity> pathsById) {
-		this.pathsById = pathsById;
+	public void setNextPathEntities(Collection<PathEntity> nextPathEntities) {
+		this.nextPathEntities = nextPathEntities;
+	}
+
+	public OrderEntity getOrderEntity() {
+		return orderEntity;
+	}
+
+	public void setOrderEntity(OrderEntity orderEntity) {
+		this.orderEntity = orderEntity;
 	}
 
 	@Override
@@ -171,7 +191,6 @@ public class PathEntity {
 		if (endAddress != null ? !endAddress.equals(that.endAddress) : that.endAddress != null) return false;
 		if (length != null ? !length.equals(that.length) : that.length != null) return false;
 		if (price != null ? !price.equals(that.price) : that.price != null) return false;
-
 		return true;
 	}
 
@@ -188,13 +207,5 @@ public class PathEntity {
 		result = 31 * result + (length != null ? length.hashCode() : 0);
 		result = 31 * result + (price != null ? price.hashCode() : 0);
 		return result;
-	}
-
-	public OrderEntity getOrderEntity() {
-		return orderEntity;
-	}
-
-	public void setOrderEntity(OrderEntity orderEntity) {
-		this.orderEntity = orderEntity;
 	}
 }

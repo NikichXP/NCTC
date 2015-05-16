@@ -15,15 +15,17 @@ public class FavouriteAddressEntity {
 	)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FAVOURITE_ADDRESS_SEQUENCE_GENERATOR")
+	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
 	@Basic
 	@Column(name = "address", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String address;
+
 	@ManyToOne
 	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-	private UserEntity userByCustomerId;
+	private UserEntity userEntity;
 
-	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	public BigInteger getId() {
 		return id;
 	}
@@ -40,12 +42,12 @@ public class FavouriteAddressEntity {
 		this.address = address;
 	}
 
-	public UserEntity getUserByCustomerId() {
-		return userByCustomerId;
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
 
-	public void setUserByCustomerId(UserEntity userByCustomerId) {
-		this.userByCustomerId = userByCustomerId;
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
 	}
 
 	@Override
@@ -57,7 +59,6 @@ public class FavouriteAddressEntity {
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (address != null ? !address.equals(that.address) : that.address != null) return false;
-
 		return true;
 	}
 
@@ -67,4 +68,5 @@ public class FavouriteAddressEntity {
 		result = 31 * result + (address != null ? address.hashCode() : 0);
 		return result;
 	}
+
 }

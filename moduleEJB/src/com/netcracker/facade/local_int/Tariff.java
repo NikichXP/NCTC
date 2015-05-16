@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.TariffEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface Tariff {
-	public void create(TariffEntity entity);
+	void create(TariffEntity entity);
 
-	public TariffEntity read(Object id);
+	TariffEntity read(Object id);
 
-	public void update(TariffEntity entity);
+	void update(TariffEntity entity);
 
-	public void delete(TariffEntity entity);
+	void delete(TariffEntity entity);
 
-	public List<TariffEntity> findAll();
+	List<TariffEntity> findAll();
 
-	public List<TariffEntity> findRange(int[] range);
+	List<TariffEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

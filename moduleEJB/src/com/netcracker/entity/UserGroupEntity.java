@@ -19,6 +19,17 @@ public class UserGroupEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
+	@OneToMany(mappedBy = "userGroupEntities")
+	private Collection<UserEntity> UserEntities;
+
+	@Basic
+	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String name;
+
+	@Basic
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger tariffMultiplier;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -26,10 +37,6 @@ public class UserGroupEntity {
 	public void setId(BigInteger id) {
 		this.id = id;
 	}
-
-	@Basic
-	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
-	private String name;
 
 	public String getName() {
 		return name;
@@ -39,10 +46,6 @@ public class UserGroupEntity {
 		this.name = name;
 	}
 
-	@Basic
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger tariffMultiplier;
-
 	public BigInteger getTariffMultiplier() {
 		return tariffMultiplier;
 	}
@@ -51,15 +54,12 @@ public class UserGroupEntity {
 		this.tariffMultiplier = tariffMultiplier;
 	}
 
-	@OneToMany(mappedBy = "userGroupByGroupId")
-	private Collection<UserEntity> usersById;
-
-	public Collection<UserEntity> getUsersById() {
-		return usersById;
+	public Collection<UserEntity> getUserEntities() {
+		return UserEntities;
 	}
 
-	public void setUsersById(Collection<UserEntity> usersById) {
-		this.usersById = usersById;
+	public void setUserEntities(Collection<UserEntity> usersById) {
+		this.UserEntities = usersById;
 	}
 
 	@Override
@@ -73,7 +73,6 @@ public class UserGroupEntity {
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		if (tariffMultiplier != null ? !tariffMultiplier.equals(that.tariffMultiplier) : that.tariffMultiplier != null)
 			return false;
-
 		return true;
 	}
 

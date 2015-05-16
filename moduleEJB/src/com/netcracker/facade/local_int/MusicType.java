@@ -4,24 +4,27 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.MusicTypeEntity;
 
+import javax.ejb.Local;
 import java.math.BigInteger;
 import java.util.List;
 
+@Local
 public interface MusicType {
-	public void create(MusicTypeEntity entity);
+	void create(MusicTypeEntity entity);
 
-	public MusicTypeEntity read(Object id);
+	MusicTypeEntity read(Object id);
 
-	public void update(MusicTypeEntity entity);
+	void update(MusicTypeEntity entity);
 
-	public void delete(MusicTypeEntity entity);
+	void delete(MusicTypeEntity entity);
 
-	public List<MusicTypeEntity> findAll();
+	List<MusicTypeEntity> findAll();
 
-	public List<MusicTypeEntity> findRange(int[] range);
+	List<MusicTypeEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 
 	MusicTypeEntity findByName(String name);
+
 	MusicTypeEntity findById(BigInteger id);
 }

@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.RefuseCauseByDriverEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface RefuseCauseByDriver {
-	public void create(RefuseCauseByDriverEntity entity);
+	void create(RefuseCauseByDriverEntity entity);
 
-	public RefuseCauseByDriverEntity read(Object id);
+	RefuseCauseByDriverEntity read(Object id);
 
-	public void update(RefuseCauseByDriverEntity entity);
+	void update(RefuseCauseByDriverEntity entity);
 
-	public void delete(RefuseCauseByDriverEntity entity);
+	void delete(RefuseCauseByDriverEntity entity);
 
-	public List<RefuseCauseByDriverEntity> findAll();
+	List<RefuseCauseByDriverEntity> findAll();
 
-	public List<RefuseCauseByDriverEntity> findRange(int[] range);
+	List<RefuseCauseByDriverEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

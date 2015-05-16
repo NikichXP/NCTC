@@ -18,13 +18,16 @@ public class UserAccessLevelEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_access_level_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
+	@OneToMany(mappedBy = "userAccessLevelEntity")
+	private Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities;
+
+	@ManyToMany (mappedBy = "userAccessLevelEntities")
+	private Collection<UserEntity> userEntities;
+
 	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
-	@OneToMany(mappedBy = "userAccessLevelByUserAccessLevelId")
-	private Collection<UserUserAccessLevelEntity> userUserAccessLevelsById;
-	@ManyToMany (mappedBy = "userAccessLevelEntities")
-	private Collection<UserEntity> userEntities;
 
 	public BigInteger getId() {
 		return id;
@@ -42,12 +45,20 @@ public class UserAccessLevelEntity {
 		this.name = name;
 	}
 
-	public Collection<UserUserAccessLevelEntity> getUserUserAccessLevelsById() {
-		return userUserAccessLevelsById;
+	public Collection<User$UserAccessLevelEntity> getUser$UserAccessLevelEntities() {
+		return user$UserAccessLevelEntities;
 	}
 
-	public void setUserUserAccessLevelsById(Collection<UserUserAccessLevelEntity> userUserAccessLevelsById) {
-		this.userUserAccessLevelsById = userUserAccessLevelsById;
+	public void setUser$UserAccessLevelEntities(Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities) {
+		this.user$UserAccessLevelEntities = user$UserAccessLevelEntities;
+	}
+
+	public Collection<UserEntity> getUserEntities() {
+		return userEntities;
+	}
+
+	public void setUserEntities(Collection<UserEntity> userEntities) {
+		this.userEntities = userEntities;
 	}
 
 	@Override
@@ -58,9 +69,7 @@ public class UserAccessLevelEntity {
 		UserAccessLevelEntity that = (UserAccessLevelEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
-		if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-		return true;
+		return !(name != null ? !name.equals(that.name) : that.name != null);
 	}
 
 	@Override
@@ -68,13 +77,5 @@ public class UserAccessLevelEntity {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		return result;
-	}
-
-	public Collection<UserEntity> getUserEntities() {
-		return userEntities;
-	}
-
-	public void setUserEntities(Collection<UserEntity> userEntities) {
-		this.userEntities = userEntities;
 	}
 }

@@ -19,33 +19,43 @@ public class TariffEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tariff_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
 	@Basic
 	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigDecimal perHour;
+
 	@Basic
 	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigDecimal perKilometer;
+
 	@Basic
 	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeStarts;
+
 	@Basic
 	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
 	private Timestamp timeEnds;
+
 	@Basic
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
+
 	@Basic
 	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	private Boolean wifi;
+
 	@Basic
 	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String sex;
+
 	@Basic
 	@Column(name = "from_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger fromSeatsCount;
+
 	@Basic
 	@Column(name = "to_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger toSeatsCount;
+
 	@Basic
 	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger multiplier;
@@ -157,9 +167,8 @@ public class TariffEntity {
 		if (fromSeatsCount != null ? !fromSeatsCount.equals(that.fromSeatsCount) : that.fromSeatsCount != null)
 			return false;
 		if (toSeatsCount != null ? !toSeatsCount.equals(that.toSeatsCount) : that.toSeatsCount != null) return false;
-		if (multiplier != null ? !multiplier.equals(that.multiplier) : that.multiplier != null) return false;
+		return !(multiplier != null ? !multiplier.equals(that.multiplier) : that.multiplier != null);
 
-		return true;
 	}
 
 	@Override

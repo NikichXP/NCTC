@@ -4,22 +4,24 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.UserEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface User {
-	public void create(UserEntity entity);
+	void create(UserEntity entity);
 
-	public UserEntity read(Object id);
+	UserEntity read(Object id);
 
-	public void update(UserEntity entity);
+	void update(UserEntity entity);
 
-	public void delete(UserEntity entity);
+	void delete(UserEntity entity);
 
-	public List<UserEntity> findAll();
+	List<UserEntity> findAll();
 
-	public List<UserEntity> findRange(int[] range);
+	List<UserEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 
 	boolean isEmailUsed(String name);
 

@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.RefuseCauseByCustomerEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface RefuseCauseByCustomer {
-	public void create(RefuseCauseByCustomerEntity entity);
+	void create(RefuseCauseByCustomerEntity entity);
 
-	public RefuseCauseByCustomerEntity read(Object id);
+	RefuseCauseByCustomerEntity read(Object id);
 
-	public void update(RefuseCauseByCustomerEntity entity);
+	void update(RefuseCauseByCustomerEntity entity);
 
-	public void delete(RefuseCauseByCustomerEntity entity);
+	void delete(RefuseCauseByCustomerEntity entity);
 
-	public List<RefuseCauseByCustomerEntity> findAll();
+	List<RefuseCauseByCustomerEntity> findAll();
 
-	public List<RefuseCauseByCustomerEntity> findRange(int[] range);
+	List<RefuseCauseByCustomerEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

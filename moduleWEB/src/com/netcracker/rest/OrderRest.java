@@ -102,7 +102,7 @@ public class OrderRest {
 
 			pathEntities.add(pathEntity);
 
-			pathEntities.get(i).setPathByNextPathId(pathEntity);
+			pathEntities.get(i).setNextPathEntity(pathEntity);
 		}
 
 		orderEntity.setPathEntities(pathEntities);

@@ -19,21 +19,27 @@ public class DriverCategoryEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DRIVER_CATEGORY_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
+	@OneToMany(mappedBy = "driverCategoryEntity")
+	private Collection<CarEntity> carEntities;
+
+	@OneToMany(mappedBy = "driverCategoryEntity")
+	private Collection<User$DriverCategoryEntity> user$DriverCategoryEntities;
+
+	@ManyToMany (mappedBy = "driverCategoryEntities")
+	private Collection<UserEntity> userEntities;
+
 	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
+
 	@Basic
 	@Column(name = "description", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String description;
+
 	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal tariffMultiplier;
-	@OneToMany(mappedBy = "driverCategoryEntity")
-	private Collection<CarEntity> carsById;
-	@OneToMany(mappedBy = "driverCategoryByDriverCategoryId")
-	private Collection<UserDriverCategoryEntity> userDriverCategoriesById;
-	@ManyToMany (mappedBy = "driverCategoryEntities")
-	private Collection<UserEntity> userEntities;
 
 	public BigInteger getId() {
 		return id;
@@ -67,20 +73,28 @@ public class DriverCategoryEntity {
 		this.tariffMultiplier = tariffMultiplier;
 	}
 
-	public Collection<CarEntity> getCarsById() {
-		return carsById;
+	public Collection<CarEntity> getCarEntities() {
+		return carEntities;
 	}
 
-	public void setCarsById(Collection<CarEntity> carsById) {
-		this.carsById = carsById;
+	public void setCarEntities(Collection<CarEntity> carEntities) {
+		this.carEntities = carEntities;
 	}
 
-	public Collection<UserDriverCategoryEntity> getUserDriverCategoriesById() {
-		return userDriverCategoriesById;
+	public Collection<User$DriverCategoryEntity> getUser$DriverCategoryEntities() {
+		return user$DriverCategoryEntities;
 	}
 
-	public void setUserDriverCategoriesById(Collection<UserDriverCategoryEntity> userDriverCategoriesById) {
-		this.userDriverCategoriesById = userDriverCategoriesById;
+	public void setUser$DriverCategoryEntities(Collection<User$DriverCategoryEntity> user$DriverCategoryEntities) {
+		this.user$DriverCategoryEntities = user$DriverCategoryEntities;
+	}
+
+	public Collection<UserEntity> getUserEntities() {
+		return userEntities;
+	}
+
+	public void setUserEntities(Collection<UserEntity> userEntities) {
+		this.userEntities = userEntities;
 	}
 
 	@Override
@@ -93,10 +107,8 @@ public class DriverCategoryEntity {
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		if (description != null ? !description.equals(that.description) : that.description != null) return false;
-		if (tariffMultiplier != null ? !tariffMultiplier.equals(that.tariffMultiplier) : that.tariffMultiplier != null)
-			return false;
+		return !(tariffMultiplier != null ? !tariffMultiplier.equals(that.tariffMultiplier) : that.tariffMultiplier != null);
 
-		return true;
 	}
 
 	@Override

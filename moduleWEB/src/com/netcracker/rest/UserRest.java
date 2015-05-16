@@ -1,6 +1,7 @@
 package com.netcracker.rest;
 
 import com.netcracker.classes.UserJson;
+import com.netcracker.entity.User$UserAccessLevelEntity;
 import com.netcracker.entity.UserAccessLevelEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
@@ -134,7 +135,7 @@ public class UserRest {
      *
      * @param sid - service UUID
      * @return - level of permission
-     * @see com.netcracker.entity.UserUserAccessLevelEntity
+     * @see User$UserAccessLevelEntity
      */
     @GET
     @Path("validPermission/{sid}")

@@ -4,22 +4,24 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.OrderTypeEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface OrderType {
-	public void create(OrderTypeEntity entity);
+	void create(OrderTypeEntity entity);
 
-	public OrderTypeEntity read(Object id);
+	OrderTypeEntity read(Object id);
 
-	public void update(OrderTypeEntity entity);
+	void update(OrderTypeEntity entity);
 
-	public void delete(OrderTypeEntity entity);
+	void delete(OrderTypeEntity entity);
 
-	public List<OrderTypeEntity> findAll();
+	List<OrderTypeEntity> findAll();
 
-	public List<OrderTypeEntity> findRange(int[] range);
+	List<OrderTypeEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 
 	OrderTypeEntity findByName(String name);
 }

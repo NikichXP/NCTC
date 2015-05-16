@@ -9,7 +9,8 @@ import java.util.Collection;
 @Entity
 @Table(name = "order_state", schema = "public", catalog = "postgres")
 @NamedQueries({
-		@NamedQuery(name = "OrderState.findByName", query = "SELECT f FROM OrderStateEntity f WHERE upper(f.name) = upper(:name)")})
+		@NamedQuery(name = "OrderState.findByName", query = "SELECT f FROM OrderStateEntity f " +
+				"WHERE upper(f.name) = upper(:name)")})
 public class OrderStateEntity {
 	@SequenceGenerator(
 			name = "ORDER_STATE_SEQUENCE_GENERATOR",
@@ -20,11 +21,13 @@ public class OrderStateEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_STATE_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
+	@OneToMany(mappedBy="orderStateEntity")
+	private Collection<OrderEntity> orderEntities;
+
 	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
-	@OneToMany(mappedBy="orderStateEntity")
-	private Collection<OrderEntity> orderEntities;
 
 	public BigInteger getId() {
 		return id;
@@ -59,8 +62,8 @@ public class OrderStateEntity {
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
 		return true;
+
 	}
 
 	@Override

@@ -10,7 +10,8 @@ import java.util.Collection;
 @Entity
 @Table(name = "car_class", schema = "public", catalog = "postgres")
 @NamedQueries({
-		@NamedQuery(name = "CarClass.findByName", query = "SELECT f FROM CarClassEntity f WHERE upper(f.name) = upper(:name)")})
+		@NamedQuery(name = "CarClass.findByName", query = "SELECT f FROM CarClassEntity f " +
+				"WHERE upper(f.name) = upper(:name)")})
 public class CarClassEntity {
 	@SequenceGenerator(
 			name = "CAR_CLASS_SEQUENCE_GENERATOR",
@@ -21,16 +22,20 @@ public class CarClassEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_CLASS_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
-	@OneToMany (mappedBy = "carClassEntity")
+
+	@OneToMany(mappedBy = "carClassEntity")
 	private Collection<OrderEntity> orderEntities;
+
+	@OneToMany(mappedBy = "carClassEntity")
+	private Collection<CarEntity> carEntities;
+
 	@Basic
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
+
 	@Basic
 	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigDecimal tariffMultiplier;
-	@OneToMany(mappedBy = "carClassEntity")
-	private Collection<CarEntity> carsById;
 
 	public BigInteger getId() {
 		return id;
@@ -64,6 +69,15 @@ public class CarClassEntity {
 		this.tariffMultiplier = tariffMultiplier;
 	}
 
+
+	public Collection<CarEntity> getCarEntities() {
+		return carEntities;
+	}
+
+	public void setCarEntities(Collection<CarEntity> carEntities) {
+		this.carEntities = carEntities;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -75,7 +89,6 @@ public class CarClassEntity {
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		if (tariffMultiplier != null ? !tariffMultiplier.equals(that.tariffMultiplier) : that.tariffMultiplier != null)
 			return false;
-
 		return true;
 	}
 
@@ -85,13 +98,5 @@ public class CarClassEntity {
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (tariffMultiplier != null ? tariffMultiplier.hashCode() : 0);
 		return result;
-	}
-
-	public Collection<CarEntity> getCarsById() {
-		return carsById;
-	}
-
-	public void setCarsById(Collection<CarEntity> carsById) {
-		this.carsById = carsById;
 	}
 }

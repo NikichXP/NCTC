@@ -18,27 +18,34 @@ public class CarEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_SEQUENCE_GENERATOR")
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
+
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private UserEntity userEntity;
-	@Basic
-	@Column(name = "model", nullable = false, insertable = true, updatable = true, length = 2147483647)
-	private String model;
-	@Basic
-	@Column(name = "seats_count", nullable = false, insertable = true, updatable = true, precision = 0)
-	private BigInteger seatsCount;
-	@Basic
-	@Column(name = "licence_plate", nullable = false, insertable = true, updatable = true, length = 2147483647)
-	private String licencePlate;
-	@Basic
-	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
-	private Date dateManufactured;
+
 	@ManyToOne
 	@JoinColumn(name = "class_id", referencedColumnName = "id", nullable = false)
 	private CarClassEntity carClassEntity;
+
 	@ManyToOne
 	@JoinColumn(name = "required_driver_category_id", referencedColumnName = "id", nullable = false)
 	private DriverCategoryEntity driverCategoryEntity;
+
+	@Basic
+	@Column(name = "model", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String model;
+
+	@Basic
+	@Column(name = "seats_count", nullable = false, insertable = true, updatable = true, precision = 0)
+	private BigInteger seatsCount;
+
+	@Basic
+	@Column(name = "licence_plate", nullable = false, insertable = true, updatable = true, length = 2147483647)
+	private String licencePlate;
+
+	@Basic
+	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
+	private Date dateManufactured;
 
 	public BigInteger getId() {
 		return id;
@@ -116,13 +123,7 @@ public class CarEntity {
 		if (seatsCount != null ? !seatsCount.equals(carEntity.seatsCount) : carEntity.seatsCount != null) return false;
 		if (licencePlate != null ? !licencePlate.equals(carEntity.licencePlate) : carEntity.licencePlate != null)
 			return false;
-		if (dateManufactured != null ? !dateManufactured.equals(carEntity.dateManufactured) : carEntity.dateManufactured != null)
-			return false;
-		if (carClassEntity != null ? !carClassEntity.equals(carEntity.carClassEntity) : carEntity.carClassEntity != null)
-			return false;
-		if (driverCategoryEntity != null ? !driverCategoryEntity.equals(carEntity.driverCategoryEntity) : carEntity.driverCategoryEntity != null)
-			return false;
-		return !(userEntity != null ? !userEntity.equals(carEntity.userEntity) : carEntity.userEntity != null);
+		return !(dateManufactured != null ? !dateManufactured.equals(carEntity.dateManufactured) : carEntity.dateManufactured != null);
 
 	}
 
@@ -133,9 +134,6 @@ public class CarEntity {
 		result = 31 * result + (seatsCount != null ? seatsCount.hashCode() : 0);
 		result = 31 * result + (licencePlate != null ? licencePlate.hashCode() : 0);
 		result = 31 * result + (dateManufactured != null ? dateManufactured.hashCode() : 0);
-		result = 31 * result + (carClassEntity != null ? carClassEntity.hashCode() : 0);
-		result = 31 * result + (driverCategoryEntity != null ? driverCategoryEntity.hashCode() : 0);
-		result = 31 * result + (userEntity != null ? userEntity.hashCode() : 0);
 		return result;
 	}
 }

@@ -6,22 +6,24 @@ import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface Order {
-	public void create(OrderEntity entity);
+	void create(OrderEntity entity);
 
-	public OrderEntity read(Object id);
+	OrderEntity read(Object id);
 
-	public void update(OrderEntity entity);
+	void update(OrderEntity entity);
 
-	public void delete(OrderEntity entity);
+	void delete(OrderEntity entity);
 
-	public List<OrderEntity> findAll();
+	List<OrderEntity> findAll();
 
-	public List<OrderEntity> findRange(int[] range);
+	List<OrderEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 
 	List<OrderEntity> getOrdersByStateAndCustomerUuid(OrderStateEntity orderStateEntity, String customerUuid);
 

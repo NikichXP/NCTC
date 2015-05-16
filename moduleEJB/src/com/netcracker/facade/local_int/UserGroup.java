@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.UserGroupEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface UserGroup {
-	public void create(UserGroupEntity entity);
+	void create(UserGroupEntity entity);
 
-	public UserGroupEntity read(Object id);
+	UserGroupEntity read(Object id);
 
-	public void update(UserGroupEntity entity);
+	void update(UserGroupEntity entity);
 
-	public void delete(UserGroupEntity entity);
+	void delete(UserGroupEntity entity);
 
-	public List<UserGroupEntity> findAll();
+	List<UserGroupEntity> findAll();
 
-	public List<UserGroupEntity> findRange(int[] range);
+	List<UserGroupEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

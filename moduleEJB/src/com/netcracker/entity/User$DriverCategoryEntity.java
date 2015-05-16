@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "user$driver_category", schema = "public", catalog = "postgres")
-public class UserDriverCategoryEntity {
+public class User$DriverCategoryEntity {
 	@SequenceGenerator(
 			name = "user-driver_category_SEQUENCE_GENERATOR",
 			sequenceName = "user-driver_category_id_seq",
@@ -18,6 +18,14 @@ public class UserDriverCategoryEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
+	@ManyToOne
+	@JoinColumn(name = "driver_category_id", referencedColumnName = "id", nullable = false)
+	private DriverCategoryEntity driverCategoryEntity;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+	private UserEntity userEntity;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -26,28 +34,20 @@ public class UserDriverCategoryEntity {
 		this.id = id;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "driver_category_id", referencedColumnName = "id", nullable = false)
-	private DriverCategoryEntity driverCategoryByDriverCategoryId;
-
-	public DriverCategoryEntity getDriverCategoryByDriverCategoryId() {
-		return driverCategoryByDriverCategoryId;
+	public DriverCategoryEntity getDriverCategoryEntity() {
+		return driverCategoryEntity;
 	}
 
-	public void setDriverCategoryByDriverCategoryId(DriverCategoryEntity driverCategoryByDriverCategoryId) {
-		this.driverCategoryByDriverCategoryId = driverCategoryByDriverCategoryId;
+	public void setDriverCategoryEntity(DriverCategoryEntity driverCategoryEntity) {
+		this.driverCategoryEntity = driverCategoryEntity;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-	private UserEntity userByUserId;
-
-	public UserEntity getUserByUserId() {
-		return userByUserId;
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
 
-	public void setUserByUserId(UserEntity userByUserId) {
-		this.userByUserId = userByUserId;
+	public void setUserEntity(UserEntity userByUserId) {
+		this.userEntity = userByUserId;
 	}
 
 	@Override
@@ -55,15 +55,15 @@ public class UserDriverCategoryEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		UserDriverCategoryEntity that = (UserDriverCategoryEntity) o;
+		User$DriverCategoryEntity that = (User$DriverCategoryEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		int result = id != null ? id.hashCode() : 0;
+		return result;
 	}
 }

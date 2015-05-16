@@ -4,20 +4,22 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.DriverCategoryEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface DriverCategory {
-	public void create(DriverCategoryEntity entity);
+	void create(DriverCategoryEntity entity);
 
-	public DriverCategoryEntity read(Object id);
+	DriverCategoryEntity read(Object id);
 
-	public void update(DriverCategoryEntity entity);
+	void update(DriverCategoryEntity entity);
 
-	public void delete(DriverCategoryEntity entity);
+	void delete(DriverCategoryEntity entity);
 
-	public List<DriverCategoryEntity> findAll();
+	List<DriverCategoryEntity> findAll();
 
-	public List<DriverCategoryEntity> findRange(int[] range);
+	List<DriverCategoryEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 }

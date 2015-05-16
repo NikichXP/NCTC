@@ -4,22 +4,24 @@ package com.netcracker.facade.local_int;
 
 import com.netcracker.entity.CarClassEntity;
 
+import javax.ejb.Local;
 import java.util.List;
 
+@Local
 public interface CarClass {
-	public void create(CarClassEntity entity);
+	void create(CarClassEntity entity);
 
-	public CarClassEntity read(Object id);
+	CarClassEntity read(Object id);
 
-	public void update(CarClassEntity entity);
+	void update(CarClassEntity entity);
 
-	public void delete(CarClassEntity entity);
+	void delete(CarClassEntity entity);
 
-	public List<CarClassEntity> findAll();
+	List<CarClassEntity> findAll();
 
-	public List<CarClassEntity> findRange(int[] range);
+	List<CarClassEntity> findRange(int[] range);
 
-	public int count();
+	int count();
 
 	CarClassEntity findByName(String name);
 }

@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "user$user_access_level", schema = "public", catalog = "postgres")
-public class UserUserAccessLevelEntity {
+public class User$UserAccessLevelEntity {
 	@SequenceGenerator(
 			name = "user-user_access_level_SEQUENCE_GENERATOR",
 			sequenceName = "user-user_access_level_id_seq",
@@ -18,6 +18,14 @@ public class UserUserAccessLevelEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
+	@ManyToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+	private UserEntity userEntity;
+
+	@ManyToOne
+	@JoinColumn(name = "user_access_level_id", referencedColumnName = "id", nullable = false)
+	private UserAccessLevelEntity userAccessLevelEntity;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -26,28 +34,20 @@ public class UserUserAccessLevelEntity {
 		this.id = id;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-	private UserEntity userByUserId;
-
-	public UserEntity getUserByUserId() {
-		return userByUserId;
+	public UserEntity getUserEntity() {
+		return userEntity;
 	}
 
-	public void setUserByUserId(UserEntity userByUserId) {
-		this.userByUserId = userByUserId;
+	public void setUserEntity(UserEntity userByUserId) {
+		this.userEntity = userByUserId;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "user_access_level_id", referencedColumnName = "id", nullable = false)
-	private UserAccessLevelEntity userAccessLevelByUserAccessLevelId;
-
-	public UserAccessLevelEntity getUserAccessLevelByUserAccessLevelId() {
-		return userAccessLevelByUserAccessLevelId;
+	public UserAccessLevelEntity getUserAccessLevelEntity() {
+		return userAccessLevelEntity;
 	}
 
-	public void setUserAccessLevelByUserAccessLevelId(UserAccessLevelEntity userAccessLevelByUserAccessLevelId) {
-		this.userAccessLevelByUserAccessLevelId = userAccessLevelByUserAccessLevelId;
+	public void setUserAccessLevelEntity(UserAccessLevelEntity userAccessLevelEntity) {
+		this.userAccessLevelEntity = userAccessLevelEntity;
 	}
 
 	@Override
@@ -55,15 +55,15 @@ public class UserUserAccessLevelEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		UserUserAccessLevelEntity that = (UserUserAccessLevelEntity) o;
+		User$UserAccessLevelEntity that = (User$UserAccessLevelEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
-
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
+		int result = id != null ? id.hashCode() : 0;
+		return result;
 	}
 }
