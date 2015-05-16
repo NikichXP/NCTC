@@ -4,6 +4,7 @@
 
 //AJAX POST for registration
 $("#basic-order-submit").click(function () {
+    $("#basic-order-submit").prop('disabled', true);
     var JSONdata = {
         customerUserUuid: getCookie("uuid"),
         contactName: $("#contactName").val(),
@@ -14,9 +15,9 @@ $("#basic-order-submit").click(function () {
         fromAddress: $("#fromAddress").val(),
         fromX: $("#fromX").val(),
         fromY: $("#fromY").val(),
-        toAddress: getArrayOfToAdresses("toAddress"),
-        toX: getArrayOfToAdresses("toX"),
-        toY: getArrayOfToAdresses("toY"),
+        toAddress: getArrayOfToAddresses("toAddress"),
+        toX: getArrayOfToAddresses("toX"),
+        toY: getArrayOfToAddresses("toY"),
 
         sex: $("input[name=sex]:checked").attr("data-value"),
         carClass: $("input[name=carClass]:checked").attr("data-value"),
@@ -35,14 +36,17 @@ $("#basic-order-submit").click(function () {
         totalPrice: $("#totalPrice").val()
     };
 
-    function getArrayOfToAdresses(idWithoutNumber) {
+    function getArrayOfToAddresses(idWithoutNumber) {
         var arr = [];
         for (var i = 0; i < $("[id^=" + idWithoutNumber + "]").length; i++) {
             arr[i] = $("#" + idWithoutNumber + i).val()
         }
         return arr;
     }
-    if (!validateBasicOrderData()) return;
+    if (!validateBasicOrderData()) {
+        $("#basic-order-submit").prop('disabled', false);
+        return;
+    }
     $.ajax({
         method: 'POST',
         url: 'api/order/create',
@@ -54,6 +58,7 @@ $("#basic-order-submit").click(function () {
             document.location.href = "customer.jsp";
         },
         error: function (jqXHR, textStatus, errorThrown) {
+            $("#basic-order-submit").prop('disabled', false);
             alert("Bad response from server.");
         }
     })
