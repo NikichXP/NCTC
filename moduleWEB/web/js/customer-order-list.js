@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    setHistory()
+    setList()
 });
 
-function setHistory(){
+function setList(){
     var uuid = getCookie("uuid");
     $.ajax({
         method: 'POST',
@@ -12,7 +12,7 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "#orderList");
+            drawTable(obj.orderHistory, "table");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
@@ -42,18 +42,23 @@ function getCookie(name) {
 
 function drawTable(data, table) {
     for (var i = 0; i < data.length; i++) {
+
         drawBody(data[i], table);
     }
 }
 function drawBody(rowData, table) {
-    var row = $("<tbody><tr>")
-    $(table).append(row);
-    row.append($("<td></td>"));
-    row.append($("<td>" + rowData.dateOrderCreate + "</td>"))
-    row.append($("<td>" + rowData.startOrder + "</td>"));
-    row.append($("<td>" + rowData.endOrder + "</td>"));
-    row.append($("<td>" + rowData.price + "</td>"));
-    row.append($("<td>" + rowData.statusOrder + "</td></tr></tbody>"));
+
+    var div = document.getElementById(table);
+    var createDiv = document.createElement("div");
+    var node = document.createTextNode("data :" + rowData.dateOrderCreate
+                                        + "\nferst point :" + rowData.startOrder
+                                        + "\nnext point :" + rowData.endOrder
+                                        + "\nstatus :" + rowData.price
+                                        + "\nprice: " + rowData.price + "$");
+    createDiv.appendChild(node);
+    createDiv.className = "button";
+    div.appendChild(createDiv);
+
 }
 
 function goBack(){

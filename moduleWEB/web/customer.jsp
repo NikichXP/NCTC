@@ -46,22 +46,10 @@
 blocks contain brief information about order-->
 <div class="mainSection" id="customerOrdersPanel">
 
-    <div class="col-md-12 mt">
-
+    <div class="col-md-12 mt" id="table">
         <h4>CURRENT ORDERS:</h4>
         <hr>
-        <table id="orderList" class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>StartOrder</th>
-                <th>EndOrder</th>
-                <th>Price</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-        </table>
+
     </div>
 </div>
 
@@ -79,9 +67,11 @@ blocks contain brief information about order-->
     </div>
 
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--scripts provided by Bootstrap-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <!--handmade sript-->
 <script src="js/customer-script.js"></script>
