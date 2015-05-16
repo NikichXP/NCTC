@@ -50,13 +50,15 @@ blocks contain brief information about order-->
 
         <h4>CURRENT ORDERS:</h4>
         <hr>
-        <table id="historyOrderTable" class="table">
+        <table id="orderList" class="table">
             <thead>
             <tr>
                 <th>#</th>
+                <th>Date</th>
                 <th>StartOrder</th>
                 <th>EndOrder</th>
                 <th>Price</th>
+                <th>Status</th>
             </tr>
             </thead>
         </table>
@@ -86,5 +88,6 @@ blocks contain brief information about order-->
 <!--script check life cookie, end delete cookie on click logout-button-->
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
-<script src="js/customerorderhistory.js" type="text/javascript"></script>
+<!--set data in table-->
+<script src="js/customer-order-list.js" type="text/javascript"></script>
 </body>
