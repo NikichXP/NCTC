@@ -18,10 +18,10 @@
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
   <input type="text" id="requestedSeatsCount" placeholder="Requested seats count"/><br>
-  <input type="text" id="fromAddress" placeholder="From address" onchange="makeSearch(this)"/>
+  <input type="text" id="fromAddress" placeholder="From address" onchange="removeFromXY(); makeSearch(this)"/>
   <input type="text" id="fromX" disabled/>
   <input type="text" id="fromY" disabled/><br>
-  <input type="text" id="toAddress0" disabled placeholder="To address" onchange="makeSearch(this)"/>
+  <input type="text" id="toAddress0" placeholder="To address" onchange="removeToXY(this); makeSearch(this)"/>
   <input type="text" id="toX0" disabled/>
   <input type="text" id="toY0" disabled/><br>
   <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
@@ -53,27 +53,26 @@
 </div>
 <div id="map" style="width:600px; height:600px; float: right;"></div>
 
-<script>
+<script> //TODO reorganise this code
   jQuery(function($){
     $("#timeRequested").mask("99/99/9999 99:99",{placeholder:"dd/mm/yyyy hh:mm"});
   });
-  var counter = 1;
+  var counter = 0;
   var isDeleteExists = false;
   function createToAddress() {
-      if(($("#fromAddress").attr("disabled") == "disabled") && ($("#toAddress0").attr("disabled") == "disabled")){
+      if($("#fromX").val().length > 0 && $("#toX0").val().length > 0 && $("#toX" + counter).val().length > 0){
+          setLock("#fromAddress");
+          setLock("#toAddress" + counter);
+          counter++;
       var outer = document.getElementById("order-form");
       var br = document.createElement("br");
       br.setAttribute("id", "br"+counter);
 
       var input = document.createElement("input");
       input.setAttribute("type", "text");
-//      input.setAttribute("disabled", "disabled");
       input.setAttribute("id", "toAddress"+counter);
-      input.setAttribute("onchange", "makeSearch(this)");
+      input.setAttribute("onchange", "removeToXY(this); makeSearch(this)");
       input.setAttribute("placeholder", "To address "+counter);
-
-
-
 
       var input2 = document.createElement("input");
       input2.setAttribute("disabled", "disabled");
@@ -96,25 +95,45 @@
           isDeleteExists = true;
       }
       var addressRemover = document.getElementById("addressRemover");
-      outer.insertBefore(br, addressRemover);
       outer.insertBefore(input, addressRemover);
       outer.insertBefore(input2, addressRemover);
       outer.insertBefore(input3, addressRemover);
-      counter++;
-      } else {alert("Enter fromAddress and toAddress.")}
+      outer.insertBefore(br, addressRemover);
+      } else {alert("Enter valid fromAddress and toAddress.")}
   }
 
   function deleteToAddress() {
-      document.getElementById("br" + (counter - 1)).remove();
-      document.getElementById("toAddress" + (counter - 1)).remove();
-      document.getElementById("toX" + (counter - 1)).remove();
-      document.getElementById("toY" + (counter - 1)).remove();
+      document.getElementById("toAddress" + (counter)).remove();
+      document.getElementById("toX" + (counter)).remove();
+      document.getElementById("toY" + (counter)).remove();
+      document.getElementById("br" + (counter)).remove();
       counter--;
-      buildPath(counter - 1);
-      if (counter == 1) {
+      buildPath(counter);
+      if (counter == 0) {
+          setUnlock("#fromAddress");
+          setUnlock("#toAddress0");
           document.getElementById("addressRemover").remove();
           isDeleteExists = false;
+      } else {
+        setUnlock("#toAddress" + (counter));
       }
+  }
+
+  function setLock(name){
+      $(name).prop('disabled', true);
+  }
+  function setUnlock(name){
+      $(name).prop('disabled', false);
+  }
+
+  function removeFromXY() {
+      $("#fromX").val("");
+      $("#fromY").val("");
+  }
+
+  function removeToXY(element) {
+      $("#toX" + element.id.slice(-1)).val("");
+      $("#toY" + element.id.slice(-1)).val("");
   }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

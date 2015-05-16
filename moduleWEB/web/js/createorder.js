@@ -114,11 +114,16 @@ function validateBasicOrderData() {
         return false;
     }
     if($("#fromAddress").val().length == 0 || $("#fromX").val().length == 0 || $("#fromY").val().length == 0){
-        alert("Select start address.");
+        alert("Select proper start address.");
         return false;
     }
-    if($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0){
-        alert("Select distinition address.");
+    if($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0) {
+        alert("Select proper destination address.");
+        return false;
+    }
+    if($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
+        || $("#toY" + counter).val().length == 0){
+        alert("Select proper destination address.");
         return false;
     }
     if(!$("#asSoonAsPossible").is(':checked') && !validateNames($("#timeRequested").val(), dateTime)){

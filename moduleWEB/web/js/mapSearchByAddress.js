@@ -43,12 +43,10 @@ function makeSearch(element) {
         if (element.id.indexOf("from") == 0) {
             document.getElementById("fromX").value = coords[0];
             document.getElementById("fromY").value = coords[1];
-            setLock("#" + element.id);
-            setUnlock("#toAddress0");
         }
         else {
             document.getElementById("toX" + element.id.slice(-1)).value = coords[0];
-                document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
+            document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
         }
 
         // Добавляем первый найденный геообъект на карту.
@@ -85,15 +83,8 @@ function buildPath(index) {
     }).then(function (route) {
         myMap.geoObjects.add(route);
         document.getElementById('totalLength').value=route.getLength();
-           setLock("#toAddress"+index);
     }, function (error) {
         alert("An error occurred: " + error.message);
     });
     return false;
-}
-function setLock(name){
-    $(name).prop('disabled', true);
-}
-function setUnlock(name){
-    $(name).prop('disabled', false);
 }
