@@ -28,6 +28,7 @@
   <input type="text" id="toAddress0" placeholder="To address" onchange="removeToXY(this); makeSearch(this)"/>
   <input type="text" id="toX0" disabled/>
   <input type="text" id="toY0" disabled/><br>
+  <input type="text" id="distance0" disabled/><br>
   <input type="button" id="addressAdder" value = "Add" onclick = "createToAddress();"><br>
 
   <input onchange="showOrHideDatePicker()" type="checkbox" id="asSoonAsPossible">asSoonAsPossible</input><br>
@@ -85,6 +86,11 @@ function createToAddress() {
     input3.setAttribute("type", "text");
     input3.setAttribute("id", "toY"+counter);
 
+    var input4 = document.createElement("input");
+    input4.setAttribute("disabled", "disabled");
+    input4.setAttribute("type", "text");
+    input4.setAttribute("id", "distance"+counter);
+
     var addressAdder = document.getElementById("addressAdder");
     if (!isDeleteExists) {
       var addressRemover = document.createElement("input");
@@ -99,6 +105,7 @@ function createToAddress() {
     outer.insertBefore(input, addressRemover);
     outer.insertBefore(input2, addressRemover);
     outer.insertBefore(input3, addressRemover);
+    outer.insertBefore(input4, addressRemover);
     outer.insertBefore(br, addressRemover);
   } else {alert("Enter valid fromAddress and toAddress.")}
 }
@@ -107,6 +114,7 @@ function deleteToAddress() {
   document.getElementById("toAddress" + (counter)).remove();
   document.getElementById("toX" + (counter)).remove();
   document.getElementById("toY" + (counter)).remove();
+  document.getElementById("distance" + (counter)).remove();
   document.getElementById("br" + (counter)).remove();
   counter--;
   buildPath(counter);
@@ -135,6 +143,7 @@ function removeFromXY() {
 function removeToXY(element) {
   $("#toX" + element.id.slice(-1)).val("");
   $("#toY" + element.id.slice(-1)).val("");
+  $("#distance" + element.id.slice(-1)).val("");
 }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
