@@ -1,4 +1,6 @@
-checkCookie("uuid");
+$(document).ready(function(){
+    checkCookie("uuid");
+});
 
 $("#logout-button").click(function(){
     deleteAllCookies();

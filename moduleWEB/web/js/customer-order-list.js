@@ -1,23 +1,25 @@
-$(document).ready(function(){
+$(document).ready(function () {
     setList()
 });
 
-function setList(){
+function setList() {
     var uuid = getCookie("uuid");
-    $.ajax({
-        method: 'POST',
-        url: 'api/user_dash/customer_list',
-        contentType: "text/plain; charset=utf-8",
-        data: uuid,
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "table");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error!");
-        }
-    })
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user_dash/customer_list',
+            contentType: "text/plain; charset=utf-8",
+            data: uuid,
+            dataType: 'text',
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                drawTable(obj.orderHistory, "table");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText + " Error!");
+            }
+        })
+    }
 }
 
 function getCookie(name) {
@@ -51,17 +53,17 @@ function drawBody(rowData, table) {
     var div = document.getElementById(table);
     var createDiv = document.createElement("div");
     var node = document.createTextNode("data :" + rowData.dateOrderCreate
-                                        + "\nferst point :" + rowData.startOrder
-                                        + "\nnext point :" + rowData.endOrder
-                                        + "\nstatus :" + rowData.price
-                                        + "\nprice: " + rowData.price + "$");
+    + "\nferst point :" + rowData.startOrder
+    + "\nnext point :" + rowData.endOrder
+    + "\nstatus :" + rowData.price
+    + "\nprice: " + rowData.price + "$");
     createDiv.appendChild(node);
     createDiv.className = "button";
     div.appendChild(createDiv);
 
 }
 
-function goBack(){
+function goBack() {
     document.location.href = "customer.jsp"
 }
 
