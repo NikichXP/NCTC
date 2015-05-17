@@ -6,20 +6,22 @@ $(document).ready(function(){
 
 function setList(){
     var uuid = getCookie("uuid");
-    $.ajax({
-        method: 'POST',
-        url: 'api/user_dash/customer_list',
-        contentType: "text/plain; charset=utf-8",
-        data: uuid,
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "table");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error!");
-        }
-    })
+    if(uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user_dash/customer_list',
+            contentType: "text/plain; charset=utf-8",
+            data: uuid,
+            dataType: 'text',
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                drawTable(obj.orderHistory, "table");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText + " Error!");
+            }
+        })
+    }
 }
 
 function getCookie(name) {
