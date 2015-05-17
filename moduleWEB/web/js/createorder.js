@@ -96,6 +96,34 @@ function getCarClass() {
             for (var i = 0; i < obj.carClass.length; i++) {
                 if (i == 0) {
                     str = str + '<input type="radio" checked name="carClass" data-value="'
+                        + obj.carClass[i].name + '" multiplier="' + obj.carClass[i].tariff_multiplier
+                        + '">' + obj.carClass[i].name + '</input><br>';
+                } else {
+                    str = str + '<input type="radio" name="carClass" data-value="'
+                        + obj.carClass[i].name + '" multiplier="' + obj.carClass[i].tariff_multiplier
+                        + '">' + obj.carClass[i].name + '</input><br>';
+                }
+            }
+
+            document.getElementById("carClass").innerHTML = str;
+        },
+        error: function (jqXHR) {
+            alert("Bad response from server.\n" + jqXHR.responseText);
+        }
+    })
+}
+
+function getAllTariffs() {
+    $.ajax({
+        method: 'POST',
+        url: 'api/tariff/getAll',
+        dataType: 'text',
+        success: function (data) {
+            var obj = JSON.parse(data);
+            var str = 'Car class:<br>';
+            for (var i = 0; i < obj.carClass.length; i++) {
+                if (i == 0) {
+                    str = str + '<input type="radio" checked name="carClass" data-value="'
                         + obj.carClass[i].name + '">' + obj.carClass[i].name + '</input><br>';
                 } else {
                     str = str + '<input type="radio" name="carClass" data-value="'

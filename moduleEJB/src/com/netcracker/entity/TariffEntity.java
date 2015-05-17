@@ -9,18 +9,6 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tariff", schema = "public", catalog = "postgres")
-@NamedQueries({
-		@NamedQuery(name = "Tariff.findAnimalMultiplier", query = "SELECT f FROM TariffEntity f " +
-				"WHERE f.animalFriendly = true"),
-		@NamedQuery(name = "Tariff.findWifiMultiplier", query = "SELECT f FROM TariffEntity f " +
-				"WHERE f.wifi = true"),
-		@NamedQuery(name = "Tariff.findSexMultiplier", query = "SELECT f FROM TariffEntity f " +
-				"WHERE f.sex = :sex"),
-		@NamedQuery(name = "Tariff.findPerHourByRequestedTime", query = "SELECT f FROM TariffEntity f " +
-				"WHERE :requestedTimeHHmm BETWEEN f.timeStarts AND f.timeEnds"),
-		@NamedQuery(name = "Tariff.findPerKmByRequestedTime", query = "SELECT f FROM TariffEntity f " +
-				"WHERE :requestedTimeHHmm BETWEEN f.timeStarts AND f.timeEnds")
-})
 public class TariffEntity {
 	@SequenceGenerator(
 			name = "tariff_SEQUENCE_GENERATOR",
@@ -33,22 +21,25 @@ public class TariffEntity {
 	private BigInteger id;
 
 	@Column(name = "per_hour", nullable = true, insertable = true, updatable = true, precision = 3)
-	private boolean perHour;
+	private Boolean perHour;
 
 	@Column(name = "per_kilometer", nullable = true, insertable = true, updatable = true, precision = 3)
-	private boolean perKilometer;
+	private Boolean perKilometer;
 
 	@Column(name = "time_starts", nullable = true, insertable = true, updatable = true)
-	private Timestamp timeStarts;
+	private String timeStarts;
 
 	@Column(name = "time_ends", nullable = true, insertable = true, updatable = true)
-	private Timestamp timeEnds;
+	private String timeEnds;
 
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
 
 	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	private Boolean wifi;
+
+	@Column(name = "smoking_friendly", nullable = true, insertable = true, updatable = true)
+	private Boolean smokingFriendly;
 
 	@Column(name = "sex", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String sex;
@@ -60,7 +51,7 @@ public class TariffEntity {
 	private BigInteger toSeatsCount;
 
 	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 3)
-	private BigInteger multiplier;
+	private BigDecimal multiplier;
 
 	public BigInteger getId() {
 		return id;
@@ -70,35 +61,35 @@ public class TariffEntity {
 		this.id = id;
 	}
 
-	public boolean getPerHour() {
+	public Boolean isPerHour() {
 		return perHour;
 	}
 
-	public void setPerHour(boolean perHour) {
+	public void setPerHour(Boolean perHour) {
 		this.perHour = perHour;
 	}
 
-	public boolean getPerKilometer() {
+	public Boolean isPerKilometer() {
 		return perKilometer;
 	}
 
-	public void setPerKilometer(boolean perKilometer) {
+	public void setPerKilometer(Boolean perKilometer) {
 		this.perKilometer = perKilometer;
 	}
 
-	public Timestamp getTimeStarts() {
+	public String getTimeStarts() {
 		return timeStarts;
 	}
 
-	public void setTimeStarts(Timestamp timeStarts) {
+	public void setTimeStarts(String timeStarts) {
 		this.timeStarts = timeStarts;
 	}
 
-	public Timestamp getTimeEnds() {
+	public String getTimeEnds() {
 		return timeEnds;
 	}
 
-	public void setTimeEnds(Timestamp timeEnds) {
+	public void setTimeEnds(String timeEnds) {
 		this.timeEnds = timeEnds;
 	}
 
@@ -116,6 +107,14 @@ public class TariffEntity {
 
 	public void setWifi(Boolean wifi) {
 		this.wifi = wifi;
+	}
+
+	public Boolean getSmokingFriendly() {
+		return smokingFriendly;
+	}
+
+	public void setSmokingFriendly(Boolean smokingFriendly) {
+		this.smokingFriendly = smokingFriendly;
 	}
 
 	public String getSex() {
@@ -142,11 +141,11 @@ public class TariffEntity {
 		this.toSeatsCount = toSeatsCount;
 	}
 
-	public BigInteger getMultiplier() {
+	public BigDecimal getMultiplier() {
 		return multiplier;
 	}
 
-	public void setMultiplier(BigInteger multiplier) {
+	public void setMultiplier(BigDecimal multiplier) {
 		this.multiplier = multiplier;
 	}
 

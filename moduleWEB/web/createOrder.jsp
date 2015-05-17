@@ -11,9 +11,13 @@
   <title>Order Test</title>
   <script src="js/jquery.js"></script>
   <script src="js/jquery.maskedinput.js"></script>
+  <script src="js/tariff.js"></script>
+
   <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"> </script>
 </head>
-<body onload="getMusicType(); getCarClass()">
+<body onload="getMusicType(); getCarClass(); getTariffs('basic')">
+<p id="tariffs" hidden></p>
+
 <div id="order-form" style="float: left;">
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
