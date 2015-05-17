@@ -3,6 +3,7 @@ package com.netcracker.entity;
 /* 13:42 30.04.2015 by Viktor Taranenko */
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 
@@ -27,6 +28,9 @@ public class OrderTypeEntity {
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 3)
+	private BigDecimal tariffMultiplier;
+
 	public BigInteger getId() {
 		return id;
 	}
@@ -41,6 +45,14 @@ public class OrderTypeEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public BigDecimal getTariffMultiplier() {
+		return tariffMultiplier;
+	}
+
+	public void setTariffMultiplier(BigDecimal tariffMultiplier) {
+		this.tariffMultiplier = tariffMultiplier;
 	}
 
 	public Collection<OrderEntity> getOrderEntities() {

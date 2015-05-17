@@ -113,13 +113,13 @@ public class OrderEntity {
 	@Column(name = "driver_refuse_comment", nullable = true, insertable = true, updatable = true, length = 2147483647)
 	private String driverRefuseComment;
 
-	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "total_length", nullable = true, insertable = true, updatable = true, precision = 3)
 	private BigDecimal totalLength;
 
-	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "total_multiplier", nullable = true, insertable = true, updatable = true, precision = 3)
 	private BigDecimal totalMultiplier;
 
-	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 0)
+	@Column(name = "final_price", nullable = true, insertable = true, updatable = true, precision = 2)
 	private BigDecimal finalPrice;
 
 	public CarClassEntity getCarClassEntity() {

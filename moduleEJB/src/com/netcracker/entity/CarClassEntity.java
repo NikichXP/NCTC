@@ -32,7 +32,7 @@ public class CarClassEntity {
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String name;
 
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 3)
 	private BigDecimal tariffMultiplier;
 
 	public BigInteger getId() {

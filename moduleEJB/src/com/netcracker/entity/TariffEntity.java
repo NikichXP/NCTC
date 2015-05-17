@@ -59,7 +59,7 @@ public class TariffEntity {
 	@Column(name = "to_seats_count", nullable = true, insertable = true, updatable = true, precision = 0)
 	private BigInteger toSeatsCount;
 
-	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "multiplier", nullable = false, insertable = true, updatable = true, precision = 3)
 	private BigInteger multiplier;
 
 	public BigInteger getId() {

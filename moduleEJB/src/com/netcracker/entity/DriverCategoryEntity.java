@@ -35,7 +35,7 @@ public class DriverCategoryEntity {
 	@Column(name = "description", nullable = false, insertable = true, updatable = true, length = 2147483647)
 	private String description;
 
-	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "tariff_multiplier", nullable = false, insertable = true, updatable = true, precision = 3)
 	private BigDecimal tariffMultiplier;
 
 	public BigInteger getId() {

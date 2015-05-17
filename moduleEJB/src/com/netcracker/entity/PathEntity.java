@@ -31,16 +31,16 @@ public class PathEntity {
 	@OneToMany(mappedBy = "nextPathEntity")
 	private Collection<PathEntity> nextPathEntities;
 
-	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "start_x", nullable = false, insertable = true, updatable = true, precision = 6)
 	private BigDecimal startX;
 
-	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "start_y", nullable = false, insertable = true, updatable = true, precision = 6)
 	private BigDecimal startY;
 
-	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "end_x", nullable = false, insertable = true, updatable = true, precision = 6)
 	private BigDecimal endX;
 
-	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "end_y", nullable = false, insertable = true, updatable = true, precision = 6)
 	private BigDecimal endY;
 
 	@Column(name = "start_address", nullable = false, insertable = true, updatable = true, length = 2147483647)
@@ -52,10 +52,10 @@ public class PathEntity {
 	@Column(name = "completed", nullable = false, insertable = true, updatable = true)
 	private boolean completed;
 
-	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "length", nullable = false, insertable = true, updatable = true, precision = 3)
 	private BigDecimal length;
 
-	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 0)
+	@Column(name = "price", nullable = false, insertable = true, updatable = true, precision = 2)
 	private BigDecimal price;
 
 	public PathEntity() {
