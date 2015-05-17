@@ -13,7 +13,7 @@
   <script src="js/jquery.maskedinput.js"></script>
   <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"> </script>
 </head>
-<body onload="getMusicType()">
+<body onload="getMusicType(); getCarClass()">
 <div id="order-form" style="float: left;">
   <input type="text" id="contactName" placeholder="Contact name"/><br>
   <input type="text" id="contactPhone" placeholder="Contact phone"/><br>
@@ -34,11 +34,8 @@
   <input type="radio" name="sex" data-value="Any">Any</input><br>
   <input type="radio" name="sex" data-value="Female">Female</input><br>
 
-  Car class:<br>
-  <input type="radio" checked name="carClass" data-value="Basic">Basic</input><br><%--TODO get from DB--%>
-  <input type="radio" name="carClass" data-value="Premium">Premium</input><br>
-
-  <p id="musicTypes"></p>
+    <p id="carClass"></p>
+    <p id="musicTypes"></p>
 
   <input type="checkbox" id="smokingFriendly">smokingFriendly</input><br>
   <input type="checkbox" id="animalFriendly">animalFriendly</input><br>
