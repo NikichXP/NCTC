@@ -73,7 +73,9 @@ function makeSearch(element) {
         //});
     });
     if (document.getElementById('fromAddress').value != '' && document.getElementById('toAddress0').value != '') {
-        buildPath(element.id.slice(-1));
+        if (element.id != "fromAddress") {
+            buildPath(element.id.slice(-1));
+        } else buildPath(0);
     }
     return false;
 }
