@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(UserRest.class);
         resources.add(OrderRest.class);
         resources.add(MusicRest.class);
+        resources.add(CarClassRest.class);
         resources.add(OrderDataRest.class);
         resources.add(TestRest.class);
     }
