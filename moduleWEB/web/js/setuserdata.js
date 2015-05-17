@@ -1,26 +1,28 @@
-$(document).ready(function(){
+$(document).ready(function () {
     setUserDataInPlaceHolder();
 });
 
-function setUserDataInPlaceHolder(){
+function setUserDataInPlaceHolder() {
     var uuid = getCookie("uuid");
-    $.ajax({
-        method: 'POST',
-        url: 'api/user/getUserDataByUuid',
-        contentType: "text/plain; charset=utf-8",
-        data: uuid,
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            setData(obj.userData);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(uuid + " Error!");
-        }
-    })
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user/getUserDataByUuid',
+            contentType: "text/plain; charset=utf-8",
+            data: uuid,
+            dataType: 'text',
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                setData(obj.userData);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(uuid + " Error!");
+            }
+        })
+    }
 }
 
-function setData(data){
+function setData(data) {
     document.getElementById("contactName").value = data[0].name;
     document.getElementById("contactPhone").value = data[0].phone;
 }
