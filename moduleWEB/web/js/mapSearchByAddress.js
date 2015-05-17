@@ -13,14 +13,30 @@ ymaps.ready(init);
 function init() {
     // Создание экземпляра карты и его привязка к контейнеру с
     // заданным id ("map").
+    var geolocation = ymaps.geolocation;
     myMap = new ymaps.Map('map', {
         // При инициализации карты обязательно нужно указать
         // её центр и коэффициент масштабирования.
-
-        center: [50.450097, 30.523397], // Киев
-        zoom: 10
+        center: [50.45,30.52], // Киев
+        zoom: 11
     });
-}
+    geolocation.get({
+        provider: 'browser',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        // Синим цветом пометим положение, полученное через браузер.
+        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+        result.geoObjects.options.set('preset', 'islands#blueCircleIcon');
+        myMap.geoObjects.add(result.geoObjects);
+        var coords=result.geoObjects.position;
+        document.getElementById("fromX").value=coords[0];
+        document.getElementById("fromY").value = coords[1];
+        var firstGeoObject=result.geoObjects.get(0);
+        document.getElementById("fromAddress").value=firstGeoObject.properties.get('text');
+    }, function(e){
+        alert("Couldn't detect your location");
+    });
+};
 
 function makeSearch(element) {
     alert(element.value + " " + element.id);
