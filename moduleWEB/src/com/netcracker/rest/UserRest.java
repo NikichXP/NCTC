@@ -190,7 +190,11 @@ public class UserRest {
         }
         userEntity.setConfirmed(true);
         user.update(userEntity);
-        return Response.status(201).entity("Email confirmed").build();
+        return Response.status(201).entity("" +
+                "<script>" +
+                "alert('Email confirmed');" +
+                "document.location.href = \"http://localhost:8080/moduleWEB_war_archive/customer.jsp\";" +
+                "</script>").build(); //TODO change to real url
     }
 
     @POST
