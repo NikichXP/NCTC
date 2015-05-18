@@ -71,3 +71,11 @@ function drawRowDrivers(rowData, table) {
     };
     div.appendChild(createDiv);
 }
+
+function addDriver(){
+    alert("driver addid");
+}
+
+function addCar(){
+    alert("carsdffdjkg");
+}

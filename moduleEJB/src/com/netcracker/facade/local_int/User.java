@@ -38,4 +38,6 @@ public interface User {
 	UserEntity loginByEmail(String email, String password);
 
 	UserEntity loginByPhone(String phone, String password);
+
+	UserEntity getUserById(String id);
 }
