@@ -225,13 +225,13 @@ public class UserRest {
 
 
     @POST
-    @Path("getUserDataByid")
+    @Path("getUserDataById")
     @Consumes("text/plain")
     public Response getUserDataByID(String id) {
         UserEntity userEntity = user.getUserById("3");
 
 
-            return Response.status(200).entity(userEntity.getFirstName()).build();
+        return Response.status(200).entity(userEntity.getFirstName()).build();
 
     }
 

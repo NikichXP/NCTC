@@ -10,15 +10,14 @@ function setForm(){
 
     $.ajax({
         method: 'POST',
-        url: 'api/user/getUserDataByid',
+        url: 'api/user/getUserDataById',
         contentType: "text/plain; charset=utf-8",
-        data:"3",
-
+        data:'3',
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            alert(data)
-            drawForm(obj.userData, "#form");
+            //var obj = JSON.parse(data);
+            alert(data);
+            //drawForm(obj.userData, "#form");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");

@@ -80,4 +80,5 @@ blocks contain brief information about order-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
 <!--set data in table-->
 <script src="js/customer-order-list.js" type="text/javascript"></script>
+<script src="js/admin-form-script.js"></script>
 </body>

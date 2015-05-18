@@ -8,6 +8,7 @@ import com.netcracker.facade.local_int.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.util.List;
 
 @Stateless
@@ -46,7 +47,7 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
 
     @Override
     public UserEntity getUserById(String id) {
-        List results = em.createNamedQuery("User.getUserById").setParameter("userId", id).getResultList();
+        List results = em.createNamedQuery("User.getUserById").setParameter("userId", new Integer(id)).getResultList();
         if (!results.isEmpty()) {
             return (UserEntity)results.get(0);
         }
