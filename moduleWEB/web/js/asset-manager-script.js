@@ -12,7 +12,7 @@ function setAssetManager() {
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
             alert(data);
-            drawTable(obj.cars, "table");
+            drawCars(obj.cars, "table");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
@@ -20,26 +20,28 @@ function setAssetManager() {
     })
 }
 
-function drawTable(data, table) {
+function drawCars(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table);
+        drawBodyCars(data[i], table);
     }
 }
-function drawBody(rowData, table) {
+function drawBodyCars(rowData, table) {
+
     var createDiv = document.createElement("div");
     var node = document.createTextNode("id :" + rowData.carId + " model :" + rowData.model);
     createDiv.appendChild(node);
     createDiv.className = "button";
     createDiv.onclick = function () {
-        //document.location.href = "editOrder.jsp?id=" + rowData.id;
+        alert(rowData.carId);
     };
-    var table = document.getElementById("table");
+    var table = document.getElementById("assetManagerTable");
     var tbody = document.createElement("tbody");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td")
     var td2 = document.createElement("td")
     td1.appendChild(createDiv);
-    tr.appendChild(td1, td2);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
     tbody.appendChild(tr);
     table.appendChild(tbody);
 }

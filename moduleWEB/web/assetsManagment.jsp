@@ -49,7 +49,7 @@ blocks contain brief information about order-->
 
     <h4> ASSET NANAGMENT</h4>
     <hr>
-    <table id="historyOrderTable" class="table">
+    <table id="assetManagerTable" class="table">
       <thead>
       <tr>
         <th>CAR</th>
