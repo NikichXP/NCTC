@@ -6,7 +6,6 @@ function getTariffs(orderTypeName) {
         data: orderTypeName,
         dataType: 'text',
         success: function (data) {
-            alert(data);
             var obj = JSON.parse(data);
             var str = '<p id="orderTypeRate" multiplier="' + obj.orderTypeRate + '" />';
             for (var i = 0; i < obj.hourlyRates.length; i++) {
