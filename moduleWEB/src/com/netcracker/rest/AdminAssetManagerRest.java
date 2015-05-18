@@ -1,7 +1,9 @@
 package com.netcracker.rest;
 
 import com.netcracker.entity.CarEntity;
+import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.Car;
+import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;
 import javax.ws.rs.POST;
@@ -19,9 +21,12 @@ public class AdminAssetManagerRest {
     @EJB
     Car car;
 
+    @EJB
+    User user;
+
     @POST
     @Path("cars")
-    public Response getOrderHistoryData() {
+    public Response getCars() {
         List<CarEntity> list = car.findAll();
         StringBuilder sb = new StringBuilder();
         sb.append("{\"cars\":[");
@@ -30,6 +35,30 @@ public class AdminAssetManagerRest {
                     .append(carEntity.getId())
                     .append("\",\"model\":\"")
                     .append(carEntity.getModel())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (list != null) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+
+    }
+
+
+    @POST
+    @Path("drivers")
+    public Response getDrivers() {
+        List<UserEntity> list = user.findAll();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"cars\":[");
+        for (UserEntity userEntity : list) {
+            sb.append("{\"driverId\":\"")
+                    .append(userEntity.getId())
+                    .append("\",\"name\":\"")
+                    .append(userEntity.getFirstName())
                     .append("\" },");
         }
         sb.replace(sb.length() - 1, sb.length(), "");

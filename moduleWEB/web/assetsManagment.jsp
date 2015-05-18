@@ -56,6 +56,16 @@ blocks contain brief information about order-->
         <th>DRIVER</th>
       </tr>
       </thead>
+      <tbody>
+      <tr>
+        <th>
+          <div id="cars"></div>
+        </th>
+        <th>
+          <div id="drivers"></div>
+        </th>
+      </tr>
+      </tbody>
       <tfoot>
       <tr>
         <th>
