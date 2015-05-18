@@ -16,8 +16,8 @@
         <class>com.netcracker.entity.PathEntity</class>
         <class>com.netcracker.entity.TariffEntity</class>
         <class>com.netcracker.entity.UserEntity</class>
-        <class>com.netcracker.entity.User$DriverCategoryEntity</class>
-        <class>com.netcracker.entity.User$UserAccessLevelEntity</class>
+        <class>com.netcracker.entity.UserDriverCategoryEntity</class>
+        <class>com.netcracker.entity.UserUserAccessLevelEntity</class>
         <class>com.netcracker.entity.UserAccessLevelEntity</class>
         <class>com.netcracker.entity.UserGroupEntity</class>
         <properties>

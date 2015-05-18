@@ -24,7 +24,7 @@ public class DriverCategoryEntity {
 	private Collection<CarEntity> carEntities;
 
 	@OneToMany(mappedBy = "driverCategoryEntity")
-	private Collection<User$DriverCategoryEntity> user$DriverCategoryEntities;
+	private Collection<UserDriverCategoryEntity> user$DriverCategoryEntities;
 
 	@ManyToMany (mappedBy = "driverCategoryEntities")
 	private Collection<UserEntity> userEntities;
@@ -78,11 +78,11 @@ public class DriverCategoryEntity {
 		this.carEntities = carEntities;
 	}
 
-	public Collection<User$DriverCategoryEntity> getUser$DriverCategoryEntities() {
+	public Collection<UserDriverCategoryEntity> getUser$DriverCategoryEntities() {
 		return user$DriverCategoryEntities;
 	}
 
-	public void setUser$DriverCategoryEntities(Collection<User$DriverCategoryEntity> user$DriverCategoryEntities) {
+	public void setUser$DriverCategoryEntities(Collection<UserDriverCategoryEntity> user$DriverCategoryEntities) {
 		this.user$DriverCategoryEntities = user$DriverCategoryEntities;
 	}
 

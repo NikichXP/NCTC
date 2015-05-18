@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "user$driver_category", schema = "public", catalog = "postgres")
-public class User$DriverCategoryEntity {
+public class UserDriverCategoryEntity {
 	@SequenceGenerator(
 			name = "user-driver_category_SEQUENCE_GENERATOR",
 			sequenceName = "user-driver_category_id_seq",
@@ -55,7 +55,7 @@ public class User$DriverCategoryEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		User$DriverCategoryEntity that = (User$DriverCategoryEntity) o;
+		UserDriverCategoryEntity that = (UserDriverCategoryEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		return true;

@@ -21,7 +21,7 @@ import java.util.Collection;
 				"WHERE f.phone = :phone AND f.password = :password"),
 		@NamedQuery(name = "User.findByUuid", query = "SELECT f FROM UserEntity f WHERE f.uuid = :uuid"),
 		@NamedQuery(name = "User.getDrivers", query = "SELECT f.userEntity FROM UserUserAccessLevelEntity f " +
-				"WHERE f.userAccessLevelEntity.id = 3")
+				"WHERE f.userAccessLevelEntity.name = 'driver'")
 })
 public class UserEntity {
 	@SequenceGenerator(
@@ -56,7 +56,7 @@ public class UserEntity {
 	private Collection<FavouriteAddressEntity> favouriteAddressEntities;
 
 	@OneToMany(mappedBy = "userEntity")
-	private Collection<User$DriverCategoryEntity> user$DriverCategoryEntities;
+	private Collection<UserDriverCategoryEntity> user$DriverCategoryEntities;
 
 	@OneToMany(mappedBy = "customerUserEntity")
 	private Collection<OrderEntity> orderEntitiesAsCustomer;
@@ -280,11 +280,11 @@ public class UserEntity {
 		this.userGroupEntities = userGroupByGroupId;
 	}
 
-	public Collection<User$DriverCategoryEntity> getUser$DriverCategoryEntities() {
+	public Collection<UserDriverCategoryEntity> getUser$DriverCategoryEntities() {
 		return user$DriverCategoryEntities;
 	}
 
-	public void setUser$DriverCategoryEntities(Collection<User$DriverCategoryEntity> user$DriverCategoryEntities) {
+	public void setUser$DriverCategoryEntities(Collection<UserDriverCategoryEntity> user$DriverCategoryEntities) {
 		this.user$DriverCategoryEntities = user$DriverCategoryEntities;
 	}
 
