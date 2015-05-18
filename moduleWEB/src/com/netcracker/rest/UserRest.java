@@ -222,4 +222,50 @@ public class UserRest {
         }
     }
 
+
+
+    @POST
+    @Path("getUserDataByid")
+    @Consumes("text/plain")
+    public Response getUserDataByID(String id) {
+        UserEntity userEntity = user.getUserById("3");
+
+
+            return Response.status(200).entity(userEntity.getFirstName()).build();
+
+    }
+
+
+
+//    @POST
+//    @Path("getUserDataByid")
+//    @Consumes("text/plain")
+//    public Response getUserDataByID(String id) {
+//        UserEntity userEntity = user.getUserById("3");
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("{\"userData\":[");
+//
+//        sb.append("{\"name\":\"")
+//                .append(userEntity.getFirstName())
+//                .append("\",\"phone\":\"")
+//                .append(userEntity.getPhone())
+//                .append("\",\"firstName\":\"")
+//                .append(userEntity.getFirstName())
+//                .append("\",\"lastName\":\"")
+//                .append(userEntity.getLastName())
+//                .append("\",\"myMail\":\"")
+//                .append(userEntity.getEmail())
+//                .append("\" },");
+//        sb.replace(sb.length() - 1, sb.length(), "");
+//        sb.append("]}");
+//        if (userEntity != null) {
+//            return Response.status(200).entity(sb.toString()).build();
+//        } else {
+//            return Response.status(404).entity("Bad response.").build();
+//        }
+//    }
+
+
+
 }
