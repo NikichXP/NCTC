@@ -28,6 +28,7 @@ public class AdminRest {
     public Response getUsersData() {
         List<UserEntity> list = user.findAll();
         StringBuilder sb = new StringBuilder();
+        sb.append("{\"users_tb\":[");
         for (UserEntity userEntity : list) {
 
             sb.append("{\"firstName\":\"")

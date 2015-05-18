@@ -2,7 +2,7 @@
  * Created by Евгений on 16.05.2015.
  */
 $(document).ready(function(){
-
+ setHistory();
 });
 
 
@@ -16,7 +16,8 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "#historyOrderTable");
+            alert("1")
+            drawTable(obj.users_tb, "#table");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
@@ -30,7 +31,7 @@ function drawTable(data, table) {
     }
 }
 function drawBody(rowData, table) {
-    var row = $("<tbody><tr>")
+    var row = $("<tbody><tr>");
     $(table).append(row);
     row.append($("<td></td>"));
     row.append($("<td>" + rowData.firstName + "</td>"))
