@@ -23,7 +23,7 @@ import java.util.Collection;
 		@NamedQuery(name = "User.getDrivers", query = "SELECT f.userEntity FROM UserUserAccessLevelEntity f " +
 				"WHERE f.userAccessLevelEntity.id = 3"),
 		@NamedQuery(name = "User.getUserById", query = "SELECT f FROM UserEntity f " +
-		"WHERE f.id = :usrId")
+		"WHERE f.id = :userId")
 
 })
 public class UserEntity {

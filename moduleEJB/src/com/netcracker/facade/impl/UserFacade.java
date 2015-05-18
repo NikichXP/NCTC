@@ -46,7 +46,7 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
 
     @Override
     public UserEntity getUserById(String id) {
-        List results = em.createNamedQuery("User.getUserById").setParameter("usrId", id).getResultList();
+        List results = em.createNamedQuery("User.getUserById").setParameter("userId", id).getResultList();
         if (!results.isEmpty()) {
             return (UserEntity)results.get(0);
         }
