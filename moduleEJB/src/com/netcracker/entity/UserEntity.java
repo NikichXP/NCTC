@@ -19,7 +19,11 @@ import java.util.Collection;
 				"WHERE UPPER(f.email) = UPPER(:email) AND f.password = :password"),
 		@NamedQuery(name = "User.findByPhoneAndPassword", query = "SELECT f FROM UserEntity f " +
 				"WHERE f.phone = :phone AND f.password = :password"),
-		@NamedQuery(name = "User.findByUuid", query = "SELECT f FROM UserEntity f WHERE f.uuid = :uuid")})
+		@NamedQuery(name = "User.findByUuid", query = "SELECT f FROM UserEntity f WHERE f.uuid = :uuid"),
+		@NamedQuery(name = "User.getDrivers", query = "SELECT f.userEntity FROM UserUserAccessLevelEntity f " +
+				"WHERE f.userAccessLevelEntity.id = 3")
+
+})
 public class UserEntity {
 	@SequenceGenerator(
 			name = "USER_SEQUENCE_GENERATOR",
@@ -62,7 +66,7 @@ public class UserEntity {
 	private Collection<OrderEntity> orderEntitiesAsDriver;
 
 	@OneToMany(mappedBy = "userEntity")
-	private Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities;
+	private Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities;
 
 	@OneToOne(mappedBy = "userEntity")
 	private CarEntity carEntity;
@@ -285,11 +289,11 @@ public class UserEntity {
 		this.user$DriverCategoryEntities = user$DriverCategoryEntities;
 	}
 
-	public Collection<User$UserAccessLevelEntity> getUser$UserAccessLevelEntities() {
+	public Collection<UserUserAccessLevelEntity> getUser$UserAccessLevelEntities() {
 		return user$UserAccessLevelEntities;
 	}
 
-	public void setUser$UserAccessLevelEntities(Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities) {
+	public void setUser$UserAccessLevelEntities(Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities) {
 		this.user$UserAccessLevelEntities = user$UserAccessLevelEntities;
 	}
 

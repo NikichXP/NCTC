@@ -20,7 +20,7 @@ public class UserAccessLevelEntity {
 	private BigInteger id;
 
 	@OneToMany(mappedBy = "userAccessLevelEntity")
-	private Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities;
+	private Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities;
 
 	@ManyToMany (mappedBy = "userAccessLevelEntities")
 	private Collection<UserEntity> userEntities;
@@ -44,11 +44,11 @@ public class UserAccessLevelEntity {
 		this.name = name;
 	}
 
-	public Collection<User$UserAccessLevelEntity> getUser$UserAccessLevelEntities() {
+	public Collection<UserUserAccessLevelEntity> getUser$UserAccessLevelEntities() {
 		return user$UserAccessLevelEntities;
 	}
 
-	public void setUser$UserAccessLevelEntities(Collection<User$UserAccessLevelEntity> user$UserAccessLevelEntities) {
+	public void setUser$UserAccessLevelEntities(Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities) {
 		this.user$UserAccessLevelEntities = user$UserAccessLevelEntities;
 	}
 

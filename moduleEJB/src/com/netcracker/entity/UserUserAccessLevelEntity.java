@@ -7,7 +7,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "user$user_access_level", schema = "public", catalog = "postgres")
-public class User$UserAccessLevelEntity {
+public class UserUserAccessLevelEntity {
 	@SequenceGenerator(
 			name = "user-user_access_level_SEQUENCE_GENERATOR",
 			sequenceName = "user-user_access_level_id_seq",
@@ -55,7 +55,7 @@ public class User$UserAccessLevelEntity {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		User$UserAccessLevelEntity that = (User$UserAccessLevelEntity) o;
+		UserUserAccessLevelEntity that = (UserUserAccessLevelEntity) o;
 
 		if (id != null ? !id.equals(that.id) : that.id != null) return false;
 		return true;

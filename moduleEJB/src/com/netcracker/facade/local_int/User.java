@@ -21,6 +21,8 @@ public interface User {
 
 	List<UserEntity> findRange(int[] range);
 
+	List<UserEntity> getDrivers();
+
 	int count();
 
 	boolean isEmailUsed(String name);

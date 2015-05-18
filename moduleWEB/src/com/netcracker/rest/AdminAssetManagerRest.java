@@ -51,7 +51,7 @@ public class AdminAssetManagerRest {
     @POST
     @Path("drivers")
     public Response getDrivers() {
-        List<UserEntity> list = user.findAll();
+        List<UserEntity> list = user.getDrivers();
         StringBuilder sb = new StringBuilder();
         sb.append("{\"cars\":[");
         for (UserEntity userEntity : list) {

@@ -43,6 +43,12 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
         return !results.isEmpty();
     }
+
+    @Override
+    public List<UserEntity> getDrivers() {
+        return em.createNamedQuery("User.getDrivers").getResultList();
+    }
+
     /**
      * @param email unique user email
      * @return <b>UserEntity</b> object or <b>null</b> if not found
