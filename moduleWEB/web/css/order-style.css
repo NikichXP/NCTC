@@ -1,0 +1,160 @@
+body {
+	height: 95%;
+	width: 95%;
+	background-color: #394085;
+}
+input[type="text"]{
+	text-align: center;
+	display: table-row;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	width: 80%;
+}
+button {
+	display: table-row;
+	clear: left;
+}
+/*To store fields and map*/
+#container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 100%;
+}
+/*First major block on */
+#order-form {
+	height: 60%;
+	width: 40%;
+	float: left;
+	clear: right;
+	display: inline-block;
+	margin-left: auto;
+	margin: 10px;
+	padding: 10px;
+	overflow: auto;
+	background-color: #575E9F;
+}
+
+/*All input fields inside order-form have same margin*/
+#order-form > input {
+	margin: 1px;
+}
+
+#musicType {
+	width: 100%;
+	text-align: center;
+	clear: left;
+}
+#musicTypesBox h5{
+	padding: 0px;
+	text-align: center;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-right: auto;
+	margin-left: auto;
+
+}
+#musicTypes {
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+	width: 80%;
+}
+	
+#timeOption {
+
+}
+#timeRequested{
+	display: block;
+	clear: left;
+}
+
+#contacts {
+	background-color: #ffae19;
+	margin: 1px;
+}
+#importantInfo {
+	background-color: #ffb732;
+	margin: 1px;
+}
+#timeOption {
+	background-color: #ffc966;
+	margin: 1px;
+}
+#genderOption {
+	background-color: #6fd36f;
+	margin: 1px;
+}
+
+#contacts > input {
+	margin: 1px;
+}
+
+.optionsContainer {
+	margin: 1px;
+	display: block;
+	background-color: #32c132;
+}
+
+#musicTypesContainer {
+	background-color: #46c746;
+	margin: 1px;
+}
+#carClass {
+	margin: 1px;
+	background-color: #5acd5a;
+}
+/**/
+.summaryInfoContainer {
+	margin: 1px;
+	background-color: #3e6fda;
+}
+.summarySection {
+	display: inline-block;
+	margin: 1px;
+}
+/**/
+.commentaryContainer {
+	padding: 1px;
+	margin: 1px;
+	background-color: #2456c0;
+}
+#customerPreCreateComment {
+	display: block;
+	clear: left;
+	height: 40px;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+
+/**/
+.submitButtonContainer {
+	text-align: center;
+	width: auto;
+	height: auto;
+	display: block;
+	clear: left;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #204dac;
+}
+#basic-order-submit {
+	display: inline;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#map {
+	display: inline-block;
+	margin-right: auto;
+	margin: 10px;
+	overflow: hidden;
+	width: 500px;
+	height: 500px;
+	background-color: grey;
+}

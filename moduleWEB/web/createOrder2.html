@@ -1,0 +1,126 @@
+
+
+<html>
+
+<head>
+    <title>
+
+        Order Test 2 STATIC
+
+    </title>
+    <link href="css/order-style.css" rel="stylesheet">
+
+</head>
+<body onload="getMusicType(); getCarClass(); getTariffs('basic')">
+    <div id="container">
+        <div id="order-form">
+            <div id="contacts">
+                <input id="contactName" type="text" placeholder="Contact name"></input>
+                <input id="contactPhone" type="text" placeholder="Contact phone"></input>
+            </div>
+            <div id="importantInfo">
+                <input id="requestedSeatsCount" type="text" placeholder="Requested seats count"></input>
+                <input id="fromAddress" type="text" onchange="removeFromXY(); makeSearch(this)" placeholder="From address"></input>
+                <input id="toAddress0" type="text" onchange="removeToXY(this); makeSearch(this)" placeholder="To address"></input>
+                <input id="addressAdder" type="button" onclick="createToAddress();" value="Add"></input>
+            </div>
+            <div id="timeOption">
+                <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()"></input>
+                asSoonAsPossible
+                <input id="timeRequested" type="text" style="visibility: visible"></input>
+            </div>
+            <div id="genderOption">
+                Driver sex:
+                <input type="radio" data-value="Male" name="sex" checked="" multiplier="1"></input>
+                Male
+                <input type="radio" data-value="Any" name="sex"></input>
+                Any
+                <input type="radio" data-value="Female" name="sex" multiplier="1.1"></input>
+                Female
+            </div>
+
+            
+            <div id="carClass">
+                Car class:
+                <input type="radio" multiplier="1" data-value="basic" name="carClass" checked=""></input>
+                basic
+                <input type="radio" multiplier="1.1" data-value="premium" name="carClass"></input>
+                premium
+            </div>
+            
+            <!--Container to apply color and size-->
+            <div id="musicTypesContainer">
+                <!--Additional container to center text and dropdown-->
+                <div id="musicTypesBox">
+                    <h5>Music type:</h5>
+                    <select id="musicType">
+                        <option value="1">
+                            Pop
+                        </option>
+                        <option value="2">
+                            Classic
+                        </option>
+                        <option value="3">
+                            Rock
+                        </option>
+                        <option value="4">
+                            Punk
+                        </option>
+                        <option value="5">
+                            Reggae
+                        </option>
+                        <option value="6">
+                            RnB
+                        </option>
+                        <option value="7">
+                            Rap
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!--Container for Order Options-->
+            <div class="optionsContainer">
+                <div class="option">
+                    <input id="smokingFriendly" type="checkbox" multiplier="1.1"></input>
+                    smokingFriendly
+                </div>
+                <div class="option">
+                   <input id="animalFriendly" type="checkbox" multiplier="1.1"></input>
+                   animalFriendly
+               </div>
+               <div class="option">
+                   <input id="wifi" type="checkbox" multiplier="1.2"></input>
+                   wifi
+               </div>
+               <div class="option">
+                <input id="airConditioner" type="checkbox"></input>
+                airConditioner
+               </div>
+            </div>
+
+       
+
+        <div class="summaryInfoContainer">
+            <div class="summarySection">
+                Total length:
+                <input id="totalLength" type="text" disabled=""></input>
+            </div>
+            <div class="summarySection">
+                Total price:
+                <input id="totalPrice" type="text" disabled=""></input>
+            </div> 
+        </div>
+
+        <div class="commentaryContainer">
+            <textarea id="customerPreCreateComment" placeholder="Additional comments to your order"></textarea>
+        </div>
+        
+        <div class="submitButtonContainer">
+            <input id="basic-order-submit" type="button" value="Create test Order."></input>
+        </div>
+    </div>
+    <div id="map"></div>
+</div>
+</body>
+</html>
+
