@@ -60,18 +60,12 @@ blocks contain brief information about order-->
       <tr>
         <th>
           <div class="button" id="addCar">
-            +
-          </div>
-          <div class="button" id="deleteCar">
-            X
+            ADD
           </div>
         </th>
         <th>
           <div class="button" id="addDriver">
-            +
-          </div>
-          <div class="button" id="deleteDriver">
-            X
+            ADD
           </div>
         </th>
       </tr>
