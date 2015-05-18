@@ -1,6 +1,6 @@
 $("#orderHistory").click(function(){
-    //orderHistoryClick
     alert("#orderHistory")
+    document.location.href = "adminHistory.jsp";
 });
 $("#makeReport").click(function(){
     //makeReport
@@ -13,6 +13,7 @@ $("#setting").click(function(){
 $("#assetManagement").click(function(){
     //assetManagement
     alert("#assetManagement")
+    document.location.href = "assetsManagment.jsp";
 });
 $("#fareManagement").click(function(){
     //fareManagement
