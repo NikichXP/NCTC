@@ -36,6 +36,7 @@ public class ApplicationConfig extends Application {
         resources.add(OrderDataRest.class);
         resources.add(TestRest.class);
         resources.add(TariffRest.class);
+        resources.add(AdminAssetManagerRest.class);
     }
 
 }

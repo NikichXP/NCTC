@@ -93,4 +93,5 @@ blocks contain brief information about order-->
 <script src="js/bootstrap.min.js"></script>
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
+<script src="js/asset-manager-script.js"></script>
 </body>
