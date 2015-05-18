@@ -42,6 +42,8 @@ public class TariffRest {
 				tariffJson.setAnimalFriendly(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.getWifi() != null)
 				tariffJson.setWifi(tariffEntity.getMultiplier().toString());
+			else if (tariffEntity.getAirConditioner() != null)
+				tariffJson.setAirConditioner(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.getSmokingFriendly() != null)
 				tariffJson.setSmokingFriendly(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.getSex() != null && tariffEntity.getSex().equalsIgnoreCase("male"))

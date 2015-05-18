@@ -35,6 +35,9 @@ public class TariffEntity {
 	@Column(name = "animal_friendly", nullable = true, insertable = true, updatable = true)
 	private Boolean animalFriendly;
 
+	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
+	private Boolean airConditioner;
+
 	@Column(name = "wifi", nullable = true, insertable = true, updatable = true)
 	private Boolean wifi;
 
@@ -95,6 +98,22 @@ public class TariffEntity {
 
 	public Boolean getAnimalFriendly() {
 		return animalFriendly;
+	}
+
+	public Boolean getPerHour() {
+		return perHour;
+	}
+
+	public Boolean getPerKilometer() {
+		return perKilometer;
+	}
+
+	public Boolean getAirConditioner() {
+		return airConditioner;
+	}
+
+	public void setAirConditioner(Boolean airConditioner) {
+		this.airConditioner = airConditioner;
 	}
 
 	public void setAnimalFriendly(Boolean animalFriendly) {
