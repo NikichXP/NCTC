@@ -56,6 +56,26 @@ blocks contain brief information about order-->
         <th>DRIVER</th>
       </tr>
       </thead>
+      <tfoot>
+      <tr>
+        <th>
+          <div class="button" id="addCar">
+            +
+          </div>
+          <div class="button" id="deleteCar">
+            X
+          </div>
+        </th>
+        <th>
+          <div class="button" id="addDriver">
+            +
+          </div>
+          <div class="button" id="deleteDriver">
+            X
+          </div>
+        </th>
+      </tr>
+      </tfoot>
     </table>
   </div>
 
