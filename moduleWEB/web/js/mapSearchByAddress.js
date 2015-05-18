@@ -100,6 +100,12 @@ function buildPath(index) {
         mapStateAutoApply: true // automatically position the map
     }).then(function (route) {
         myMap.geoObjects.add(route);
+            var Paths=route.getPaths();
+            for(var i = 0; i <= Paths.getLength(); i++) {
+                document.getElementById('distance'+i).value=Paths.get(i).getLength();
+                console.log(Paths.get(i).getLength());
+            }
+            //console.log(Paths);
         document.getElementById('totalLength').value=route.getLength();
     }, function (error) {
         alert("An error occurred: " + error.message);
