@@ -21,10 +21,7 @@ import java.util.Collection;
 				"WHERE f.phone = :phone AND f.password = :password"),
 		@NamedQuery(name = "User.findByUuid", query = "SELECT f FROM UserEntity f WHERE f.uuid = :uuid"),
 		@NamedQuery(name = "User.getDrivers", query = "SELECT f.userEntity FROM UserUserAccessLevelEntity f " +
-				"WHERE f.userAccessLevelEntity.id = 3"),
-		@NamedQuery(name = "User.getUserById", query = "SELECT f FROM UserEntity f " +
-		"WHERE f.id = :userId")
-
+				"WHERE f.userAccessLevelEntity.id = 3")
 })
 public class UserEntity {
 	@SequenceGenerator(
