@@ -34,12 +34,12 @@ function init() {
         var firstGeoObject=result.geoObjects.get(0);
         document.getElementById("fromAddress").value=firstGeoObject.properties.get('text');
     }, function(e){
-        alert("Couldn't detect your location");
+        //alert("Couldn't detect your location");
     });
 };
 
 function makeSearch(element) {
-    alert(element.value + " " + element.id);
+    //alert(element.value + " " + element.id);
     var myGeocoder = ymaps.geocode(element.value, {
         /**
          * Опции запроса
@@ -91,7 +91,7 @@ function buildPath(index) {
 
     for(var i = 0; i <= index; i++) {
         pointsArray.push(document.getElementById('toAddress' + i).value);
-        alert(pointsArray);
+        //alert(pointsArray);
     }
     myPath= new ymaps.route(
         pointsArray
@@ -102,13 +102,14 @@ function buildPath(index) {
         myMap.geoObjects.add(route);
             var Paths=route.getPaths();
             for(var i = 0; i < Paths.getLength(); i++) {
-                document.getElementById('distance'+i).value=Paths.get(i).getLength();
+                document.getElementById('distance'+i).value = Paths.get(i).getLength()/1000;
                 console.log(Paths.get(i).getLength());
             }
             //console.log(Paths);
-        document.getElementById('totalLength').value=route.getLength();
+            document.getElementById('totalLength').value = route.getLength()/1000;
+            updateMultiplierAndPrice();
     }, function (error) {
-        alert("An error occurred: " + error.message);
+        //alert("An error occurred: " + error.message);
     });
     return false;
 }

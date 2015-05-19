@@ -16,6 +16,7 @@ $("#basic-order-submit").click(function () {
         fromX: $("#fromX").val(),
         fromY: $("#fromY").val(),
         toAddress: getArrayOfToAddresses("toAddress"),
+        distance: getArrayOfToAddresses("distance"),
         toX: getArrayOfToAddresses("toX"),
         toY: getArrayOfToAddresses("toY"),
 
@@ -54,7 +55,7 @@ $("#basic-order-submit").click(function () {
         data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert("Order successfully creared.\nOrder details were sent to your email.");
+            alert("Order successfully created.\nOrder details were sent to your email.");
             document.location.href = "customer.jsp";
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -164,7 +165,7 @@ function validateBasicOrderData() {
         alert("Wrong requested time");
         return false;
     }
-    if($("#totalLength").val().length > 0 && $("#totalMultiplier").val().length > 0 && $("#totalPrice").val().length > 0){
+    if(!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0){
         alert("Bad totals.");
         return false;
     }

@@ -12,7 +12,10 @@ import java.util.Collection;
 @Table(name = "order", schema = "public", catalog = "postgres")
 @NamedQueries({
 		@NamedQuery(name = "Order.getOrdersByStateAndCustomerUuid", query = "SELECT f FROM OrderEntity f " +
-				"WHERE f.orderStateEntity = :orderStateEntity AND f.customerUserEntity.uuid = :customerUuid")})
+				"WHERE f.orderStateEntity = :orderStateEntity AND f.customerUserEntity.uuid = :customerUuid"),
+		@NamedQuery(name = "Order.getOrdersByState", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.orderStateEntity = :orderStateEntity")
+})
 public class OrderEntity {
 	@SequenceGenerator(
 			name = "ORDER_SEQUENCE_GENERATOR",

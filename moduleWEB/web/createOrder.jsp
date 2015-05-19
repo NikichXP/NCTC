@@ -27,12 +27,12 @@
         </div>
         <div id="importantInfo">
             <input id="requestedSeatsCount" type="text" placeholder="Requested seats count"/>
-            <input id="fromAddress" type="text" onchange="removeFromXY(); makeSearch(this)" placeholder="From address"/>
-            <input type="text" id="fromX" disabled/>
-            <input type="text" id="fromY" disabled/>
-            <input id="toAddress0" type="text" onchange="removeToXY(this); makeSearch(this)" placeholder="To address"/>
-            <input type="text" id="toX0" disabled/>
-            <input type="text" id="toY0" disabled/>
+            <input id="fromAddress" type="text" onchange="clearFromXY(); makeSearch(this)" placeholder="From address"/>
+            <input type="text" id="fromX" hidden/>
+            <input type="text" id="fromY" hidden/>
+            <input id="toAddress0" type="text" onchange="clearToXY(this); makeSearch(this)" placeholder="To address"/>
+            <input type="text" id="toX0" hidden/>
+            <input type="text" id="toY0" hidden/>
             <input type="text" id="distance0" disabled/>
             <input type="button" id="addressAdder" value="Add" onclick="createToAddress();"><br>
         </div>
@@ -111,21 +111,21 @@ function createToAddress() {
         var input = document.createElement("input");
         input.setAttribute("type", "text");
         input.setAttribute("id", "toAddress" + counter);
-        input.setAttribute("onchange", "removeToXY(this); makeSearch(this)");
+        input.setAttribute("onchange", "clearToXY(this); makeSearch(this)");
         input.setAttribute("placeholder", "To address " + counter);
 
         var input2 = document.createElement("input");
-        input2.setAttribute("disabled", "disabled");
+        input2.setAttribute("hidden", "hidden");
         input2.setAttribute("type", "text");
         input2.setAttribute("id", "toX" + counter);
 
         var input3 = document.createElement("input");
-        input3.setAttribute("disabled", "disabled");
+        input3.setAttribute("hidden", "hidden");
         input3.setAttribute("type", "text");
         input3.setAttribute("id", "toY" + counter);
 
         var input4 = document.createElement("input");
-        input4.setAttribute("disabled", "disabled");
+        input4.setAttribute("hidden", "hidden");
         input4.setAttribute("type", "text");
         input4.setAttribute("id", "distance" + counter);
 
@@ -145,7 +145,7 @@ function createToAddress() {
         outer.insertBefore(input3, addressRemover);
         outer.insertBefore(input4, addressRemover);
     } else {
-        alert("Enter valid fromAddress and toAddress.")
+        alert("Enter valid <b>From address</b> and <b>To address</b>.")
     }
 }
 
@@ -173,20 +173,21 @@ function setUnlock(name) {
     $(name).prop('disabled', false);
 }
 
-function removeFromXY() {
+function clearFromXY() {
     $("#fromX").val("");
     $("#fromY").val("");
 }
 
-function removeToXY(element) {
+function clearToXY(element) {
     $("#toX" + element.id.slice(-1)).val("");
     $("#toY" + element.id.slice(-1)).val("");
 }
 
-$('body').click(function () {       //updating totalMultiplier
+$('body').click(updateMultiplierAndPrice);
+
+function updateMultiplierAndPrice() {
     var totalMultiplier = 1;
     totalMultiplier *= $("#orderTypeRate").attr("multiplier");
-    alert("validateTime($(\"#timeRequested\").val()" + validateTime($("#timeRequested").val()));
     var i = 0;
     while ($("#distanceRates" + i).length > 0) {
         if ($("#asSoonAsPossible").is(':checked')) {
@@ -198,9 +199,7 @@ $('body').click(function () {       //updating totalMultiplier
             }
         } else if (validateTime($("#timeRequested").val())) {
             var n = $("#timeRequested").val().slice(-5);
-            alert(n >= $("#distanceRates" + i).attr("fromtimehhmm") && n <= $("#distanceRates" + i).attr("totimehhmm"));
             if (n >= $("#distanceRates" + i).attr("fromtimehhmm") && n <= $("#distanceRates" + i).attr("totimehhmm")) {
-                alert("in while2 " + i);
                 totalMultiplier *= $("#distanceRates" + i).attr("multiplier");
                 break;
             }
@@ -214,7 +213,8 @@ $('body').click(function () {       //updating totalMultiplier
     if ($("#wifi").is(':checked')) totalMultiplier *= $("#wifi").attr("multiplier");
     if ($("#airConditioner").is(':checked')) totalMultiplier *= $("#airConditioner").attr("multiplier");
     $("#totalMultiplier").val(totalMultiplier);
-});
+    $("#totalPrice").val(totalMultiplier * $("#totalLength").val());
+}
 
 function validateTime(input) {
     var timeRegex = /^[012]?[0-9]:[0-6][0-9]$/;
