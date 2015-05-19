@@ -130,3 +130,7 @@ body{
   width: 30%;
 }
 
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+

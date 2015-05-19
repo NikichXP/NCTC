@@ -59,6 +59,7 @@ blocks contain brief information about order-->
             <tbody>
             <tr>
                 <th>
+
                     <div id="cars"></div>
                 </th>
                 <th>
@@ -68,18 +69,35 @@ blocks contain brief information about order-->
             </tbody>
             <tfoot>
             <tr>
-                <th>
+                <td align="center">
+                    <ul>
+                        <li><input type="text-field" placeholder="model" id="model"/></li>
+                        <li><input type="text-field" placeholder="seat count" id="seatCount"/></li>
+                        <li><input type="text-field" placeholder="licence plate" id="licencePlate"/></li>
+                        <li><input type="text-field" placeholder="class" id="class"/></li>
+                        <li><input type="text-field" placeholder="driver id" id="driverId"/></li>
+                        <li><input type="text-field" placeholder="conditioner" id="conditioner"/></li>
+                    </ul>
 
                     <div class="button" id="addCar" onclick="addCar()">
                         ADD
                     </div>
-                </th>
-                <th>
-
+                </td>
+                <td align="center">
+                    <ul>
+                        <li><input type="text-field" placeholder="First name" id="firstName"/></li>
+                        <li><input type="text-field" placeholder="Last name" id="lastName"/></li>
+                        <li><input type="text-field" placeholder="Phone number" id="phone"/></li>
+                        <li><input type="text-field" placeholder="E-mail" id="email"/></li>
+                        <li><input type="password" placeholder="Password" id="regpass"/></li>
+                        <li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>
+                        <li><input type="text-field" placeholder="access level" id="accessLevel"/></li>
+                        <li><input type="text-field" placeholder="car id" id="carId"/></li>
+                    </ul>
                     <div class="button" id="addDriver" onclick="addDriver()">
                         ADD
                     </div>
-                </th>
+                </td>
             </tr>
             </tfoot>
         </table>
