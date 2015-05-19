@@ -30,28 +30,28 @@ public class DriverRest {
 
         Collection<OrderEntity> list = orderState.findByName("queued").getOrderEntities();
 
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("{\"orders\":[");
-//        for (OrderEntity orderEntity : list) {
-//            List<Point> points = order.getFirstAndLastPoints(orderEntity);
-//            sb.append("{\"startOrder\":\"")
-//                    .append(points.get(0).toString())
-//                    .append("\",\"endOrder\":\"")
-//                    .append(points.get(1).toString())
-//                    .append("\",\"dateOrderCreate\":\"")
-//                    .append(orderEntity.getTimeCreated().toString())
-//                    .append("\",\"id\":\"")
-//                    .append(orderEntity.getId())
-//                    .append("\",\"statusOrder\":\"")
-//                    .append(orderEntity.getOrderStateEntity().getName())
-//                    .append("\",\"price\":\"")
-//                    .append(orderEntity.getFinalPrice())
-//                    .append("\" },");
-//        }
-//        sb.replace(sb.length() - 1, sb.length(), "");
-//        sb.append("]}");
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"orders\":[");
+        for (OrderEntity orderEntity : list) {
+            List<Point> points = order.getFirstAndLastPoints(orderEntity);
+            sb.append("{\"startOrder\":\"")
+                    .append(points.get(0).toString())
+                    .append("\",\"endOrder\":\"")
+                    .append(points.get(1).toString())
+                    .append("\",\"dateOrderCreate\":\"")
+                    .append(orderEntity.getTimeCreated().toString())
+                    .append("\",\"id\":\"")
+                    .append(orderEntity.getId())
+                    .append("\",\"statusOrder\":\"")
+                    .append(orderEntity.getOrderStateEntity().getName())
+                    .append("\",\"price\":\"")
+                    .append(orderEntity.getFinalPrice())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
         if (!list.isEmpty()) {
-            return Response.status(200).entity(list.toString()).build();
+            return Response.status(200).entity(sb.toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
         }
