@@ -199,6 +199,19 @@ public class UserRest {
         }
     }
 
+    @POST
+    @Path("delete")
+    @Consumes("application/json")
+    public Response deleteUserById(UserJson id) {
+        UserEntity userEntity = user.read(new BigInteger(id.getId()));
+        user.delete(userEntity);
+        if (userEntity == null) {
+            return Response.status(200).entity("Driver is delete").build();
+        } else {
+            return Response.status(404).entity("driver is not delete").build();
+        }
+    }
+
     private UserEntity  createUserEntityByUserJson(UserJson userJson){
         UserEntity userEntity = null;
         String randomUuid = UUID.randomUUID().toString();

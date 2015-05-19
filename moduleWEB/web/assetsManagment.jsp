@@ -58,13 +58,12 @@ blocks contain brief information about order-->
             </thead>
             <tbody>
             <tr>
-                <th>
-
+                <td align="center">
                     <div id="cars"></div>
-                </th>
-                <th>
+                </td>
+                <td align="center">
                     <div id="drivers"></div>
-                </th>
+                </td>
             </tr>
             </tbody>
             <tfoot>
@@ -85,6 +84,9 @@ blocks contain brief information about order-->
                     <div class="button" id="editCar" onclick="editCar()">
                         EDIT
                     </div>
+                    <div class="button" id="deleteCar" onclick="deleteDriver()">
+                        Delete
+                    </div>
                 </td>
                 <td align="center">
                     <ul>
@@ -102,6 +104,9 @@ blocks contain brief information about order-->
                     </div>
                     <div class="button" id="editDriver" onclick="editDriver()">
                         EDIT
+                    </div>
+                    <div class="button" id="deleteDriver" onclick="deleteDriver()">
+                        Delete
                     </div>
                 </td>
             </tr>

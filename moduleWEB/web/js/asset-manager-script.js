@@ -142,6 +142,26 @@ function setDriver(JSONdata){
 
 
 }
+function deleteDriver(){
+    var id = $("#idForDriver").val();
+    alert("asdjk");
+    var JSONdata = {
+        id: $("#idForDriver").val()
+    };
+    $.ajax({
+        method: 'POST',
+        url: "api/user/delete",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+}
 
 function addCar(){
     alert("carsdffdjkg");
