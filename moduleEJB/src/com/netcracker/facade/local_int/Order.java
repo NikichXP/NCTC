@@ -27,5 +27,7 @@ public interface Order {
 
 	List<OrderEntity> getOrdersByStateAndCustomerUuid(OrderStateEntity orderStateEntity, String customerUuid);
 
+	List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity);
+
 	List<Point> getFirstAndLastPoints(OrderEntity orderEntity);
 }

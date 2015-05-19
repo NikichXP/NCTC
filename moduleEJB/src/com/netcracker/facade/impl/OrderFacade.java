@@ -27,10 +27,18 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
         super(OrderEntity.class);
     }
 
-	@Override
+    @Override
     public List<OrderEntity> getOrdersByStateAndCustomerUuid(OrderStateEntity orderStateEntity, String customerUuid) {
         List results = em.createNamedQuery("Order.getOrdersByStateAndCustomerUuid")
                 .setParameter("customerUuid", customerUuid)
+                .setParameter("orderStateEntity", orderStateEntity)
+                .getResultList();
+        return results;
+    }
+
+    @Override
+    public List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity) {
+        List results = em.createNamedQuery("Order.getOrdersByState")
                 .setParameter("orderStateEntity", orderStateEntity)
                 .getResultList();
         return results;

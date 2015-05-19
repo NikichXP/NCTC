@@ -26,6 +26,7 @@ public class OrderJson {
     private String fromX;
     private String fromY;
     private String[] toAddress;
+    private String[] distance;
     private String[] toX;
     private String[] toY;
 
@@ -202,6 +203,14 @@ public class OrderJson {
         this.toAddress = toAddress;
     }
 
+    public String[] getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String[] distance) {
+        this.distance = distance;
+    }
+
     public String[] getToX() {
         return toX;
     }
@@ -375,6 +384,7 @@ public class OrderJson {
                 "\"fromX\":" + (fromX == null ? "null" : "\"" + fromX + "\"") + ", " +
                 "\"fromY\":" + (fromY == null ? "null" : "\"" + fromY + "\"") + ", " +
                 "\"toAddress\":" + Arrays.toString(toAddress) + ", " +
+                "\"distance\":" + Arrays.toString(distance) + ", " +
                 "\"toX\":" + Arrays.toString(toX) + ", " +
                 "\"toY\":" + Arrays.toString(toY) + ", " +
                 "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +

@@ -53,7 +53,7 @@ function redirectWithAccessLevels(userData, url) {
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
 			document.cookie = "uuid="+jqXHR.responseText;
-			alert("uuid="+jqXHR.responseText);
+			//alert("uuid="+jqXHR.responseText);
 			uuid = jqXHR.responseText;
 			getAccessLevels(uuid);
 		},
@@ -71,7 +71,7 @@ function getAccessLevels(uuid) {
 		data: uuid,
 		dataType:'text',
 		success: function (data,textStatus,jqXHR ) {
-			alert("User access levels: " + jqXHR.responseText);
+			//alert("User access levels: " + jqXHR.responseText);
 			var obj = JSON.parse(data);
 			if (obj.userAccessLevel.length == 1) {
 				document.location.href = obj.userAccessLevel[0].level + '.jsp';
