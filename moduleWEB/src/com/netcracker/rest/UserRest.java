@@ -205,7 +205,7 @@ public class UserRest {
     public Response deleteUserById(UserJson id) {
         UserEntity userEntity = user.read(new BigInteger(id.getId()));
         user.delete(userEntity);
-        if (userEntity == null) {
+        if (user.read(new BigInteger(id.getId())) == null) {
             return Response.status(200).entity("Driver is delete").build();
         } else {
             return Response.status(404).entity("driver is not delete").build();
