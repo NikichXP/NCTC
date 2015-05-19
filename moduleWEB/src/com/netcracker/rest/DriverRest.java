@@ -26,7 +26,7 @@ public class DriverRest {
 
     @POST
     @Path("getQueuedOrders")
-    public Response getOrders(){
+    public Response getQueuedOrders(){
 
         Collection<OrderEntity> list = orderState.findByName("queued").getOrderEntities();
 
