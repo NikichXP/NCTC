@@ -55,7 +55,7 @@ body{
  Copy-paste this code, but watch out - adjustment and modification might be required!
  NO COLOR DEFINED, color defined in BODE style
  (you can refactor if you want)*/
-.mainSectionCurrent {
+.mainSectionAssigned {
   width: 99%;
   height: 100%;
   position: absolute;
@@ -83,7 +83,7 @@ body{
   overflow: scroll;
 }
 /*Style for the text above TO (in mainSection)*/
-.mainSectionCurrent h4 {
+.mainSectionAssigned h4 {
   line-height: 50%;
   color: white;
   padding-left: 10px;

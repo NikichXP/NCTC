@@ -1,5 +1,6 @@
 $(document).ready(function(){
     getQueuedOrders();
+    getAssignedOrders();
 });
 
 function getQueuedOrders(){
@@ -10,13 +11,29 @@ function getQueuedOrders(){
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                alert(obj);
                 drawTable(obj.orders, "driverQueuedOrdersPanel");
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText + " Error!");
+                alert(jqXHR.responseText + " Error! driverQueuedOrders");
             }
         })
+
+}
+
+function getAssignedOrders(){
+    $.ajax({
+        method: 'POST',
+        url: 'api/driver/getAssignedOrders',
+        contentType: "text/plain; charset=utf-8",
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            var obj = JSON.parse(data);
+            drawTable(obj.orders, "driverAssignedOrdersPanel");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + " Error! driverAssignedOrders");
+        }
+    })
 
 }
 
