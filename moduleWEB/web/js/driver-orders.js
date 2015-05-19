@@ -1,9 +1,12 @@
+var uuid = getCookie("uuid");
+
 $(document).ready(function(){
     getQueuedOrders();
     getAssignedOrders();
 });
 
 function getQueuedOrders(){
+    if(uuid != null) {
         $.ajax({
             method: 'POST',
             url: 'api/driver/getQueuedOrders',
@@ -17,10 +20,10 @@ function getQueuedOrders(){
                 alert(jqXHR.responseText + " Error! driverQueuedOrders");
             }
         })
+    }
 }
 
 function getAssignedOrders(){
-    var uuid = getCookie("uuid");
     if(uuid != null) {
         $.ajax({
             method: 'POST',

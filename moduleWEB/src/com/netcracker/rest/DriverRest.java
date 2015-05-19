@@ -28,9 +28,7 @@ public class DriverRest {
     @POST
     @Path("getQueuedOrders")
     public Response getQueuedOrders(){
-
         Collection<OrderEntity> list = orderState.findByName("queued").getOrderEntities();
-
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orders\":[");
         for (OrderEntity orderEntity : list) {
@@ -62,8 +60,6 @@ public class DriverRest {
     @Path("getAssignedOrders")
     @Consumes("text/plain")
     public Response getAssignedOrders(String uuid){
-        //getOrdersByStateAndDriverUuid
-        //Collection<OrderEntity> list = orderState.findByName("assigned");
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("assigned"), uuid);
 
         StringBuilder sb = new StringBuilder();
@@ -93,4 +89,36 @@ public class DriverRest {
         }
     }
 
+    @POST
+    @Path("history")
+    @Consumes("text/plain")
+    public Response getOrderHistory(String uuid) {
+        List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"), uuid));
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"orderHistory\":[");
+        for (OrderEntity orderEntity : list) {
+            List<Point> points = order.getFirstAndLastPoints(orderEntity);
+            sb.append("{\"startOrder\":\"")
+                    .append(points.get(0).toString())
+                    .append("\",\"endOrder\":\"")
+                    .append(points.get(1).toString())
+                    .append("\",\"dateOrderCreate\":\"")
+                    .append(orderEntity.getTimeCreated().toString())
+                    .append("\",\"id\":\"")
+                    .append(orderEntity.getId())
+                    .append("\",\"statusOrder\":\"")
+                    .append(orderEntity.getOrderStateEntity().getName())
+                    .append("\",\"price\":\"")
+                    .append(orderEntity.getFinalPrice())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (!list.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
 }
