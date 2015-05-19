@@ -38,7 +38,7 @@
         </div>
         <div id="timeOption">
             <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()">asSoonAsPossible</input>
-            <input id="timeRequested" type="text" style="visibility: visible"/>
+            <input id="timeRequested" type="text" placeholder="Requested time of taxi arrival" style="visibility: visible"/>
         </div>
         <div id="genderOption">
             Driver sex:
@@ -47,15 +47,14 @@
             <input type="radio" name="sex" data-value="Female">Female</input>
         </div>
 
-        <div id="carClass">
+        <div id="carClassBox">
+            Car class:
+            <div id="carClass"></div>
         </div>
 
-        <!--Container to apply color and size-->
-        <div id="musicTypesContainer">
-            <!--Additional container to center text and dropdown-->
-            <div id="musicTypesBox">
-                <div id="musicTypes"></div>
-            </div>
+        <div id="musicTypesBox">
+            Music type:
+            <div id="musicTypes"></div>
         </div>
         <!--Container for Order Options-->
         <div class="optionsContainer">

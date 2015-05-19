@@ -72,7 +72,7 @@ function getMusicType() {
         dataType: 'text',
         success: function (data) {
             var obj = JSON.parse(data);
-            var str = 'Music type:&nbsp<select id="musicType">';
+            var str = '<select id="musicType">';
             for (var i = 0; i < obj.musicType.length; i++) {
                 str = str + '<option value="' + obj.musicType[i].id
                     +'">' + obj.musicType[i].name + '</option>';
@@ -93,7 +93,7 @@ function getCarClass() {
         dataType: 'text',
         success: function (data) {
             var obj = JSON.parse(data);
-            var str = 'Car class:<br>';
+            var str = '';
             for (var i = 0; i < obj.carClass.length; i++) {
                 if (i == 0) {
                     str = str + '<input type="radio" checked name="carClass" data-value="'
