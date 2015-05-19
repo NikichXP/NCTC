@@ -1,11 +1,11 @@
 $(document).ready(function(){
-    getOrders();
+    getQueuedOrders();
 });
 
-function getOrders(){
+function getQueuedOrders(){
         $.ajax({
             method: 'POST',
-            url: 'api/driver/getOrders',
+            url: 'api/driver/getQueuedOrders',
             contentType: "text/plain; charset=utf-8",
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {

@@ -45,7 +45,7 @@
 <!--Main section. On this particular page Taxi Orders appear in this section in form of divs.
 blocks contain brief information about order-->
 <div class="mainSectionCurrent" id="driverCurrentOrdersPanel">
-  <h4>CURRENT ORDERS:</h4>
+  <h4>ASSIGNED ORDERS:</h4>
 </div>
 
 <div class="mainSectionQueued" id="driverQueuedOrdersPanel">
