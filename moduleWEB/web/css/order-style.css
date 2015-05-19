@@ -1,5 +1,7 @@
 body {
-	background-color: #cccccc;
+	margin: 0px;
+	padding: 20px;
+	background-color: #9CB8DE;
 }
 
 input {
@@ -14,23 +16,27 @@ input[type = text] {
 
 input[type = button] {
 	margin: 5px;
-	width: 40%;
+	width: 200px;
 }
 
+#container {
+	width: 99%;
+}
 #order-form {
 	width: 40%;
-	background-color: #999999;
+	background-color: #254B6F;
 	padding: 5px;
+	margin-right: 10px;
 	float: left;
 }
 
 #order-form div {
 	margin: auto;
-	background-color: #cccccc;
+	background-color: #9CB8DE;
 }
 
 #map {
 	overflow: hidden;
 	width: 60%;
-	height: 80%;
+	height: 90%;
 }
