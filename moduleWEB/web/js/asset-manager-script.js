@@ -3,9 +3,10 @@ $(document).ready(function () {
     setAssetManagerDrivers();
 });
 
+var myCarId;
+var myDriverId;
 
 function setAssetManagerCars() {
-
     $.ajax({
         method: 'POST',
         url: 'api/admin_asset_manager/cars',
@@ -20,26 +21,10 @@ function setAssetManagerCars() {
         }
     })
 }
-
 function drawTableCars(data, table) {
     for (var i = 0; i < data.length; i++) {
         drawRowCars(data[i], table);
     }
-}
-function editCar() {
-    $.ajax({
-        method: 'POST',
-        url: 'api/admin_asset_manager/drivers',
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            alert(data);
-            drawTableDrivers(obj.cars, "drivers");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error!");
-        }
-    })
 }
 function drawRowCars(rowData, table) {
     var div = document.getElementById(table);
@@ -75,34 +60,6 @@ function drawTableDrivers(data, table) {
         drawRowDrivers(data[i], table);
     }
 }
-function editDriverData(userData) {
-    document.getElementById("firstName").value = userData.firstName;
-    document.getElementById("lastName").value = userData.lastName;
-    document.getElementById("phone").value = userData.phone;
-    document.getElementById("email").value = userData.email;
-    document.getElementById("regpass").value = userData.getPassword;
-    document.getElementById("passconfirm").value = userData.getPassword;
-    document.getElementById("accessLevel").value = userData.accessLevel;
-    //document.getElementById("carId").value = userData.name;
-}
-function editDriver() {
-    $.ajax({
-        method: 'POST',
-        url: 'api/user/getUserDataById',
-        contentType: "text/plain; charset=utf-8",
-        data:'3',
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            alert(data);
-            editDriverData(obj.userData[0]);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error!");
-        }
-    })
-}
-
 function drawRowDrivers(rowData, table) {
     var div = document.getElementById(table);
     var createDiv = document.createElement("div");
@@ -111,13 +68,39 @@ function drawRowDrivers(rowData, table) {
     createDiv.className = "button";
     createDiv.onclick = function () {
         alert(rowData.driverId);
-        editDriver();
     };
     div.appendChild(createDiv);
 }
 
 function addDriver(){
-    alert("driver addid");
+    alert("driver add....");
+    setDriver();
+
+}
+function setDriver(){
+    var JSONdata = {
+        firstName: $("#firstName").val(),
+        lastName: $("#lastName").val(),
+        phone: $("#phone").val(),
+        email: $("#email").val(),
+        pass: $("#regpass").val()
+    };
+    alert(JSON.stringify(JSONdata))
+    $.ajax({
+        method: 'POST',
+        url: "api/user/create_driver",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+
+
 }
 
 function addCar(){

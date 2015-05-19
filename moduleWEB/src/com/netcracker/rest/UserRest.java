@@ -28,6 +28,7 @@ import java.util.UUID;
 
 @Path("user")
 public class UserRest {
+
     @EJB
     User user;
     @EJB
@@ -77,9 +78,7 @@ public class UserRest {
     @Path("sendMail/{email}/{theme}/{text}")
     @Consumes("text/plain")
     @Produces("text/plain")
-    public String sendMail(@PathParam("email") String email,
-                           @PathParam("theme") String theme,
-                           @PathParam("text") String text) {
+    public String sendMail(@PathParam("email") String email, @PathParam("theme") String theme, @PathParam("text") String text) {
         return Mail.testSend(email, theme, text);
     }
 
@@ -168,6 +167,35 @@ public class UserRest {
             userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
+            user.create(userEntity);
+            Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
+                    "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
+                            + SecuritySettings.encrypt(randomUuid));
+            //TODO Replace with real URL
+        }
+        if (userEntity == null) {
+            return Response.status(404).entity("Phone or email is already in use").build();
+        } else {
+            return Response.status(201).entity(randomUuid).build();
+        }
+    }
+
+    @POST
+    @Path("create_driver")
+    @Consumes("application/json")
+    public Response createDriver(UserJson userJson) {
+        UserEntity userEntity = null;
+        String randomUuid = UUID.randomUUID().toString();
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+            userEntity = new UserEntity();
+            userEntity.setFirstName(userJson.getFirstName());
+            userEntity.setLastName(userJson.getLastName());
+            userEntity.setPassword(userJson.getPass());
+            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
+            userEntity.setEmail(userJson.getEmail());
+            userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
+            userEntity.setUuid(randomUuid);
+            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("3"))));
             user.create(userEntity);
             Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
                     "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
