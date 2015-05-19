@@ -54,7 +54,7 @@ function drawBody(rowData, table) {
     var div = document.getElementById(table);
     var createDiv = document.createElement("div");
     var node = document.createTextNode("data :" + rowData.dateOrderCreate
-    + " ferst point :" + rowData.startOrder
+    + " first point :" + rowData.startOrder
     + " next point :" + rowData.endOrder
     + " status :" + rowData.statusOrder
     + " price: " + rowData.price + "$");
