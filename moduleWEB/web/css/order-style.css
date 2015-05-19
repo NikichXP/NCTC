@@ -1,7 +1,9 @@
 body {
-	height: 95%;
-	width: 95%;
 	background-color: #cccccc;
+}
+
+input {
+	padding: 5px;
 }
 
 input[type = text] {
@@ -23,14 +25,12 @@ input[type = button] {
 }
 
 #order-form div {
-	margin: 5px auto;
+	margin: auto;
 	background-color: #cccccc;
-	width:97%;
 }
 
 #map {
 	overflow: hidden;
 	width: 60%;
 	height: 80%;
-	background-color: grey;
 }
