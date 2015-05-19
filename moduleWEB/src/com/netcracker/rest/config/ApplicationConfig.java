@@ -38,6 +38,7 @@ public class ApplicationConfig extends Application {
         resources.add(TariffRest.class);
         resources.add(AdminAssetManagerRest.class);
         resources.add(AdminRest.class);
+        resources.add(DriverRest.class);
     }
 
 }

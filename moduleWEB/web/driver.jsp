@@ -45,7 +45,7 @@
 <!--Main section. On this particular page Taxi Orders appear in this section in form of divs.
 blocks contain brief information about order-->
 <div class="mainSectionCurrent" id="driverCurrentOrdersPanel">
-  <h4>CURRENT ORDERS:</h4>
+  <h4>ASSIGNED ORDERS:</h4>
 </div>
 
 <div class="mainSectionQueued" id="driverQueuedOrdersPanel">
@@ -71,8 +71,11 @@ blocks contain brief information about order-->
 <script src="js/bootstrap.js"></script>
 <!--handmade sript-->
 <script src="js/driver-script.js"></script>
+<script src="js/driver_orders.js"></script>
 <!--script check life cookie, end delete cookie on click logout-button-->
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
 </body>
+
+</html>

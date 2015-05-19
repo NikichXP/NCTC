@@ -125,7 +125,7 @@ function createToAddress() {
         input3.setAttribute("id", "toY" + counter);
 
         var input4 = document.createElement("input");
-        input4.setAttribute("hidden", "hidden");
+        input4.setAttribute("disabled", "disabled");
         input4.setAttribute("type", "text");
         input4.setAttribute("id", "distance" + counter);
 
