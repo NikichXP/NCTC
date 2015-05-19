@@ -8,16 +8,19 @@ setForm();
 
 function setForm(){
 
+    var queryString = window.location.search;
+    queryString = queryString.substring(4);
+
     $.ajax({
         method: 'POST',
         url: 'api/user/getUserDataById',
         contentType: "text/plain; charset=utf-8",
-        data:'3',
+        data:queryString,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            //var obj = JSON.parse(data);
+            var obj = JSON.parse(data);
             alert(data);
-            //drawForm(obj.userData, "#form");
+            drawForm(obj.userData[0], "#form");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
@@ -29,7 +32,7 @@ function setForm(){
 function drawForm(rowData, table) {
     var in1 = document.createElement('input');
     in1.type = 'text';
-    in1.placeholder=rowData.firstName;
+    in1.value=rowData.firstName;
 
     var in2 = document.createElement('input');
     in2.type = 'text';
@@ -42,7 +45,6 @@ function drawForm(rowData, table) {
     var in4 = document.createElement('input');
     in4.type = 'text';
     in4.placeholder=rowData.email;
-
 
 
 

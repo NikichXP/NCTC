@@ -47,7 +47,9 @@ function drawBody(rowData, table) {
 
     };
 
+
     $(table).append(btn);
 
     row.append($("<td>" + rowData.phone + "</td></tr></tbody>"));
+
 }
