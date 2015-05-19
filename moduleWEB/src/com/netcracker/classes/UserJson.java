@@ -7,13 +7,21 @@ public class UserJson {
 
     private String cred;
 
+    private String id;
+
     private String pass;
     private String email;
     private String firstName;
     private String lastName;
     private String phone;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getCred() {
         return cred;
     }

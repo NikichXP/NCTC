@@ -183,7 +183,23 @@ public class UserRest {
     @POST
     @Path("create_driver")
     @Consumes("application/json")
-    public Response createDriver(UserJson userJson) {
+    public Response cuUser(UserJson userJson) {
+        UserEntity userEntity = null;
+        if (userJson.getId() == null) {
+            userEntity = createUserEntityByUserJson(userJson);
+            user.create(userEntity);
+        } else {
+            userEntity = editUserEntityByJson(userJson);
+            user.update(userEntity);
+        }
+        if (userEntity == null) {
+            return Response.status(404).entity("Phone or email is already in use").build();
+        } else {
+            return Response.status(201).entity("user add").build();
+        }
+    }
+
+    private UserEntity  createUserEntityByUserJson(UserJson userJson){
         UserEntity userEntity = null;
         String randomUuid = UUID.randomUUID().toString();
         if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
@@ -196,17 +212,25 @@ public class UserRest {
             userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("3"))));
-            user.create(userEntity);
-            Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
-                    "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
-                            + SecuritySettings.encrypt(randomUuid));
-            //TODO Replace with real URL
         }
-        if (userEntity == null) {
-            return Response.status(404).entity("Phone or email is already in use").build();
-        } else {
-            return Response.status(201).entity(randomUuid).build();
+        return userEntity;
+    }
+
+    private UserEntity editUserEntityByJson(UserJson userJson){
+        UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
+        String randomUuid = UUID.randomUUID().toString();
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+            userEntity = new UserEntity();
+            userEntity.setFirstName(userJson.getFirstName());
+            userEntity.setLastName(userJson.getLastName());
+            userEntity.setPassword(userJson.getPass());
+            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
+            userEntity.setEmail(userJson.getEmail());
+            userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
+            userEntity.setUuid(randomUuid);
+            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("3"))));
         }
+        return userEntity;
     }
 
     @GET
@@ -265,8 +289,8 @@ public class UserRest {
                 .append(userEntity.getLastName())
                 .append("\",\"phone\":\"")
                 .append(userEntity.getPhone())
-                .append("\",\"accessLevel\":\"")
-                .append("3")
+                .append("\",\"userId\":\"")
+                .append(userEntity.getId())
                 .append("\",\"email\":\"")
                 .append(userEntity.getEmail())
                 .append("\",\"getPassword\":\"")
