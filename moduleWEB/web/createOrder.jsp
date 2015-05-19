@@ -47,7 +47,6 @@
             <input type="radio" name="sex" data-value="Female">Female</input>
         </div>
 
-
         <div id="carClass">
         </div>
 
@@ -73,17 +72,7 @@
                 <input id="airConditioner" type="checkbox"/>airConditioner</input>
             </div>
         </div>
-
-
         <div class="summaryInfoContainer">
-            <%--<div class="summarySection">--%>
-            <%--Total length:--%>
-            <%--<input id="totalLength" type="text" disabled=""/>--%>
-            <%--</div>--%>
-            <%--<div class="summarySection">--%>
-            <%--Total price:--%>
-            <%--<input id="totalPrice" type="text" disabled=""/>--%>
-            <%--</div>--%>
             <div class="summarySection">
                 Total multiplier:<input disabled type="text" id="totalMultiplier"/>
             </div>
@@ -118,8 +107,6 @@ function createToAddress() {
         setLock("#toAddress" + counter);
         counter++;
         var outer = document.getElementById("importantInfo");
-//        var br = document.createElement("br");
-//        br.setAttribute("id", "br"+counter);
 
         var input = document.createElement("input");
         input.setAttribute("type", "text");
@@ -157,7 +144,6 @@ function createToAddress() {
         outer.insertBefore(input2, addressRemover);
         outer.insertBefore(input3, addressRemover);
         outer.insertBefore(input4, addressRemover);
-//        outer.insertBefore(br, addressRemover);
     } else {
         alert("Enter valid fromAddress and toAddress.")
     }
@@ -200,18 +186,21 @@ function removeToXY(element) {
 $('body').click(function () {       //updating totalMultiplier
     var totalMultiplier = 1;
     totalMultiplier *= $("#orderTypeRate").attr("multiplier");
+    alert("validateTime($(\"#timeRequested\").val()" + validateTime($("#timeRequested").val()));
     var i = 0;
     while ($("#distanceRates" + i).length > 0) {
         if ($("#asSoonAsPossible").is(':checked')) {
             var d = new Date();
             var n = (d.getHours() < 10 ? '0' : '') + d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-            if (n >= $("#distanceRates" + i).attr("fromTimeHHmm") && n <= $("#distanceRates" + i).attr("toTimeHHmm")) {
+            if (n >= $("#distanceRates" + i).attr("fromtimehhmm") && n <= $("#distanceRates" + i).attr("totimehhmm")) {
                 totalMultiplier *= $("#distanceRates" + i).attr("multiplier");
                 break;
             }
         } else if (validateTime($("#timeRequested").val())) {
-            var n = $("#timeRequested").val().splice(-5);
-            if (n >= $("#distanceRates" + i).attr("fromTimeHHmm") && n <= $("#distanceRates" + i).attr("toTimeHHmm")) {
+            var n = $("#timeRequested").val().slice(-5);
+            alert(n >= $("#distanceRates" + i).attr("fromtimehhmm") && n <= $("#distanceRates" + i).attr("totimehhmm"));
+            if (n >= $("#distanceRates" + i).attr("fromtimehhmm") && n <= $("#distanceRates" + i).attr("totimehhmm")) {
+                alert("in while2 " + i);
                 totalMultiplier *= $("#distanceRates" + i).attr("multiplier");
                 break;
             }
@@ -230,7 +219,7 @@ $('body').click(function () {       //updating totalMultiplier
 function validateTime(input) {
     var timeRegex = /^[012]?[0-9]:[0-6][0-9]$/;
     if (input.length > 4) {
-        return input.slice(-5).test(timeRegex);
+        return timeRegex.test(input.slice(-5));
     }
     return false;
 }
