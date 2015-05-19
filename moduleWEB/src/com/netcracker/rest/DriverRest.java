@@ -6,6 +6,7 @@ import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
 
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -59,9 +60,11 @@ public class DriverRest {
 
     @POST
     @Path("getAssignedOrders")
-    public Response getAssignedOrders(){
-
-        Collection<OrderEntity> list = orderState.findByName("assigned").getOrderEntities();
+    @Consumes("text/plain")
+    public Response getAssignedOrders(String uuid){
+        //getOrdersByStateAndDriverUuid
+        //Collection<OrderEntity> list = orderState.findByName("assigned");
+        List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("assigned"), uuid);
 
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orders\":[");
