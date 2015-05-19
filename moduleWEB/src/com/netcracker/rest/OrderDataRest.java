@@ -54,7 +54,7 @@ public class OrderDataRest {
         }
         sb.replace(sb.length() - 1, sb.length(), "");
         sb.append("]}");
-        if (list != null) {
+        if (!list.isEmpty()) {
             return Response.status(200).entity(sb.toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
@@ -89,7 +89,7 @@ public class OrderDataRest {
         }
         sb.replace(sb.length() - 1, sb.length(), "");
         sb.append("]}");
-        if (list != null) {
+        if (!list.isEmpty()) {
             return Response.status(200).entity(sb.toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();

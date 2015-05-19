@@ -71,8 +71,11 @@ blocks contain brief information about order-->
 <script src="js/bootstrap.js"></script>
 <!--handmade sript-->
 <script src="js/driver-script.js"></script>
+<script src="js/driver_orders.js"></script>
 <!--script check life cookie, end delete cookie on click logout-button-->
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
 </body>
+
+</html>
