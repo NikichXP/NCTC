@@ -35,6 +35,11 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         return !results.isEmpty();
     }
 
+    @Override
+    public void delete(BigInteger id) {
+        em.createNamedQuery("User.deleteById").setParameter("id", id).executeUpdate();
+    }
+
     /**
      * @param phone user phone number
      * @return <b>true</b> if user with this phone number already exists
@@ -44,6 +49,8 @@ public class UserFacade extends AbstractFacade<UserEntity> implements User {
         List results = em.createNamedQuery("User.findByPhone").setParameter("phone", phone).getResultList();
         return !results.isEmpty();
     }
+
+
 
     @Override
     public List<UserEntity> getDrivers() {
