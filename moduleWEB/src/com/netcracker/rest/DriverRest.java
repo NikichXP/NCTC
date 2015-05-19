@@ -148,13 +148,13 @@ public class DriverRest {
         orderJson.setTimeRequested(orderEntity.getTimeRequested().toString());
 
 
-        List<PathEntity> pathEntities = new LinkedList<>();
-
-        PathEntity firstPathEntity = new PathEntity();
-
-        orderJson.setFromAddress(firstPathEntity.getStartAddress());
-        orderJson.setFromX(firstPathEntity.getStartX().toString());
-        orderJson.setFromY(firstPathEntity.getStartY().toString());
+//        List<PathEntity> pathEntities = new LinkedList<>();
+//
+//        PathEntity firstPathEntity = new PathEntity();
+//
+//        orderJson.setFromAddress(firstPathEntity.getStartAddress());
+//        orderJson.setFromX(firstPathEntity.getStartX().toString());
+//        orderJson.setFromY(firstPathEntity.getStartY().toString());
 
 
 //        firstPathEntity.setEndAddress(orderJson.getToAddress()[0]);
@@ -214,7 +214,8 @@ public class DriverRest {
 //        orderEntity.setFinalPrice(totalPrice);
 
         if (orderEntity != null) {
-            return Response.status(200).entity("").build();
+            //TODO replace: return value
+            return Response.status(200).entity(id).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
         }
