@@ -91,3 +91,22 @@ function getCookie(name) {
     }
     return (setStr);
 }
+
+function getOrder(){
+    if(uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/getOrder',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                drawTableAssignedOrders(obj.orders, "driverAssignedOrdersPanel");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+}
