@@ -41,10 +41,12 @@
             <input id="timeRequested" type="text" placeholder="Requested time of taxi arrival" style="visibility: visible"/>
         </div>
         <div id="genderOption">
-            Driver sex:<br>
+            Driver sex:
+            <div id="musicTypeBox">
             <input type="radio" checked name="sex" data-value="Male">Male</input>
             <input type="radio" name="sex" data-value="Any">Any</input>
             <input type="radio" name="sex" data-value="Female">Female</input>
+            </div>
         </div>
 
         <div id="carClassBox">
@@ -73,13 +75,13 @@
         </div>
         <div class="summaryInfoContainer">
             <div class="summarySection">
-                Total multiplier:<input disabled type="text" id="totalMultiplier"/>
+                <div>Total multiplier:</div><input disabled type="text" id="totalMultiplier"/>
             </div>
             <div class="summarySection">
-                Total length:<input disabled type="text" id="totalLength"/>
+                <div>Total length:</div><input disabled type="text" id="totalLength"/>
             </div>
             <div class="summarySection">
-                Total price:<input disabled type="text" id="totalPrice"/>
+                <div>Total price:</div><input disabled type="text" id="totalPrice"/>
             </div>
         </div>
 
