@@ -101,7 +101,7 @@ function buildPath(index) {
     }).then(function (route) {
         myMap.geoObjects.add(route);
             var Paths=route.getPaths();
-            for(var i = 0; i <= Paths.getLength(); i++) {
+            for(var i = 0; i < Paths.getLength(); i++) {
                 document.getElementById('distance'+i).value=Paths.get(i).getLength();
                 console.log(Paths.get(i).getLength());
             }

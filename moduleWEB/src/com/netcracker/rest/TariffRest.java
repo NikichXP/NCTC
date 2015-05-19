@@ -50,6 +50,8 @@ public class TariffRest {
 				tariffJson.setMale(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.getSex() != null && tariffEntity.getSex().equalsIgnoreCase("female"))
 				tariffJson.setFemale(tariffEntity.getMultiplier().toString());
+			else if (tariffEntity.getSex() != null && tariffEntity.getSex().equalsIgnoreCase("any"))
+				tariffJson.setAny(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.isPerHour() != null) {
 				hourlyRates.add(new TimeRate(tariffEntity.getTimeStarts(),
 						tariffEntity.getTimeEnds(), tariffEntity.getMultiplier().toString()));

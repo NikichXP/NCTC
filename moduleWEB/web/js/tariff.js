@@ -26,6 +26,7 @@ function getTariffs(orderTypeName) {
 
             $("[data-value='Male']").attr("multiplier", obj.male);
             $("[data-value='Female']").attr("multiplier", obj.female);
+            $("[data-value='Any']").attr("multiplier", obj.any);
             $("#smokingFriendly").attr("multiplier", obj.smokingFriendly);
             $("#animalFriendly").attr("multiplier", obj.animalFriendly);
             $("#wifi").attr("multiplier", obj.wifi);

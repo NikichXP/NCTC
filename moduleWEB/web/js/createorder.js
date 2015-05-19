@@ -97,11 +97,11 @@ function getCarClass() {
                 if (i == 0) {
                     str = str + '<input type="radio" checked name="carClass" data-value="'
                         + obj.carClass[i].name + '" multiplier="' + obj.carClass[i].tariff_multiplier
-                        + '">' + obj.carClass[i].name + '</input><br>';
+                        + '">' + obj.carClass[i].name + '</input>';
                 } else {
                     str = str + '<input type="radio" name="carClass" data-value="'
                         + obj.carClass[i].name + '" multiplier="' + obj.carClass[i].tariff_multiplier
-                        + '">' + obj.carClass[i].name + '</input><br>';
+                        + '">' + obj.carClass[i].name + '</input>';
                 }
             }
 

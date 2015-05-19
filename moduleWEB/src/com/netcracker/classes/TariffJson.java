@@ -12,6 +12,7 @@ public class TariffJson {
 	private String smokingFriendly;
 	private String male;
 	private String female;
+	private String any;
 
 	private TimeRate[] hourlyRates;//[from time][to time]
 	private TimeRate[] distanceRates;
@@ -88,6 +89,14 @@ public class TariffJson {
 		this.distanceRates = distanceRates;
 	}
 
+	public String getAny() {
+		return any;
+	}
+
+	public void setAny(String any) {
+		this.any = any;
+	}
+
 	@Override
 	public String toString() {
 		return "{\"orderTypeRate\":" + (orderTypeRate == null ? "null" : "\"" + orderTypeRate + "\"") + ", " +
@@ -97,6 +106,7 @@ public class TariffJson {
 				"\"smokingFriendly\":" + (smokingFriendly == null ? "null" : "\"" + smokingFriendly + "\"") + ", " +
 				"\"male\":" + (male == null ? "null" : "\"" + male + "\"") + ", " +
 				"\"female\":" + (female == null ? "null" : "\"" + female + "\"") + ", " +
+				"\"any\":" + (any == null ? "null" : "\"" + any + "\"") + ", " +
 				"\"hourlyRates\":" + Arrays.toString(hourlyRates) + ", " +
 				"\"distanceRates\":" + Arrays.toString(distanceRates) +
 				"}";
