@@ -91,4 +91,6 @@ blocks contain brief information about order-->
 <!--set information about user-->
 <script src="js/userdatabyuuid.js" type="text/javascript"></script>
 
+<script src="js/driver-history.js" type="text/javascript"></script>
+
 </body>

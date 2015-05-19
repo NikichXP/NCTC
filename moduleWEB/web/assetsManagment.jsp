@@ -58,19 +58,19 @@ blocks contain brief information about order-->
             </thead>
             <tbody>
             <tr>
-                <th>
-
+                <td align="center">
                     <div id="cars"></div>
-                </th>
-                <th>
+                </td>
+                <td align="center">
                     <div id="drivers"></div>
-                </th>
+                </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
                 <td align="center">
                     <ul>
+                        <li><input type="text-field" placeholder="id" id="idForCar"/></li>
                         <li><input type="text-field" placeholder="model" id="model"/></li>
                         <li><input type="text-field" placeholder="seat count" id="seatCount"/></li>
                         <li><input type="text-field" placeholder="licence plate" id="licencePlate"/></li>
@@ -78,24 +78,35 @@ blocks contain brief information about order-->
                         <li><input type="text-field" placeholder="driver id" id="driverId"/></li>
                         <li><input type="text-field" placeholder="conditioner" id="conditioner"/></li>
                     </ul>
-
                     <div class="button" id="addCar" onclick="addCar()">
                         ADD
+                    </div>
+                    <div class="button" id="editCar" onclick="editCar()">
+                        EDIT
+                    </div>
+                    <div class="button" id="deleteCar" onclick="deleteDriver()">
+                        Delete
                     </div>
                 </td>
                 <td align="center">
                     <ul>
+                        <li><input type="text-field" placeholder="id" id="idForDriver"/></li>
                         <li><input type="text-field" placeholder="First name" id="firstName"/></li>
                         <li><input type="text-field" placeholder="Last name" id="lastName"/></li>
                         <li><input type="text-field" placeholder="Phone number" id="phone"/></li>
                         <li><input type="text-field" placeholder="E-mail" id="email"/></li>
                         <li><input type="password" placeholder="Password" id="regpass"/></li>
                         <li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>
-                        <li><input type="text-field" placeholder="access level" id="accessLevel"/></li>
                         <li><input type="text-field" placeholder="car id" id="carId"/></li>
                     </ul>
                     <div class="button" id="addDriver" onclick="addDriver()">
                         ADD
+                    </div>
+                    <div class="button" id="editDriver" onclick="editDriver()">
+                        EDIT
+                    </div>
+                    <div class="button" id="deleteDriver" onclick="deleteDriver()">
+                        Delete
                     </div>
                 </td>
             </tr>

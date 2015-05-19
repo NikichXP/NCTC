@@ -1,7 +1,11 @@
 body {
-	height: 95%;
-	width: 95%;
-	background-color: #cccccc;
+	margin: 0px;
+	padding: 20px;
+	background-color: #9CB8DE;
+}
+
+input {
+	padding: 5px;
 }
 
 input[type = text] {
@@ -12,25 +16,45 @@ input[type = text] {
 
 input[type = button] {
 	margin: 5px;
-	width: 40%;
+	width: 30%;
 }
 
+input[type = checkbox] {
+	margin: 7px;
+}
+
+select {
+	margin: 7px;
+	padding: 5px;
+}
+
+textarea {
+	margin: 10px;
+	min-width: 30%;
+	max-width: 97%;
+	max-height: 400px;
+	width: 80%;
+}
+
+#container {
+	width: 99%;
+}
 #order-form {
 	width: 40%;
-	background-color: #999999;
+	background-color: #254B6F;
 	padding: 5px;
+	margin-right: 10px;
 	float: left;
 }
 
 #order-form div {
-	margin: 5px auto;
-	background-color: #cccccc;
-	width:97%;
+	padding: 0px 3px;
+	margin: auto;
+	background-color: #9CB8DE;
 }
 
 #map {
 	overflow: hidden;
 	width: 60%;
-	height: 80%;
-	background-color: grey;
+	height: 90%;
 }
