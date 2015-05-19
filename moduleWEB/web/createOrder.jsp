@@ -37,11 +37,11 @@
             <input type="button" id="addressAdder" value="Add" onclick="createToAddress();"><br>
         </div>
         <div id="timeOption">
-            <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()">asSoonAsPossible</input>
+            <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()">As soon as possible</input>
             <input id="timeRequested" type="text" placeholder="Requested time of taxi arrival" style="visibility: visible"/>
         </div>
         <div id="genderOption">
-            Driver sex:
+            Driver sex:<br>
             <input type="radio" checked name="sex" data-value="Male">Male</input>
             <input type="radio" name="sex" data-value="Any">Any</input>
             <input type="radio" name="sex" data-value="Female">Female</input>
@@ -59,16 +59,16 @@
         <!--Container for Order Options-->
         <div class="optionsContainer">
             <div class="option">
-                <input id="smokingFriendly" type="checkbox"/>smokingFriendly</input>
+                <input id="smokingFriendly" type="checkbox"/>Smoker</input>
             </div>
             <div class="option">
-                <input id="animalFriendly" type="checkbox"/>animalFriendly</input>
+                <input id="animalFriendly" type="checkbox"/>Suitable for animal transportation</input>
             </div>
             <div class="option">
-                <input id="wifi" type="checkbox"/>wifi</input>
+                <input id="wifi" type="checkbox"/>Wi-Fi</input>
             </div>
             <div class="option">
-                <input id="airConditioner" type="checkbox"/>airConditioner</input>
+                <input id="airConditioner" type="checkbox"/>Air conditioner</input>
             </div>
         </div>
         <div class="summaryInfoContainer">

@@ -16,7 +16,24 @@ input[type = text] {
 
 input[type = button] {
 	margin: 5px;
-	width: 200px;
+	width: 30%;
+}
+
+input[type = checkbox] {
+	margin: 7px;
+}
+
+select {
+	margin: 7px;
+	padding: 5px;
+}
+
+textarea {
+	margin: 10px;
+	min-width: 30%;
+	max-width: 97%;
+	max-height: 400px;
+	width: 80%;
 }
 
 #container {
@@ -31,6 +48,7 @@ input[type = button] {
 }
 
 #order-form div {
+	padding: 0px 3px;
 	margin: auto;
 	background-color: #9CB8DE;
 }
