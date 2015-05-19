@@ -218,9 +218,11 @@ public class UserRest {
 
     private UserEntity editUserEntityByJson(UserJson userJson){
         UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
+        userEntity.setPhone("380000000000");
+        userEntity.setEmail("a@mial.com");
+        user.update(userEntity);
         String randomUuid = UUID.randomUUID().toString();
         if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
-            userEntity = new UserEntity();
             userEntity.setFirstName(userJson.getFirstName());
             userEntity.setLastName(userJson.getLastName());
             userEntity.setPassword(userJson.getPass());
