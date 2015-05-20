@@ -319,35 +319,5 @@ public class UserRest {
         }
     }
 
-    private UserEntity upUser (UserJson userJson){
-        UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
-
-
-            userEntity.setFirstName(userJson.getFirstName());
-            userEntity.setLastName(userJson.getLastName());
-
-            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
-            userEntity.setEmail(userJson.getEmail());
-        user.update(userEntity);
-
-        return userEntity;
-    }
-
-
-    @POST
-    @Path("resUpUser")
-    @Consumes("application/json")
-    public Response resUpUser(UserJson userJson) {
-        UserEntity userEntity = null;
-
-            userEntity = upUser(userJson);
-            user.update(userEntity);
-
-        if (userEntity == null) {
-            return Response.status(404).entity("Phone or email is already in use").build();
-        } else {
-            return Response.status(201).entity("user add").build();
-        }
-    }
 
 }

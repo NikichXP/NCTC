@@ -8,6 +8,11 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "car", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "Car.deleteById", query = "DELETE FROM CarEntity f " +
+				"WHERE f.id = :id"),
+		@NamedQuery(name = "Car.isLicenceUsed", query = "SELECT f FROM CarEntity f WHERE f.licencePlate = :licence")
+})
 public class CarEntity {
 	@SequenceGenerator(
 			name = "CAR_SEQUENCE_GENERATOR",
@@ -42,6 +47,17 @@ public class CarEntity {
 
 	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
 	private Date dateManufactured;
+
+	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
+	private Boolean airCondition;
+
+	public Boolean getAirCondition() {
+		return airCondition;
+	}
+
+	public void setAirCondition(Boolean airCondition) {
+		this.airCondition = airCondition;
+	}
 
 	public BigInteger getId() {
 		return id;

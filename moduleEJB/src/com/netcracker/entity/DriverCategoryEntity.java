@@ -9,6 +9,10 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "driver_category", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "User.findByName", query = "SELECT f FROM DriverCategoryEntity f " +
+				"WHERE UPPER(f.name) = UPPER(:name)")
+})
 public class DriverCategoryEntity {
 	@SequenceGenerator(
 			name = "DRIVER_CATEGORY_SEQUENCE_GENERATOR",

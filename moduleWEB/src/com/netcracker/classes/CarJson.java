@@ -7,20 +7,29 @@ import java.math.BigInteger;
  */
 public class CarJson {
 
-    private BigInteger id;
+    private String id;
 
     private String model;
-    private String licensePlate;
+    private String licencePlate;
     private String classId;
     private String requiredDriverCategory;
     private String userId;
     private String airConditioner;
+    private String seatCount;
 
-    public BigInteger getId() {
+    public String getSeatCount() {
+        return seatCount;
+    }
+
+    public void setSeatCount(String seatCount) {
+        this.seatCount = seatCount;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -32,12 +41,12 @@ public class CarJson {
         this.model = model;
     }
 
-    public String getLicensePlate() {
-        return licensePlate;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
+    public void setLicencePlate(String licensePlate) {
+        this.licencePlate = licensePlate;
     }
 
     public String getClassId() {
@@ -75,8 +84,9 @@ public class CarJson {
     @Override
     public String toString() {
         return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
+                "\"seatCount\":" + (seatCount == null ? "null" : "\"" + seatCount + "\"") +
                 "\"model\":" + (model == null ? "null" : "\"" + model + "\"") + ", " +
-                "\"licensePlate\":" + (licensePlate == null ? "null" : "\"" + licensePlate + "\"") + ", " +
+                "\"licencePlate\":" + (licencePlate == null ? "null" : "\"" + licencePlate + "\"") + ", " +
                 "\"classId\":" + (classId == null ? "null" : "\"" + classId + "\"") + ", " +
                 "\"requiredDriverCategory\":" + (requiredDriverCategory == null ? "null" : "\"" + requiredDriverCategory + "\"") + ", " +
                 "\"userId\":" + (userId == null ? "null" : "\"" + userId + "\"") + ", " +

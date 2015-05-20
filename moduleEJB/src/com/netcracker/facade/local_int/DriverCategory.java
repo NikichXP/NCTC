@@ -22,4 +22,6 @@ public interface DriverCategory {
 	List<DriverCategoryEntity> findRange(int[] range);
 
 	int count();
+
+	DriverCategoryEntity findByName(String requiredDriverCategory);
 }

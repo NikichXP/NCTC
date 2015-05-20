@@ -5,6 +5,7 @@ package com.netcracker.facade.local_int;
 import com.netcracker.entity.CarEntity;
 
 import javax.ejb.Local;
+import java.math.BigInteger;
 import java.util.List;
 
 @Local
@@ -22,4 +23,8 @@ public interface Car {
 	List<CarEntity> findRange(int[] range);
 
 	int count();
+
+	void delete(BigInteger bigInteger);
+
+	boolean isLicenceUsed(String licencePlate);
 }

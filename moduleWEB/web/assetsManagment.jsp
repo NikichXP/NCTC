@@ -74,7 +74,8 @@ blocks contain brief information about order-->
                         <li><input type="text-field" placeholder="model" id="model"/></li>
                         <li><input type="text-field" placeholder="seat count" id="seatCount"/></li>
                         <li><input type="text-field" placeholder="licence plate" id="licencePlate"/></li>
-                        <li><input type="text-field" placeholder="class" id="class"/></li>
+                        <li><input type="text-field" placeholder="class" id="classCar"/></li>
+                        <li><input type="text-field" placeholder="required driver category" id="requiredDriverCategory"/></li>
                         <li><input type="text-field" placeholder="driver id" id="driverId"/></li>
                         <li><input type="text-field" placeholder="conditioner" id="conditioner"/></li>
                     </ul>
@@ -84,7 +85,7 @@ blocks contain brief information about order-->
                     <div class="button" id="editCar" onclick="editCar()">
                         EDIT
                     </div>
-                    <div class="button" id="deleteCar" onclick="deleteDriver()">
+                    <div class="button" id="deleteCar" onclick="deleteCar()">
                         Delete
                     </div>
                 </td>

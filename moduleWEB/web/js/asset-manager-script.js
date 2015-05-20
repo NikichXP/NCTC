@@ -40,22 +40,28 @@ function editCarById(carId){
     alert(carId);
     $.ajax({
         method: 'POST',
-        url: 'api/user/getCarsById',
+        url: 'api/car/getCarDataById',
         contentType: "text/plain; charset=utf-8",
-        data: driverId,
+        data: carId,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
             alert(data);
-            drawFormDriver(obj.userData[0]);
+            drawFormCar(obj.carData[0]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
         }
     })
 }
-function editCar(rowData){
-    //document.getElementById("idForDriver").value = rowData;
+function drawFormCar(rowData){
+    document.getElementById("idForCar").value = rowData.carId;
+    document.getElementById("model").value = rowData.model;
+    document.getElementById("seatCount").value = rowData.countSeat;
+    document.getElementById("licencePlate").value = rowData.licencePlate;
+    document.getElementById("classCar").value = rowData.classCar;
+    document.getElementById("driverId").value = rowData.driverId;
+    document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
 }
 
 function setAssetManagerDrivers() {
@@ -183,4 +189,64 @@ function deleteDriver(){
 
 function addCar(){
     alert("carsdffdjkg");
+    var JSONdata = {
+        model: $("#model").val(),
+        seatCount: $("#seatCount").val(),
+        classId: $("#classCar").val(),
+        userId: $("#driverId").val(),
+        licencePlate: $("#licencePlate").val(),
+        requiredDriverCategory: $("#requiredDriverCategory").val(),
+        airConditioner: $("#conditioner").val()
+    };
+    setCar(JSONdata);
+}
+function editCar(){
+    alert("driver add....");
+    var JSONdata = {
+        id: $("#idForCar").val(),
+        model: $("#model").val(),
+        seatCount: $("#seatCount").val(),
+        classId: $("#classCar").val(),
+        userId: $("#driverId").val(),
+        licencePlate: $("#licencePlate").val(),
+        requiredDriverCategory: $("#requiredDriverCategory").val(),
+        airConditioner: $("#conditioner").val()
+    };
+    setCar(JSONdata);
+}
+function setCar(JSONdata){
+    alert(JSON.stringify(JSONdata))
+    $.ajax({
+        method: 'POST',
+        url: "api/car/create_car",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+}
+function deleteCar(){
+    var id = $("#idForCar").val();
+    alert("asdjk");
+    var JSONdata = {
+        id: $("#idForCar").val()
+    };
+    $.ajax({
+        method: 'POST',
+        url: "api/car/delete",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
 }

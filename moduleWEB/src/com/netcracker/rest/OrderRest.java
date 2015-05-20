@@ -334,7 +334,7 @@ public class OrderRest {
 		return Response.status(201).entity(orderEntity.getId()).build();
 	}
 	@GET
-	@javax.ws.rs.Path("view")
+	@javax.ws.rs.Path("view_w")
 	public Response viewOrderWithExist(@QueryParam("id") String orderId, @QueryParam("uuid") String uuid) {
 		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
 
