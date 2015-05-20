@@ -164,7 +164,7 @@ public class OrderRest {
 			orderEntity.setTimeRequested(new Timestamp(new Date().getTime()));
 		}
 
-		Collection<PathEntity> pathEntities = orderEntity.getPathEntities();
+		List<PathEntity> pathEntities = new ArrayList<>(orderEntity.getPathEntities());
 		for (PathEntity pathE: pathEntities){
 			path.delete(pathE);
 		}
