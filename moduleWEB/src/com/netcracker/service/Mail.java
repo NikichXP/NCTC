@@ -1,10 +1,12 @@
 package com.netcracker.service;
 
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -31,13 +33,13 @@ public class Mail {
 
 
     public static String test2 () {
-        return testSend("nikichx2@gmail.com", "someTheme", LOGINMSG);
+        return sendMail("nikichx2@gmail.com", "someTheme", LOGINMSG);
     }
 
     public static String notifyUser (String email, String orderId) {
         return "not yet ready";
     }
-    public static String testSend(String email, String theme, String text) {
+    public static String sendMail(String email, String theme, String text) {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -63,5 +65,45 @@ public class Mail {
         } catch (Exception e) {
             return e.toString();
         }
+    }
+
+    private static boolean sendMail (String email, String theme, String text, int n) throws Exception {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(email));
+            message.setSubject(theme);
+            message.setText(text);
+            Transport.send(message);
+            return true;
+    }
+
+    public static String groupSend (String theme, String msg, List<String> mails) {
+        return groupSend(theme, msg, (String[])mails.toArray());
+    }
+
+    public static String groupSend (String theme, String msg, String[] mails) {
+        int successed = 0;
+        for (String mail: mails) {
+            try {
+                sendMail(mail, theme, msg, 0);
+                successed++;
+            } catch (Exception e) {
+
+            }
+        }
+        return "Mails sent: " + successed + " out of " + mails.length;
     }
 }
