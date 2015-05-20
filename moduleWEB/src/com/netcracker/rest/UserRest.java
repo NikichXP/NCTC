@@ -79,7 +79,7 @@ public class UserRest {
     @Consumes("text/plain")
     @Produces("text/plain")
     public String sendMail(@PathParam("email") String email, @PathParam("theme") String theme, @PathParam("text") String text) {
-        return Mail.testSend(email, theme, text);
+        return Mail.sendMail(email, theme, text);
     }
 
     @POST
@@ -168,7 +168,7 @@ public class UserRest {
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
             user.create(userEntity);
-            Mail.testSend(userJson.getEmail(), "Taxi Service confirmation",
+            Mail.sendMail(userJson.getEmail(), "Taxi Service confirmation",
                     "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
                             + SecuritySettings.encrypt(randomUuid));
             //TODO Replace with real URL
