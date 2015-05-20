@@ -29,6 +29,7 @@ public class OrderJson {
     private String[] distance;
     private String[] toX;
     private String[] toY;
+    private String[] pathId;
 
     private String sex;
     private String carClass;
@@ -225,6 +226,14 @@ public class OrderJson {
 
     public void setToY(String[] toY) {
         this.toY = toY;
+    }
+
+    public String[] getPathId() {
+        return pathId;
+    }
+
+    public void setPathId(String[] pathId) {
+        this.pathId = pathId;
     }
 
     public String getSex() {
