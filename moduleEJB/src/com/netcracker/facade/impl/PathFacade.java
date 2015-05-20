@@ -26,8 +26,4 @@ public class PathFacade extends AbstractFacade<PathEntity> implements com.netcra
         super(PathEntity.class);
     }
 
-    @Override
-    public List<PathEntity> getByOrderEntitie(OrderEntity orderEntity) {
-        return em.createNamedQuery("Path.getByOrderEntitie").setParameter("orderEntity", orderEntity).getResultList();
-    }
 }

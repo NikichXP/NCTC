@@ -22,7 +22,5 @@ public interface Path {
 
 	List<PathEntity> findRange(int[] range);
 
-	List<PathEntity> getByOrderEntitie(OrderEntity orderEntity);
-
 	int count();
 }

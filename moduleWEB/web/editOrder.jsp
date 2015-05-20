@@ -90,7 +90,7 @@
     </div>
 
     <div class="submitButtonContainer">
-      <input id="basic-order-submit" type="button" value="Create test Order."/>
+      <input id="basic-order-submit" type="button" value="edit Order."/>
     </div>
   </div>
   <div id="map"></div>

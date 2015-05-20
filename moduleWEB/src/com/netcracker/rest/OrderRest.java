@@ -15,10 +15,7 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Juger on 05.05.2015.
@@ -167,7 +164,7 @@ public class OrderRest {
 			orderEntity.setTimeRequested(new Timestamp(new Date().getTime()));
 		}
 
-		List<PathEntity> pathEntities = path.getByOrderEntitie(orderEntity);
+		Collection<PathEntity> pathEntities = orderEntity.getPathEntities();
 		for (PathEntity pathE: pathEntities){
 			path.delete(pathE);
 		}
