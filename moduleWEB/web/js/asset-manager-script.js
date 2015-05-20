@@ -32,9 +32,27 @@ function drawRowCars(rowData, table) {
     createDiv.className = "button";
     createDiv.onclick = function () {
         alert(rowData.carId)
-        editCar();
+        editCarById(rowData.carId);
     };
     div.appendChild(createDiv);
+}
+function editCarById(carId){
+    alert(carId);
+    $.ajax({
+        method: 'POST',
+        url: 'api/user/getCarsById',
+        contentType: "text/plain; charset=utf-8",
+        data: driverId,
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            var obj = JSON.parse(data);
+            alert(data);
+            drawFormDriver(obj.userData[0]);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + " Error!");
+        }
+    })
 }
 function editCar(rowData){
     //document.getElementById("idForDriver").value = rowData;
