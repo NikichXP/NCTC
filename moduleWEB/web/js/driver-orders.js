@@ -14,7 +14,7 @@ function getQueuedOrders(){
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                drawTable(obj.orders, "driverQueuedOrdersPanel");
+                drawTableQueuedOrders(obj.orders, "driverQueuedOrdersPanel");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + " Error! driverQueuedOrders");
@@ -33,7 +33,7 @@ function getAssignedOrders(){
             data: uuid,
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                drawTable(obj.orders, "driverAssignedOrdersPanel");
+                drawTableAssignedOrders(obj.orders, "driverAssignedOrdersPanel");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + " Error! driverAssignedOrders");
@@ -43,12 +43,19 @@ function getAssignedOrders(){
 }
 
 
-function drawTable(data, table) {
+function drawTableAssignedOrders(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table);
+        drawBody(data[i], table, "driverAssignedOrders.jsp");
     }
 }
-function drawBody(rowData, table) {
+
+function drawTableQueuedOrders(data, table) {
+    for (var i = 0; i < data.length; i++) {
+        drawBody(data[i], table, "driverQueuedOrders.jsp");
+    }
+}
+
+function drawBody(rowData, table, url) {
 
     var div = document.getElementById(table);
     var createDiv = document.createElement("div");
@@ -60,7 +67,7 @@ function drawBody(rowData, table) {
     createDiv.appendChild(node);
     createDiv.className = "button";
     createDiv.onclick = function () {
-        document.location.href = "editOrder.jsp?id=" + rowData.id;
+        document.location.href = url + "?id=" + rowData.id;
     };
     div.appendChild(createDiv);
 }
@@ -83,4 +90,23 @@ function getCookie(name) {
         }
     }
     return (setStr);
+}
+
+function getOrder(){
+    if(uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/getOrder',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                drawTableAssignedOrders(obj.orders, "driverAssignedOrdersPanel");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
 }
