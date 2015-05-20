@@ -138,6 +138,11 @@ public class OrderRest {
 	@javax.ws.rs.Path("view")
 	public Response viewOrder(@QueryParam("id") String orderId) {
 		OrderEntity orderEntity = order.read(new BigInteger(orderId));
+
+		if (orderEntity == null) {
+			return Response.status(404).entity("No such order in DB.").build();
+		}
+
 		OrderJson orderJson = new OrderJson();
 
 		orderJson.setId(orderEntity.getId().toString());
@@ -214,12 +219,7 @@ public class OrderRest {
 			orderJson.setTotalMultiplier(orderEntity.getTotalMultiplier().toString());
 			orderJson.setTotalPrice(orderEntity.getTotalMultiplier().multiply(orderEntity.getTotalLength()).toString());
 		}
-
-		if (orderJson == null) {
-			return Response.status(404).entity("OrderJson is null.").build();
-		} else {
-			return Response.status(201).entity(orderJson.toString()).build();
-		}
+		return Response.status(201).entity(orderJson.toString()).build();
 	}
 
 	@POST
