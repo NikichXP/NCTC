@@ -9,6 +9,10 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "path", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "Path.getByOrderEntitie", query = "SELECT f.orderEntity FROM PathEntity f " +
+				"WHERE f.orderEntity = :orderEntity")
+})
 public class PathEntity {
 	@SequenceGenerator(
 			name = "PATH_SEQUENCE_GENERATOR",

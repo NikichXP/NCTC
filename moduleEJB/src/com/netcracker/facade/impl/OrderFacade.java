@@ -45,6 +45,7 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
         return results;
     }
 
+
     @Override
     public List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity) {
         List results = em.createNamedQuery("Order.getOrdersByState")
