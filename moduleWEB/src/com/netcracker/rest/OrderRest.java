@@ -327,5 +327,12 @@ public class OrderRest {
 
 	}
 
+	@GET
+	@javax.ws.rs.Path("existing")
+	public Response isExistUserToThetOrder(@QueryParam("id") String orderId, @QueryParam("uuid") String uuid) {
+		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
+		return Response.status(201).entity(orderEntity.getId()).build();
+	}
+
 
 }

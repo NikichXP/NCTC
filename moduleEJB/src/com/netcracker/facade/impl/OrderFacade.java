@@ -11,6 +11,7 @@ import com.netcracker.facade.local_int.Order;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.math.BigInteger;
 import java.util.*;
 
 @Stateless
@@ -45,6 +46,17 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
         return results;
     }
 
+    @Override
+    public OrderEntity getByUUIDAndId(String orderId, String uuid) {
+        List<OrderEntity> result = em.createNamedQuery("Order.getByUUIDAndID")
+                .setParameter("id", new BigInteger(orderId))
+                .setParameter("uuid", uuid)
+                .getResultList();
+        if(result.isEmpty())
+            return null;
+        else
+            return result.get(0);
+    }
 
     @Override
     public List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity) {

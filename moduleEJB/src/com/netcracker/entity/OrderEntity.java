@@ -16,7 +16,9 @@ import java.util.Collection;
 		@NamedQuery(name = "Order.getOrdersByState", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity"),
 		@NamedQuery(name = "Order.getOrdersByStateAndDriverUuid", query = "SELECT f FROM OrderEntity f " +
-				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :driverUuid")
+				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :driverUuid"),
+		@NamedQuery(name = "Order.getByUUIDAndID", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.id = :id AND f.customerUserEntity.uuid = :uuid")
 })
 public class OrderEntity {
 	@SequenceGenerator(

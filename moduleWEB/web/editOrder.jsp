@@ -90,7 +90,7 @@
     </div>
 
     <div class="submitButtonContainer">
-      <input id="basic-order-submit" type="button" value="edit Order."/>
+      <input id="basic-order-submit" type="button" value="edit Order" onclick=""/>
     </div>
   </div>
   <div id="map"></div>
@@ -228,7 +228,6 @@ function validateTime(input) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/setuserdata.js" type="text/javascript"></script>
 <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
-<script src="js/createorder.js"></script>
 <script src="js/edit-orders.js" type="text/javascript"></script>
 </body>
 </html>
