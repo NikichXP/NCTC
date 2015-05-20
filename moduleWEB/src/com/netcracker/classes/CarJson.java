@@ -74,6 +74,13 @@ public class CarJson {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
+                "\"model\":" + (model == null ? "null" : "\"" + model + "\"") + ", " +
+                "\"licensePlate\":" + (licensePlate == null ? "null" : "\"" + licensePlate + "\"") + ", " +
+                "\"classId\":" + (classId == null ? "null" : "\"" + classId + "\"") + ", " +
+                "\"requiredDriverCategory\":" + (requiredDriverCategory == null ? "null" : "\"" + requiredDriverCategory + "\"") + ", " +
+                "\"userId\":" + (userId == null ? "null" : "\"" + userId + "\"") + ", " +
+                "\"airConditioner\":" + (airConditioner == null ? "null" : "\"" + airConditioner + "\"") +
+                "}";
     }
 }
