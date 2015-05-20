@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Juger
-  Date: 17.05.2015
-  Time: 20:15
+  User: Ubuntu
+  Date: 19.05.2015
+  Time: 23:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="submitButtonContainer">
-      <input id="basic-order-submit" type="button" value="edit Order."/>
+      <input id="basic-order-submit" type="button" value="Create test Order."/>
     </div>
   </div>
   <div id="map"></div>
@@ -229,6 +229,5 @@ function validateTime(input) {
 <script src="js/setuserdata.js" type="text/javascript"></script>
 <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
 <script src="js/createorder.js"></script>
-<script src="js/edit-orders.js" type="text/javascript"></script>
 </body>
 </html>

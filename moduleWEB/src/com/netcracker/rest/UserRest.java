@@ -203,8 +203,7 @@ public class UserRest {
     @Path("delete")
     @Consumes("application/json")
     public Response deleteUserById(UserJson id) {
-        UserEntity userEntity = user.read(new BigInteger(id.getId()));
-        user.delete(userEntity);
+        user.delete(new BigInteger(id.getId()));
         if (user.read(new BigInteger(id.getId())) == null) {
             return Response.status(200).entity("Driver is delete").build();
         } else {

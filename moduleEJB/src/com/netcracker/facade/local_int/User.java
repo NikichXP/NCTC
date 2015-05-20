@@ -5,6 +5,7 @@ package com.netcracker.facade.local_int;
 import com.netcracker.entity.UserEntity;
 
 import javax.ejb.Local;
+import java.math.BigInteger;
 import java.util.List;
 
 @Local
@@ -16,6 +17,8 @@ public interface User {
 	void update(UserEntity entity);
 
 	void delete(UserEntity entity);
+
+	void delete(BigInteger id);
 
 	List<UserEntity> findAll();
 

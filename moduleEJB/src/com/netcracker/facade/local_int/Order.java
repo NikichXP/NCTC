@@ -5,6 +5,7 @@ package com.netcracker.facade.local_int;
 import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
+import com.netcracker.entity.PathEntity;
 
 import javax.ejb.Local;
 import java.util.List;
@@ -32,4 +33,5 @@ public interface Order {
 	List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity);
 
 	List<Point> getFirstAndLastPoints(OrderEntity orderEntity);
+
 }

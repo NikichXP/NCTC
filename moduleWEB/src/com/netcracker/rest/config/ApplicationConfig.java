@@ -39,6 +39,7 @@ public class ApplicationConfig extends Application {
         resources.add(AdminAssetManagerRest.class);
         resources.add(AdminRest.class);
         resources.add(DriverRest.class);
+        resources.add(CarRest.class);
     }
 
 }
