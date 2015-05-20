@@ -10,7 +10,6 @@ function setAssetManagerCars() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
             drawTableCars(obj.cars, "cars");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -31,13 +30,11 @@ function drawRowCars(rowData, table) {
     createDiv.appendChild(node);
     createDiv.className = "button";
     createDiv.onclick = function () {
-        alert(rowData.carId)
         editCarById(rowData.carId);
     };
     div.appendChild(createDiv);
 }
 function editCarById(carId){
-    alert(carId);
     $.ajax({
         method: 'POST',
         url: 'api/car/getCarDataById',
@@ -60,7 +57,7 @@ function drawFormCar(rowData){
     document.getElementById("seatCount").value = rowData.countSeat;
     document.getElementById("licencePlate").value = rowData.licencePlate;
     document.getElementById("classCar").value = rowData.classCar;
-    document.getElementById("driverId").value = rowData.driverId;
+    document.getElementById("userDriverId").value = rowData.carDriverId;
     document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
 }
 
@@ -72,7 +69,6 @@ function setAssetManagerDrivers() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
             drawTableDrivers(obj.cars, "drivers");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -97,7 +93,6 @@ function drawRowDrivers(rowData, table) {
     div.appendChild(createDiv);
 }
 function editDriverById(driverId){
-    alert(driverId);
     $.ajax({
         method: 'POST',
         url: 'api/user/getUserDataById',
@@ -106,7 +101,6 @@ function editDriverById(driverId){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
             drawFormDriver(obj.userData[0]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -125,7 +119,6 @@ function drawFormDriver(rowData){
 }
 
 function addDriver(){
-    alert("driver add....");
     var JSONdata = {
         firstName: $("#firstName").val(),
         lastName: $("#lastName").val(),
@@ -136,7 +129,6 @@ function addDriver(){
     setDriver(JSONdata);
 }
 function editDriver(){
-    alert("driver add....");
     var JSONdata = {
         id: $("#idForDriver").val(),
         firstName: $("#firstName").val(),
@@ -148,8 +140,6 @@ function editDriver(){
     setDriver(JSONdata);
 }
 function setDriver(JSONdata){
-
-    alert(JSON.stringify(JSONdata))
     $.ajax({
         method: 'POST',
         url: "api/user/create_driver",
@@ -168,7 +158,6 @@ function setDriver(JSONdata){
 }
 function deleteDriver(){
     var id = $("#idForDriver").val();
-    alert("asdjk");
     var JSONdata = {
         id: $("#idForDriver").val()
     };
@@ -188,26 +177,25 @@ function deleteDriver(){
 }
 
 function addCar(){
-    alert("carsdffdjkg");
     var JSONdata = {
         model: $("#model").val(),
+        userId: $("#userDriverId").val(),
         seatCount: $("#seatCount").val(),
         classId: $("#classCar").val(),
-        userId: $("#driverId").val(),
         licencePlate: $("#licencePlate").val(),
         requiredDriverCategory: $("#requiredDriverCategory").val(),
         airConditioner: $("#conditioner").val()
     };
     setCar(JSONdata);
+
 }
 function editCar(){
-    alert("driver add....");
     var JSONdata = {
         id: $("#idForCar").val(),
         model: $("#model").val(),
+        userId: $("#userDriverId").val(),
         seatCount: $("#seatCount").val(),
         classId: $("#classCar").val(),
-        userId: $("#driverId").val(),
         licencePlate: $("#licencePlate").val(),
         requiredDriverCategory: $("#requiredDriverCategory").val(),
         airConditioner: $("#conditioner").val()
@@ -215,7 +203,6 @@ function editCar(){
     setCar(JSONdata);
 }
 function setCar(JSONdata){
-    alert(JSON.stringify(JSONdata))
     $.ajax({
         method: 'POST',
         url: "api/car/create_car",
@@ -232,7 +219,6 @@ function setCar(JSONdata){
 }
 function deleteCar(){
     var id = $("#idForCar").val();
-    alert("asdjk");
     var JSONdata = {
         id: $("#idForCar").val()
     };

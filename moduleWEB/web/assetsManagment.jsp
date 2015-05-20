@@ -76,7 +76,7 @@ blocks contain brief information about order-->
                         <li><input type="text-field" placeholder="licence plate" id="licencePlate"/></li>
                         <li><input type="text-field" placeholder="class" id="classCar"/></li>
                         <li><input type="text-field" placeholder="required driver category" id="requiredDriverCategory"/></li>
-                        <li><input type="text-field" placeholder="driver id" id="driverId"/></li>
+                        <li><input type="text-field" placeholder="driver id" id="userDriverId"/></li>
                         <li><input type="text-field" placeholder="conditioner" id="conditioner"/></li>
                     </ul>
                     <div class="button" id="addCar" onclick="addCar()">

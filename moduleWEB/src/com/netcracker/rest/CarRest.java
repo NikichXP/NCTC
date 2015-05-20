@@ -9,6 +9,7 @@ import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.Car;
 import com.netcracker.facade.local_int.CarClass;
 import com.netcracker.facade.local_int.DriverCategory;
+import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
@@ -36,6 +37,9 @@ public class CarRest {
 
     @EJB
     DriverCategory driverCategory;
+
+    @EJB
+    User user;
 
     @POST
     @Path("create_car")
@@ -79,6 +83,7 @@ public class CarRest {
             carEntity.setSeatsCount(new BigInteger(carJson.getSeatCount()));
             carEntity.setDateManufactured(new java.sql.Date(new Date().getTime()));
             carEntity.setAirCondition(true);
+            carEntity.setUserEntity(user.read(new BigInteger(carJson.getUserId())));
         }
         return carEntity;
     }
@@ -95,6 +100,7 @@ public class CarRest {
             carEntity.setSeatsCount(new BigInteger(carJson.getSeatCount()));
             carEntity.setDateManufactured(new java.sql.Date(new Date().getTime()));
             carEntity.setAirCondition(true);
+            carEntity.setUserEntity(user.read(new BigInteger(carJson.getUserId())));
         }
         return carEntity;
     }
@@ -118,7 +124,7 @@ public class CarRest {
                 .append(carEntity.getDriverCategoryEntity().getName())
                 .append("\",\"countSeat\":\"")
                 .append(carEntity.getSeatsCount())
-                .append("\",\"driverId\":\"")
+                .append("\",\"carDriverId\":\"")
                 .append(carEntity.getUserEntity().getId())
                 .append("\" },");
         sb.replace(sb.length() - 1, sb.length(), "");
