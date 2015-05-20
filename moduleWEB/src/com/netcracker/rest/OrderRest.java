@@ -333,6 +333,100 @@ public class OrderRest {
 		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
 		return Response.status(201).entity(orderEntity.getId()).build();
 	}
+	@GET
+	@javax.ws.rs.Path("view")
+	public Response viewOrderWithExist(@QueryParam("id") String orderId, @QueryParam("uuid") String uuid) {
+		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
 
+		if (orderEntity == null) {
+			return Response.status(404).entity("No such order in DB.").build();
+		}
+
+		OrderJson orderJson = new OrderJson();
+
+		orderJson.setId(orderEntity.getId().toString());
+		orderJson.setContactName(orderEntity.getContactName());
+		orderJson.setContactPhone(orderEntity.getContactPhone());
+
+		orderJson.setType(orderEntity.getOrderTypeEntity().getName());
+		orderJson.setState(orderEntity.getOrderStateEntity().getName());
+
+		orderJson.setTimeCreated(
+				simpleDateFormat.format(
+						new Date(orderEntity.getTimeCreated().getTime())));
+		orderJson.setTimeRequested(
+				simpleDateFormat.format(
+						new Date(orderEntity.getTimeRequested().getTime())));
+		if (orderEntity.getTimeOfDriverArrival() != null) {
+			orderJson.setTimeOfDriverArrival(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeOfDriverArrival().getTime())));
+		}
+		if (orderEntity.getTimeStarted() != null) {
+			orderJson.setTimeStarted(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeStarted().getTime())));
+		}
+		if (orderEntity.getTimeCompleted() != null) {
+			orderJson.setTimeCompleted(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeCompleted().getTime())));
+		}
+
+		List<PathEntity> pathEntities = new LinkedList<>(orderEntity.getPathEntities());
+		pathEntities.sort(new Comparator<PathEntity>() {
+			@Override
+			public int compare(PathEntity o1, PathEntity o2) {
+				return o1.getId().compareTo(o2.getId());
+			}
+		});
+		orderJson.setFromAddress(pathEntities.get(0).getStartAddress());
+		orderJson.setFromX(pathEntities.get(0).getStartX().toString());
+		orderJson.setFromY(pathEntities.get(0).getStartY().toString());
+
+		List<String> endAddresses = new LinkedList<>();
+		List<String> endXs = new LinkedList<>();
+		List<String> endYs = new LinkedList<>();
+		List<String> distances = new LinkedList<>();
+		List<String> pathIds = new LinkedList<>();
+
+		for (PathEntity pathEntity : pathEntities) {
+			endAddresses.add(pathEntity.getEndAddress());
+			endXs.add(pathEntity.getEndX().toString());
+			endYs.add(pathEntity.getEndY().toString());
+			distances.add(pathEntity.getLength().toString());
+			pathIds.add(pathEntity.getId().toString());
+		}
+
+		orderJson.setToAddress(endAddresses.toArray(new String[endAddresses.size()]));
+		orderJson.setToX(endXs.toArray(new String[endXs.size()]));
+		orderJson.setToY(endYs.toArray(new String[endYs.size()]));
+		orderJson.setDistance(distances.toArray(new String[distances.size()]));
+		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
+
+		orderJson.setSex(orderEntity.getDriverSex());
+		orderJson.setCarClass(orderEntity.getCarClassEntity().getName());
+		orderJson.setMusicType(orderEntity.getMusicTypeEntity().getName());
+		orderJson.setSmokingFriendly(orderEntity.getSmokingFriendly());
+		orderJson.setAnimalFriendly(orderEntity.getAnimalFriendly());
+		orderJson.setWifi(orderEntity.getWifi());
+		orderJson.setAirConditioner(orderEntity.getAirConditioner());
+
+		orderJson.setCustomerPreCreateComment(orderEntity.getCustomerPreCreateComment());
+		orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
+		if(orderEntity.getRefuseCauseByCustomerEntity() != null)
+			orderJson.setCustomerRefuseCause(orderEntity.getRefuseCauseByCustomerEntity().getMessage());
+		if(orderEntity.getRefuseCauseByDriverEntity() != null)
+			orderJson.setDriverRefuseCause(orderEntity.getRefuseCauseByDriverEntity().getMessage());
+		orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
+		orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+
+		if (orderEntity.getTotalLength() != null) {
+			orderJson.setTotalLength(orderEntity.getTotalLength().toString());
+			orderJson.setTotalMultiplier(orderEntity.getTotalMultiplier().toString());
+			orderJson.setTotalPrice(orderEntity.getTotalMultiplier().multiply(orderEntity.getTotalLength()).toString());
+		}
+		return Response.status(201).entity(orderJson.toString()).build();
+	}
 
 }
