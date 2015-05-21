@@ -2,8 +2,14 @@
  * Created by Ubuntu on 11.05.2015.
  */
 
-//AJAX POST for registration
-$("#basic-order-submit").click(function () {
+$(document).ready(function () {
+    getCarClass();
+    getMusicType();
+    $('body').click(updateMultiplierAndPrice);
+    $("#basic-order-submit").click(submitOrder);
+});
+
+function submitOrder() {
     $("#basic-order-submit").prop('disabled', true);
     var JSONdata = {
         customerUserUuid: getCookie("uuid"),
@@ -44,6 +50,7 @@ $("#basic-order-submit").click(function () {
         }
         return arr;
     }
+
     if (!validateBasicOrderData()) {
         $("#basic-order-submit").prop('disabled', false);
         return;
@@ -63,7 +70,7 @@ $("#basic-order-submit").click(function () {
             alert("Bad response from server.");
         }
     })
-});
+}
 
 function getMusicType() {
     $.ajax({
@@ -75,9 +82,9 @@ function getMusicType() {
             var str = '<select id="musicType">';
             for (var i = 0; i < obj.musicType.length; i++) {
                 str = str + '<option value="' + obj.musicType[i].id
-                    +'">' + obj.musicType[i].name + '</option>';
+                    + '">' + obj.musicType[i].name + '</option>';
             }
-                str = str + '</select><br>';
+            str = str + '</select><br>';
             document.getElementById("musicTypes").innerHTML = str;
         },
         error: function (jqXHR) {
@@ -130,50 +137,50 @@ var dateTime = /^([1-9]|([012][0-9])|(3[01]))\/([0]?[1-9]|1[012])\/\d\d\d\d [012
 var seatsCount = /^\d+$/;
 
 function validateBasicOrderData() {
-    if(getCookie("uuid").length != 36){
+    if (getCookie("uuid").length != 36) {
         alert("Wrong uuid cookie");
         return false;
     }
-    if(!validateNames($("#contactName").val(), namesRegEx)){
+    if (!validateNames($("#contactName").val(), namesRegEx)) {
         alert("Contact name:\nPlease, use only alphabetic characters!");
         return false;
     }
     var contactPhone = $("#contactPhone").val();
     contactPhone = contactPhone.replace(/\s/g, "").replace(/\+/g, "");
-    if(!validateNames(contactPhone, phoneRegEx)){
+    if (!validateNames(contactPhone, phoneRegEx)) {
         alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
         return false;
     }
-    if(!validateNames($("#requestedSeatsCount").val(), seatsCount)){
+    if (!validateNames($("#requestedSeatsCount").val(), seatsCount)) {
         alert("Requested seats count:\nDigits only.");
         return false;
     }
-    if($("#fromAddress").val().length == 0 || $("#fromX").val().length == 0 || $("#fromY").val().length == 0){
+    if ($("#fromAddress").val().length == 0 || $("#fromX").val().length == 0 || $("#fromY").val().length == 0) {
         alert("Select proper start address.");
         return false;
     }
-    if($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0) {
+    if ($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0) {
         alert("Select proper destination address.");
         return false;
     }
-    if($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
-        || $("#toY" + counter).val().length == 0){
+    if ($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
+        || $("#toY" + counter).val().length == 0) {
         alert("Select proper destination address.");
         return false;
     }
-    if(!$("#asSoonAsPossible").is(':checked') && !validateNames($("#timeRequested").val(), dateTime)){
+    if (!$("#asSoonAsPossible").is(':checked') && !validateNames($("#timeRequested").val(), dateTime)) {
         alert("Wrong requested time");
         return false;
     }
-    if(!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0){
+    if (!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0) {
         alert("Bad totals.");
         return false;
     }
     return true;
 }
 
-function validateNames (input, regEx) {
-    if(input.length > 0){
+function validateNames(input, regEx) {
+    if (input.length > 0) {
         return regEx.test(input);
     }
     return false;
@@ -196,7 +203,7 @@ function getCookie(name) {
             setStr = decodeURI(cookie.substring(offset, end));
         }
     }
-    return(setStr);
+    return (setStr);
 }
 
 jQuery(function ($) {
@@ -204,6 +211,7 @@ jQuery(function ($) {
 });
 var counter = 0;
 var isDeleteExists = false;
+
 function createToAddress() {
     if ($("#fromX").val().length > 0 && $("#toX0").val().length > 0 && $("#toX" + counter).val().length > 0) {
         setLock("#fromAddress");
@@ -272,6 +280,7 @@ function deleteToAddress() {
 function setLock(name) {
     $(name).prop('disabled', true);
 }
+
 function setUnlock(name) {
     $(name).prop('disabled', false);
 }
@@ -285,8 +294,6 @@ function clearToXY(element) {
     $("#toX" + element.id.slice(-1)).val("");
     $("#toY" + element.id.slice(-1)).val("");
 }
-
-$('body').click(updateMultiplierAndPrice);
 
 function updateMultiplierAndPrice() {
     var totalMultiplier = 1;

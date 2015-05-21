@@ -6,26 +6,7 @@
 
 </head>
 <body onload="getAccessLevels()">
-<%!
-    Cookie[] c;
-    boolean flag;
-%>
-<%
-  /*  flag = false;
-    c = request.getCookies();
-    for (Cookie cook:c) {
-        if (cook.getName().equals("uuid")) {
-            if (user.findByUuid(cook.getValue()) == null) {
 
-            } else {
-                flag = true;
-            }
-        }
-    }
-    if (!flag) {
-        response.sendRedirect("index.jsp");
-    }*/
-%>
 <h1 style="text-align: center">Choose access level</h1><br>
 
 <p id="accessLevel" style="text-align: center"></p>

@@ -1,3 +1,7 @@
+$(document).ready(function(){
+    getTariffs("basic");
+});
+
 function getTariffs(orderTypeName) {
     $.ajax({
         method: 'POST',

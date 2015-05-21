@@ -190,6 +190,7 @@ public class OrderRest {
 		List<String> endYs = new LinkedList<>();
 		List<String> distances = new LinkedList<>();
 		List<String> pathIds = new LinkedList<>();
+		List<String> isPathCompleted = new LinkedList<>();
 
 		for (PathEntity pathEntity : pathEntities) {
 			endAddresses.add(pathEntity.getEndAddress());
@@ -197,12 +198,14 @@ public class OrderRest {
 			endYs.add(pathEntity.getEndY().toString());
 			distances.add(pathEntity.getLength().toString());
 			pathIds.add(pathEntity.getId().toString());
+			isPathCompleted.add(String.valueOf(pathEntity.isCompleted()));
 		}
 
 		orderJson.setToAddress(endAddresses.toArray(new String[endAddresses.size()]));
 		orderJson.setToX(endXs.toArray(new String[endXs.size()]));
 		orderJson.setToY(endYs.toArray(new String[endYs.size()]));
 		orderJson.setDistance(distances.toArray(new String[distances.size()]));
+		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
 		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
 
 		orderJson.setSex(orderEntity.getDriverSex());

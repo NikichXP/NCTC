@@ -77,7 +77,7 @@ $("#test").click(function () {
         phone: $("#in3").val(),
         email: $("#in4").val()
     };
-    alert("Trevis")
+
     updateUser(JSONdata);
 
 });
@@ -89,13 +89,13 @@ var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,
 
 
 function validateRegistrationData() {
-    alert("10")
+
     //validates login credentials (e-mail or phone number) field
     if (!validateName($("#in1").val(), namesRegEx)) {
         alert("First name:\nPlease, use only alphabetic characters!");
         return false;
     }
-    alert("11")
+
     if (!validateName($("#in2").val(), namesRegEx)) {
         alert("Last name:\nPlease, use only alphabetic characters!");
         return false;
@@ -138,6 +138,32 @@ function validateName(input, regEx) {
         return regEx.test(input);
     }
     return false;
+}
+$("#delete").click(function () {
+    var queryString = window.location.search;
+    queryString = queryString.substring(4);
+    deleteDriver(queryString);
+});
+
+
+function deleteDriver(id){
+    alert(id);
+    var JSONdata = {
+        id: id
+    };
+    $.ajax({
+        method: 'POST',
+        url: "api/user/delete",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
 }
 
 

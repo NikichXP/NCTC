@@ -35,13 +35,15 @@ function drawBody(rowData, table) {
 
     var row = $("<tbody><tr>");
     $(table).append(row);
-    row.append($("<td></td>"));
+  //  row.append($("<td></td>"));
     row.append($("<td>" + rowData.firstName + "</td>"))
     row.append($("<td>" + rowData.lastName + "</td>"));
 
     var btn = document.createElement('input');
     btn.id = rowData.id_d;
     btn.type = 'button';
+    btn.value = 'Modify'
+    btn.class = 'modify'
     btn.onclick = function () {
         document.location.href = "adminForm.html?id="+rowData.id_d;
 
@@ -53,3 +55,4 @@ function drawBody(rowData, table) {
     row.append($("<td>" + rowData.phone + "</td></tr></tbody>"));
 
 }
+
