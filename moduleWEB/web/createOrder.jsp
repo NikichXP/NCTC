@@ -13,8 +13,10 @@
     <script src="js/jquery.js"></script>
     <script src="js/jquery.maskedinput.js"></script>
     <script src="js/tariff.js"></script>
-
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
+    <script src="js/setuserdata.js" type="text/javascript"></script>
+    <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
+    <script src="js/createorder.js"></script>
 </head>
 <body onload="getMusicType(); getCarClass(); getTariffs('basic')">
 <div id="tariffs" hidden></div>
@@ -44,7 +46,7 @@
             Driver sex:
             <div id="musicTypeBox">
             <input type="radio" checked name="sex" data-value="Male">Male</input>
-            <input type="radio" name="sex" data-value="Any" multiplier="1">Any</input>
+            <input type="radio" name="sex" data-value="Any">Any</input>
             <input type="radio" name="sex" data-value="Female">Female</input>
             </div>
         </div>
@@ -95,10 +97,5 @@
     </div>
     <div id="map"></div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/setuserdata.js" type="text/javascript"></script>
-<script src="js/mapSearchByAddress.js" type="text/javascript"></script>
-<script src="js/createorder.js"></script>
 </body>
 </html>
