@@ -192,10 +192,11 @@ public class UserRest {
         UserEntity userEntity = null;
         if (userJson.getId() == null) {
             userEntity = createUserEntityByUserJson(userJson);
-
             user.create(userEntity);
+            setCar(userJson.getCarId(), userEntity.getId().toString());
         } else {
             userEntity = editUserEntityByJson(userJson);
+            setCar(userJson.getCarId(), userJson.getId());
             user.update(userEntity);
         }
         if (userEntity == null) {
@@ -257,7 +258,6 @@ public class UserRest {
             userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("3"))));
-            setCar(userJson.getCarId(), userJson.getId());
         }
         return userEntity;
     }

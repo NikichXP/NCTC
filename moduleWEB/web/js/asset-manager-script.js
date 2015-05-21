@@ -130,6 +130,7 @@ function addDriver(){
         carId: $("#carId").val(),
         pass: $("#regpass").val()
     };
+    alert(JSON.stringify(JSONdata))
     setDriver(JSONdata);
 }
 function editDriver(){
