@@ -1,9 +1,11 @@
 package com.netcracker.rest;
 
 import com.netcracker.classes.UserJson;
+import com.netcracker.entity.CarEntity;
 import com.netcracker.entity.UserUserAccessLevelEntity;
 import com.netcracker.entity.UserAccessLevelEntity;
 import com.netcracker.entity.UserEntity;
+import com.netcracker.facade.local_int.Car;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.facade.local_int.UserAccessLevel;
 import com.netcracker.rest.utils.SecuritySettings;
@@ -180,6 +182,9 @@ public class UserRest {
         }
     }
 
+    @EJB
+    Car car;
+
     @POST
     @Path("create_driver")
     @Consumes("application/json")
@@ -187,6 +192,7 @@ public class UserRest {
         UserEntity userEntity = null;
         if (userJson.getId() == null) {
             userEntity = createUserEntityByUserJson(userJson);
+
             user.create(userEntity);
         } else {
             userEntity = editUserEntityByJson(userJson);
@@ -198,6 +204,8 @@ public class UserRest {
             return Response.status(201).entity("user add").build();
         }
     }
+
+
 
     @POST
     @Path("delete")
@@ -228,6 +236,12 @@ public class UserRest {
         return userEntity;
     }
 
+    private void setCar(String carId, String userId) {
+        CarEntity carEntity = car.read(new BigInteger(carId));
+        carEntity.setUserEntity(user.read(new BigInteger(userId)));
+        car.update(carEntity);
+    }
+
     private UserEntity editUserEntityByJson(UserJson userJson){
         UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
         userEntity.setPhone("380000000000");
@@ -243,6 +257,7 @@ public class UserRest {
             userEntity.setDateRegistered(new Timestamp(new Date().getTime()));
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("3"))));
+            setCar(userJson.getCarId(), userJson.getId());
         }
         return userEntity;
     }
@@ -292,7 +307,7 @@ public class UserRest {
     @POST
     @Path("getUserDataById")
     @Consumes("text/plain")
-    public Response getUserDataByID(String id) {
+    public Response getDriverDataByID(String id) {
         UserEntity userEntity = user.read(new BigInteger(id));
 
         StringBuilder sb = new StringBuilder();

@@ -124,6 +124,7 @@ function addDriver(){
         lastName: $("#lastName").val(),
         phone: $("#phone").val(),
         email: $("#email").val(),
+        carId: $("#carId").val(),
         pass: $("#regpass").val()
     };
     setDriver(JSONdata);
@@ -135,6 +136,7 @@ function editDriver(){
         lastName: $("#lastName").val(),
         phone: $("#phone").val(),
         email: $("#email").val(),
+        carId: $("#carId").val(),
         pass: $("#regpass").val()
     };
     setDriver(JSONdata);

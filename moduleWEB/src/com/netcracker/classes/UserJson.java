@@ -15,6 +15,15 @@ public class UserJson {
     private String lastName;
     private String phone;
 
+    private String carId;
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
+    }
 
     public String getId() {
         return id;
