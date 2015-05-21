@@ -381,6 +381,32 @@ public class OrderJson {
         this.totalPrice = totalPrice;
     }
 
+    private String arrayToJson(Object[] var0){
+        if(var0 == null) {
+            return "null";
+        } else {
+            int var1 = var0.length - 1;
+            if(var1 == -1) {
+                return "[]";
+            } else {
+                StringBuilder var2 = new StringBuilder();
+                var2.append('[');
+                var2.append('\"');
+                int var3 = 0;
+
+                while(true) {
+                    var2.append(String.valueOf(var0[var3]));
+                    if(var3 == var1) {
+                        return var2.append("\"]").toString();
+                    }
+
+                    var2.append("\", \"");
+                    ++var3;
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
@@ -401,12 +427,12 @@ public class OrderJson {
                 "\"fromAddress\":" + (fromAddress == null ? "null" : "\"" + fromAddress + "\"") + ", " +
                 "\"fromX\":" + (fromX == null ? "null" : "\"" + fromX + "\"") + ", " +
                 "\"fromY\":" + (fromY == null ? "null" : "\"" + fromY + "\"") + ", " +
-                "\"toAddress\":" + Arrays.toString(toAddress) + ", " +
-                "\"distance\":" + Arrays.toString(distance) + ", " +
-                "\"toX\":" + Arrays.toString(toX) + ", " +
-                "\"toY\":" + Arrays.toString(toY) + ", " +
-                "\"pathId\":" + Arrays.toString(pathId) + ", " +
-                "\"pathCompleted\":" + Arrays.toString(pathCompleted) + ", " +
+                "\"toAddress\":" + arrayToJson(toAddress) + ", " +
+                "\"distance\":" + arrayToJson(distance) + ", " +
+                "\"toX\":" + arrayToJson(toX) + ", " +
+                "\"toY\":" + arrayToJson(toY) + ", " +
+                "\"pathId\":" + arrayToJson(pathId) + ", " +
+                "\"pathCompleted\":" + arrayToJson(pathCompleted) + ", " +
                 "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +
                 "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
                 "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +
