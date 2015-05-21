@@ -1,8 +1,12 @@
 package com.netcracker.rest;
 
 import com.netcracker.entity.CarEntity;
+import com.netcracker.entity.DriverCategoryEntity;
+import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.Car;
+import com.netcracker.facade.local_int.DriverCategory;
+import com.netcracker.facade.local_int.MusicType;
 import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;
@@ -70,5 +74,31 @@ public class AdminAssetManagerRest {
         }
 
     }
+    @EJB
+    DriverCategory driverCategory;
+
+    @POST
+    @Path("driverCategory")
+    public Response getRequiredDriverCategory(){
+        List<DriverCategoryEntity> driverCategoryEntities = driverCategory.findAll();
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"driverCategory\":[");
+        for (DriverCategoryEntity driverCategoryEntity : driverCategoryEntities) {
+            sb.append("{\"name\":\"")
+                    .append(driverCategoryEntity.getName())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (!driverCategoryEntities.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
+    
+    
+        
+    
 
 }
