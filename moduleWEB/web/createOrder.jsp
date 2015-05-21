@@ -44,7 +44,7 @@
             Driver sex:
             <div id="musicTypeBox">
             <input type="radio" checked name="sex" data-value="Male">Male</input>
-            <input type="radio" name="sex" data-value="Any">Any</input>
+            <input type="radio" name="sex" data-value="Any" multiplier="1">Any</input>
             <input type="radio" name="sex" data-value="Female">Female</input>
             </div>
         </div>

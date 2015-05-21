@@ -30,6 +30,7 @@ public class OrderJson {
     private String[] toX;
     private String[] toY;
     private String[] pathId;
+    private String[] pathCompleted;
 
     private String sex;
     private String carClass;

@@ -48,7 +48,7 @@ public class CarEntity {
 	@Column(name = "date_manufactured", nullable = false, insertable = true, updatable = true)
 	private Date dateManufactured;
 
-	@Column(name = "air_conditioner", nullable = true, insertable = true, updatable = true)
+	@Column(name = "air_conditioner", nullable = false, insertable = true, updatable = true)
 	private Boolean airCondition;
 
 	public Boolean getAirCondition() {
