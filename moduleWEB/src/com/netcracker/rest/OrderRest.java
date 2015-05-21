@@ -148,9 +148,15 @@ public class OrderRest {
 		orderJson.setId(orderEntity.getId().toString());
 		orderJson.setContactName(orderEntity.getContactName());
 		orderJson.setContactPhone(orderEntity.getContactPhone());
+		orderJson.setRequestedSeatsCount(orderEntity.getRequestedSeatsCount().toString());
 
 		orderJson.setType(orderEntity.getOrderTypeEntity().getName());
 		orderJson.setState(orderEntity.getOrderStateEntity().getName());
+
+		orderJson.setPublicToken(orderEntity.getPublicToken());
+		orderJson.setCustomerUserId(orderEntity.getCustomerUserEntity().getId().toString());
+		orderJson.setCustomerUserUuid(orderEntity.getCustomerUserEntity().getUuid());
+		orderJson.setDriverUserId(orderEntity.getDriverUserEntity().getId().toString());
 
 		orderJson.setTimeCreated(
 				simpleDateFormat.format(
@@ -207,6 +213,7 @@ public class OrderRest {
 		orderJson.setDistance(distances.toArray(new String[distances.size()]));
 		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
 		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
+		orderJson.setPathCompleted(isPathCompleted.toArray(new String[isPathCompleted.size()]));
 
 		orderJson.setSex(orderEntity.getDriverSex());
 		orderJson.setCarClass(orderEntity.getCarClassEntity().getName());
@@ -217,19 +224,32 @@ public class OrderRest {
 		orderJson.setAirConditioner(orderEntity.getAirConditioner());
 
 		orderJson.setCustomerPreCreateComment(orderEntity.getCustomerPreCreateComment());
-		orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
-		if(orderEntity.getRefuseCauseByCustomerEntity() != null)
+		if(orderEntity.getCustomerPostCompleteComment() != null) {
+			orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
+		} else orderJson.setCustomerPostCompleteComment("");
+		if(orderEntity.getRefuseCauseByCustomerEntity() != null) {
 			orderJson.setCustomerRefuseCause(orderEntity.getRefuseCauseByCustomerEntity().getMessage());
-		if(orderEntity.getRefuseCauseByDriverEntity() != null)
-		orderJson.setDriverRefuseCause(orderEntity.getRefuseCauseByDriverEntity().getMessage());
-		orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
-		orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+		} else orderJson.setCustomerRefuseCause("");
+		if(orderEntity.getRefuseCauseByDriverEntity() != null) {
+			orderJson.setDriverRefuseCause(orderEntity.getRefuseCauseByDriverEntity().getMessage());
+		} else orderJson.setDriverRefuseCause("");
+		if(orderEntity.getCustomerRefuseComment() != null) {
+			orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
+		} else orderJson.setCustomerRefuseComment("");
+		if(orderEntity.getDriverRefuseComment() != null) {
+			orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+		} else orderJson.setDriverRefuseComment("");
 
-		if (orderEntity.getTotalLength() != null) {
+		if(orderEntity.getTotalLength() != null && orderEntity.getTotalMultiplier() != null) {
 			orderJson.setTotalLength(orderEntity.getTotalLength().toString());
 			orderJson.setTotalMultiplier(orderEntity.getTotalMultiplier().toString());
 			orderJson.setTotalPrice(orderEntity.getTotalMultiplier().multiply(orderEntity.getTotalLength()).toString());
+		} else {
+			orderJson.setTotalLength("");
+			orderJson.setTotalMultiplier("");
+			orderJson.setTotalPrice("");
 		}
+
 		return Response.status(201).entity(orderJson.toString()).build();
 	}
 
@@ -415,14 +435,24 @@ public class OrderRest {
 		orderJson.setWifi(orderEntity.getWifi());
 		orderJson.setAirConditioner(orderEntity.getAirConditioner());
 
+		if(orderEntity.getCustomerPreCreateComment() != null){
 		orderJson.setCustomerPreCreateComment(orderEntity.getCustomerPreCreateComment());
-		orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
-		if(orderEntity.getRefuseCauseByCustomerEntity() != null)
+		} else orderJson.setCustomerPreCreateComment("");
+		if(orderEntity.getCustomerPostCompleteComment() != null) {
+			orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
+		} else orderJson.setCustomerPostCompleteComment("");
+		if(orderEntity.getRefuseCauseByCustomerEntity() != null) {
 			orderJson.setCustomerRefuseCause(orderEntity.getRefuseCauseByCustomerEntity().getMessage());
-		if(orderEntity.getRefuseCauseByDriverEntity() != null)
+		} else orderJson.setCustomerRefuseCause("");
+		if(orderEntity.getRefuseCauseByDriverEntity() != null) {
 			orderJson.setDriverRefuseCause(orderEntity.getRefuseCauseByDriverEntity().getMessage());
-		orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
-		orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+		} else orderJson.setDriverRefuseCause("");
+		if(orderEntity.getCustomerRefuseComment() != null) {
+			orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
+		} else orderJson.setCustomerRefuseComment("");
+		if(orderEntity.getDriverRefuseComment() != null) {
+			orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+		} else orderJson.setDriverRefuseComment("");
 
 		if (orderEntity.getTotalLength() != null) {
 			orderJson.setTotalLength(orderEntity.getTotalLength().toString());

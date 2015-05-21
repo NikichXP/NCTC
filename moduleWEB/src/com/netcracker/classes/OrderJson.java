@@ -237,6 +237,14 @@ public class OrderJson {
         this.pathId = pathId;
     }
 
+    public String[] getPathCompleted() {
+        return pathCompleted;
+    }
+
+    public void setPathCompleted(String[] pathCompleted) {
+        this.pathCompleted = pathCompleted;
+    }
+
     public String getSex() {
         return sex;
     }
@@ -253,20 +261,20 @@ public class OrderJson {
         this.carClass = carClass;
     }
 
-    public boolean isAsSoonAsPossible() {
-        return asSoonAsPossible;
-    }
-
-    public void setAsSoonAsPossible(boolean asSoonAsPossible) {
-        this.asSoonAsPossible = asSoonAsPossible;
-    }
-
     public String getMusicType() {
         return musicType;
     }
 
     public void setMusicType(String musicType) {
         this.musicType = musicType;
+    }
+
+    public boolean isAsSoonAsPossible() {
+        return asSoonAsPossible;
+    }
+
+    public void setAsSoonAsPossible(boolean asSoonAsPossible) {
+        this.asSoonAsPossible = asSoonAsPossible;
     }
 
     public boolean isSmokingFriendly() {
@@ -397,6 +405,8 @@ public class OrderJson {
                 "\"distance\":" + Arrays.toString(distance) + ", " +
                 "\"toX\":" + Arrays.toString(toX) + ", " +
                 "\"toY\":" + Arrays.toString(toY) + ", " +
+                "\"pathId\":" + Arrays.toString(pathId) + ", " +
+                "\"pathCompleted\":" + Arrays.toString(pathCompleted) + ", " +
                 "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +
                 "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
                 "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +

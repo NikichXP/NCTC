@@ -58,18 +58,9 @@ blocks contain brief information about order-->
     <div class="button" id="rightButtonHystory">
       DISTANCE
     </div>
-    <table id="historyOrderTable" class="table">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Date</th>
-        <th>StartOrder</th>
-        <th>EndOrder</th>
-        <th>Cost</th>
-        <th>Distance</th>
-      </tr>
-      </thead>
-    </table>
+    <hr>
+    <div id="driverOrdersHistory">
+    </div>
   </div>
 
 </div>

@@ -1,27 +1,11 @@
 /**
  * Created by Ubuntu on 19.05.2015.
  */
-$(document).ready(function() {
-    setHistory();
-});
+var uuid = getCookie("uuid");
 
-function setHistory(){
-    var uuid = getCookie("uuid");
-    $.ajax({
-        method: 'POST',
-        url: 'api/driver/history',
-        contentType: "text/plain; charset=utf-8",
-        data: uuid,
-        dataType: 'text',
-        success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "#historyOrderTable");
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error! Driver History.");
-        }
-    })
-}
+$(document).ready(function() {
+    getOrderHistory();
+});
 
 function getCookie(name) {
     var cookie = " " + document.cookie;
@@ -43,18 +27,46 @@ function getCookie(name) {
     return (setStr);
 }
 
-function drawTable(data, table) {
-    for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table);
+function getOrderHistory(){
+    if(uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/history',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                drawTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
     }
 }
-function drawBody(rowData, table) {
-    var row = $("<tbody><tr>")
-    $(table).append(row);
-    row.append($("<td></td>"));
-    row.append($("<td>" + rowData.dateOrderCreate + "</td>"))
-    row.append($("<td>" + rowData.startOrder + "</td>"));
-    row.append($("<td>" + rowData.endOrder + "</td>"));
-    row.append($("<td>" + rowData.price + "</td>"));
-    row.append($("<td>" + rowData.statusOrder + "</td></tr></tbody>"));
+
+
+function drawTable(data, table) {
+    for (var i = 0; i < data.length; i++) {
+        drawBody(data[i], table, "viewOrder.jsp");
+    }
+}
+
+
+function drawBody(rowData, table, url) {
+
+    var div = document.getElementById(table);
+    var createDiv = document.createElement("div");
+    var node = document.createTextNode("date :" + rowData.dateOrderCreate
+    + " first point :" + rowData.startOrder
+    + " next point :" + rowData.endOrder
+    + " status :" + rowData.statusOrder
+    + " price: " + rowData.price + "$");
+    createDiv.appendChild(node);
+    createDiv.className = "button";
+    createDiv.onclick = function () {
+        document.location.href = url + "?id=" + rowData.id;
+    };
+    div.appendChild(createDiv);
 }
