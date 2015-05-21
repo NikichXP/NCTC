@@ -237,3 +237,24 @@ function deleteCar(){
         }
     })
 }
+
+//function getDriverCategory() {
+//    $.ajax({
+//        method: 'POST',
+//        url: 'api/admin_asset_manager/driverCategory',
+//        dataType: 'text',
+//        success: function (data) {
+//            var obj = JSON.parse(data);
+//            var str = '<select id="driverCategoryType">';
+//            for (var i = 0; i < obj.musicType.length; i++) {
+//                str = str + '<option value="' + obj.musicType[i].id
+//                    +'">' + obj.musicType[i].name + '</option>';
+//            }
+//            str = str + '</select><br>';
+//            document.getElementById("musicTypes").innerHTML = str;
+//        },
+//        error: function (jqXHR) {
+//            alert("Bad response from server.\n" + jqXHR.responseText);
+//        }
+//    })
+//}
