@@ -10,8 +10,12 @@ function getOrderById(id) {
     $.get("api/order/view?id=" + id, function (data) {
         alert(data);
         var obj = JSON.parse(data);
-        alert(obj.customerUserUuid);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
+        $("#fromAddress").attr("value", obj.fromAddress);
+        $("#fromX").attr("value", obj.fromX);
+        $("#fromX").attr("value", obj.fromY);
+
+        $("#toAddress0").attr("value", obj.toAddress[0]);
 
     });
 }

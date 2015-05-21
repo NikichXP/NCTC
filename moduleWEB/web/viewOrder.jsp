@@ -30,10 +30,10 @@
     </div>
     <div id="importantInfo">
       <input id="requestedSeatsCount" type="text" disabled/>
-      <input id="fromAddress" type="text" />
+      <input id="fromAddress" type="text" disabled/>
       <input type="text" id="fromX" hidden/>
       <input type="text" id="fromY" hidden/>
-      <input id="toAddress0" type="text" onchange="clearToXY(this); makeSearch(this)" placeholder="To address"/>
+      <input id="toAddress0" type="text" disabled/>
       <input type="text" id="toX0" hidden/>
       <input type="text" id="toY0" hidden/>
       <input type="text" id="distance0" disabled/>

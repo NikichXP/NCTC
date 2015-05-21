@@ -407,6 +407,32 @@ public class OrderJson {
         }
     }
 
+    public static String toString(Object[] var0) {
+        if(var0 == null) {
+            return "null";
+        } else {
+            int var1 = var0.length - 1;
+            if(var1 == -1) {
+                return "[]";
+            } else {
+                StringBuilder var2 = new StringBuilder();
+                var2.append('[');
+                int var3 = 0;
+
+                while(true) {
+                    var2.append(String.valueOf(var0[var3]));
+                    if(var3 == var1) {
+                        return var2.append(']').toString();
+                    }
+
+                    var2.append(", ");
+                    ++var3;
+                }
+            }
+        }
+    }
+
+
     @Override
     public String toString() {
         return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
