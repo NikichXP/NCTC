@@ -18,7 +18,7 @@
     <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
     <script src="js/createorder.js"></script>
 </head>
-<body onload="getMusicType(); getCarClass(); getTariffs('basic')">
+<body>
 <div id="tariffs" hidden></div>
 
 <div id="container">

@@ -1,7 +1,6 @@
 /**
  * Created by Ann on 09.05.2015.
  */
-$(document).ready(function () {
     var myMap;
     var myPath;
 // Дождёмся загрузки API и готовности DOM.
@@ -111,4 +110,3 @@ $(document).ready(function () {
             });
         return false;
     }
-});

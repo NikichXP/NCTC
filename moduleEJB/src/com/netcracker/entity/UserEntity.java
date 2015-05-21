@@ -67,7 +67,7 @@ public class UserEntity {
 	@OneToMany(mappedBy = "userEntity")
 	private Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities;
 
-	@OneToOne(mappedBy = "userEntity", cascade = CascadeType.DETACH)
+	@OneToOne(mappedBy = "userEntity")
 	private CarEntity carEntity;
 
 	@Column(name = "uuid", nullable = true, insertable = true, updatable = false, length = 2147483647)
