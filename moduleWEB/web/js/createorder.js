@@ -187,23 +187,9 @@ function validateNames(input, regEx) {
 }
 
 function getCookie(name) {
-    var cookie = " " + document.cookie;
-    var search = " " + name + "=";
-    var setStr = null;
-    var offset = 0;
-    var end = 0;
-    if (cookie.length > 0) {
-        offset = cookie.indexOf(search);
-        if (offset != -1) {
-            offset += search.length;
-            end = cookie.indexOf(";", offset);
-            if (end == -1) {
-                end = cookie.length;
-            }
-            setStr = decodeURI(cookie.substring(offset, end));
-        }
-    }
-    return (setStr);
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 jQuery(function ($) {
