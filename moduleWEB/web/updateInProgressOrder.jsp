@@ -4,8 +4,8 @@
     <title>Order Test</title>
     <link href="css/order-style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.maskedinput.js"></script>
-    <script src="js/tariff.js"></script>
+    <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
+    <script src="js/update-in-progress-order.js"></script>
 
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
 </head>
@@ -28,8 +28,12 @@
             <input type="text" id="toY0" hidden/>
             <input type="text" id="distance0" disabled/>
             <input type="text" id="pathId0" hidden/>
-            <%--add all paths here! --%>
-            <input type="button" id="addressAdder" value="Add" onclick="createToAddress();"><br>
+        <%--add all paths here! --%>
+            <input type="button" id="addPointOnPath" value="Add point on path">
+            <input type="button" id="updateCurrentPath" value="Update current path" disabled>
+            <input type="button" id="removeCurrentPath" value="Remove current path" disabled>
+            <input type="button" id="completeCurrentPath" value="Complete current path">
+            <input type="button" id="completeOrder" value="Complete order" disabled><br>
         </div>
         <div id="timeOption">
             <input id="timeRequested" type="text" disabled/>
@@ -79,101 +83,5 @@
     </div>
     <div id="map"></div>
 </div>
-
-<script>
-var counter = 0;
-var isDeleteExists = false;
-function createToAddress() {
-    if ($("#fromX").val().length > 0 && $("#toX0").val().length > 0 && $("#toX" + counter).val().length > 0) {
-        setLock("#fromAddress");
-        setLock("#toAddress" + counter);
-        counter++;
-        var outer = document.getElementById("importantInfo");
-
-        var input = document.createElement("input");
-        input.setAttribute("type", "text");
-        input.setAttribute("id", "toAddress" + counter);
-        input.setAttribute("onchange", "clearToXY(this); makeSearch(this)");
-        input.setAttribute("placeholder", "To address " + counter);
-
-        var input2 = document.createElement("input");
-        input2.setAttribute("hidden", "hidden");
-        input2.setAttribute("type", "text");
-        input2.setAttribute("id", "toX" + counter);
-
-        var input3 = document.createElement("input");
-        input3.setAttribute("hidden", "hidden");
-        input3.setAttribute("type", "text");
-        input3.setAttribute("id", "toY" + counter);
-
-        var input4 = document.createElement("input");
-        input4.setAttribute("disabled", "disabled");
-        input4.setAttribute("type", "text");
-        input4.setAttribute("id", "distance" + counter);
-
-        var addressAdder = document.getElementById("addressAdder");
-        if (!isDeleteExists) {
-            var addressRemover = document.createElement("input");
-            addressRemover.setAttribute("id", "addressRemover");
-            addressRemover.setAttribute("type", "button");
-            addressRemover.setAttribute("onclick", "deleteToAddress()");
-            addressRemover.setAttribute("value", "Remove");
-            outer.insertBefore(addressRemover, addressAdder);
-            isDeleteExists = true;
-        }
-        var addressRemover = document.getElementById("addressRemover");
-        outer.insertBefore(input, addressRemover);
-        outer.insertBefore(input2, addressRemover);
-        outer.insertBefore(input3, addressRemover);
-        outer.insertBefore(input4, addressRemover);
-    } else {
-        alert("Enter valid <b>From address</b> and <b>To address</b>.")
-    }
-}
-
-function deleteToAddress() {
-    document.getElementById("toAddress" + (counter)).remove();
-    document.getElementById("toX" + (counter)).remove();
-    document.getElementById("toY" + (counter)).remove();
-    document.getElementById("distance" + (counter)).remove();
-    counter--;
-    buildPath(counter);
-    if (counter == 0) {
-        setUnlock("#fromAddress");
-        setUnlock("#toAddress0");
-        document.getElementById("addressRemover").remove();
-        isDeleteExists = false;
-    } else {
-        setUnlock("#toAddress" + (counter));
-    }
-}
-
-function setLock(name) {
-    $(name).prop('disabled', true);
-}
-function setUnlock(name) {
-    $(name).prop('disabled', false);
-}
-
-function clearFromXY() {
-    $("#fromX").val("");
-    $("#fromY").val("");
-}
-
-function clearToXY(element) {
-    $("#toX" + element.id.slice(-1)).val("");
-    $("#toY" + element.id.slice(-1)).val("");
-}
-
-$('body').click(updateMultiplierAndPrice);
-
-function updateMultiplierAndPrice() {
-    var totalMultiplier = $("#totalMultiplier").val();
-    $("#totalPrice").val(totalMultiplier * $("#totalLength").val());
-}
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
-<script src="js/update-in-progress-order.js"></script>
 </body>
 </html>
