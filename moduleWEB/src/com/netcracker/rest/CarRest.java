@@ -120,6 +120,8 @@ public class CarRest {
                 .append(carEntity.getLicencePlate())
                 .append("\",\"classCar\":\"")
                 .append(carEntity.getCarClassEntity().getName())
+                .append("\",\"conditioner\":\"")
+                .append(carEntity.getAirCondition().toString())
                 .append("\",\"requiredDriverCategory\":\"")
                 .append(carEntity.getDriverCategoryEntity().getName())
                 .append("\",\"countSeat\":\"")

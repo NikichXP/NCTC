@@ -61,6 +61,7 @@ function drawFormCar(rowData){
     document.getElementById("classCar").value = rowData.classCar;
     document.getElementById("userDriverId").value = rowData.carDriverId;
     document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
+    document.getElementById("conditioner").value = rowData.conditioner;
 }
 
 function setAssetManagerDrivers() {
