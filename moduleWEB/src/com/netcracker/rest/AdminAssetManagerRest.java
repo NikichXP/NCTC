@@ -1,9 +1,6 @@
 package com.netcracker.rest;
 
-import com.netcracker.entity.CarEntity;
-import com.netcracker.entity.DriverCategoryEntity;
-import com.netcracker.entity.MusicTypeEntity;
-import com.netcracker.entity.UserEntity;
+import com.netcracker.entity.*;
 import com.netcracker.facade.local_int.Car;
 import com.netcracker.facade.local_int.DriverCategory;
 import com.netcracker.facade.local_int.MusicType;
@@ -27,6 +24,9 @@ public class AdminAssetManagerRest {
 
     @EJB
     User user;
+
+    @EJB
+    DriverCategory driverCategory;
 
     @POST
     @Path("cars")
@@ -74,18 +74,20 @@ public class AdminAssetManagerRest {
         }
 
     }
-    @EJB
-    DriverCategory driverCategory;
 
     @POST
-    @Path("driverCategory")
-    public Response getRequiredDriverCategory(){
+    @Path("driver_category")
+    public Response getCarClass() {
         List<DriverCategoryEntity> driverCategoryEntities = driverCategory.findAll();
         StringBuilder sb = new StringBuilder();
-        sb.append("{\"driverCategory\":[");
-        for (DriverCategoryEntity driverCategoryEntity : driverCategoryEntities) {
-            sb.append("{\"name\":\"")
-                    .append(driverCategoryEntity.getName())
+        sb.append("{\"driverCategoryClass\":[");
+        for (DriverCategoryEntity categoryEntity : driverCategoryEntities) {
+            sb.append("{\"id\":\"")
+                    .append(categoryEntity.getId())
+                    .append("\",\"name\":\"")
+                    .append(categoryEntity.getName())
+                    .append("\",\"tariff_multiplier\":\"")
+                    .append(categoryEntity.getTariffMultiplier())
                     .append("\" },");
         }
         sb.replace(sb.length() - 1, sb.length(), "");
@@ -96,8 +98,6 @@ public class AdminAssetManagerRest {
             return Response.status(404).entity("Bad response.").build();
         }
     }
-    
-    
         
     
 
