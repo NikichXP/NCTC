@@ -122,3 +122,12 @@ body{
   float:right;
   margin-right: 10%;
 }
+
+#table{
+    margin-top: 11%;
+}
+
+#form{
+    margin-top: 15%;
+    align:center;
+}
