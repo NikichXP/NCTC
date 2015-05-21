@@ -200,6 +200,7 @@ function editCar(){
         requiredDriverCategory: $("#requiredDriverCategory").val(),
         airConditioner: $("#conditioner").val()
     };
+    alert(JSON.stringify(JSONdata))
     setCar(JSONdata);
 }
 function setCar(JSONdata){

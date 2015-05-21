@@ -74,10 +74,27 @@ blocks contain brief information about order-->
                         <li><input type="text-field" placeholder="model" id="model"/></li>
                         <li><input type="text-field" placeholder="seat count" id="seatCount"/></li>
                         <li><input type="text-field" placeholder="licence plate" id="licencePlate"/></li>
+                        <%--<li>--%>
+                            <%--<div class="">--%>
+                                <%--<select name="language" class="form-control" id="selection">--%>
+                                    <%--<option value=""></option>--%>
+                                    <%--<option value="arabic">Arabic</option>--%>
+                                    <%--<option value="english">English</option>--%>
+                                    <%--<option value="french">French</option>--%>
+                                    <%--<option value="german">German</option>--%>
+                                    <%--<option value="other">Other</option>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</li>--%>
                         <li><input type="text-field" placeholder="class" id="classCar"/></li>
                         <li><input type="text-field" placeholder="required driver category" id="requiredDriverCategory"/></li>
                         <li><input type="text-field" placeholder="driver id" id="userDriverId"/></li>
-                        <li><input type="text-field" placeholder="conditioner" id="conditioner"/></li>
+                        <div>
+                            <select name="language" class="form-control" id="conditioner">
+                                <option value="true">true</option>
+                                <option value="false">false</option>
+                            </select>
+                        </div>
                     </ul>
                     <div class="button" id="addCar" onclick="addCar()">
                         ADD

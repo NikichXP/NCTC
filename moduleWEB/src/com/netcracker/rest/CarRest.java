@@ -56,7 +56,7 @@ public class CarRest {
         if (carrEntity == null) {
             return Response.status(404).entity("Phone or email is already in use").build();
         } else {
-            return Response.status(201).entity("user add").build();
+            return Response.status(201).entity("car add").build();
         }
     }
 
@@ -82,7 +82,7 @@ public class CarRest {
             carEntity.setDriverCategoryEntity(driverCategory.findByName(carJson.getRequiredDriverCategory()));
             carEntity.setSeatsCount(new BigInteger(carJson.getSeatCount()));
             carEntity.setDateManufactured(new java.sql.Date(new Date().getTime()));
-            carEntity.setAirCondition(true);
+            carEntity.setAirCondition(new Boolean(carJson.getAirConditioner()));
             carEntity.setUserEntity(user.read(new BigInteger(carJson.getUserId())));
         }
         return carEntity;
@@ -99,7 +99,7 @@ public class CarRest {
             carEntity.setDriverCategoryEntity(driverCategory.findByName(carJson.getRequiredDriverCategory()));
             carEntity.setSeatsCount(new BigInteger(carJson.getSeatCount()));
             carEntity.setDateManufactured(new java.sql.Date(new Date().getTime()));
-            carEntity.setAirCondition(true);
+            carEntity.setAirCondition(new Boolean(carJson.getAirConditioner()));
             carEntity.setUserEntity(user.read(new BigInteger(carJson.getUserId())));
         }
         return carEntity;
