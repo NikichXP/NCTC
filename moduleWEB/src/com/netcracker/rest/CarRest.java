@@ -26,7 +26,7 @@ import java.util.Date;
  * Created by Juger on 19.05.2015.
  */
 
-@Path("car")
+@Path("car_car")
 public class CarRest {
 
     @EJB
@@ -107,7 +107,7 @@ public class CarRest {
     @POST
     @Path("getCarDataById")
     @Consumes("text/plain")
-    public Response getUserDataByID(String id) {
+    public Response getCarDataByID(String id) {
         CarEntity carEntity = car.read(new BigInteger(id));
 
         StringBuilder sb = new StringBuilder();

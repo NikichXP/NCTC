@@ -1,6 +1,8 @@
 $(document).ready(function () {
     setAssetManagerCars();
     setAssetManagerDrivers();
+    getCarClass();
+    getDriverCategory();
 });
 
 function setAssetManagerCars() {
@@ -37,7 +39,7 @@ function drawRowCars(rowData, table) {
 function editCarById(carId){
     $.ajax({
         method: 'POST',
-        url: 'api/car/getCarDataById',
+        url: 'api/car_car/getCarDataById',
         contentType: "text/plain; charset=utf-8",
         data: carId,
         dataType: 'text',
@@ -208,7 +210,7 @@ function editCar(){
 function setCar(JSONdata){
     $.ajax({
         method: 'POST',
-        url: "api/car/create_car",
+        url: "api/car_car/create_car",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
         dataType:'text',
@@ -227,7 +229,7 @@ function deleteCar(){
     };
     $.ajax({
         method: 'POST',
-        url: "api/car/delete",
+        url: "api/car_car/delete",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
         dataType:'text',
@@ -240,23 +242,62 @@ function deleteCar(){
     })
 }
 
-//function getDriverCategory() {
-//    $.ajax({
-//        method: 'POST',
-//        url: 'api/admin_asset_manager/driverCategory',
-//        dataType: 'text',
-//        success: function (data) {
-//            var obj = JSON.parse(data);
-//            var str = '<select id="driverCategoryType">';
-//            for (var i = 0; i < obj.musicType.length; i++) {
-//                str = str + '<option value="' + obj.musicType[i].id
-//                    +'">' + obj.musicType[i].name + '</option>';
-//            }
-//            str = str + '</select><br>';
-//            document.getElementById("musicTypes").innerHTML = str;
-//        },
-//        error: function (jqXHR) {
-//            alert("Bad response from server.\n" + jqXHR.responseText);
-//        }
-//    })
-//}
+function getCarClass() {
+    $.ajax({
+        method: 'POST',
+        url: 'api/car/class',
+        dataType: 'text',
+        success: function (data) {
+            var select = document.getElementById("classCar");
+            var option;
+            var node;
+            var obj = JSON.parse(data);
+            for (var i = 0; i < obj.carClass.length; i++) {
+                option = document.createElement("option");
+                option.value = obj.carClass[i].name;
+                node = document.createTextNode(obj.carClass[i].name);
+                option.appendChild(node);
+                select.appendChild(option)
+            }
+
+            option.appendChild(node);
+            select.appendChild(option);
+
+
+            document.getElementById("carClass").innerHTML = str;
+        },
+        error: function (jqXHR) {
+            alert("Bad response from server.\n" + jqXHR.responseText);
+        }
+    })
+}
+
+function getDriverCategory() {
+    $.ajax({
+        method: 'POST',
+        url: 'api/admin_asset_manager/driver_category',
+        dataType: 'text',
+        success: function (data) {
+            var select = document.getElementById("requiredDriverCategory");
+            var option;
+            var node;
+            var obj = JSON.parse(data);
+            for (var i = 0; i < obj.driverCategoryClass.length; i++) {
+                option = document.createElement("option");
+                option.value = obj.driverCategoryClass[i].name;
+                node = document.createTextNode(obj.driverCategoryClass[i].name);
+                option.appendChild(node);
+                select.appendChild(option)
+            }
+
+            option.appendChild(node);
+            select.appendChild(option);
+
+
+            document.getElementById("carClass").innerHTML = str;
+        },
+        error: function (jqXHR) {
+            alert("Bad response from server.\n" + jqXHR.responseText);
+        }
+    })
+}
