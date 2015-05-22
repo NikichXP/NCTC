@@ -2,6 +2,7 @@ package com.netcracker.rest;
 
 import com.netcracker.classes.OrderJson;
 import com.netcracker.entity.OrderEntity;
+import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.*;
 
@@ -41,10 +42,11 @@ public class OrderRest {
 	@POST
 	@javax.ws.rs.Path("getOrderInProgressByDriverUUID")
 	public Response isDriverOfOrder(String driverUuid) {
-		OrderEntity orderEntity = order.getOrderInProgressByDriverUUID(driverUuid);
-		return (orderEntity == null ?
+		OrderStateEntity orderStateEntity = orderState.findByName("in progress");
+		List<OrderEntity> orderEntities = order.getOrdersByStateAndDriverUuid(orderStateEntity, driverUuid);
+		return (orderEntities.isEmpty() ?
 				Response.status(404).entity(false).build() :
-				Response.status(201).entity(true).build());
+				Response.status(201).entity(orderEntities.get(0).getId()).build());
 	}
 
 	@POST
@@ -126,7 +128,7 @@ public class OrderRest {
 		orderEntity.setCustomerPreCreateComment(orderJson.getCustomerPreCreateComment());
 
 		BigDecimal totalPrice = new BigDecimal(0);
-		BigDecimal totalLength = new BigDecimal(orderJson.getTotalLength());
+		BigDecimal totalLength = new BigDecimal(0);
 
 		for (PathEntity pathEntity : pathEntities) {
 			pathEntity.setCompleted(false);
@@ -134,6 +136,7 @@ public class OrderRest {
 			totalLength = totalLength.add(pathEntity.getPrice());
 		}
 		orderEntity.setFinalPrice(totalPrice);
+		orderEntity.setTotalLength(totalPrice);
 		order.create(orderEntity);
 
 		if (orderJson == null) {

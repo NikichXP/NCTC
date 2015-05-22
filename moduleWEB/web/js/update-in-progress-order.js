@@ -1,3 +1,5 @@
+var id;
+
 $(document).ready(function () {
     var driverUuid = getCookie('uuid');
     $.ajax({
@@ -7,8 +9,9 @@ $(document).ready(function () {
         data: driverUuid,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert(data);
+            id = data;
             fillPageWithData();
+            ymaps.ready(init);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('You have no "in progress" order.');
@@ -16,12 +19,42 @@ $(document).ready(function () {
         }
     });
     $('body').click(updatePrice);
-    $("#basic-order-submit").click(submitOrder);
     $("#updateCurrentPath").click(submitUpdate);
 });
 
 function fillPageWithData() {
+    $.get("api/order/view?id=" + id, function (data) {
+        var obj = JSON.parse(data);
+        $("#contactName").attr("value", obj.contactName);
+        $("#contactPhone").attr("value", obj.contactPhone);
 
+        $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
+        $("#fromAddress").attr("value", obj.fromAddress);
+        $("#fromX").attr("value", obj.fromX);
+        $("#fromY").attr("value", obj.fromY);
+        //TODO add dynamic generation
+        $("#toAddress0").attr("value", obj.toAddress[0]);
+        $("#toX0").attr("value", obj.toX[0]);
+        $("#toY0").attr("value", obj.toY[0]);
+        $("#distance0").attr("value", obj.distance[0]);
+        $("#pathId0").attr("value", obj.distance[0]);
+
+        $("#timeRequested").attr("value", obj.timeRequested);
+        $("#timeOfDriverArrival").attr("value", obj.timeOfDriverArrival);
+
+        $("#music").attr("value", obj.musicType);
+
+        if(obj.smokingFriendly == "true") $('input:checkbox[id=smokingFriendly]').prop('checked', true);
+        if(obj.animalFriendly == "true") $('input:checkbox[id=animalFriendly]').prop('checked', true);
+        if(obj.wifi == "true") $('input:checkbox[id=wifi]').prop('checked', true);
+        if(obj.airConditioner == "true") $('input:checkbox[id=airConditioner]').prop('checked', true);
+
+        $("#totalMultiplier").attr("value", obj.totalMultiplier);         //TODO recalculate this values
+        $("#totalLength").attr("value", obj.totalLength);        //TODO recalculate this values
+        $("#totalPrice").attr("value", obj.totalPrice);
+
+        $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+    });
 }
 
 function submitUpdate() {

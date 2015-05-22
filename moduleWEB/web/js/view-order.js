@@ -12,7 +12,7 @@ function getOrderById(id) {
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
         $("#fromAddress").attr("value", obj.fromAddress);
         $("#fromX").attr("value", obj.fromX);
-        $("#fromX").attr("value", obj.fromY);
+        $("#fromY").attr("value", obj.fromY);
 
         //TODO add dynamic generation
         $("#toAddress0").attr("value", obj.toAddress[0]);

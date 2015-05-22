@@ -3,12 +3,6 @@
  */
 var myMap;
 var myPath;
-//var rootURL = "http://localhost:8085/TestMaps_war_exploded/map.html";
-//var coord;
-
-// Дождёмся загрузки API и готовности DOM.
-ymaps.ready(init);
-
 
 function init() {
     // Создание экземпляра карты и его привязка к контейнеру с
@@ -20,10 +14,11 @@ function init() {
         center: [50.45,30.52], // Киев
         zoom: 11
     });
+    buildPath(0); //TODO Replace with last path index
 }
 
 function makeSearch(element) {
-    //alert(element.value + " " + element.id);
+    alert(element.value + " " + element.id);
     var myGeocoder = ymaps.geocode(element.value, {
         /**
          * Опции запроса
@@ -40,14 +35,8 @@ function makeSearch(element) {
         var coords = firstGeoObject.geometry.getCoordinates();
         // Область видимости геообъекта.
         //var bounds = firstGeoObject.properties.get('boundedBy');
-        if (element.id.indexOf("from") == 0) {
-            document.getElementById("fromX").value = coords[0];
-            document.getElementById("fromY").value = coords[1];
-        }
-        else {
-            document.getElementById("toX" + element.id.slice(-1)).value = coords[0];
-            document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
-        }
+         document.getElementById("toX" + element.id.slice(-1)).value = coords[0];
+         document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
 
         // Добавляем первый найденный геообъект на карту.
         myMap.geoObjects.add(firstGeoObject);

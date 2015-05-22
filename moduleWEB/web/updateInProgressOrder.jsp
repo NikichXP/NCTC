@@ -3,11 +3,10 @@
 <head>
     <title>Order Test</title>
     <link href="css/order-style.css" rel="stylesheet">
+    <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
     <script src="js/jquery.js"></script>
     <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
     <script src="js/update-in-progress-order.js"></script>
-
-    <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
 </head>
 <body>
 <div id="tariffs" hidden></div>
@@ -23,7 +22,7 @@
             <input id="fromAddress" type="text" disabled/>
             <input type="text" id="fromX" hidden/>
             <input type="text" id="fromY" hidden/>
-            <input id="toAddress0" type="text" onchange="clearToXY(this); makeSearch(this)" placeholder="To address"/>
+            <input id="toAddress0" type="text" onchange="clearToXY(this)" placeholder="To address"/>
             <input type="text" id="toX0" hidden/>
             <input type="text" id="toY0" hidden/>
             <input type="text" id="distance0" disabled/>
