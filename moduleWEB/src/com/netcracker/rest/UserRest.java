@@ -171,7 +171,7 @@ public class UserRest {
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
             user.create(userEntity);
             Mail.sendMail(userJson.getEmail(), "Taxi Service confirmation",
-                    "http://localhost:8080/moduleWEB_war_archive/api/user/confirm?encryptedUuid="
+                    "http://178.151.17.247/nctc/api/user/confirm?encryptedUuid="
                             + SecuritySettings.encrypt(randomUuid));
             //TODO Replace with real URL
         }
