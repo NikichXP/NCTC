@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * Created by Евгений on 16.05.2015.
+ * Created by Someone on 16.05.2015.
  */
 
 @Path("admin_table")
