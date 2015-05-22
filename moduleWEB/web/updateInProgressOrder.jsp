@@ -9,7 +9,7 @@
 
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
 </head>
-<body onload="getTariffs('basic')">
+<body>
 <div id="tariffs" hidden></div>
 
 <div id="container">

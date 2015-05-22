@@ -39,6 +39,16 @@ public class OrderRest {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
 	@POST
+	@javax.ws.rs.Path("isDriverOfOrder")
+	@Consumes("application/json")
+	public Response isDriverOfOrder(OrderJson orderJson) {
+		OrderEntity orderEntity = order.getByDriverUUIDAndId(orderJson.getId(), orderJson.getDriverUserUuid());
+		return (orderEntity == null ?
+				Response.status(404).entity(false).build() :
+				Response.status(201).entity(true).build());
+	}
+
+	@POST
 	@javax.ws.rs.Path("create")
 	@Consumes("application/json")
 	public Response createOrder(OrderJson orderJson) {
@@ -351,15 +361,15 @@ public class OrderRest {
 	}
 
 	@GET
-	@javax.ws.rs.Path("existing")
+	@javax.ws.rs.Path("existing")											//TODO Maxim, update or delete this. Viktor.
 	public Response isExistUserToThetOrder(@QueryParam("id") String orderId, @QueryParam("uuid") String uuid) {
-		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
+		OrderEntity orderEntity = (OrderEntity) order.getByUUIDAndId(orderId, uuid);
 		return Response.status(201).entity(orderEntity.getId()).build();
 	}
 	@GET
-	@javax.ws.rs.Path("view_w")
+	@javax.ws.rs.Path("view_w")												//TODO Maxim, update or delete this. Viktor.
 	public Response viewOrderWithExist(@QueryParam("id") String orderId, @QueryParam("uuid") String uuid) {
-		OrderEntity orderEntity = order.getByUUIDAndId(orderId, uuid);
+		OrderEntity orderEntity = (OrderEntity) order.getByUUIDAndId(orderId, uuid);
 
 		if (orderEntity == null) {
 			return Response.status(404).entity("No such order in DB.").build();

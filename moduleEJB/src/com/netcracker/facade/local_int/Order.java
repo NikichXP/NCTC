@@ -30,10 +30,12 @@ public interface Order {
 
 	List<OrderEntity> getOrdersByStateAndDriverUuid(OrderStateEntity orderStateEntity, String driverUuid);
 
+	OrderEntity getByDriverUUIDAndId(String orderId, String driverUuid);
+
 	List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity);
 
 	List<Point> getFirstAndLastPoints(OrderEntity orderEntity);
 
-	OrderEntity getByUUIDAndId(String orderId, String uuid);
+	Object getByUUIDAndId(String orderId, String uuid);
 
 }

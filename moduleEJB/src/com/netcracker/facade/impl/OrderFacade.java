@@ -48,14 +48,26 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
 
     @Override
     public OrderEntity getByUUIDAndId(String orderId, String uuid) {
-        List<OrderEntity> result = em.createNamedQuery("Order.getByUUIDAndID")
+        List result = em.createNamedQuery("Order.getByUUIDAndID")
                 .setParameter("id", new BigInteger(orderId))
                 .setParameter("uuid", uuid)
                 .getResultList();
         if(result.isEmpty())
             return null;
         else
-            return result.get(0);
+            return (OrderEntity) result.get(0);
+    }
+
+    @Override
+    public OrderEntity getByDriverUUIDAndId(String orderId, String driverUuid) {
+        List result = em.createNamedQuery("Order.getByDriverUUIDAndID")
+                .setParameter("id", new BigInteger(orderId))
+                .setParameter("uuid", driverUuid)
+                .getResultList();
+        if(result.isEmpty())
+            return null;
+        else
+            return (OrderEntity) result.get(0);
     }
 
     @Override

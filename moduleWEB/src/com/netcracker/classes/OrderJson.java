@@ -9,6 +9,7 @@ public class OrderJson {
     private String customerUserId;
     private String customerUserUuid;
     private String driverUserId;
+    private String driverUserUuid;
     private String contactName;
     private String contactPhone;
     private String requestedSeatsCount;
@@ -91,6 +92,14 @@ public class OrderJson {
 
     public void setDriverUserId(String driverUserId) {
         this.driverUserId = driverUserId;
+    }
+
+    public String getDriverUserUuid() {
+        return driverUserUuid;
+    }
+
+    public void setDriverUserUuid(String driverUserUuid) {
+        this.driverUserUuid = driverUserUuid;
     }
 
     public String getContactName() {
@@ -440,6 +449,7 @@ public class OrderJson {
                 "\"customerUserId\":" + (customerUserId == null ? "null" : "\"" + customerUserId + "\"") + ", " +
                 "\"customerUserUuid\":" + (customerUserUuid == null ? "null" : "\"" + customerUserUuid + "\"") + ", " +
                 "\"driverUserId\":" + (driverUserId == null ? "null" : "\"" + driverUserId + "\"") + ", " +
+                "\"driverUserUuid\":" + (driverUserUuid == null ? "null" : "\"" + driverUserUuid + "\"") + ", " +
                 "\"contactName\":" + (contactName == null ? "null" : "\"" + contactName + "\"") + ", " +
                 "\"contactPhone\":" + (contactPhone == null ? "null" : "\"" + contactPhone + "\"") + ", " +
                 "\"requestedSeatsCount\":" + (requestedSeatsCount == null ? "null" : "\"" + requestedSeatsCount + "\"") + ", " +
