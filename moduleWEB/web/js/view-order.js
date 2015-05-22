@@ -49,6 +49,8 @@ function getOrderById(id) {
         $("#totalPrice").attr("value", obj.totalPrice);
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+
+        //TODO don't work map operation: need make function makeSearch(element) but i could not run it.
     });
 }
 
