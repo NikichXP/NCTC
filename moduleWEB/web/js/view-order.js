@@ -10,6 +10,8 @@ $(document).ready(function () {
 function getOrderById(id) {
     $.get("api/order/view?id=" + id, function (data) {
         var obj = JSON.parse(data);
+        $("#contactName").attr("value", obj.contactName);
+        $("#contactPhone").attr("value", obj.contactPhone);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
         $("#fromAddress").attr("value", obj.fromAddress);
         $("#fromX").attr("value", obj.fromX);
@@ -25,9 +27,7 @@ function getOrderById(id) {
 
         $('input:radio[name=sex][data-value=' + obj.sex + ']').prop('checked', true);
 
-        //TODO override getCarClass() method dynamic generation in createorder.js : carClass = disabled. Make copy file.
-        $('input:radio[name=carClass][data-value=' + obj.carClass + ']').prop('checked', true);
-
+        $("#car").attr("value", obj.carClass);
         $("#music").attr("value", obj.musicType);
 
         if(obj.smokingFriendly == "true") {
@@ -49,8 +49,6 @@ function getOrderById(id) {
         $("#totalPrice").attr("value", obj.totalPrice);
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
-
-        //TODO don't work map operation: need make function makeSearch(element) but i could not run it.
     });
 }
 

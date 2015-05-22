@@ -14,7 +14,6 @@
     <script src="js/jquery.maskedinput.js"></script>
     <script src="js/tariff.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
-    <script src="js/setuserdata.js" type="text/javascript"></script>
     <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
     <script src="js/createorder.js"></script>
     <script src="js/view-order.js"></script>
@@ -45,17 +44,15 @@
             <input id="timeRequested" type="text" disabled style="visibility: visible"/>
         </div>
         <div id="genderOption">
-            Driver sex:
+            <%--Driver sex:--%>
             <div id="musicTypeBox">
-                <input type="radio" checked name="sex" data-value="Male" disabled>Male</input>
-                <input type="radio" name="sex" data-value="Any" disabled>Any</input>
-                <input type="radio" name="sex" data-value="Female" disabled>Female</input>
+                <br>
             </div>
         </div>
 
         <div id="carClassBox">
             Car class:
-            <div id="carClass"></div>
+            <input type="text" id="car" disabled/>
         </div>
 
         <div id="musicTypesBox">
