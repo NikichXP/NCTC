@@ -56,7 +56,7 @@ function setUserData(userData, url){
 			var index = 0;
 			for (var i = 0; i < obj.userAccessLevel.length; i++) {
 				str = str + '<a href="' + obj.userAccessLevel[i].level
-					+ '.jsp">Login like: '
+					+ '.jsp">Login as: '
 					+ obj.userAccessLevel[i].level
 					+ '</a>' + '<br>';
 				index++;

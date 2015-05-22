@@ -11,11 +11,8 @@
     <title>Order Test</title>
     <link href="css/order-style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.maskedinput.js"></script>
-    <script src="js/tariff.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
-    <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
-    <script src="js/createorder.js"></script>
+    <script src="js/mapSearchByAddressViewOrder.js" type="text/javascript"></script>
     <script src="js/view-order.js"></script>
 </head>
 <body>
