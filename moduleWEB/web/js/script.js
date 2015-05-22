@@ -58,7 +58,7 @@ function redirectWithAccessLevels(userData, url) {
 			getAccessLevels(uuid);
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert("Wrong user credentials.");
+			alert(jqXHR.responseText);
 		}
 	})
 }
