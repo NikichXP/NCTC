@@ -45,7 +45,7 @@ function editCarById(carId){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
+            //alert(data);
             drawFormCar(obj.carData[0]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -130,7 +130,7 @@ function addDriver(){
         carId: $("#carId").val(),
         pass: $("#regpass").val()
     };
-    alert(JSON.stringify(JSONdata))
+    //alert(JSON.stringify(JSONdata))
     setDriver(JSONdata);
 }
 function editDriver(){
@@ -206,7 +206,7 @@ function editCar(){
         requiredDriverCategory: $("#requiredDriverCategory").val(),
         airConditioner: $("#conditioner").val()
     };
-    alert(JSON.stringify(JSONdata))
+    //alert(JSON.stringify(JSONdata))
     setCar(JSONdata);
 }
 function setCar(JSONdata){
