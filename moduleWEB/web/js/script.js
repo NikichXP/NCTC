@@ -87,7 +87,7 @@ function getAccessLevels(uuid) {
 }
 //AJAX POST for
 $('#track-TO-submit').click(function(){
-	JSONdata = {
+	var JSONdata = {
 		'orderid': $("#tracking-id").val()
 	};
 	$.ajax({

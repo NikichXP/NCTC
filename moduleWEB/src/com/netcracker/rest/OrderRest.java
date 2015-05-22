@@ -39,10 +39,9 @@ public class OrderRest {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
 	@POST
-	@javax.ws.rs.Path("isDriverOfOrder")
-	@Consumes("application/json")
-	public Response isDriverOfOrder(OrderJson orderJson) {
-		OrderEntity orderEntity = order.getByDriverUUIDAndId(orderJson.getId(), orderJson.getDriverUserUuid());
+	@javax.ws.rs.Path("getOrderInProgressByDriverUUID")
+	public Response isDriverOfOrder(String driverUuid) {
+		OrderEntity orderEntity = order.getOrderInProgressByDriverUUID(driverUuid);
 		return (orderEntity == null ?
 				Response.status(404).entity(false).build() :
 				Response.status(201).entity(true).build());

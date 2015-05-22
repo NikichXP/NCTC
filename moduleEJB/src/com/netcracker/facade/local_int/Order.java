@@ -30,7 +30,7 @@ public interface Order {
 
 	List<OrderEntity> getOrdersByStateAndDriverUuid(OrderStateEntity orderStateEntity, String driverUuid);
 
-	OrderEntity getByDriverUUIDAndId(String orderId, String driverUuid);
+	OrderEntity getOrderInProgressByDriverUUID(String driverUuid);
 
 	List<OrderEntity> getOrdersByState(OrderStateEntity orderStateEntity);
 

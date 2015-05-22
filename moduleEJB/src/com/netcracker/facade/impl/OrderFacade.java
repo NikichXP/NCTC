@@ -59,9 +59,8 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
     }
 
     @Override
-    public OrderEntity getByDriverUUIDAndId(String orderId, String driverUuid) {
-        List result = em.createNamedQuery("Order.getByDriverUUIDAndID")
-                .setParameter("id", new BigInteger(orderId))
+    public OrderEntity getOrderInProgressByDriverUUID(String driverUuid) {
+        List result = em.createNamedQuery("Order.getOrderInProgressByDriverUUID")
                 .setParameter("uuid", driverUuid)
                 .getResultList();
         if(result.isEmpty())

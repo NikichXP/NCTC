@@ -1,16 +1,18 @@
 $(document).ready(function () {
+    var driverUuid = getCookie('uuid');
     $.ajax({
         method: 'POST',
-        url: 'api/order/create',
+        url: 'api/order/getOrderInProgressByDriverUUID',
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(JSONdata),
+        data: driverUuid,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
+            alert(data);
             fillPageWithData();
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            $("#basic-order-submit").prop('disabled', false);
-            alert("Bad response from server.");
+            alert('You have no "in progress" order.');
+            //TODO Add redirect
         }
     });
     $('body').click(updatePrice);
