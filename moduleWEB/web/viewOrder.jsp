@@ -15,7 +15,7 @@
     <script src="js/tariff.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
     <script src="js/setuserdata.js" type="text/javascript"></script>
-    <script src="js/mapSearchByAddress.js" type="text/javascript"></script>
+    <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
     <script src="js/createorder.js"></script>
     <script src="js/view-order.js"></script>
 </head>

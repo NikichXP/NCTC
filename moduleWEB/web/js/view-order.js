@@ -4,6 +4,7 @@
 $(document).ready(function () {
     getUrlVars();
     getOrderById(getUrlVars()["id"]);
+    ymaps.ready(init);
 });
 
 function getOrderById(id) {
