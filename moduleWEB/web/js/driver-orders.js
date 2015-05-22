@@ -45,13 +45,15 @@ function getAssignedOrders(){
 
 function drawTableAssignedOrders(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table, "viewAssignedOrder.jsp");
+       // drawBody(data[i], table, "viewAssignedOrder.jsp");
+        drawBody(data[i], table, "viewOrder.jsp");
     }
 }
 
 function drawTableQueuedOrders(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table, "viewQueuedOrder.jsp");
+       // drawBody(data[i], table, "viewQueuedOrder.jsp");
+        drawBody(data[i], table, "viewOrder.jsp");
     }
 }
 
