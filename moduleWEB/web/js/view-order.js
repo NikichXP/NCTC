@@ -8,7 +8,6 @@ $(document).ready(function () {
 
 function getOrderById(id) {
     $.get("api/order/view?id=" + id, function (data) {
-        alert(data);
         var obj = JSON.parse(data);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
         $("#fromAddress").attr("value", obj.fromAddress);
