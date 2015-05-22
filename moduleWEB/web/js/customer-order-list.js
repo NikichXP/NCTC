@@ -18,7 +18,7 @@ function setList(){
                 drawTable(obj.orderHistory, "table");
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText + " Error!");
+                //alert(jqXHR.responseText + " Error!");
             }
         })
     }
