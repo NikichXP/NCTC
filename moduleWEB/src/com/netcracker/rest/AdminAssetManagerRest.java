@@ -33,11 +33,11 @@ public class AdminAssetManagerRest {
     public Response getCars() {
         List<CarEntity> list = car.findAll();
         StringBuilder sb = new StringBuilder();
-        sb.append("{\"cars\":[");
+        sb.append("{\"dataEntity\":[");
         for (CarEntity carEntity : list) {
-            sb.append("{\"carId\":\"")
+            sb.append("{\"id\":\"")
                     .append(carEntity.getId())
-                    .append("\",\"model\":\"")
+                    .append("\",\"name\":\"")
                     .append(carEntity.getModel())
                     .append("\" },");
         }
@@ -57,9 +57,9 @@ public class AdminAssetManagerRest {
     public Response getDrivers() {
         List<UserEntity> list = user.getDrivers();
         StringBuilder sb = new StringBuilder();
-        sb.append("{\"cars\":[");
+        sb.append("{\"dataEntity\":[");
         for (UserEntity userEntity : list) {
-            sb.append("{\"driverId\":\"")
+            sb.append("{\"id\":\"")
                     .append(userEntity.getId())
                     .append("\",\"name\":\"")
                     .append(userEntity.getFirstName())

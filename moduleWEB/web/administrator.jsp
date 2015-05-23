@@ -76,5 +76,5 @@ blocks contain brief information about order-->
 <!--script for menu batton-->
 <script src="js/admin-dashboard.js" type="text/javascript"></script>
 <!--set information about user-->
-<script src="js/userdatabyuuid.js" type="text/javascript"></script>
+<script src="js/user-data-by-uuid.js" type="text/javascript"></script>
 </body>
