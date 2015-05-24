@@ -57,7 +57,7 @@ function submitOrder() {
     }
     $.ajax({
         method: 'POST',
-        url: 'api/order/create',
+        url: 'api/order/createWithoutRegistration',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
         dataType: 'text',
