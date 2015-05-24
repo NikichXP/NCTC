@@ -151,6 +151,10 @@ body{
   display: inline-block;
   width: 30%;
 }
+
+#centralButton:hover {
+  background-color: orange;
+}
 /**/
 #rightButton {
 
