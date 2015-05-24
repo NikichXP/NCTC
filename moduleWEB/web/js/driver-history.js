@@ -26,7 +26,7 @@ function getOrderHistory() {
                 createTable(obj.orderHistory, "driverOrdersHistory");
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText + " Error! driverAssignedOrders");
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
             }
         })
     }
