@@ -9,6 +9,8 @@ import com.netcracker.facade.local_int.Tariff;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -68,4 +70,96 @@ public class TariffRest {
 		}
 		return tariffJson.toString();
 	}
+
+
+
+	@POST
+	@Path("getOrderTypeMultipliers")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public Response getOrderTypeMultipliers() {
+		OrderTypeEntity orderTypeEntity1 = orderType.findByName("basic");
+		OrderTypeEntity orderTypeEntity2 = orderType.findByName("cargo");
+		OrderTypeEntity orderTypeEntity3 = orderType.findByName("sober driver");
+		OrderTypeEntity orderTypeEntity4 = orderType.findByName("guest delivery");
+		OrderTypeEntity orderTypeEntity5 = orderType.findByName("meet my guest");
+		OrderTypeEntity orderTypeEntity6 = orderType.findByName("celebration taxi");
+
+
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"OrderTypeMultipliers\":[");
+
+		sb.append("{\"basic\":\"")
+				.append(orderTypeEntity1.getTariffMultiplier())
+				.append("\",\"cargo\":\"")
+				.append(orderTypeEntity2.getTariffMultiplier())
+				.append("\",\"sober_driver\":\"")
+				.append(orderTypeEntity3.getTariffMultiplier())
+				.append("\",\"guest_delivery\":\"")
+				.append(orderTypeEntity4.getTariffMultiplier())
+				.append("\",\"meet_my_guest\":\"")
+				.append(orderTypeEntity5.getTariffMultiplier())
+				.append("\",\"celebration_taxi\":\"")
+				.append(orderTypeEntity6.getTariffMultiplier())
+				.append("\" },");
+		sb.replace(sb.length() - 1, sb.length(), "");
+		sb.append("]}");
+		if (orderTypeEntity1 != null && orderTypeEntity2 != null && orderTypeEntity3 != null && orderTypeEntity4 != null && orderTypeEntity5 != null && orderTypeEntity6 != null) {
+			return Response.status(200).entity(sb.toString()).build();
+		} else {
+			return Response.status(404).entity("Bad response.").build();
+		}
+	}
+	@POST
+	@Path("basicButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeBasic(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("basic");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+	@POST
+	@Path("cargoButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeCargo(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("cargo");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+	@POST
+	@Path("soberButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeSober(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("sober driver");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+	@POST
+	@Path("guestButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeGuestDel(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("guest delivery");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+	@POST
+	@Path("meetButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeMeetMyGuest(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("meet my guest");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+	@POST
+	@Path("celebrationButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setOrderTypeCelebTaxi(String mul) {
+		OrderTypeEntity orderTypeEntity = orderType.findByName("celebration taxi");
+		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+	}
+
+
+
 }
