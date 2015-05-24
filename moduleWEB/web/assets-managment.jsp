@@ -62,13 +62,13 @@
                 </td>
                 <td align="center">
                     <%--<ul>--%>
-                        <%--<li><input type="text-field" placeholder="First name" id="firstName"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="Last name" id="lastName"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="Phone number" id="phone"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="E-mail" id="email"/></li>--%>
-                        <%--<li><input type="password" placeholder="Password" id="regpass"/></li>--%>
-                        <%--<li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="car id" id="carId"/></li>--%>
+                    <%--<li><input type="text-field" placeholder="First name" id="firstName"/></li>--%>
+                    <%--<li><input type="text-field" placeholder="Last name" id="lastName"/></li>--%>
+                    <%--<li><input type="text-field" placeholder="Phone number" id="phone"/></li>--%>
+                    <%--<li><input type="text-field" placeholder="E-mail" id="email"/></li>--%>
+                    <%--<li><input type="password" placeholder="Password" id="regpass"/></li>--%>
+                    <%--<li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>--%>
+                    <%--<li><input type="text-field" placeholder="car id" id="carId"/></li>--%>
                     <%--</ul>--%>
 
                 </td>
@@ -99,8 +99,10 @@
 
             </td>
             <td align="center">
-                <div class="button" id="addDriver" onclick="addDriver()">
-                    ADD
+                <div id="addSettingDriver">
+                    <div class="button" id="addDriver" onclick="addDriverSection()">
+                        ADD
+                    </div>
                 </div>
             </td>
         </tr>

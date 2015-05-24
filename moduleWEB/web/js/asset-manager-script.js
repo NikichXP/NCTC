@@ -254,11 +254,11 @@ function createSettingOptionForDriver(mainDiv) {
     var li6 = document.createElement("li");
     var li7 = document.createElement("li");
     var ferstName = document.createElement("input");
-    ferstName.id = "ferstName";
+    ferstName.id = "firstName";
     ferstName.type = "text-field";
     ferstName.placeholder = "ferst name"
     var secondName = document.createElement("input");
-    secondName.id = "secondName";
+    secondName.id = "lastName";
     secondName.type = "text-field";
     secondName.placeholder = "second name"
     var phone = document.createElement("input");
@@ -419,8 +419,53 @@ function setCar(JSONdata) {
     })
 }
 
+function addDriverSection() {
+    if (fix == true) {
+        removeAll();
+    } else {
+        var getDiv = document.getElementById("addSettingDriver")
+        createSettingOptionForDriver(getDiv);
+        createAddDriver(getDiv);
+    }
+}
+function createAddDriver(getDiv) {
+    var add = document.createElement("div");
+    add.className = "button";
+    add.id = "add-my-car";
+    add.appendChild(document.createTextNode("ADD"))
+    add.onclick = function () {
+        var JSONdata = {
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            phone: $("#phone").val(),
+            email: $("#email").val(),
+            carId: $("#carId").val(),
+            pass: $("#regpass").val()
+        };
+        alert(JSON.stringify(JSONdata))
+        setDriver(JSONdata);
+        removeAll();
+    }
+    getDiv.appendChild(add);
+}
+function setDriver(JSONdata) {
+    $.ajax({
+        method: 'POST',
+        url: "api/user/create_driver",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+}
+
 //----------------------------------------------------------------------------------------------------------------------
-//Get Sel
+//Get
 function getAir(mainDiv) {
     var select = document.createElement("select");
     select.id = "conditioner";
