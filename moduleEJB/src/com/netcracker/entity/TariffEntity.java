@@ -5,10 +5,33 @@ package com.netcracker.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tariff", schema = "public", catalog = "postgres")
+@NamedQueries({
+		@NamedQuery(name = "Tariff.setDayHourlyMultiplier", query = "UPDATE TariffEntity f SET  " +
+				"f.multiplier = :multiplier WHERE f.perHour = true AND f.timeStarts = '07:00'"),
+		@NamedQuery(name = "Tariff.setNightHourlyMultiplier", query = "UPDATE TariffEntity f SET  " +
+				"f.multiplier = :multiplier WHERE f.perHour = true AND f.timeStarts <> '07:00'"),
+		@NamedQuery(name = "Tariff.setDayDistanceMultiplier", query = "UPDATE TariffEntity f SET  " +
+				"f.multiplier = :multiplier WHERE f.perKilometer = true AND f.timeStarts = '07:00'"),
+        @NamedQuery(name = "Tariff.setNightDistanceMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE f.perKilometer = true AND f.timeStarts <> '07:00'"),
+        @NamedQuery(name = "Tariff.setSmokingFriendlyMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE f.smokingFriendly = true"),
+        @NamedQuery(name = "Tariff.setAnimalFriendlyMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE f.animalFriendly = true"),
+        @NamedQuery(name = "Tariff.setAirConditionerMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE f.airConditioner = true"),
+        @NamedQuery(name = "Tariff.setWifiMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE f.wifi = true"),
+        @NamedQuery(name = "Tariff.setSexMultiplier", query = "UPDATE TariffEntity f SET  " +
+                "f.multiplier = :multiplier WHERE UPPER(f.sex) = UPPER(:sex)"),
+        @NamedQuery(name = "Tariff.setCarClassMultiplier", query = "UPDATE CarClassEntity f SET  " +
+                "f.tariffMultiplier = :multiplier WHERE f = :carClassEntity"),
+        @NamedQuery(name = "Tariff.setOrderTypeMultiplier", query = "UPDATE OrderTypeEntity f SET  " +
+                "f.tariffMultiplier = :multiplier WHERE f = :orderTypeEntity")
+})
 public class TariffEntity {
 	@SequenceGenerator(
 			name = "tariff_SEQUENCE_GENERATOR",
