@@ -21,13 +21,13 @@ import java.util.Collection;
 				"WHERE f.id = :id AND f.customerUserEntity.uuid = :uuid"),
 		@NamedQuery(name = "Order.sortByDateAndUUIDAndState", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :uuid " +
-				"ORDER BY f.timeCreated"),
+				"ORDER BY f.timeCreated DESC"),
 		@NamedQuery(name = "Order.sortByLengthAndUUIDAndStat", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :uuid " +
-				"ORDER BY f.totalLength"),
+				"ORDER BY f.totalLength DESC"),
 		@NamedQuery(name = "Order.sortByPriceAndUUIDAndStat", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :uuid " +
-				"ORDER BY f.finalPrice")
+				"ORDER BY f.finalPrice DESC")
 })
 public class OrderEntity {
 	@SequenceGenerator(

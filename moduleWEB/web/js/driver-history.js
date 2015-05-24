@@ -13,11 +13,66 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
+$('#leftButtonHystory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/historyByDate',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+$('#centralButtonHystory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/historyByPrice',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+$('#rightButtonHystory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/driver/historyByLength',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+
 function getOrderHistory() {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
-            url: 'api/driver/history',
+            url: 'api/driver/historyByDate',
             contentType: "text/plain; charset=utf-8",
             dataType: 'text',
             data: uuid,
