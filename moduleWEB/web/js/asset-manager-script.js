@@ -32,23 +32,39 @@ function drawRow(rowData, table) {
     createDiv.className = "button";
     var node = document.createTextNode("id :" + rowData.id + " name :" + rowData.name);
     createDiv.appendChild(node);
-    createDiv.onclick = function () {
-        onEntityClick(rowData.id, createMainDiv);
-    };
+    if ('cars' == table) {
+        createDiv.onclick = function () {
+            onCarEntityClick(rowData.id, createMainDiv);
+        };
+    } else {
+        createDiv.onclick = function () {
+            onDriverEntityClick(rowData.id, createMainDiv);
+        };
+    }
+
     createMainDiv.appendChild(createDiv);
     div.appendChild(createMainDiv);
 }
-function onEntityClick(createDiv, createMainDiv) {
+
+
+function onCarEntityClick(createDiv, createMainDiv) {
     if (fix == true) {
         removeAll();
     } else {
         createSettingOptionForCar(createMainDiv);
         createEditCar(createMainDiv, createDiv);
     }
-    //removeAll();
 
 }
+function onDriverEntityClick(createDiv, createMainDiv) {
+    if (fix == true) {
+        removeAll();
+    } else {
+        createSettingOptionForDriver(createMainDiv);
+        createEditDriver(createMainDiv, createDiv);
+    }
 
+}
 
 function createEditCar(createMainDiv, createDiv) {
     var edit = document.createElement("div");
@@ -82,7 +98,7 @@ function createEditCar(createMainDiv, createDiv) {
     createMainDiv.appendChild(del);
     setEditCarById(createDiv);
 }
-function deleteCar(carId){
+function deleteCar(carId) {
     var JSONdata = {
         id: carId
     };
@@ -91,8 +107,8 @@ function deleteCar(carId){
         url: "api/car_car/delete",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
-        dataType:'text',
-        success: function (data,textStatus,jqXHR ) {
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
             alert(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -127,6 +143,97 @@ function drawInputForCar(rowData) {
     document.getElementById("conditioner").value = rowData.conditioner;
 }
 
+function createEditDriver(createMainDiv, createDiv) {
+    var edit = document.createElement("div");
+    var del = document.createElement("div");
+    del.className = "button";
+    edit.className = "button";
+    del.id = "delete-my-car"
+    edit.id = "edit-my-car";
+    del.appendChild(document.createTextNode("DELETE"))
+    edit.appendChild(document.createTextNode("EDIT"));
+    del.onclick = function () {
+        deleteDriver(createDiv);
+    }
+    edit.onclick = function () {
+        var JSONdata = {
+            id: createDiv,
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            phone: $("#phone").val(),
+            email: $("#email").val(),
+            carId: $("#carId").val(),
+            pass: $("#regpass").val()
+        };
+        setDriver(JSONdata);
+        removeAll();
+    }
+    createMainDiv.appendChild(edit);
+    createMainDiv.appendChild(del);
+    setEditDriverById(createDiv);
+}
+function deleteDriver(myId) {
+    var JSONdata = {
+        id: myId
+    };
+    $.ajax({
+        method: 'POST',
+        url: "api/user/delete",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+}
+function setDriver(carId) {
+    $.ajax({
+        method: 'POST',
+        url: "api/user/create_driver",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
+}
+function setEditDriverById(driverId) {
+
+    $.ajax({
+        method: 'POST',
+        url: 'api/user/getUserDataById',
+        contentType: "text/plain; charset=utf-8",
+        data: driverId,
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            var obj = JSON.parse(data);
+            drawInputForDriver(obj.userData[0]);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText + " Error!");
+        }
+    })
+
+
+}
+function drawInputForDriver(rowData) {
+
+    document.getElementById("firstName").value = rowData.firstName;
+    document.getElementById("lastName").value = rowData.lastName;
+    document.getElementById("phone").value = rowData.phone;
+    document.getElementById("email").value = rowData.email;
+    document.getElementById("regpass").value = rowData.getPassword;
+
+}
+
 
 function removeAll() {
     $("#fixind-feald").remove();
@@ -136,6 +243,63 @@ function removeAll() {
     fix = false;
 }
 
+function createSettingOptionForDriver(mainDiv) {
+    var ul = document.createElement("ul");
+    ul.id = "fixind-feald";
+    var li1 = document.createElement("li");
+    var li2 = document.createElement("li");
+    var li3 = document.createElement("li");
+    var li4 = document.createElement("li");
+    var li5 = document.createElement("li");
+    var li6 = document.createElement("li");
+    var li7 = document.createElement("li");
+    var ferstName = document.createElement("input");
+    ferstName.id = "ferstName";
+    ferstName.type = "text-field";
+    ferstName.placeholder = "ferst name"
+    var secondName = document.createElement("input");
+    secondName.id = "secondName";
+    secondName.type = "text-field";
+    secondName.placeholder = "second name"
+    var phone = document.createElement("input");
+    phone.id = "phone";
+    phone.type = "text-field";
+    phone.placeholder = "phone"
+    var email = document.createElement("input");
+    email.id = "email";
+    email.type = "text-field";
+    email.placeholder = "e-mail"
+    var regpass = document.createElement("input");
+    regpass.id = "regpass";
+    regpass.type = "password";
+    var passconfirm = document.createElement("input");
+    passconfirm.id = "passconfirm";
+    passconfirm.type = "password";
+    var carId = document.createElement("input");
+    carId.id = "carId";
+    carId.type = "text-field";
+    carId.placeholder = "car id";
+
+    li1.appendChild(ferstName);
+    li2.appendChild(secondName);
+    li3.appendChild(phone);
+    li4.appendChild(email);
+    li5.appendChild(regpass);
+    li6.appendChild(passconfirm);
+    li7.appendChild(carId);
+
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    ul.appendChild(li3);
+    ul.appendChild(li4);
+    ul.appendChild(li5);
+    ul.appendChild(li6);
+    ul.appendChild(li7);
+
+    mainDiv.appendChild(ul);
+
+    fix = true;
+}
 function createSettingOptionForCar(mainDiv) {
     var ul = document.createElement("ul");
     ul.id = "fixind-feald";
@@ -180,7 +344,6 @@ function createSettingOptionForCar(mainDiv) {
     mainDiv.appendChild(ul);
     fix = true;
 }
-
 
 function editCarById(carId) {
     $.ajax({
@@ -257,7 +420,7 @@ function setCar(JSONdata) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-//Get Selects
+//Get Sel
 function getAir(mainDiv) {
     var select = document.createElement("select");
     select.id = "conditioner";
