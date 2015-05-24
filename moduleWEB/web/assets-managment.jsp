@@ -41,8 +41,8 @@
         <table id="assetManagerTable" class="table">
             <thead>
             <tr>
-                <th>CAR</th>
-                <th>DRIVER</th>
+                <th align="center">CAR</th>
+                <th align="center">DRIVER</th>
             </tr>
             </thead>
             <tbody>
@@ -84,24 +84,15 @@
     <table id="buttonTable" class="table">
         <thead>
         <tr>
-            <th>CAR</th>
-            <th>DRIVER</th>
+            <th align="center">CAR</th>
+            <th align="center">DRIVER</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td align="center">
                 <div id="addSettingCar">
-                    <%--<ul>--%>
-                        <%--<li><input type="text-field" placeholder="First name" id="firstName"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="Last name" id="lastName"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="Phone number" id="phone"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="E-mail" id="email"/></li>--%>
-                        <%--<li><input type="password" placeholder="Password" id="regpass"/></li>--%>
-                        <%--<li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>--%>
-                        <%--<li><input type="text-field" placeholder="car id" id="carId"/></li>--%>
-                    <%--</ul>--%>
-                    <div class="button" id="addCar" onclick="addCar()">
+                    <div class="button" id="addCar" onclick="addCarSection()">
                         ADD
                     </div>
                 </div>
