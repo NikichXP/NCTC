@@ -100,26 +100,28 @@ public class DriverRest {
     public Response getOrderHistory(String uuid) {
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
         list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"), uuid));
+
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
             List<Point> points = order.getFirstAndLastPoints(orderEntity);
             sb.append("{\"startOrder\":\"")
-                    .append(points.get(0).toString())
+                    .append(points.get(0).getAddress())
                     .append("\",\"endOrder\":\"")
-                    .append(points.get(1).toString())
+                    .append(points.get(1).getAddress())
                     .append("\",\"dateOrderCreate\":\"")
                     .append(orderEntity.getTimeCreated().toString())
                     .append("\",\"id\":\"")
                     .append(orderEntity.getId())
-                    .append("\",\"statusOrder\":\"")
-                    .append(orderEntity.getOrderStateEntity().getName())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
                     .append("\",\"price\":\"")
                     .append(orderEntity.getFinalPrice())
                     .append("\" },");
         }
         sb.replace(sb.length() - 1, sb.length(), "");
         sb.append("]}");
+
         if (!list.isEmpty()) {
             return Response.status(200).entity(sb.toString()).build();
         } else {

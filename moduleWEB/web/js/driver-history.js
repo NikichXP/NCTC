@@ -3,7 +3,7 @@
  */
 var uuid = getCookie("uuid");
 
-$(document).ready(function() {
+$(document).ready(function () {
     getOrderHistory();
 });
 
@@ -13,8 +13,8 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-function getOrderHistory(){
-    if(uuid != null) {
+function getOrderHistory() {
+    if (uuid != null) {
         $.ajax({
             method: 'POST',
             url: 'api/driver/history',
@@ -23,7 +23,7 @@ function getOrderHistory(){
             data: uuid,
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                drawTable(obj.orderHistory, "driverOrdersHistory");
+                createTable(obj.orderHistory, "driverOrdersHistory");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText + " Error! driverAssignedOrders");
@@ -32,26 +32,31 @@ function getOrderHistory(){
     }
 }
 
+function createTable(data, table) {
+    var tb = '<table style="width:100%">';
 
-function drawTable(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table, "viewOrder.jsp");
+        var date = "Date: " + data[i].dateOrderCreate.split(".")[0];
+        var from = "From: " + data[i].startOrder;
+        var to = "To: " + data[i].endOrder;
+        var distance = "Distance: " + parseFloat(data[i].distance).toFixed(2) + " km.";
+        var price = "Price: " + parseFloat(data[i].price).toFixed(2) + " &#8372";
+
+        var div = '<div class="button" onclick="redirect(' + data[i].id + ')" style="width: 100%">View</div>';
+
+        tb = tb + '<tr>'
+            + '<td>&nbsp' + date + '</td>'
+            + '<td>&nbsp' + from + '</td>'
+            + '<td>&nbsp' + to + '</td>'
+            + '<td>&nbsp' + distance + '</td>'
+            + '<td>&nbsp' + price + '</td>'
+            + '<td>' + div + '</td>'
+            + '</tr>';
     }
+    tb = tb + '</table>';
+    document.getElementById(table).innerHTML = tb;
 }
 
-
-function drawBody(rowData, table, url) {
-    //TODO Need to remake this method
-    var div = document.getElementById(table);
-    var createDiv = document.createElement("div");
-    var node = document.createTextNode("Date: " + rowData.dateOrderCreate + "\n"
-    + " From: " + rowData.startOrder
-    + " To: " + rowData.endOrder
-    + " Price: " + parseFloat(rowData.price).toFixed(2) + "$");
-    createDiv.appendChild(node);
-    createDiv.className = "button";
-    createDiv.onclick = function () {
-        document.location.href = url + "?id=" + rowData.id;
-    };
-    div.appendChild(createDiv);
-}
+function redirect(id) {
+    document.location.href = "viewOrder.jsp?id=" + id;
+};
