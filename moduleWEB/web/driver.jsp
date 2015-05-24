@@ -75,7 +75,7 @@ blocks contain brief information about order-->
 <!--script check life cookie, end delete cookie on click logout-button-->
 <script src="js/cookie.js" type="text/javascript"></script>
 <!--set information about user-->
-<script src="js/userdatabyuuid.js" type="text/javascript"></script>
+<script src="js/user-data-by-uuid.js" type="text/javascript"></script>
 </body>
 
 </html>

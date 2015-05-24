@@ -41,14 +41,13 @@ function drawTable(data, table) {
 
 
 function drawBody(rowData, table, url) {
-
+    //TODO Need to remake this method
     var div = document.getElementById(table);
     var createDiv = document.createElement("div");
-    var node = document.createTextNode("date :" + rowData.dateOrderCreate
-    + " first point :" + rowData.startOrder
-    + " next point :" + rowData.endOrder
-    + " status :" + rowData.statusOrder
-    + " price: " + rowData.price + "$");
+    var node = document.createTextNode("Date: " + rowData.dateOrderCreate + "\n"
+    + " From: " + rowData.startOrder
+    + " To: " + rowData.endOrder
+    + " Price: " + parseFloat(rowData.price).toFixed(2) + "$");
     createDiv.appendChild(node);
     createDiv.className = "button";
     createDiv.onclick = function () {

@@ -11,7 +11,7 @@ $("#setting").click(function(){
     alert("#setting")
 });
 $("#assetManagement").click(function(){
-    document.location.href = "assetsManagment.jsp";
+    document.location.href = "assets-managment.jsp";
 });
 $("#fareManagement").click(function(){
     //fareManagement

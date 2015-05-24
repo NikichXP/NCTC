@@ -80,7 +80,7 @@ blocks contain brief information about order-->
 <!--handmade sript-->
 <script src="js/driver-script.js"></script>
 <!--set information about user-->
-<script src="js/userdatabyuuid.js" type="text/javascript"></script>
+<script src="js/user-data-by-uuid.js" type="text/javascript"></script>
 
 <script src="js/driver-history.js" type="text/javascript"></script>
 
