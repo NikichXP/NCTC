@@ -265,6 +265,125 @@ public class OrderRest {
 		return Response.status(201).entity(orderJson.toString()).build();
 	}
 
+	@GET
+	@javax.ws.rs.Path("viewQueuedOrder")
+	public Response viewQueuedOrders(@QueryParam("id") String orderId) {
+		OrderEntity orderEntity = order.read(new BigInteger(orderId));
+
+		if (orderEntity == null) {
+			return Response.status(404).entity("No such order in DB.").build();
+		}
+
+		OrderJson orderJson = new OrderJson();
+
+		orderJson.setId(orderEntity.getId().toString());
+		orderJson.setContactName(orderEntity.getContactName());
+		orderJson.setContactPhone(orderEntity.getContactPhone());
+		orderJson.setRequestedSeatsCount(orderEntity.getRequestedSeatsCount().toString());
+
+		orderJson.setType(orderEntity.getOrderTypeEntity().getName());
+		orderJson.setState(orderEntity.getOrderStateEntity().getName());
+
+		orderJson.setPublicToken(orderEntity.getPublicToken());
+		orderJson.setCustomerUserId(orderEntity.getCustomerUserEntity().getId().toString());
+		orderJson.setCustomerUserUuid(orderEntity.getCustomerUserEntity().getUuid());
+		//orderJson.setDriverUserId(orderEntity.getDriverUserEntity().getId().toString());
+
+		orderJson.setTimeCreated(
+				simpleDateFormat.format(
+						new Date(orderEntity.getTimeCreated().getTime())));
+		orderJson.setTimeRequested(
+				simpleDateFormat.format(
+						new Date(orderEntity.getTimeRequested().getTime())));
+		if (orderEntity.getTimeOfDriverArrival() != null) {
+			orderJson.setTimeOfDriverArrival(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeOfDriverArrival().getTime())));
+		}
+		if (orderEntity.getTimeStarted() != null) {
+			orderJson.setTimeStarted(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeStarted().getTime())));
+		}
+		if (orderEntity.getTimeCompleted() != null) {
+			orderJson.setTimeCompleted(
+					simpleDateFormat.format(
+							new Date(orderEntity.getTimeCompleted().getTime())));
+		}
+
+		List<PathEntity> pathEntities = new LinkedList<>(orderEntity.getPathEntities());
+		pathEntities.sort(new Comparator<PathEntity>() {
+			@Override
+			public int compare(PathEntity o1, PathEntity o2) {
+				return o1.getId().compareTo(o2.getId());
+			}
+		});
+		orderJson.setFromAddress(pathEntities.get(0).getStartAddress());
+		orderJson.setFromX(pathEntities.get(0).getStartX().toString());
+		orderJson.setFromY(pathEntities.get(0).getStartY().toString());
+
+		List<String> endAddresses = new LinkedList<>();
+		List<String> endXs = new LinkedList<>();
+		List<String> endYs = new LinkedList<>();
+		List<String> distances = new LinkedList<>();
+		List<String> pathIds = new LinkedList<>();
+		List<String> isPathCompleted = new LinkedList<>();
+
+		for (PathEntity pathEntity : pathEntities) {
+			endAddresses.add(pathEntity.getEndAddress());
+			endXs.add(pathEntity.getEndX().toString());
+			endYs.add(pathEntity.getEndY().toString());
+			distances.add(pathEntity.getLength().toString());
+			pathIds.add(pathEntity.getId().toString());
+			isPathCompleted.add(String.valueOf(pathEntity.isCompleted()));
+		}
+
+		orderJson.setToAddress(endAddresses.toArray(new String[endAddresses.size()]));
+		orderJson.setToX(endXs.toArray(new String[endXs.size()]));
+		orderJson.setToY(endYs.toArray(new String[endYs.size()]));
+		orderJson.setDistance(distances.toArray(new String[distances.size()]));
+		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
+		orderJson.setPathId(pathIds.toArray(new String[pathIds.size()]));
+		orderJson.setPathCompleted(isPathCompleted.toArray(new String[isPathCompleted.size()]));
+
+		orderJson.setSex(orderEntity.getDriverSex());
+		orderJson.setCarClass(orderEntity.getCarClassEntity().getName());
+		orderJson.setMusicType(orderEntity.getMusicTypeEntity().getName());
+		orderJson.setSmokingFriendly(orderEntity.getSmokingFriendly());
+		orderJson.setAnimalFriendly(orderEntity.getAnimalFriendly());
+		orderJson.setWifi(orderEntity.getWifi());
+		orderJson.setAirConditioner(orderEntity.getAirConditioner());
+
+		orderJson.setCustomerPreCreateComment(orderEntity.getCustomerPreCreateComment());
+		if(orderEntity.getCustomerPostCompleteComment() != null) {
+			orderJson.setCustomerPostCompleteComment(orderEntity.getCustomerPostCompleteComment());
+		} else orderJson.setCustomerPostCompleteComment("");
+		if(orderEntity.getRefuseCauseByCustomerEntity() != null) {
+			orderJson.setCustomerRefuseCause(orderEntity.getRefuseCauseByCustomerEntity().getMessage());
+		} else orderJson.setCustomerRefuseCause("");
+		if(orderEntity.getRefuseCauseByDriverEntity() != null) {
+			orderJson.setDriverRefuseCause(orderEntity.getRefuseCauseByDriverEntity().getMessage());
+		} else orderJson.setDriverRefuseCause("");
+		if(orderEntity.getCustomerRefuseComment() != null) {
+			orderJson.setCustomerRefuseComment(orderEntity.getCustomerRefuseComment());
+		} else orderJson.setCustomerRefuseComment("");
+		if(orderEntity.getDriverRefuseComment() != null) {
+			orderJson.setDriverRefuseComment(orderEntity.getDriverRefuseComment());
+		} else orderJson.setDriverRefuseComment("");
+
+		if(orderEntity.getTotalLength() != null && orderEntity.getTotalMultiplier() != null) {
+			orderJson.setTotalLength(orderEntity.getTotalLength().toString());
+			orderJson.setTotalMultiplier(orderEntity.getTotalMultiplier().toString());
+			orderJson.setTotalPrice(orderEntity.getTotalMultiplier().multiply(orderEntity.getTotalLength()).toString());
+		} else {
+			orderJson.setTotalLength("");
+			orderJson.setTotalMultiplier("");
+			orderJson.setTotalPrice("");
+		}
+
+		return Response.status(201).entity(orderJson.toString()).build();
+	}
+
 	@POST
 	@javax.ws.rs.Path("edit")
 	@Consumes("application/json")
