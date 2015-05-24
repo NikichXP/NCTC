@@ -66,9 +66,9 @@ public class CarRest {
     public Response deleteCarById(UserJson id) {
         car.delete(new BigInteger(id.getId()));
         if (car.read(new BigInteger(id.getId())) == null) {
-            return Response.status(200).entity("Driver is delete").build();
+            return Response.status(200).entity("car is delete").build();
         } else {
-            return Response.status(404).entity("driver is not delete").build();
+            return Response.status(404).entity("car is not delete").build();
         }
     }
 

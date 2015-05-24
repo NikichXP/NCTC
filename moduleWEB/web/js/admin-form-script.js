@@ -126,7 +126,7 @@ function updateUser(JSONdata) {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert(data);
-            alert("Euegene");
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Wrong user credentials.");

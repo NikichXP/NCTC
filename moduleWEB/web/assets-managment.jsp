@@ -75,8 +75,8 @@
             </tr>
             </tfoot>
         </table>
+        <div style="height: 349px;"></div>
     </div>
-    <div id="for-footer"></div>
 
 </div>
 

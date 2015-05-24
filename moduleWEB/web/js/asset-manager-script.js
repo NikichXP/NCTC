@@ -1,5 +1,6 @@
 $(document).ready(function () {
     setAssetManager('api/admin_asset_manager/cars', "cars");
+    setAssetManager('api/admin_asset_manager/drivers', 'drivers');
 });
 
 var fix = false;
@@ -36,7 +37,6 @@ function drawRow(rowData, table) {
     };
     createMainDiv.appendChild(createDiv);
     div.appendChild(createMainDiv);
-
 }
 function onEntityClick(createDiv, createMainDiv) {
     if (fix == true) {
@@ -52,9 +52,16 @@ function onEntityClick(createDiv, createMainDiv) {
 
 function createEditCar(createMainDiv, createDiv) {
     var edit = document.createElement("div");
+    var del = document.createElement("div");
+    del.className = "button";
     edit.className = "button";
+    del.id = "delete-my-car"
     edit.id = "edit-my-car";
+    del.appendChild(document.createTextNode("DELETE"))
     edit.appendChild(document.createTextNode("EDIT"));
+    del.onclick = function () {
+        deleteCar(createDiv);
+    }
     edit.onclick = function () {
 
         var JSONdata = {
@@ -72,7 +79,26 @@ function createEditCar(createMainDiv, createDiv) {
         removeAll();
     }
     createMainDiv.appendChild(edit);
+    createMainDiv.appendChild(del);
     setEditCarById(createDiv);
+}
+function deleteCar(carId){
+    var JSONdata = {
+        id: carId
+    };
+    $.ajax({
+        method: 'POST',
+        url: "api/car_car/delete",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(JSONdata),
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+            alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Wrong user credentials.");
+        }
+    })
 }
 function setEditCarById(carId) {
     $.ajax({
@@ -106,6 +132,7 @@ function removeAll() {
     $("#fixind-feald").remove();
     $("#add-my-car").remove();
     $("#edit-my-car").remove();
+    $("#delete-my-car").remove();
     fix = false;
 }
 
