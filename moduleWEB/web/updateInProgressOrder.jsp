@@ -22,11 +22,6 @@
             <input id="fromAddress" type="text" disabled/>
             <input type="text" id="fromX" hidden/>
             <input type="text" id="fromY" hidden/>
-            <input id="toAddress0" type="text" onchange="clearToXY(this)" placeholder="To address"/>
-            <input type="text" id="toX0" hidden/>
-            <input type="text" id="toY0" hidden/>
-            <input type="text" id="distance0" disabled/>
-            <input type="text" id="pathId0" hidden/>
         <%--add all paths here! --%>
             <input type="button" id="addPointOnPath" value="Add point on path">
             <input type="button" id="updateCurrentPath" value="Update current path" disabled>

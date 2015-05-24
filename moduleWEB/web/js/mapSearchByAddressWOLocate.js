@@ -14,11 +14,9 @@ function init() {
         center: [50.45,30.52], // Киев
         zoom: 11
     });
-    buildPath(0); //TODO Replace with last path index
 }
 
 function makeSearch(element) {
-    alert(element.value + " " + element.id);
     var myGeocoder = ymaps.geocode(element.value, {
         /**
          * Опции запроса
@@ -82,7 +80,7 @@ function buildPath(index) {
             document.getElementById('totalLength').value = route.getLength()/1000;
             updateMultiplierAndPrice();
     }, function (error) {
-        //alert("An error occurred: " + error.message);
+        alert("Unable to build path. Input correct addresses.");
     });
     return false;
 }
