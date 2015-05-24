@@ -44,6 +44,10 @@ $('#registration-submit').click(function(){
 	redirectWithAccessLevels(JSON.stringify(JSONdata), "api/user/create");
 });
 
+$('#order-wo-reg-submit').click(function(){
+	document.location.href = "createOrderWithoutRegistration.jsp";
+});
+
 function redirectWithAccessLevels(userData, url) {
 	$.ajax({
 		method: 'POST',
@@ -99,11 +103,7 @@ $('#track-TO-submit').click(function(){
 		.done(function(){alert("success!!");})
 		.fail(function(){alert("fail!");});
 });
-//AJAX POST for
-$('#order-wo-reg-submit').click(function(){
 
-	alert("Hold on, not yet functionlal!");
-});
 
 var phoneRegEx = /^\+?[0-9]{6,12}$/;
 var namesRegEx = /^[a-zA-Z\s'\-]+$/;
