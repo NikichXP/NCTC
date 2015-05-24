@@ -36,4 +36,10 @@ public interface Order {
 
 	Object getByUUIDAndId(String orderId, String uuid);
 
+	List<OrderEntity> sortByDateAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
+
+	List<OrderEntity> sortByPriceAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
+
+	List<OrderEntity> sortByLengthAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
+
 }
