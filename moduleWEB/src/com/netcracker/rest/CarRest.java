@@ -90,9 +90,9 @@ public class CarRest {
 
     private CarEntity editUserEntityByJson(CarJson carJson) {
         CarEntity carEntity = car.read(new BigInteger(carJson.getId()));
-        carEntity.setLicencePlate("ASDFGHJK");
-        car.update(carEntity);
-        if (!car.isLicenceUsed(carJson.getLicencePlate())) {
+//        carEntity.setLicencePlate("ASDFGHJK");
+//        car.update(carEntity);
+        if (!car.isLicenceUsed(carJson.getLicencePlate()) || carEntity.getLicencePlate().equals(carJson.getLicencePlate())) {
             carEntity.setModel(carJson.getModel());
             carEntity.setLicencePlate(carJson.getLicencePlate());
             carEntity.setCarClassEntity(carClas.findByName(carJson.getClassId()));

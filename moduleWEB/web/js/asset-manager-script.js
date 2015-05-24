@@ -39,9 +39,14 @@ function drawRow(rowData, table) {
 
 }
 function onEntityClick(createDiv, createMainDiv) {
-    removeAll();
-    createSettingOptionForCar(createMainDiv);
-    createEditCar(createMainDiv, createDiv);
+    if (fix == true) {
+        removeAll();
+    } else {
+        createSettingOptionForCar(createMainDiv);
+        createEditCar(createMainDiv, createDiv);
+    }
+    //removeAll();
+
 }
 
 
@@ -55,7 +60,7 @@ function createEditCar(createMainDiv, createDiv) {
         var JSONdata = {
             id: createDiv,
             model: $("#model").val(),
-            userId: $("#userDriverId").val(),
+            userId: $("#userId").val(),
             seatCount: $("#seatCount").val(),
             classId: $("#classCar").val(),
             licencePlate: $("#licencePlate").val(),
@@ -90,9 +95,9 @@ function drawInputForCar(rowData) {
     document.getElementById("model").value = rowData.model;
     document.getElementById("seatCount").value = rowData.countSeat;
     document.getElementById("licencePlate").value = rowData.licencePlate;
-    document.getElementById("classCar").value = rowData.classCar;
+    //document.getElementById("classCar").value = rowData.classCar;
     document.getElementById("userId").value = rowData.carDriverId;
-    document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
+    //document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
     document.getElementById("conditioner").value = rowData.conditioner;
 }
 
