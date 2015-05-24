@@ -10,8 +10,7 @@ $(document).ready(function () {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             id = data;
-            fillPageWithData();
-            ymaps.ready(init);
+            ymaps.ready(function () {init(); fillPageWithData()});
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('You have no "in progress" order.');
@@ -32,12 +31,64 @@ function fillPageWithData() {
         $("#fromAddress").attr("value", obj.fromAddress);
         $("#fromX").attr("value", obj.fromX);
         $("#fromY").attr("value", obj.fromY);
-        //TODO add dynamic generation
-        $("#toAddress0").attr("value", obj.toAddress[0]);
-        $("#toX0").attr("value", obj.toX[0]);
-        $("#toY0").attr("value", obj.toY[0]);
-        $("#distance0").attr("value", obj.distance[0]);
-        $("#pathId0").attr("value", obj.distance[0]);
+
+        var flag = false;
+        for (var i = 0; i < obj.toAddress.length; i++) {
+            var outer = document.getElementById("importantInfo");
+
+            var input = document.createElement("input");
+            if (obj.pathCompleted[i] == "true" || flag) input.setAttribute("disabled", "disabled")
+            else flag = true;
+            input.setAttribute("type", "text");
+            input.setAttribute("id", "toAddress" + i);
+            input.setAttribute("onchange", "clearToXY(this)");
+            input.setAttribute("placeholder", "To address " + i);
+            input.setAttribute("value", obj.toAddress[i]);
+
+            var input2 = document.createElement("input");
+            input2.setAttribute("hidden", "hidden");
+            input2.setAttribute("type", "text");
+            input2.setAttribute("id", "toX" + i);
+            input2.setAttribute("value", obj.toX[i]);
+
+            var input3 = document.createElement("input");
+            input3.setAttribute("hidden", "hidden");
+            input3.setAttribute("type", "text");
+            input3.setAttribute("id", "toY" + i);
+            input3.setAttribute("value", obj.toY[i]);
+
+            var input4 = document.createElement("input");
+            input4.setAttribute("disabled", "disabled");
+            input4.setAttribute("type", "text");
+            input4.setAttribute("id", "distance" + i);
+            input4.setAttribute("value", obj.distance[i]);
+
+            var input5 = document.createElement("input");
+            input5.setAttribute("hidden", "hidden");
+            input5.setAttribute("type", "text");
+            input5.setAttribute("id", "pathId" + i);
+            input5.setAttribute("value", obj.pathId[i]);
+
+            var input6 = document.createElement("input");
+            input6.setAttribute("hidden", "hidden");
+            input6.setAttribute("type", "text");
+            input6.setAttribute("id", "pathCompleted" + i);
+            input6.setAttribute("value", obj.pathCompleted[i]);
+
+            var button = document.getElementById("addPointOnPath");
+
+            outer.insertBefore(input, button);
+            outer.insertBefore(input2, button);
+            outer.insertBefore(input3, button);
+            outer.insertBefore(input4, button);
+            outer.insertBefore(input5, button);
+            outer.insertBefore(input6, button);
+
+            makeSearch(input);
+            $("#toAddress" + i).change(function (){
+                buildPath($("[id^='toAddress']").length - 1);
+            });
+        }
 
         $("#timeRequested").attr("value", obj.timeRequested);
         $("#timeOfDriverArrival").attr("value", obj.timeOfDriverArrival);
@@ -49,8 +100,8 @@ function fillPageWithData() {
         if(obj.wifi == "true") $('input:checkbox[id=wifi]').prop('checked', true);
         if(obj.airConditioner == "true") $('input:checkbox[id=airConditioner]').prop('checked', true);
 
-        $("#totalMultiplier").attr("value", obj.totalMultiplier);         //TODO recalculate this values
-        $("#totalLength").attr("value", obj.totalLength);        //TODO recalculate this values
+        $("#totalMultiplier").attr("value", obj.totalMultiplier);
+        $("#totalLength").attr("value", obj.totalLength);
         $("#totalPrice").attr("value", obj.totalPrice);
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
