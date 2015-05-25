@@ -14,6 +14,8 @@ public class OrderJson {
     private String contactPhone;
     private String requestedSeatsCount;
 
+    private String email;
+
     private String type;
     private String state;
 
@@ -124,6 +126,14 @@ public class OrderJson {
 
     public void setRequestedSeatsCount(String requestedSeatsCount) {
         this.requestedSeatsCount = requestedSeatsCount;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getType() {
@@ -453,6 +463,7 @@ public class OrderJson {
                 "\"contactName\":" + (contactName == null ? "null" : "\"" + contactName + "\"") + ", " +
                 "\"contactPhone\":" + (contactPhone == null ? "null" : "\"" + contactPhone + "\"") + ", " +
                 "\"requestedSeatsCount\":" + (requestedSeatsCount == null ? "null" : "\"" + requestedSeatsCount + "\"") + ", " +
+                "\"email\":" + (email == null ? "null" : "\"" + email + "\"") + ", " +
                 "\"type\":" + (type == null ? "null" : "\"" + type + "\"") + ", " +
                 "\"state\":" + (state == null ? "null" : "\"" + state + "\"") + ", " +
                 "\"timeCreated\":" + (timeCreated == null ? "null" : "\"" + timeCreated + "\"") + ", " +
