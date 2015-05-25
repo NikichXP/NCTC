@@ -56,5 +56,5 @@ function createTable(data, table) {
 }
 
 function redirect(id) {
-    document.location.href = "viewOrder.jsp?id=" + id;
+    document.location.href = "viewQueuedOrder.jsp?id=" + id;
 };
