@@ -173,11 +173,31 @@ public class TariffRest {
 	@Produces("text/plain")
 	public void setDayHourlyRate(String mul) {
 		 tariff.setDayHourlyMultiplier(new BigDecimal(mul));
-
-
-
 	}
 
+	@POST
+	@Path("nightHourlyRateButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setNightHourlyRate(String mul) {
+		tariff.setNightHourlyMultiplier(new BigDecimal(mul));
+	}
+
+	@POST
+	@Path("dayDistanceRateButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setDayDistanceRate(String mul) {
+		tariff.setDayDistanceMultiplier(new BigDecimal(mul));
+	}
+
+	@POST
+	@Path("nightDistanceRateButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setNightDistanceRate(String mul) {
+		tariff.setNightDistanceMultiplier(new BigDecimal(mul));
+	}
 
 
 }
