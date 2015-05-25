@@ -33,7 +33,7 @@ public class DriverRest {
     @POST
     @Path("getQueuedOrders")
     public Response getQueuedOrders(){
-        List<OrderEntity> list = new ArrayList<>(orderState.findByName("queued").getOrderEntities());
+        List<OrderEntity> list = order.getOrdersByState(orderState.findByName("queued"));
         Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orders\":[");
