@@ -30,7 +30,8 @@ function setList(){
 }
 
 function createTable(data, table) {
-    var tb = '<table style="width:100%">';
+    var title = '<h4>CURRENT ORDERS:</h4>';
+    var tb = title + '<table style="width:100%">';
 
     for (var i = 0; i < data.length; i++) {
         var date = "Date: " + data[i].dateOrderCreate.split(".")[0];
