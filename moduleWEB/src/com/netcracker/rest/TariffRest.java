@@ -118,6 +118,7 @@ public class TariffRest {
 	public void setOrderTypeBasic(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("basic");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 	@POST
 	@Path("cargoButton")
@@ -126,6 +127,7 @@ public class TariffRest {
 	public void setOrderTypeCargo(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("cargo");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 	@POST
 	@Path("soberButton")
@@ -134,6 +136,7 @@ public class TariffRest {
 	public void setOrderTypeSober(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("sober driver");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 	@POST
 	@Path("guestButton")
@@ -142,6 +145,7 @@ public class TariffRest {
 	public void setOrderTypeGuestDel(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("guest delivery");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 	@POST
 	@Path("meetButton")
@@ -150,6 +154,7 @@ public class TariffRest {
 	public void setOrderTypeMeetMyGuest(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("meet my guest");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 	@POST
 	@Path("celebrationButton")
@@ -158,6 +163,7 @@ public class TariffRest {
 	public void setOrderTypeCelebTaxi(String mul) {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("celebration taxi");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
+		orderType.update(orderTypeEntity);
 	}
 
 

@@ -4,7 +4,7 @@
 $(document).ready(function(){
     getTariffs("basic");
     getOrderTypeMultipliers();
-    $("#basicButton").click(test);
+
 });
 
 function getTariffs(orderTypeName) {
@@ -61,6 +61,30 @@ function getOrderTypeMultipliers(){
                 'Celebration taxi:<input id="celebration" value="'+obj.OrderTypeMultipliers[0].celebration_taxi+'"/><button id="celebrationButton"></button><br>'
             document.getElementById("OrderTypeRates").innerHTML = str;
 
+            $(":button").click(function () {
+                var str = $(this).attr("id");
+                str=str.replace("Button","");
+
+
+                $.ajax({
+                    method: 'POST',
+                    url: 'api/tariff/'+$(this).attr("id"),
+                    contentType: "text/plain; charset=utf-8",
+                    data:  $("#"+str).val(),//is not right , use substring to this.attr("id")
+
+                    dataType: 'text',
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText + " " + errorThrown);
+                    }
+                })
+
+            });
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " " + errorThrown);
@@ -68,44 +92,3 @@ function getOrderTypeMultipliers(){
     })
 
 }
-$(":button").click(function () {
-    var str = this.attr("id");
-    alert(str);
-
-    $.ajax({
-        method: 'POST',
-        url: 'api/tariff/'+this.attr("id"),
-        contentType: "text/plain; charset=utf-8",
-        data:  $("#"+this.attr("id")+"Button").val(),//is not right , use substring to this.attr("id")
-
-        dataType: 'text',
-        success: function (data) {
-
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " " + errorThrown);
-        }
-    })
-
-});
-function test () {
-alert("hello");
-
-    $.ajax({
-        method: 'POST',
-        url: 'api/tariff/basicButton',
-        contentType: "text/plain; charset=utf-8",
-        data:  $("#basic").val(),
-
-        dataType: 'text',
-        success: function (data) {
-
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " " + errorThrown);
-        }
-    })
-
-};
