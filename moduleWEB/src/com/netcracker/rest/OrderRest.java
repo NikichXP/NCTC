@@ -345,7 +345,7 @@ public class OrderRest {
 	public Response viewOrderWithoutRegistration(@QueryParam("publicToken") String publicToken){
 		OrderEntity orderEntity = order.getOrderByPublicToken(publicToken);
 		return Response.status(200).entity(orderEntity.getContactName() +' '+ orderEntity.getPublicToken()).build();
-
+		//TODO for Alexander )))
 //		return Response.status(201).entity("" +
 //				"<script>" +
 //				"alert('Email confirmed');" +
