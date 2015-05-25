@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,6 +70,7 @@ public class OrderDataRest {
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("assigned"), uuid));
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("in progress"), uuid));
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("updated"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
