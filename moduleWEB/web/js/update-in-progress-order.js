@@ -10,7 +10,10 @@ $(document).ready(function () {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             id = data;
-            ymaps.ready(function () {init(); fillPageWithData()});
+            ymaps.ready(function () {
+                init();
+                fillPageWithData()
+            });
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('You have no "in progress" order.');
@@ -18,7 +21,11 @@ $(document).ready(function () {
         }
     });
     $('body').click(updatePrice);
+    $('#addPointOnPath').click(addPointOnPath);
     $("#updateCurrentPath").click(submitUpdate);
+    $('#removeCurrentPath').click(updatePrice);
+    $('#completeCurrentPath').click(updatePrice);
+    $('#completeOrder').click(updatePrice);
 });
 
 function fillPageWithData() {
@@ -85,7 +92,7 @@ function fillPageWithData() {
             outer.insertBefore(input6, button);
 
             makeSearch(input);
-            $("#toAddress" + i).change(function (){
+            $("#toAddress" + i).change(function () {
                 buildPath($("[id^='toAddress']").length - 1);
             });
         }
@@ -95,10 +102,10 @@ function fillPageWithData() {
 
         $("#music").attr("value", obj.musicType);
 
-        if(obj.smokingFriendly == "true") $('input:checkbox[id=smokingFriendly]').prop('checked', true);
-        if(obj.animalFriendly == "true") $('input:checkbox[id=animalFriendly]').prop('checked', true);
-        if(obj.wifi == "true") $('input:checkbox[id=wifi]').prop('checked', true);
-        if(obj.airConditioner == "true") $('input:checkbox[id=airConditioner]').prop('checked', true);
+        if (obj.smokingFriendly == "true") $('input:checkbox[id=smokingFriendly]').prop('checked', true);
+        if (obj.animalFriendly == "true") $('input:checkbox[id=animalFriendly]').prop('checked', true);
+        if (obj.wifi == "true") $('input:checkbox[id=wifi]').prop('checked', true);
+        if (obj.airConditioner == "true") $('input:checkbox[id=airConditioner]').prop('checked', true);
 
         $("#totalMultiplier").attr("value", obj.totalMultiplier);
         $("#totalLength").attr("value", obj.totalLength);
@@ -109,7 +116,12 @@ function fillPageWithData() {
 }
 
 function submitUpdate() {
+    $("#addPointOnPath").prop('disabled', true);
     $("#updateCurrentPath").prop('disabled', true);
+    $("#removeCurrentPath").prop('disabled', true);
+    $("#completeCurrentPath").prop('disabled', true);
+    $("#completeOrder").prop('disabled', true);
+
     var JSONdata = {
         driverUserUuid: getCookie("uuid"),
 
@@ -140,7 +152,7 @@ function submitUpdate() {
     }
     $.ajax({
         method: 'POST',
-        url: 'api/order/create',
+        url: 'api/order/updateInProgress',
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
         dataType: 'text',
@@ -186,52 +198,64 @@ function getCookie(name) {
 
 var counter = 0;
 var isDeleteExists = false;
-function createToAddress() {
-    if ($("#fromX").val().length > 0 && $("#toX0").val().length > 0 && $("#toX" + counter).val().length > 0) {
-        setLock("#fromAddress");
-        setLock("#toAddress" + counter);
-        counter++;
-        var outer = document.getElementById("importantInfo");
+function addPointOnPath() {
+    var outer = document.getElementById("importantInfo");
 
-        var input = document.createElement("input");
+    var indexOfInProgress = $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
+    var lastIndex = $("[id^='toAddress']").filter($("[disabled='disabled']")).length;
+
+    alert(indexOfInProgress);
+    alert(lastIndex);
+
+    for (var i = lastIndex; i > indexOfInProgress; i--) {
+        var input = document.getElementById("toAddress" + i);
         input.setAttribute("type", "text");
-        input.setAttribute("id", "toAddress" + counter);
-        input.setAttribute("onchange", "clearToXY(this); makeSearch(this)");
-        input.setAttribute("placeholder", "To address " + counter);
+        input.setAttribute("id", "toAddress" + (i + 1));
+        input.setAttribute("onchange", "clearToXY(this);");
+        input.setAttribute("placeholder", "To address " + (i + 1));
 
-        var input2 = document.createElement("input");
+        var input2 = document.getElementById("toX" + i);
         input2.setAttribute("hidden", "hidden");
         input2.setAttribute("type", "text");
-        input2.setAttribute("id", "toX" + counter);
+        input2.setAttribute("id", "toX" + (i + 1));
 
-        var input3 = document.createElement("input");
+        var input3 = document.getElementById("toY" + i);
         input3.setAttribute("hidden", "hidden");
         input3.setAttribute("type", "text");
-        input3.setAttribute("id", "toY" + counter);
+        input3.setAttribute("id", "toY" + (i + 1));
 
-        var input4 = document.createElement("input");
+        var input4 = document.getElementById("distance" + i);
         input4.setAttribute("disabled", "disabled");
         input4.setAttribute("type", "text");
-        input4.setAttribute("id", "distance" + counter);
-
-        var addressAdder = document.getElementById("addressAdder");
-        if (!isDeleteExists) {
-            var addressRemover = document.createElement("input");
-            addressRemover.setAttribute("id", "addressRemover");
-            addressRemover.setAttribute("type", "button");
-            addressRemover.setAttribute("onclick", "deleteToAddress()");
-            addressRemover.setAttribute("value", "Remove");
-            outer.insertBefore(addressRemover, addressAdder);
-            isDeleteExists = true;
-        }
-        var addressRemover = document.getElementById("addressRemover");
-        outer.insertBefore(input, addressRemover);
-        outer.insertBefore(input2, addressRemover);
-        outer.insertBefore(input3, addressRemover);
-        outer.insertBefore(input4, addressRemover);
-    } else {
-        alert("Enter valid <b>From address</b> and <b>To address</b>.")
+        input4.setAttribute("id", "distance" + (i + 1));
     }
+
+    var addedInput = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "toAddress" + indexOfInProgress);
+    input.setAttribute("onchange", "clearToXY(this)");
+    input.setAttribute("placeholder", "To address " + indexOfInProgress);
+
+    var addedInput2 = document.createElement("input");
+    input2.setAttribute("hidden", "hidden");
+    input2.setAttribute("type", "text");
+    input2.setAttribute("id", "toX" + indexOfInProgress);
+
+    var addedInput3 = document.createElement("input");
+    input3.setAttribute("hidden", "hidden");
+    input3.setAttribute("type", "text");
+    input3.setAttribute("id", "toY" + indexOfInProgress);
+
+    var addedInput4 = document.createElement("input");
+    input4.setAttribute("disabled", "disabled");
+    input4.setAttribute("type", "text");
+    input4.setAttribute("id", "distance" + indexOfInProgress);
+
+    //var addressRemover = document.getElementById("addressRemover");
+    //outer.insertBefore(input, addressRemover);
+    //outer.insertBefore(input2, addressRemover);
+    //outer.insertBefore(input3, addressRemover);
+    //outer.insertBefore(input4, addressRemover);
 }
 
 function deleteToAddress() {
