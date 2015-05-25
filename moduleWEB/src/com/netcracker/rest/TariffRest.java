@@ -172,7 +172,9 @@ public class TariffRest {
 	@Consumes("text/plain")
 	@Produces("text/plain")
 	public void setDayHourlyRate(String mul) {
-		//TariffEntity tariffEntity = tariff.setDayHourlyMultiplier(new BigDecimal(mul));
+		 tariff.setDayHourlyMultiplier(new BigDecimal(mul));
+
+
 
 	}
 
