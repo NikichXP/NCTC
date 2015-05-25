@@ -67,7 +67,7 @@ public class DriverRest {
     @Consumes("text/plain")
     public Response getAssignedOrders(String uuid){
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("assigned"), uuid);
-
+        Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orders\":[");
         for (OrderEntity orderEntity : list) {
@@ -99,9 +99,9 @@ public class DriverRest {
     @Path("historyByLength")
     @Consumes("text/plain")
     public Response getOrderHistoryByLength(String uuid) {
-        List<OrderEntity> list = order.sortByLengthAndUUIDAndState(uuid,orderState.findByName("completed"));
-        list.addAll(order.sortByLengthAndUUIDAndState(uuid, orderState.findByName("refused")));
-
+        List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTotalLength().compareTo(o1.getTotalLength()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
@@ -133,9 +133,9 @@ public class DriverRest {
     @Path("historyByDate")
     @Consumes("text/plain")
     public Response getOrderHistoryByDate(String uuid) {
-        List<OrderEntity> list = order.sortByDateAndUUIDAndState(uuid,orderState.findByName("completed"));
-        list.addAll(order.sortByDateAndUUIDAndState(uuid, orderState.findByName("refused")));
-
+        List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"),uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
@@ -167,9 +167,9 @@ public class DriverRest {
     @Path("historyByPrice")
     @Consumes("text/plain")
     public Response getOrderHistoryByPrice(String uuid) {
-        List<OrderEntity> list = order.sortByPriceAndUUIDAndState(uuid, orderState.findByName("completed"));
-        list.addAll(order.sortByPriceAndUUIDAndState(uuid, orderState.findByName("refused")));
-
+        List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"),uuid));
+        Collections.sort(list, (o1, o2) -> o2.getFinalPrice().compareTo(o1.getFinalPrice()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
