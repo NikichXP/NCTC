@@ -18,15 +18,19 @@ function getTariffs(orderTypeName) {
             alert("1");
             var obj = JSON.parse(data);
             var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
-            for (var i = 0; i < obj.hourlyRates.length-1; i++) {
-                var innerObj = obj.hourlyRates[i];
-                str += (i+1)+':<br><input id="multiplier" value="' + innerObj.multiplier + '" /><br>';
-            }
 
-            for (var i = 0; i < obj.distanceRates.length-1; i++) {
-                var innerObj = obj.distanceRates[i];
-                str += (i+1)+'<br><input id="multiplier" value="' + innerObj.multiplier + '" /><br>';
-            }
+                var innerObj = obj.hourlyRates[0];
+                str += "1"+':<br><input id="dayHourlyRate" value="' + innerObj.multiplier + '" /><button id="dayHourlyRateButton"></button><br>';
+                innerObj = obj.hourlyRates[1];
+                str += "2"+':<br><input id="nightHourlyRate" value="' + innerObj.multiplier + '" /><button id="nightHourlyRateButton"></button><br>';
+
+
+
+                innerObj = obj.distanceRates[0];
+                str += "1"+'<br><input id="dayDistanceRate" value="' + innerObj.multiplier + '" /><button id="dayDistanceRateButton"></button><br>';
+                innerObj = obj.distanceRates[1];
+                str += "2"+'<br><input id="nightDistanceRate" value="' + innerObj.multiplier + '" /><button id="nightDistanceRateButton"></button><br>';
+
 
             document.getElementById("tariffs").innerHTML = str;
 
@@ -70,7 +74,7 @@ function getOrderTypeMultipliers(){
                     method: 'POST',
                     url: 'api/tariff/'+$(this).attr("id"),
                     contentType: "text/plain; charset=utf-8",
-                    data:  $("#"+str).val(),//is not right , use substring to this.attr("id")
+                    data:  $("#"+str).val(),
 
                     dataType: 'text',
                     success: function (data) {

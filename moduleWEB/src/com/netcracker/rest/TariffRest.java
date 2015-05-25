@@ -119,6 +119,7 @@ public class TariffRest {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("basic");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
+
 	}
 	@POST
 	@Path("cargoButton")
@@ -164,6 +165,15 @@ public class TariffRest {
 		OrderTypeEntity orderTypeEntity = orderType.findByName("celebration taxi");
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
+	}
+
+	@POST
+	@Path("dayHourlyRateButton")
+	@Consumes("text/plain")
+	@Produces("text/plain")
+	public void setDayHourlyRate(String mul) {
+		//TariffEntity tariffEntity = tariff.setDayHourlyMultiplier(new BigDecimal(mul));
+
 	}
 
 
