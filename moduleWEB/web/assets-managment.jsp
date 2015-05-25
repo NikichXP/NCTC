@@ -15,7 +15,6 @@
 
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/customer-style.css" rel="stylesheet">
-    <link href="css/for-footer.css" rel="stylesheet">
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -61,16 +60,6 @@
 
                 </td>
                 <td align="center">
-                    <%--<ul>--%>
-                    <%--<li><input type="text-field" placeholder="First name" id="firstName"/></li>--%>
-                    <%--<li><input type="text-field" placeholder="Last name" id="lastName"/></li>--%>
-                    <%--<li><input type="text-field" placeholder="Phone number" id="phone"/></li>--%>
-                    <%--<li><input type="text-field" placeholder="E-mail" id="email"/></li>--%>
-                    <%--<li><input type="password" placeholder="Password" id="regpass"/></li>--%>
-                    <%--<li><input type="password" placeholder="Confirm password" id="passconfirm"/></li>--%>
-                    <%--<li><input type="text-field" placeholder="car id" id="carId"/></li>--%>
-                    <%--</ul>--%>
-
                 </td>
             </tr>
             </tfoot>

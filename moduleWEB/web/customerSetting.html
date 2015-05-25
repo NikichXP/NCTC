@@ -1,0 +1,115 @@
+<html lang="en" ng-app="nctc">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>YATS</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/customer-style.css" rel="stylesheet">
+
+
+</head>
+
+
+<body class="container">
+<!--header-->
+<div class="header">
+    <div class="header-text">
+        <h1 id="name-line">Hello, User!</h1>
+        <h5 id="phone-line">default phone number: 0937776661</h5>
+        <h5 id="email-line">default e-mail: user_ko@gmail.com</h5>
+    </div>
+
+    <div class="header-logout" id="logout-button">
+        <h2>Log Out</h2>
+    </div>
+</div>
+<!--orders-->
+<div class="mainSection" id="customerOrdersPanel">
+    <div class="col-md-12 mt">
+
+        <h4> History orders</h4>
+        <hr>
+        <table id="historyOrderTable" class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>First name :</th>
+                <th><input type="text-field" placeholder="First name" id="firstName"/></th>
+            </tr>
+            <tr>
+                <th>Last name :</th>
+                <th><input type="text-field" placeholder="Last name" id="lastName"/></th>
+            </tr>
+            <tr>
+                <th>phone :</th>
+                <th><input type="text-field" placeholder="phone" id="phone"/></th>
+            </tr>
+            <tr>
+                <th>alternative phone :</th>
+                <th><input type="text-field" placeholder="phone" id="alternativePhone"/></th>
+            </tr>
+            <tr>
+                <th> E-mail :</th>
+                <th><input type="text-field" placeholder="e-mail" id="email"/></th>
+            </tr>
+            <tr>
+                <th>New password :</th>
+                <th><input type="text-field" placeholder="pasword" id="newPassword"/></th>
+            </tr>
+            <tr>
+                <th>Confirm password</th>
+                <th><input type="text-field" placeholder="pasword" id="confirmPassword"/></th>
+            </tr>
+            <tr>
+                <th>Sex</th>
+                <th>
+                    <select id="userSex">
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>Animal friendly</th>
+                <th>
+                    <select id="animalFriendly">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th>Smoking friendly</th>
+                <th>
+                    <select id="smokingFriendly">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!--footer-->
+<div class="footer">
+    <div class="button" id="history">
+        EDIT
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+</body>

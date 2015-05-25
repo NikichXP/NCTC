@@ -5,6 +5,53 @@ $(document).ready(function () {
 
 var fix = false;
 
+var phoneRegEx = /^\+?[0-9]{6,12}$/;
+var namesRegEx = /^[a-zA-Z\s'\-]+$/;
+var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+var passRegEx = /^....+$/;
+//var license = /
+
+function validateCar(){
+
+}
+function validateRegistrationData() {
+    //validates login credentials (e-mail or phone number) field
+    if (!validateNames($("#firstName").val(), namesRegEx)) {
+        alert("First name:\nPlease, use only alphabetic characters!");
+        return false;
+    }
+    if (!validateNames($("#lastName").val(), namesRegEx)) {
+        alert("Last name:\nPlease, use only alphabetic characters!");
+        return false;
+    }
+    var phone = $("#phone").val();
+    phone = phone.replace(/\s/g, "").replace(/\+/g, "");
+    if (!validateNames(phone, phoneRegEx)) {
+        alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
+        return false;
+    }
+    if (!validateNames($("#email").val(), emailRegEx)) {
+        alert("E-mail:\nPlease, enter a valid e-mail.");
+        return false;
+    }
+    if (!validateNames($("#regpass").val(), passRegEx)) {
+        alert("Password:\nPassword must be at least 4 characters long.");
+        return false;
+    }
+    if ($("#passconfirm").val() !== $("#regpass").val()) {
+        alert("Confirm password:\nPasswords don't match.");
+        return false;
+    }
+    return true;
+}
+function validateNames (input, regEx) {
+    if(input.length > 0){
+        return regEx.test(input);
+    }
+    return false;
+}
+
+
 function setAssetManager(url, table) {
     $.ajax({
         method: 'POST',
@@ -77,6 +124,9 @@ function createEditCar(createMainDiv, createDiv) {
     edit.appendChild(document.createTextNode("EDIT"));
     del.onclick = function () {
         deleteCar(createDiv);
+        removeAll();
+        removeChild('drivers');
+        setAssetManager('api/admin_asset_manager/drivers', "drivers");
     }
     edit.onclick = function () {
 
@@ -115,6 +165,8 @@ function deleteCar(carId) {
             alert("Wrong user credentials.");
         }
     })
+    removeChild('cars');
+    setAssetManager('api/admin_asset_manager/cars', "cars");
 }
 function setEditCarById(carId) {
     $.ajax({
@@ -189,6 +241,7 @@ function deleteDriver(myId) {
             alert("Wrong user credentials.");
         }
     })
+
 }
 function setDriver(carId) {
     $.ajax({
@@ -231,6 +284,7 @@ function drawInputForDriver(rowData) {
     document.getElementById("phone").value = rowData.phone;
     document.getElementById("email").value = rowData.email;
     document.getElementById("regpass").value = rowData.getPassword;
+    document.getElementById("passconfirm").value = rowData.getPassword;
 
 }
 
@@ -241,6 +295,15 @@ function removeAll() {
     $("#edit-my-car").remove();
     $("#delete-my-car").remove();
     fix = false;
+}
+function removeChild(element){
+    var myNode = document.getElementById(element);
+    var fc = myNode.firstChild;
+
+    while( fc ) {
+        myNode.removeChild( fc );
+        fc = myNode.firstChild;
+    }
 }
 
 function createSettingOptionForDriver(mainDiv) {
@@ -434,17 +497,24 @@ function createAddDriver(getDiv) {
     add.id = "add-my-car";
     add.appendChild(document.createTextNode("ADD"))
     add.onclick = function () {
-        var JSONdata = {
-            firstName: $("#firstName").val(),
-            lastName: $("#lastName").val(),
-            phone: $("#phone").val(),
-            email: $("#email").val(),
-            carId: $("#carId").val(),
-            pass: $("#regpass").val()
-        };
-        alert(JSON.stringify(JSONdata))
-        setDriver(JSONdata);
-        removeAll();
+        if (validateRegistrationData()) {
+            var JSONdata = {
+                firstName: $("#firstName").val(),
+                lastName: $("#lastName").val(),
+                phone: $("#phone").val(),
+                email: $("#email").val(),
+                carId: $("#carId").val(),
+                pass: $("#regpass").val()
+            };
+            alert(JSON.stringify(JSONdata))
+            setDriver(JSONdata);
+            removeAll();
+            removeChild('drivers')
+            alert("new alert");
+            setAssetManager('api/admin_asset_manager/drivers', 'drivers');
+        } else {
+
+        }
     }
     getDiv.appendChild(add);
 }
@@ -454,8 +524,8 @@ function setDriver(JSONdata) {
         url: "api/user/create_driver",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
-        dataType:'text',
-        success: function (data,textStatus,jqXHR ) {
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
             alert(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
