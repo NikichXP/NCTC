@@ -3,6 +3,11 @@ $(document).ready(function(){
 });
 
 
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
 
 function setList(){
     var uuid = getCookie("uuid");
@@ -15,7 +20,7 @@ function setList(){
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                drawTable(obj.orderHistory, "table");
+                createTable(obj.orderHistory, "table");
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 //alert(jqXHR.responseText + " Error!");
@@ -24,33 +29,31 @@ function setList(){
     }
 }
 
-function getCookie(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
-}
+function createTable(data, table) {
+    var tb = '<table style="width:100%">';
 
-function drawTable(data, table) {
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table);
+        var date = "Date: " + data[i].dateOrderCreate.split(".")[0];
+        var from = "From: " + data[i].startOrder;
+        var to = "To: " + data[i].endOrder;
+        var distance = "Distance: " + parseFloat(data[i].distance).toFixed(2) + " km.";
+        var price = "Price: " + parseFloat(data[i].price).toFixed(2) + " &#8372";
+
+        var div = '<div class="button" onclick="redirect(' + data[i].id + ')" style="width: 100%">View</div>';
+
+        tb = tb + '<tr>'
+            + '<td>&nbsp' + date + '</td>'
+            + '<td>&nbsp' + from + '</td>'
+            + '<td>&nbsp' + to + '</td>'
+            + '<td>&nbsp' + distance + '</td>'
+            + '<td>&nbsp' + price + '</td>'
+            + '<td>' + div + '</td>'
+            + '</tr>';
     }
-}
-function drawBody(rowData, table) {
-
-    var div = document.getElementById(table);
-    var createDiv = document.createElement("div");
-    var node = document.createTextNode("data :" + rowData.dateOrderCreate
-    + " first point :" + rowData.startOrder
-    + " next point :" + rowData.endOrder
-    + " status :" + rowData.statusOrder
-    + " price: " + rowData.price + "$");
-    createDiv.appendChild(node);
-    createDiv.className = "button";
-    createDiv.onclick = function () {
-        document.location.href = "editOrder.jsp?id=" + rowData.id;
-
-    };
-    div.appendChild(createDiv);
-
+    tb = tb + '</table>';
+    document.getElementById(table).innerHTML = tb;
 }
 
+function redirect(id) {
+    document.location.href = "viewOrder.jsp?id=" + id;
+};
