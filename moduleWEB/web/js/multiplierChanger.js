@@ -4,7 +4,7 @@
 $(document).ready(function(){
     getTariffs("basic");
     getOrderTypeMultipliers();
-    $("#basicButton").click(test);
+
 });
 
 function getTariffs(orderTypeName) {
@@ -18,15 +18,19 @@ function getTariffs(orderTypeName) {
             alert("1");
             var obj = JSON.parse(data);
             var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
-            for (var i = 0; i < obj.hourlyRates.length-1; i++) {
-                var innerObj = obj.hourlyRates[i];
-                str += (i+1)+':<br><input id="multiplier" value="' + innerObj.multiplier + '" /><br>';
-            }
 
-            for (var i = 0; i < obj.distanceRates.length-1; i++) {
-                var innerObj = obj.distanceRates[i];
-                str += (i+1)+'<br><input id="multiplier" value="' + innerObj.multiplier + '" /><br>';
-            }
+                var innerObj = obj.hourlyRates[0];
+                str += "1"+':<br><input id="dayHourlyRate" value="' + innerObj.multiplier + '" /><button id="dayHourlyRateButton"></button><br>';
+                innerObj = obj.hourlyRates[1];
+                str += "2"+':<br><input id="nightHourlyRate" value="' + innerObj.multiplier + '" /><button id="nightHourlyRateButton"></button><br>';
+
+
+
+                innerObj = obj.distanceRates[0];
+                str += "1"+'<br><input id="dayDistanceRate" value="' + innerObj.multiplier + '" /><button id="dayDistanceRateButton"></button><br>';
+                innerObj = obj.distanceRates[1];
+                str += "2"+'<br><input id="nightDistanceRate" value="' + innerObj.multiplier + '" /><button id="nightDistanceRateButton"></button><br>';
+
 
             document.getElementById("tariffs").innerHTML = str;
 
@@ -61,6 +65,30 @@ function getOrderTypeMultipliers(){
                 'Celebration taxi:<input id="celebration" value="'+obj.OrderTypeMultipliers[0].celebration_taxi+'"/><button id="celebrationButton"></button><br>'
             document.getElementById("OrderTypeRates").innerHTML = str;
 
+            $(":button").click(function () {
+                var str = $(this).attr("id");
+                str=str.replace("Button","");
+
+
+                $.ajax({
+                    method: 'POST',
+                    url: 'api/tariff/'+$(this).attr("id"),
+                    contentType: "text/plain; charset=utf-8",
+                    data:  $("#"+str).val(),
+
+                    dataType: 'text',
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(jqXHR.responseText + " " + errorThrown);
+                    }
+                })
+
+            });
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " " + errorThrown);
@@ -68,44 +96,3 @@ function getOrderTypeMultipliers(){
     })
 
 }
-$(":button").click(function () {
-    var str = this.attr("id");
-    alert(str);
-
-    $.ajax({
-        method: 'POST',
-        url: 'api/tariff/'+this.attr("id"),
-        contentType: "text/plain; charset=utf-8",
-        data:  $("#"+this.attr("id")+"Button").val(),//is not right , use substring to this.attr("id")
-
-        dataType: 'text',
-        success: function (data) {
-
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " " + errorThrown);
-        }
-    })
-
-});
-function test () {
-alert("hello");
-
-    $.ajax({
-        method: 'POST',
-        url: 'api/tariff/basicButton',
-        contentType: "text/plain; charset=utf-8",
-        data:  $("#basic").val(),
-
-        dataType: 'text',
-        success: function (data) {
-
-
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " " + errorThrown);
-        }
-    })
-
-};

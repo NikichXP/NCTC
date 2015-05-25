@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,20 +70,21 @@ public class OrderDataRest {
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("assigned"), uuid));
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("in progress"), uuid));
         list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("updated"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
         for (OrderEntity orderEntity : list) {
             List<Point> points = order.getFirstAndLastPoints(orderEntity);
             sb.append("{\"startOrder\":\"")
-                    .append(points.get(0).toString())
+                    .append(points.get(0).getAddress())
                     .append("\",\"endOrder\":\"")
-                    .append(points.get(1).toString())
+                    .append(points.get(1).getAddress())
                     .append("\",\"dateOrderCreate\":\"")
                     .append(orderEntity.getTimeCreated().toString())
                     .append("\",\"id\":\"")
                     .append(orderEntity.getId())
-                    .append("\",\"statusOrder\":\"")
-                    .append(orderEntity.getOrderStateEntity().getName())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
                     .append("\",\"price\":\"")
                     .append(orderEntity.getFinalPrice())
                     .append("\" },");
