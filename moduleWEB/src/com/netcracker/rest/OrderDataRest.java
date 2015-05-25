@@ -74,15 +74,15 @@ public class OrderDataRest {
         for (OrderEntity orderEntity : list) {
             List<Point> points = order.getFirstAndLastPoints(orderEntity);
             sb.append("{\"startOrder\":\"")
-                    .append(points.get(0).toString())
+                    .append(points.get(0).getAddress())
                     .append("\",\"endOrder\":\"")
-                    .append(points.get(1).toString())
+                    .append(points.get(1).getAddress())
                     .append("\",\"dateOrderCreate\":\"")
                     .append(orderEntity.getTimeCreated().toString())
                     .append("\",\"id\":\"")
                     .append(orderEntity.getId())
-                    .append("\",\"statusOrder\":\"")
-                    .append(orderEntity.getOrderStateEntity().getName())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
                     .append("\",\"price\":\"")
                     .append(orderEntity.getFinalPrice())
                     .append("\" },");
