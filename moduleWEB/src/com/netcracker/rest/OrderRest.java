@@ -5,6 +5,8 @@ import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.*;
+import com.netcracker.rest.utils.SecuritySettings;
+import com.netcracker.service.Mail;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -243,7 +245,7 @@ public class OrderRest {
 	public Response createOrderWithoutRegistration(OrderJson orderJson) {
 		OrderEntity orderEntity = new OrderEntity();
 
-		orderEntity.setCustomerUserEntity(user.findByUuid(orderJson.getCustomerUserUuid()));
+		orderEntity.setCustomerUserEntity(user.findByUuid("344b72d1-5726-4b4f-9f03-78c6b1fdaea7"));
 		orderEntity.setPublicToken(UUID.randomUUID().toString().substring(0, 8));
 
 		orderEntity.setContactName(orderJson.getContactName());
@@ -327,14 +329,29 @@ public class OrderRest {
 		orderEntity.setFinalPrice(totalPrice);
 		orderEntity.setTotalLength(totalLength);
 		order.create(orderEntity);
-
+		String msg = "http://localhost:8081/moduleWEB_war_archive/api/order/viewOrderWithoutRegistration?publicToken="
+				+ orderEntity.getPublicToken();
+		Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
+//				"http://178.151.17.247/nctc/api/order/viewOrderWithoutRegistration?publicToken="
+//						+ orderEntity.getPublicToken());
 		if (orderJson == null) {
 			return Response.status(404).entity("OrderJson is null.").build();
 		} else {
 			return Response.status(201).entity(orderJson.toString() + "Order id: " + orderEntity.getId()).build();
 		}
 	}
+	@GET
+	@javax.ws.rs.Path("viewOrderWithoutRegistration")
+	public Response viewOrderWithoutRegistration(@QueryParam("publicToken") String publicToken){
+		OrderEntity orderEntity = order.getOrderByPublicToken(publicToken);
+		return Response.status(200).entity(orderEntity.getContactName() +' '+ orderEntity.getPublicToken()).build();
 
+//		return Response.status(201).entity("" +
+//				"<script>" +
+//				"alert('Email confirmed');" +
+//				"document.location.href = \"http://localhost:8080/moduleWEB_war_archive/customer.jsp\";" +
+//				"</script>").build(); //TODO change to real url
+	}
 	@GET
 	@javax.ws.rs.Path("view")
 	public Response viewOrder(@QueryParam("id") String orderId) {

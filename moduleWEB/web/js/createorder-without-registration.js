@@ -12,9 +12,9 @@ $(document).ready(function () {
 function submitOrder() {
     $("#basic-order-submit").prop('disabled', true);
     var JSONdata = {
-        customerUserUuid: getCookie("uuid"),
         contactName: $("#contactName").val(),
         contactPhone: $("#contactPhone").val(),
+        email: $("#email").val(),
         requestedSeatsCount: $("#requestedSeatsCount").val(),
         type: $("#type").val(),
 
@@ -63,7 +63,7 @@ function submitOrder() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert("Order successfully created.\nOrder details were sent to your email.");
-            document.location.href = "customer.jsp";
+            document.location.href = "index.jsp";
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $("#basic-order-submit").prop('disabled', false);
@@ -135,12 +135,9 @@ var phoneRegEx = /^\+?[0-9]{6,12}$/;
 var namesRegEx = /^[a-zA-Z\s'\-]+$/;
 var dateTime = /^([1-9]|([012][0-9])|(3[01]))\/([0]?[1-9]|1[012])\/\d\d\d\d [012]?[0-9]:[0-6][0-9]$/;
 var seatsCount = /^\d+$/;
+var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
 function validateBasicOrderData() {
-    if (getCookie("uuid").length != 36) {
-        alert("Wrong uuid cookie");
-        return false;
-    }
     if (!validateNames($("#contactName").val(), namesRegEx)) {
         alert("Contact name:\nPlease, use only alphabetic characters!");
         return false;
@@ -149,6 +146,10 @@ function validateBasicOrderData() {
     contactPhone = contactPhone.replace(/\s/g, "").replace(/\+/g, "");
     if (!validateNames(contactPhone, phoneRegEx)) {
         alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
+        return false;
+    }
+    if(!validateNames($("#email").val(), emailRegEx)){
+        alert("E-mail:\nPlease, enter a valid e-mail.");
         return false;
     }
     if (!validateNames($("#requestedSeatsCount").val(), seatsCount)) {
@@ -184,12 +185,6 @@ function validateNames(input, regEx) {
         return regEx.test(input);
     }
     return false;
-}
-
-function getCookie(name) {
-    var value = "; " + document.cookie;
-    var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 jQuery(function ($) {
