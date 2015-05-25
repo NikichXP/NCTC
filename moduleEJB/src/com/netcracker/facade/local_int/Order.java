@@ -34,7 +34,7 @@ public interface Order {
 
 	List<Point> getFirstAndLastPoints(OrderEntity orderEntity);
 
-	Object getByUUIDAndId(String orderId, String uuid);
+	OrderEntity getByUUIDAndId(String orderId, String uuid);
 
 	List<OrderEntity> sortByDateAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
 

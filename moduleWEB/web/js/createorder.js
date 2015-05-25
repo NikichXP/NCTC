@@ -172,7 +172,7 @@ function validateBasicOrderData() {
         alert("Wrong requested time");
         return false;
     }
-    if (!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0) {
+    if (!$("#totalLength").val() > 1 || !$("#totalMultiplier").val() > 1 || !$("#totalPrice").val() > 1) {
         alert("Bad totals.");
         return false;
     }
