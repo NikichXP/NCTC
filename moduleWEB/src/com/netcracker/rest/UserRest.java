@@ -1,5 +1,6 @@
 package com.netcracker.rest;
 
+import com.netcracker.classes.JSON;
 import com.netcracker.classes.UserJson;
 import com.netcracker.entity.CarEntity;
 import com.netcracker.entity.UserUserAccessLevelEntity;
@@ -309,16 +310,8 @@ public class UserRest {
     @Consumes("text/plain")
     public Response getUserDataByID(String id) {
         UserEntity userEntity = user.read(new BigInteger(id));
-        UserJson json = new UserJson();
-        json.setFirstName(userEntity.getFirstName());
-        json.setLastName(userEntity.getLastName());
-        json.setPhone(userEntity.getPhone());
-        json.setAlternativePhone(userEntity.getAlternativePhone());
-        json.setId(userEntity.getId().toString());
-        json.setEmail(userEntity.getEmail());
-        json.setPass(userEntity.getPassword());
         if (userEntity != null) {
-            return Response.status(200).entity(json.toString()).build();
+            return Response.status(200).entity(new JSON().getUserJson(userEntity).toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
         }
@@ -352,36 +345,41 @@ public class UserRest {
     @Consumes("text/plain")
     public Response getAllUserByUUID(String uuid) {
         UserEntity userEntity = user.findByUuid(uuid);
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"userData\":[")
-                .append("{\"firstName\":\"")
-                .append(userEntity.getFirstName())
-                .append("\",\"lastName\":\"")
-                .append(userEntity.getLastName())
-                .append("\",\"phone\":\"")
-                .append(userEntity.getPhone())
-                .append("\",\"userId\":\"")
-                .append(userEntity.getId())
-                .append("\",\"email\":\"")
-                .append(userEntity.getEmail())
-                .append("\",\"userSex\":\"")
-                .append(userEntity.getSex())
-                .append("\",\"animalFriendly\":\"")
-                .append(userEntity.getAnimalFriendly())
-                .append("\",\"smokingFriendly\":\"")
-                .append(userEntity.getSmokingFriendly())
-                .append("\",\"alternativePhone\":\"")
-                .append(userEntity.getAlternativePhone())
-                .append("\",\"getPassword\":\"")
-                .append(userEntity.getPassword())
-                .append("\" },");
-        sb.replace(sb.length() - 1, sb.length(), "");
-        sb.append("]}");
         if (userEntity != null) {
-            return Response.status(200).entity(sb.toString()).build();
+            return Response.status(200).entity(new JSON().getUserJson(userEntity).toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
         }
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("{\"userData\":[")
+//                .append("{\"firstName\":\"")
+//                .append(userEntity.getFirstName())
+//                .append("\",\"lastName\":\"")
+//                .append(userEntity.getLastName())
+//                .append("\",\"phone\":\"")
+//                .append(userEntity.getPhone())
+//                .append("\",\"userId\":\"")
+//                .append(userEntity.getId())
+//                .append("\",\"email\":\"")
+//                .append(userEntity.getEmail())
+//                .append("\",\"userSex\":\"")
+//                .append(userEntity.getSex())
+//                .append("\",\"animalFriendly\":\"")
+//                .append(userEntity.getAnimalFriendly())
+//                .append("\",\"smokingFriendly\":\"")
+//                .append(userEntity.getSmokingFriendly())
+//                .append("\",\"alternativePhone\":\"")
+//                .append(userEntity.getAlternativePhone())
+//                .append("\",\"getPassword\":\"")
+//                .append(userEntity.getPassword())
+//                .append("\" },");
+//        sb.replace(sb.length() - 1, sb.length(), "");
+//        sb.append("]}");
+//        if (userEntity != null) {
+//            return Response.status(200).entity(sb.toString()).build();
+//        } else {
+//            return Response.status(404).entity("Bad response.").build();
+//        }
     }
 
     @POST

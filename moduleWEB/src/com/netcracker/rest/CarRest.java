@@ -2,6 +2,7 @@ package com.netcracker.rest;
 
 
 import com.netcracker.classes.CarJson;
+import com.netcracker.classes.JSON;
 import com.netcracker.classes.UserJson;
 import com.netcracker.entity.CarEntity;
 import com.netcracker.facade.local_int.Car;
@@ -107,17 +108,17 @@ public class CarRest {
     @Consumes("text/plain")
     public Response getCarDataByID(String id) {
         CarEntity carEntity = car.read(new BigInteger(id));
-        CarJson json = new CarJson();
-        json.setId(carEntity.getId().toString());
-        json.setModel(carEntity.getModel());
-        json.setLicencePlate(carEntity.getLicencePlate());
-        json.setClassId(carEntity.getCarClassEntity().getName());
-        json.setAirConditioner(carEntity.getAirCondition().toString());
-        json.setRequiredDriverCategory(carEntity.getDriverCategoryEntity().getName());
-        json.setSeatCount(carEntity.getSeatsCount().toString());
-        json.setUserId(carEntity.getUserEntity().getId().toString());
+//        CarJson json = new CarJson();
+//        json.setId(carEntity.getId().toString());
+//        json.setModel(carEntity.getModel());
+//        json.setLicencePlate(carEntity.getLicencePlate());
+//        json.setClassId(carEntity.getCarClassEntity().getName());
+//        json.setAirConditioner(carEntity.getAirCondition().toString());
+//        json.setRequiredDriverCategory(carEntity.getDriverCategoryEntity().getName());
+//        json.setSeatCount(carEntity.getSeatsCount().toString());
+//        json.setUserId(carEntity.getUserEntity().getId().toString());
         if (carEntity != null) {
-            return Response.status(200).entity(json.toString()).build();
+            return Response.status(200).entity(new JSON().getUserJson(carEntity).toString()).build();
         } else {
             return Response.status(404).entity("Bad respons....").build();
         }
