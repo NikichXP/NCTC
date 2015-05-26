@@ -1,6 +1,9 @@
 /**
  * Created by Ubuntu on 20.05.2015.
  */
+
+var obj;
+
 $(document).ready(function () {
     $(function ($) {
         $("#timeOfDriverArrival").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy hh:mm"});
@@ -37,11 +40,9 @@ $(document).ready(function () {
 
 });
 
-var obj;
-
 function getOrderById(id) {
     $.get("api/order/viewQueuedOrder?id=" + id, function (data) {
-        var obj = JSON.parse(data);
+        obj = JSON.parse(data);
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);

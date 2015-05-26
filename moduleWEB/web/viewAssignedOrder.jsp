@@ -13,7 +13,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/jquery.maskedinput.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
-    <script src="js/mapSearchByAddressViewOrder.js" type="text/javascript"></script>
+    <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
     <script src="js/view-assigned-order.js"></script>
 </head>
 <body>
@@ -30,10 +30,9 @@
             <input id="fromAddress" type="text" disabled/>
             <input type="text" id="fromX" hidden/>
             <input type="text" id="fromY" hidden/>
-            <input id="toAddress0" type="text" disabled/>
-            <input type="text" id="toX0" hidden/>
-            <input type="text" id="toY0" hidden/>
-            <input type="text" id="distance0" disabled/>
+
+
+            <input type="button" id="addPathPoint" value="" hidden>
         </div>
         <div id="timeOption">
             Time Requested:
