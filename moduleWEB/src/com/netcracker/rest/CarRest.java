@@ -3,9 +3,7 @@ package com.netcracker.rest;
 
 import com.netcracker.classes.CarJson;
 import com.netcracker.classes.UserJson;
-import com.netcracker.entity.CarClassEntity;
 import com.netcracker.entity.CarEntity;
-import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.Car;
 import com.netcracker.facade.local_int.CarClass;
 import com.netcracker.facade.local_int.DriverCategory;
@@ -17,8 +15,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.math.BigInteger;
-import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Date;
 
 
@@ -44,19 +40,22 @@ public class CarRest {
     @POST
     @Path("create_car")
     @Consumes("application/json")
-    public Response cuUser(CarJson carJson) {
+    public Response cuCar(CarJson carJson) {
         CarEntity carrEntity = null;
+        String stutus;
         if (carJson.getId() == null) {
-            carrEntity = createUserEntityByUserJson(carJson);
+            carrEntity = createCarEntityByCarJson(carJson);
             car.create(carrEntity);
+            stutus = "car create";
         } else {
-            carrEntity = editUserEntityByJson(carJson);
+            carrEntity = editCarEntityByJson(carJson);
             car.update(carrEntity);
+            stutus = "car edit";
         }
         if (carrEntity == null) {
-            return Response.status(404).entity("Phone or email is already in use").build();
+            return Response.status(404).entity("licence is already in use").build();
         } else {
-            return Response.status(201).entity("car add").build();
+            return Response.status(201).entity(stutus).build();
         }
     }
 
@@ -72,7 +71,7 @@ public class CarRest {
         }
     }
 
-    private CarEntity createUserEntityByUserJson(CarJson carJson) {
+    private CarEntity createCarEntityByCarJson(CarJson carJson) {
         CarEntity carEntity = null;
         if (!car.isLicenceUsed(carJson.getLicencePlate())) {
             carEntity = new CarEntity();
@@ -88,11 +87,9 @@ public class CarRest {
         return carEntity;
     }
 
-    private CarEntity editUserEntityByJson(CarJson carJson) {
+    private CarEntity editCarEntityByJson(CarJson carJson) {
         CarEntity carEntity = car.read(new BigInteger(carJson.getId()));
-//        carEntity.setLicencePlate("ASDFGHJK");
-//        car.update(carEntity);
-        if (!car.isLicenceUsed(carJson.getLicencePlate()) || carEntity.getLicencePlate().equals(carJson.getLicencePlate())) {
+        if(!car.isLicenceUsed(carJson.getLicencePlate()) || carEntity.getLicencePlate().equalsIgnoreCase(carJson.getLicencePlate())) {
             carEntity.setModel(carJson.getModel());
             carEntity.setLicencePlate(carJson.getLicencePlate());
             carEntity.setCarClassEntity(carClas.findByName(carJson.getClassId()));
@@ -104,13 +101,13 @@ public class CarRest {
         }
         return carEntity;
     }
+
     @POST
     @Path("getCarDataById")
     @Consumes("text/plain")
     public Response getCarDataByID(String id) {
         CarEntity carEntity = car.read(new BigInteger(id));
         CarJson json = new CarJson();
-        StringBuilder out = new StringBuilder("{\"carData\":[");
         json.setId(carEntity.getId().toString());
         json.setModel(carEntity.getModel());
         json.setLicencePlate(carEntity.getLicencePlate());
@@ -119,42 +116,13 @@ public class CarRest {
         json.setRequiredDriverCategory(carEntity.getDriverCategoryEntity().getName());
         json.setSeatCount(carEntity.getSeatsCount().toString());
         json.setUserId(carEntity.getUserEntity().getId().toString());
-        out.append(json.toString())
-                .append("]}");
         if (carEntity != null) {
-            return Response.status(200).entity(out.toString()).build();
+            return Response.status(200).entity(json.toString()).build();
         } else {
             return Response.status(404).entity("Bad respons....").build();
         }
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("{\"carData\":[")
-//                .append("{\"carId\":\"")
-//                .append(carEntity.getId())
-//                .append("\",\"model\":\"")
-//                .append(carEntity.getModel())
-//                .append("\",\"licencePlate\":\"")
-//                .append(carEntity.getLicencePlate())
-//                .append("\",\"classCar\":\"")
-//                .append(carEntity.getCarClassEntity().getName())
-//                .append("\",\"conditioner\":\"")
-//                .append(carEntity.getAirCondition().toString())
-//                .append("\",\"requiredDriverCategory\":\"")
-//                .append(carEntity.getDriverCategoryEntity().getName())
-//                .append("\",\"countSeat\":\"")
-//                .append(carEntity.getSeatsCount())
-//                .append("\",\"carDriverId\":\"")
-//                .append(carEntity.getUserEntity().getId())
-//                .append("\" },");
-//        sb.replace(sb.length() - 1, sb.length(), "");
-//        sb.append("]}");
-//        if (carEntity != null) {
-//            return Response.status(200).entity(sb.toString()).build();
-//        } else {
-//            return Response.status(404).entity("Bad response.").build();
-//        }
 
     }
-
 
 
 }

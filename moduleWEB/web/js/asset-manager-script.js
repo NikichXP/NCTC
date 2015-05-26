@@ -477,7 +477,7 @@ function setCar(JSONdata) {
             alert(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Wrong car credentials.");
+            alert(jqXHR + "Error!!");
         }
     })
 }
