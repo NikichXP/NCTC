@@ -5,6 +5,10 @@ $("#centralButton").click(function () {
 $("#leftButton").click(function(){
 	document.location.href = "driverHystory.jsp";
 })
+
+$("#rightButton").click(function(){
+	document.location.href = "setting.jsp";
+})
 //Apply style to dynamically creater divs (Order Blocks).
 //TO BE COMPLETED. Style constant must be developed
 function applyStyle (elementToStyle){
