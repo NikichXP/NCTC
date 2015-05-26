@@ -122,6 +122,10 @@ body{
   display: inline-block;
   width: 30%;
 }
+
+#centralButton:hover {
+    background-color: orange;
+}
 /**/
 #rightButton {
 
@@ -150,6 +154,16 @@ body{
     display: inline-block;
     right: 10px;
     width: 30%;
+}
+
+#centralButtonBack {
+    background-color: #40A136;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+#centralButtonBack:hover {
+    background-color: orange;
 }
 
 li {

@@ -10,7 +10,7 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            drawTable(obj.orderHistory, "#historyOrderTable");
+            createTable(obj.orderHistory, "driverOrdersHistory");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText + " Error!");
@@ -24,24 +24,35 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-function drawTable(data, table) {
+function createTable(data, table) {
+    var tb = '<table style="width:100%">';
+
     for (var i = 0; i < data.length; i++) {
-        drawBody(data[i], table);
+        var date = "Date: " + data[i].dateOrderCreate.split(".")[0];
+        var from = "From: " + data[i].startOrder;
+        var to = "To: " + data[i].endOrder;
+        var distance = "Distance: " + parseFloat(data[i].distance).toFixed(2) + " km.";
+        var price = "Price: " + parseFloat(data[i].price).toFixed(2) + " &#8372";
+
+        var div = '<div class="button" onclick="redirect(' + data[i].id + ')" style="width: 100%">View</div>';
+
+        tb = tb + '<tr>'
+            + '<td>&nbsp' + date + '</td>'
+            + '<td>&nbsp' + from + '</td>'
+            + '<td>&nbsp' + to + '</td>'
+            + '<td>&nbsp' + distance + '</td>'
+            + '<td>&nbsp' + price + '</td>'
+            + '<td>' + div + '</td>'
+            + '</tr>';
     }
+    tb = tb + '</table>';
+    document.getElementById(table).innerHTML = tb;
 }
-function drawBody(rowData, table) {
-    var row = $("<tbody><tr>")
-    $(table).append(row);
-    row.append($("<td></td>"));
-    row.append($("<td>" + rowData.dateOrderCreate + "</td>"))
-    row.append($("<td>" + rowData.startOrder + "</td>"));
-    row.append($("<td>" + rowData.endOrder + "</td>"));
-    row.append($("<td>" + rowData.price + "</td>"));
-    row.append($("<td>" + rowData.statusOrder + "</td></tr></tbody>"));
-}
+
+function redirect(id) {
+    document.location.href = "viewOrder.jsp?id=" + id;
+};
 
 function goBack(){
     document.location.href = "customer.jsp"
 }
-
-
