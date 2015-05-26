@@ -77,7 +77,7 @@ function drawRow(rowData, table) {
     createMainDiv.class = "main_div"
     var createDiv = document.createElement("div");
     createDiv.className = "button";
-    var node = document.createTextNode("id :" + rowData.id + " name :" + rowData.name);
+    var node = document.createTextNode(rowData.id + ". " + rowData.name);
     createDiv.appendChild(node);
     if ('cars' == table) {
         createDiv.onclick = function () {
@@ -176,8 +176,8 @@ function setEditCarById(carId) {
         data: carId,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            var obj = JSON.parse(data);
             alert(data);
+            var obj = JSON.parse(data);
             drawInputForCar(obj.carData[0]);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -187,12 +187,12 @@ function setEditCarById(carId) {
 }
 function drawInputForCar(rowData) {
     document.getElementById("model").value = rowData.model;
-    document.getElementById("seatCount").value = rowData.countSeat;
+    document.getElementById("seatCount").value = rowData.seatCount;
     document.getElementById("licencePlate").value = rowData.licencePlate;
-    //document.getElementById("classCar").value = rowData.classCar;
-    document.getElementById("userId").value = rowData.carDriverId;
+    //document.getElementById("classCar").value = rowData.classId;
+    document.getElementById("userId").value = rowData.userId;
     //document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
-    document.getElementById("conditioner").value = rowData.conditioner;
+    document.getElementById("conditioner").value = rowData.airConditioner;
 }
 
 function createEditDriver(createMainDiv, createDiv) {
@@ -579,7 +579,7 @@ function getCarClass(mainDiv) {
 function getDriverCategory(mainDiv) {
     $.ajax({
         method: 'POST',
-        url: 'api/admin_asset_manager/driver_category',
+        url: 'api/driverCategory/getCategory',
         dataType: 'text',
         success: function (data) {
             var select = document.createElement("select");

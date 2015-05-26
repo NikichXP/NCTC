@@ -41,6 +41,7 @@ public class ApplicationConfig extends Application {
         resources.add(DriverRest.class);
         resources.add(CarRest.class);
         resources.add(MailRest.class);
+        resources.add(DriverCategoryRest.class);
     }
 
 }
