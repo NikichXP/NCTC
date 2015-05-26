@@ -204,58 +204,52 @@ function addPointOnPath() {
     var indexOfInProgress = $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
     var lastIndex = $("[id^='toAddress']").filter($("[disabled='disabled']")).length;
 
-    alert(indexOfInProgress);
-    alert(lastIndex);
-
-    for (var i = lastIndex; i > indexOfInProgress; i--) {
+    for (var i = lastIndex; i >= indexOfInProgress; i--) {
         var input = document.getElementById("toAddress" + i);
-        input.setAttribute("type", "text");
         input.setAttribute("id", "toAddress" + (i + 1));
-        input.setAttribute("onchange", "clearToXY(this);");
         input.setAttribute("placeholder", "To address " + (i + 1));
+        input.setAttribute("disabled", "disabled");
 
         var input2 = document.getElementById("toX" + i);
-        input2.setAttribute("hidden", "hidden");
-        input2.setAttribute("type", "text");
         input2.setAttribute("id", "toX" + (i + 1));
 
         var input3 = document.getElementById("toY" + i);
-        input3.setAttribute("hidden", "hidden");
-        input3.setAttribute("type", "text");
         input3.setAttribute("id", "toY" + (i + 1));
 
         var input4 = document.getElementById("distance" + i);
-        input4.setAttribute("disabled", "disabled");
-        input4.setAttribute("type", "text");
         input4.setAttribute("id", "distance" + (i + 1));
+
+        document.getElementById("pathId" + i).remove();
+        document.getElementById("pathCompleted" + i).remove();
     }
 
     var addedInput = document.createElement("input");
-    input.setAttribute("type", "text");
-    input.setAttribute("id", "toAddress" + indexOfInProgress);
-    input.setAttribute("onchange", "clearToXY(this)");
-    input.setAttribute("placeholder", "To address " + indexOfInProgress);
+    addedInput.setAttribute("type", "text");
+    addedInput.setAttribute("id", "toAddress" + indexOfInProgress);
+    addedInput.setAttribute("onchange", "clearToXY(this), buildPath(" + (parseInt(lastIndex) + 1) + ")");
+    addedInput.setAttribute("placeholder", "To address " + indexOfInProgress);
 
     var addedInput2 = document.createElement("input");
-    input2.setAttribute("hidden", "hidden");
-    input2.setAttribute("type", "text");
-    input2.setAttribute("id", "toX" + indexOfInProgress);
+    addedInput2.setAttribute("hidden", "hidden");
+    addedInput2.setAttribute("type", "text");
+    addedInput2.setAttribute("id", "toX" + indexOfInProgress);
 
     var addedInput3 = document.createElement("input");
-    input3.setAttribute("hidden", "hidden");
-    input3.setAttribute("type", "text");
-    input3.setAttribute("id", "toY" + indexOfInProgress);
+    addedInput3.setAttribute("hidden", "hidden");
+    addedInput3.setAttribute("type", "text");
+    addedInput3.setAttribute("id", "toY" + indexOfInProgress);
 
     var addedInput4 = document.createElement("input");
-    input4.setAttribute("disabled", "disabled");
-    input4.setAttribute("type", "text");
-    input4.setAttribute("id", "distance" + indexOfInProgress);
+    addedInput4.setAttribute("disabled", "disabled");
+    addedInput4.setAttribute("type", "text");
+    addedInput4.setAttribute("id", "distance" + indexOfInProgress);
 
-    //var addressRemover = document.getElementById("addressRemover");
-    //outer.insertBefore(input, addressRemover);
-    //outer.insertBefore(input2, addressRemover);
-    //outer.insertBefore(input3, addressRemover);
-    //outer.insertBefore(input4, addressRemover);
+    var lastToAddress = document.getElementById("toAddress" + (parseInt(indexOfInProgress) + 1));
+    alert(lastToAddress.id);
+    outer.insertBefore(addedInput, lastToAddress);
+    outer.insertBefore(addedInput2, lastToAddress);
+    outer.insertBefore(addedInput3, lastToAddress);
+    outer.insertBefore(addedInput4, lastToAddress);
 }
 
 function deleteToAddress() {
