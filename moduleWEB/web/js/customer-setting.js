@@ -17,7 +17,7 @@ function getDataToUserField() {
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
                 alert(data);
-                //setData(obj.userData);
+                setDataToUserField(obj.userData[0]);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(uuid + "Error!");
