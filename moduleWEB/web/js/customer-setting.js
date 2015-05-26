@@ -52,11 +52,29 @@ $("#edit").click(function () {
         phone: $("#phone").val(),
         alternativePhone: $("#alternativePhone").val(),
         email: $("#email").val(),
-        password: $("#newPassword").val(date.newPassword),
-        userSex: $("#userSex").val(date.userSex),
-        animalFriendly: $("#animalFriendly").val(date.animalFriendly),
-        smokingFriendly: $("#smokingFriendly").val(date.smokingFriendly)
+        pass: $("#newPassword").val(),
+        userSex: $("#userSex").val(),
+        animalFriendly: $("#animalFriendly").val(),
+        smokingFriendly: $("#smokingFriendly").val()
     };
-
+    alert(JSON.stringify(JSONdata))
+    editUser(JSON.stringify(JSONdata))
+    //document.location.href = "customer.jsp"
 })
 
+function editUser(stringify) {
+    $.ajax({
+        method: 'POST',
+        url: "api/user/editUserByUUID",
+        contentType: "application/json; charset=utf-8",
+        data: stringify,
+        dataType:'text',
+        success: function (data,textStatus,jqXHR ) {
+           alert(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+        }
+    })
+
+}

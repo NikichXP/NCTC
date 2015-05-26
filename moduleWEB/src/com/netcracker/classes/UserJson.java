@@ -19,8 +19,16 @@ public class UserJson {
     private String firstName;
     private String lastName;
     private String phone;
-
+    private String alternativePhone;
     private String carId;
+
+    public String getAlternativePhone() {
+        return alternativePhone;
+    }
+
+    public void setAlternativePhone(String alternativePhone) {
+        this.alternativePhone = alternativePhone;
+    }
 
     public String getUserSex() {
         return userSex;
@@ -118,6 +126,7 @@ public class UserJson {
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", uuid='").append(uuid).append('\'');
         sb.append(", userSex='").append(userSex).append('\'');
+        sb.append(", alternativePhone='").append(alternativePhone).append('\'');
         sb.append(", animalFriendly='").append(animalFriendly).append('\'');
         sb.append(", smokingFriendly='").append(smokingFriendly).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');

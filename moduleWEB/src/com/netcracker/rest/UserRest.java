@@ -338,7 +338,7 @@ public class UserRest {
     @POST
     @Path("getAllUserByUUID")
     @Consumes("text/plain")
-    public Response editUserByUUID(String uuid) {
+    public Response getAllUserByUUID(String uuid) {
         UserEntity userEntity = user.findByUuid(uuid);
         StringBuilder sb = new StringBuilder();
         sb.append("{\"userData\":[")
@@ -372,5 +372,53 @@ public class UserRest {
         }
     }
 
+    @POST
+    @Path("editUserByUUID")
+    @Consumes("application/json")
+    public Response editUser(UserJson userJson) {
+        UserEntity userEntity = user.findByUuid(userJson.getUuid());
+        userEntity.setPhone("389999999999");
+        userEntity.setEmail("a@mial.com");
+        user.update(userEntity);
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+            userEntity.setFirstName(userJson.getFirstName());
+            userEntity.setLastName(userJson.getLastName());
+            userEntity.setPassword(userJson.getPass());
+            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
+            userEntity.setAlternativePhone(userJson.getAlternativePhone());
+            userEntity.setEmail(userJson.getEmail());
+            userEntity.setSex(userJson.getUserSex());
+            userEntity.setSmokingFriendly(new Boolean(userJson.getSmokingFriendly()));
+            userEntity.setAnimalFriendly(new Boolean(userJson.getAnimalFriendly()));
+            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("1"))));
+            user.update(userEntity);
+        }
+        if (userEntity == null) {
+            return Response.status(404).entity("Phone or email is already in use").build();
+        } else {
+            return Response.status(201).entity("user add").build();
+        }
+    }
+
+//    private UserEntity editCustomerByJson(UserJson userJson){
+//        UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
+//        userEntity.setPhone("389999999999");
+//        userEntity.setEmail("a@mial.com");
+//        String randomUuid = UUID.randomUUID().toString();
+//        if (!user.isEmailUsed(userJson.getEmail()) || !user.isPhoneUsed(userJson.getPhone())) {
+//            userEntity.setFirstName(userJson.getFirstName());
+//            userEntity.setLastName(userJson.getLastName());
+//            userEntity.setPassword(userJson.getPass());
+//            userEntity.setPhone(userJson.getPhone().replace("+", "").replace(" ", ""));
+//            userEntity.setAlternativePhone(userJson.getAlternativePhone());
+//            userEntity.setEmail(userJson.getEmail());
+//            userEntity.setSex(userJson.getUserSex());
+//            userEntity.setSmokingFriendly(new Boolean(userJson.getSmokingFriendly()));
+//            userEntity.setAnimalFriendly(new Boolean(userJson.getEmail()));
+//            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("1"))));
+//        }
+//        return userEntity;
+//    }
+//
 
 }
