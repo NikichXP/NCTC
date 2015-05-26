@@ -30,16 +30,24 @@ $(document).ready(function () {
 });
 
 function removeCurrentPath() {
-    var currentPathIndex  = getCurrentPathIndex();
-    $("input[id$='"+currentPathIndex+"']").remove();
-    alert("+currentPathIndex + 1 " + $("input[id$='"+currentPathIndex + 1+"']").length);
-    while($("input[id$='"+currentPathIndex + 1 + "']").length > 0) {
-        $("input[id$='"+currentPathIndex + 1 + "']")//todo -1 to all ids
+    disableAllButtons();
+    var currentPathIndex = getCurrentPathIndex();
+    $("input[id$='" + currentPathIndex + "']").remove();
+    var index = currentPathIndex;
+    while ($("input[id$='" + (index + 1) + "']").length > 0) {
+        var allPointInputs = $("input[id$='" + (index + 1) + "']");
+        for (var i = 0; i < allPointInputs.length; i++) {
+            var startId = allPointInputs.get(i).getAttribute("id");
+            allPointInputs[i].setAttribute("id", startId.match(/\D+/) + index);
+        }
+        index++;
     }
+    setUnlock("#submitUpdate");
+    setUnlock("#revertUpdate");
 }
 
 function getCurrentPathIndex() {
-    return $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
+    return parseInt($("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/));
 }
 
 function fillPageWithData() {
@@ -195,6 +203,7 @@ function submitUpdate() {
     })
 }
 
+var counter = 0;
 function validateBasicOrderData() {
     if (getCookie("uuid").length != 36) {
         alert("Wrong uuid cookie");
@@ -208,7 +217,7 @@ function validateBasicOrderData() {
         return false;
     }
     if ($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
-        || $("#toY" + counter).val().length == 0) {
+        || $("#toY" + counter).val().length == 0) {//todo iterate through all coords
         alert("2 Select proper destination address.");
         return false;
     }
@@ -278,10 +287,7 @@ function addPathPoint() {
     outer.insertBefore(addedInput3, lastToAddress);
     outer.insertBefore(addedInput4, lastToAddress);
 
-    setLock("#addPathPoint");
-    setLock("#removeCurrentPath");
-    setLock("#completeCurrentPath");
-    setLock("#completeOrder");
+    disableAllButtons();
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
 }
