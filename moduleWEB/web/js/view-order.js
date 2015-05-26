@@ -2,7 +2,6 @@
  * Created by Ubuntu on 20.05.2015.
  */
 $(document).ready(function () {
-    getUrlVars();
     ymaps.ready(function(){
         init();
         getOrderById(getUrlVars()["id"]);

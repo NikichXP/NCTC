@@ -16,7 +16,6 @@
     <script src="js/view-order.js"></script>
 </head>
 <body>
-<div id="tariffs" hidden></div>
 
 <div id="container">
     <div id="order-form">
