@@ -46,7 +46,7 @@ public class AdminAssetManagerRest {
         if (list != null) {
             return Response.status(200).entity(sb.toString()).build();
         } else {
-            return Response.status(404).entity("Bad response.").build();
+            return Response.status(404).entity("Bad response.......").build();
         }
 
     }
@@ -70,34 +70,12 @@ public class AdminAssetManagerRest {
         if (list != null) {
             return Response.status(200).entity(sb.toString()).build();
         } else {
-            return Response.status(404).entity("Bad response.").build();
+            return Response.status(404).entity("Bad response......").build();
         }
 
     }
 
-    @POST
-    @Path("driver_category")
-    public Response getCarClass() {
-        List<DriverCategoryEntity> driverCategoryEntities = driverCategory.findAll();
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"driverCategoryClass\":[");
-        for (DriverCategoryEntity categoryEntity : driverCategoryEntities) {
-            sb.append("{\"id\":\"")
-                    .append(categoryEntity.getId())
-                    .append("\",\"name\":\"")
-                    .append(categoryEntity.getName())
-                    .append("\",\"tariff_multiplier\":\"")
-                    .append(categoryEntity.getTariffMultiplier())
-                    .append("\" },");
-        }
-        sb.replace(sb.length() - 1, sb.length(), "");
-        sb.append("]}");
-        if (!driverCategoryEntities.isEmpty()) {
-            return Response.status(200).entity(sb.toString()).build();
-        } else {
-            return Response.status(404).entity("Bad response.").build();
-        }
-    }
+
         
     
 

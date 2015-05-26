@@ -109,33 +109,50 @@ public class CarRest {
     @Consumes("text/plain")
     public Response getCarDataByID(String id) {
         CarEntity carEntity = car.read(new BigInteger(id));
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"carData\":[")
-                .append("{\"carId\":\"")
-                .append(carEntity.getId())
-                .append("\",\"model\":\"")
-                .append(carEntity.getModel())
-                .append("\",\"licencePlate\":\"")
-                .append(carEntity.getLicencePlate())
-                .append("\",\"classCar\":\"")
-                .append(carEntity.getCarClassEntity().getName())
-                .append("\",\"conditioner\":\"")
-                .append(carEntity.getAirCondition().toString())
-                .append("\",\"requiredDriverCategory\":\"")
-                .append(carEntity.getDriverCategoryEntity().getName())
-                .append("\",\"countSeat\":\"")
-                .append(carEntity.getSeatsCount())
-                .append("\",\"carDriverId\":\"")
-                .append(carEntity.getUserEntity().getId())
-                .append("\" },");
-        sb.replace(sb.length() - 1, sb.length(), "");
-        sb.append("]}");
+        CarJson json = new CarJson();
+        StringBuilder out = new StringBuilder("{\"carData\":[");
+        json.setId(carEntity.getId().toString());
+        json.setModel(carEntity.getModel());
+        json.setLicencePlate(carEntity.getLicencePlate());
+        json.setClassId(carEntity.getCarClassEntity().getName());
+        json.setAirConditioner(carEntity.getAirCondition().toString());
+        json.setRequiredDriverCategory(carEntity.getDriverCategoryEntity().getName());
+        json.setSeatCount(carEntity.getSeatsCount().toString());
+        json.setUserId(carEntity.getUserEntity().getId().toString());
+        out.append(json.toString())
+                .append("]}");
         if (carEntity != null) {
-            return Response.status(200).entity(sb.toString()).build();
+            return Response.status(200).entity(out.toString()).build();
         } else {
-            return Response.status(404).entity("Bad response.").build();
+            return Response.status(404).entity("Bad respons....").build();
         }
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("{\"carData\":[")
+//                .append("{\"carId\":\"")
+//                .append(carEntity.getId())
+//                .append("\",\"model\":\"")
+//                .append(carEntity.getModel())
+//                .append("\",\"licencePlate\":\"")
+//                .append(carEntity.getLicencePlate())
+//                .append("\",\"classCar\":\"")
+//                .append(carEntity.getCarClassEntity().getName())
+//                .append("\",\"conditioner\":\"")
+//                .append(carEntity.getAirCondition().toString())
+//                .append("\",\"requiredDriverCategory\":\"")
+//                .append(carEntity.getDriverCategoryEntity().getName())
+//                .append("\",\"countSeat\":\"")
+//                .append(carEntity.getSeatsCount())
+//                .append("\",\"carDriverId\":\"")
+//                .append(carEntity.getUserEntity().getId())
+//                .append("\" },");
+//        sb.replace(sb.length() - 1, sb.length(), "");
+//        sb.append("]}");
+//        if (carEntity != null) {
+//            return Response.status(200).entity(sb.toString()).build();
+//        } else {
+//            return Response.status(404).entity("Bad response.").build();
+//        }
+
     }
 
 

@@ -1,10 +1,13 @@
 package com.netcracker.classes;
 
+import com.netcracker.entity.CarEntity;
+
 import java.math.BigInteger;
 
 /**
  * Created by Juger on 20.05.2015.
  */
+
 public class CarJson {
 
     private String id;
@@ -83,14 +86,15 @@ public class CarJson {
 
     @Override
     public String toString() {
-        return "{\"id\":" + (id == null ? "null" : "\"" + id + "\"") + ", " +
-                "\"seatCount\":" + (seatCount == null ? "null" : "\"" + seatCount + "\"") +
-                "\"model\":" + (model == null ? "null" : "\"" + model + "\"") + ", " +
-                "\"licencePlate\":" + (licencePlate == null ? "null" : "\"" + licencePlate + "\"") + ", " +
-                "\"classId\":" + (classId == null ? "null" : "\"" + classId + "\"") + ", " +
-                "\"requiredDriverCategory\":" + (requiredDriverCategory == null ? "null" : "\"" + requiredDriverCategory + "\"") + ", " +
-                "\"userId\":" + (userId == null ? "null" : "\"" + userId + "\"") + ", " +
-                "\"airConditioner\":" + (airConditioner == null ? "null" : "\"" + airConditioner + "\"") +
-                "}";
+        return new StringBuilder("{")
+        .append("\"id\":\"").append(id).append("\"")
+        .append(",\"seatCount\":\"").append(seatCount).append("\"")
+        .append(",\"model\":\"").append(model).append("\"")
+        .append(",\"licencePlate\":\"").append(licencePlate).append("\"")
+        .append(",\"classId\":\"").append(classId).append("\"")
+        .append(",\"requiredDriverCategory\":\"").append(requiredDriverCategory).append("\"")
+        .append(",\"userId\":\"").append(userId).append("\"")
+        .append(",\"airConditioner\":\"").append(airConditioner).append("\"")
+        .append("}").toString();
     }
 }
