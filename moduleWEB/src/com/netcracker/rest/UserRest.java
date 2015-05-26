@@ -400,7 +400,7 @@ public class UserRest {
             userEntity.setSex(userJson.getUserSex());
             userEntity.setSmokingFriendly(new Boolean(userJson.getSmokingFriendly()));
             userEntity.setAnimalFriendly(new Boolean(userJson.getAnimalFriendly()));
-            userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("1"))));
+            //userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("1"))));
             user.update(userEntity);
         }
         if (userEntity == null) {

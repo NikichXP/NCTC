@@ -10,6 +10,7 @@ var namesRegEx = /^[a-zA-Z\s'\-]+$/;
 var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 var passRegEx = /^....+$/;
 
+
 //TODO need add publicToken validation
 function validateData() {
     //validates login credentials (e-mail or phone number) field
@@ -25,6 +26,13 @@ function validateData() {
     phone = phone.replace(/\s/g, "").replace(/\+/g, "");
     if (!validateNames(phone, phoneRegEx)) {
         alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
+        return false;
+    }
+    var aphone = $("#alternativePhone").val();
+    aphone = aphone.replace(/\s/g, "").replace(/\+/g, "");
+    if (!validateNames(aphone, phoneRegEx) && $("#alternativePhone").val() != "") {
+        alert("Phone number:\nPlease, use only digits. Length from 0 to 12.");
+        $("#alternativePhone").val("");
         return false;
     }
     if (!validateNames($("#email").val(), emailRegEx)) {
@@ -102,9 +110,7 @@ $("#edit").click(function () {
             animalFriendly: $("#animalFriendly").val(),
             smokingFriendly: $("#smokingFriendly").val()
         };
-        alert(JSON.stringify(JSONdata))
         editUser(JSON.stringify(JSONdata))
-        document.location.href = "customer.jsp"
     }
 
 })
@@ -117,7 +123,7 @@ function editUser(stringify) {
         data: stringify,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert(data);
+            document.location.href = "customer.jsp"
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);
