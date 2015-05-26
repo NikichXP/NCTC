@@ -86,7 +86,7 @@ public class CarJson {
 
     @Override
     public String toString() {
-        return new StringBuilder("{")
+        return new StringBuilder("{\"carData\":[{")
         .append("\"id\":\"").append(id).append("\"")
         .append(",\"seatCount\":\"").append(seatCount).append("\"")
         .append(",\"model\":\"").append(model).append("\"")
@@ -95,6 +95,6 @@ public class CarJson {
         .append(",\"requiredDriverCategory\":\"").append(requiredDriverCategory).append("\"")
         .append(",\"userId\":\"").append(userId).append("\"")
         .append(",\"airConditioner\":\"").append(airConditioner).append("\"")
-        .append("}").toString();
+        .append("}]}").toString();
     }
 }
