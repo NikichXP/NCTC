@@ -39,7 +39,7 @@
 <div class="mainSection" id="customerOrdersPanel">
   <div class="col-md-12 mt">
 
-    <h4> History orders</h4>
+    <h4> Edition </h4>
     <hr>
     <table id="historyOrderTable" class="table">
       <thead>
