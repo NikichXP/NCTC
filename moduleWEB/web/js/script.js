@@ -47,9 +47,10 @@ $('#registration-submit').click(function(){
 $('#order-wo-reg-submit').click(function(){
 	document.location.href = "createOrderWithoutRegistration.jsp";
 });
+
 $('#track-TO-submit').click(function(){
-	//TODO for Alexander
-	document.location.href = "api/order/viewOrderWithoutRegistration?publicToken=" + $('#tracking-id').val();
+	if(!validatePublicTokenData()) return;
+	document.location.href = "viewOrderByPublicToken.jsp?publicToken=" + $('#tracking-id').val();
 });
 
 function redirectWithAccessLevels(userData, url) {
@@ -143,6 +144,15 @@ function validateLoginData() {
 		return false;
 	}
     return true;
+}
+
+function validatePublicTokenData() {
+	var publicToken = $("#tracking-id").val();
+	if (publicToken.length != 8) {
+		alert("Wrong Tracking Number");
+		return false;
+	}
+	return true;
 }
 
 function validateNames (input, regEx) {
