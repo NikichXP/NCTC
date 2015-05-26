@@ -11,9 +11,10 @@
     <title>Order Test</title>
     <link href="css/order-style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
+    <script src="js/jquery.maskedinput.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
     <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
-    <script src="js/view-order.js"></script>
+    <script src="js/view-customer-order.js"></script>
 </head>
 <body>
 <div id="tariffs" hidden></div>
@@ -36,12 +37,7 @@
         <div id="timeOption">
             Time Requested:
             <input id="timeRequested" type="text" disabled style="visibility: visible"/>
-            Time of Driver Arrival:
-            <input id="timeOfDriverArrival" type="text" disabled style="visibility: visible"/>
-            Time Started:
-            <input id="timeStarted" type="text" disabled style="visibility: visible"/>
-            Time Completed:
-            <input id="timeCompleted" type="text" disabled style="visibility: visible"/>
+
         </div>
 
         <div id="carClassBox">
@@ -85,6 +81,10 @@
 
         <div class="commentaryContainer">
             <textarea id="customerPreCreateComment" placeholder="Additional comments to your order" disabled></textarea>
+        </div>
+
+        <div class="submitButtonContainer">
+            <input id="submitButton" type="button" value="Ok"/>
         </div>
     </div>
     <div id="map"></div>
