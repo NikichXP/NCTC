@@ -25,9 +25,27 @@ $(document).ready(function () {
     $('#removeCurrentPath').click(removeCurrentPath);
     $("#submitUpdate").click(submitUpdate);
     $("#revertUpdate").click(fillPageWithData);
-    $('#completeCurrentPath').click();
-    $('#completeOrder').click();
+    $('#completeCurrentPath').click(completeCurrentPath);
+    $('#completeOrder').click(completeOrder);
 });
+
+function completeOrder() {
+    disableAllButtons();
+    $.ajax({
+        method: 'POST',
+        url: 'api/order/completeOrder',
+        contentType: "text/plain",
+        data: id,
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+            document.location.href = "driver.jsp";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            fillPageWithData();
+        }
+    })
+}
 
 function removeCurrentPath() {
     disableAllButtons();
@@ -42,6 +60,16 @@ function removeCurrentPath() {
         }
         index++;
     }
+    setUnlock("#submitUpdate");
+    setUnlock("#revertUpdate");
+}
+
+function completeCurrentPath() {
+    disableAllButtons();
+    var currentPathIndex = getCurrentPathIndex();
+    alert("#toAddress" + currentPathIndex);
+    $("#toAddress" + currentPathIndex).attr("disabled", "disabled");
+    $("#pathCompleted" + currentPathIndex).attr("value", true);
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
 }
@@ -193,8 +221,12 @@ function submitUpdate() {
             alert("Order successfully updated.");
             fillPageWithData();
             setUnlock("#addPathPoint");
-            setUnlock("#removeCurrentPath");
-            setUnlock("#completeCurrentPath"); //TODO MANAGE BUTTON UNLOCKS DEPENDING ON COMPLETED PATHS
+            if (!isAllPathsCompleted()) {
+                setUnlock("#removeCurrentPath");
+                setUnlock("#completeCurrentPath");
+            } else {
+                setUnlock("#completeOrder");
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $("#submitUpdate").prop('disabled', false);
@@ -236,57 +268,86 @@ function getCookie(name) {
 
 function addPathPoint() {
     var outer = document.getElementById("importantInfo");
-
-    var indexOfInProgress = $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
     var lastIndex = $("[id^='toAddress']").filter($("[disabled='disabled']")).length;
 
-    for (var i = lastIndex; i >= indexOfInProgress; i--) {
-        var input = document.getElementById("toAddress" + i);
-        input.setAttribute("id", "toAddress" + (i + 1));
-        input.setAttribute("placeholder", "To address " + (i + 1));
-        input.setAttribute("disabled", "disabled");
+    if (!isAllPathsCompleted()) {
+        var indexOfInProgress = $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
 
-        var input2 = document.getElementById("toX" + i);
-        input2.setAttribute("id", "toX" + (i + 1));
+        for (var i = lastIndex; i >= indexOfInProgress; i--) {
+            var input = document.getElementById("toAddress" + i);
+            input.setAttribute("id", "toAddress" + (i + 1));
+            input.setAttribute("placeholder", "To address " + (i + 1));
+            input.setAttribute("disabled", "disabled");
 
-        var input3 = document.getElementById("toY" + i);
-        input3.setAttribute("id", "toY" + (i + 1));
+            var input2 = document.getElementById("toX" + i);
+            input2.setAttribute("id", "toX" + (i + 1));
 
-        var input4 = document.getElementById("distance" + i);
-        input4.setAttribute("id", "distance" + (i + 1));
+            var input3 = document.getElementById("toY" + i);
+            input3.setAttribute("id", "toY" + (i + 1));
 
-        var input4 = document.getElementById("pathId" + i);
-        input4.setAttribute("id", "distance" + (i + 1));
+            var input4 = document.getElementById("distance" + i);
+            input4.setAttribute("id", "distance" + (i + 1));
+
+            var input4 = document.getElementById("pathId" + i);
+            input4.setAttribute("id", "distance" + (i + 1));
+        }
+
+        var addedInput = document.createElement("input");
+        addedInput.setAttribute("type", "text");
+        addedInput.setAttribute("id", "toAddress" + indexOfInProgress);
+        addedInput.setAttribute("onchange", "clearToXY(this); makeSearch(this); buildPath(" + (parseInt(lastIndex) + 1) + ")");
+        addedInput.setAttribute("placeholder", "To address " + indexOfInProgress);
+
+        var addedInput2 = document.createElement("input");
+        addedInput2.setAttribute("hidden", "hidden");
+        addedInput2.setAttribute("type", "text");
+        addedInput2.setAttribute("id", "toX" + indexOfInProgress);
+
+        var addedInput3 = document.createElement("input");
+        addedInput3.setAttribute("hidden", "hidden");
+        addedInput3.setAttribute("type", "text");
+        addedInput3.setAttribute("id", "toY" + indexOfInProgress);
+
+        var addedInput4 = document.createElement("input");
+        addedInput4.setAttribute("disabled", "disabled");
+        addedInput4.setAttribute("type", "text");
+        addedInput4.setAttribute("id", "distance" + indexOfInProgress);
+
+        var lastToAddress = document.getElementById("toAddress" + (parseInt(indexOfInProgress) + 1));
+        alert(lastToAddress.id);
+        outer.insertBefore(addedInput, lastToAddress);
+        outer.insertBefore(addedInput2, lastToAddress);
+        outer.insertBefore(addedInput3, lastToAddress);
+        outer.insertBefore(addedInput4, lastToAddress);
     }
+    else {
+        var addedInput = document.createElement("input");
+        addedInput.setAttribute("type", "text");
+        addedInput.setAttribute("id", "toAddress" + lastIndex);
+        addedInput.setAttribute("onchange", "clearToXY(this); makeSearch(this); buildPath(" + parseInt(lastIndex) + ")");
+        addedInput.setAttribute("placeholder", "To address " + lastIndex);
 
-    var addedInput = document.createElement("input");
-    addedInput.setAttribute("type", "text");
-    addedInput.setAttribute("id", "toAddress" + indexOfInProgress);
-    addedInput.setAttribute("onchange", "clearToXY(this); makeSearch(this); buildPath(" + (parseInt(lastIndex) + 1) + ")");
-    addedInput.setAttribute("placeholder", "To address " + indexOfInProgress);
+        var addedInput2 = document.createElement("input");
+        addedInput2.setAttribute("hidden", "hidden");
+        addedInput2.setAttribute("type", "text");
+        addedInput2.setAttribute("id", "toX" + lastIndex);
 
-    var addedInput2 = document.createElement("input");
-    addedInput2.setAttribute("hidden", "hidden");
-    addedInput2.setAttribute("type", "text");
-    addedInput2.setAttribute("id", "toX" + indexOfInProgress);
+        var addedInput3 = document.createElement("input");
+        addedInput3.setAttribute("hidden", "hidden");
+        addedInput3.setAttribute("type", "text");
+        addedInput3.setAttribute("id", "toY" + lastIndex);
 
-    var addedInput3 = document.createElement("input");
-    addedInput3.setAttribute("hidden", "hidden");
-    addedInput3.setAttribute("type", "text");
-    addedInput3.setAttribute("id", "toY" + indexOfInProgress);
+        var addedInput4 = document.createElement("input");
+        addedInput4.setAttribute("disabled", "disabled");
+        addedInput4.setAttribute("type", "text");
+        addedInput4.setAttribute("id", "distance" + lastIndex);
 
-    var addedInput4 = document.createElement("input");
-    addedInput4.setAttribute("disabled", "disabled");
-    addedInput4.setAttribute("type", "text");
-    addedInput4.setAttribute("id", "distance" + indexOfInProgress);
-
-    var lastToAddress = document.getElementById("toAddress" + (parseInt(indexOfInProgress) + 1));
-    alert(lastToAddress.id);
-    outer.insertBefore(addedInput, lastToAddress);
-    outer.insertBefore(addedInput2, lastToAddress);
-    outer.insertBefore(addedInput3, lastToAddress);
-    outer.insertBefore(addedInput4, lastToAddress);
-
+        var button = document.getElementById("addPathPoint");
+        outer.insertBefore(addedInput, button);
+        outer.insertBefore(addedInput2, button);
+        outer.insertBefore(addedInput3, button);
+        outer.insertBefore(addedInput4, button);
+    }
     disableAllButtons();
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
