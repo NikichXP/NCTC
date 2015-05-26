@@ -130,6 +130,28 @@ body{
   width: 30%;
 }
 
+#leftButtonHistory {
+    display: inline-block;
+    margin-left: 4.5%;
+    left: 20px;
+    width: 30%;
+
+}
+/**/
+#centralButtonHistory {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: 30%;
+}
+/**/
+#rightButtonHistory {
+
+    display: inline-block;
+    right: 10px;
+    width: 30%;
+}
+
 li {
     list-style-type: none; /* Убираем маркеры */
 }
