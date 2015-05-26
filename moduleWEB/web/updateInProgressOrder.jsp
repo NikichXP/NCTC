@@ -23,9 +23,9 @@
             <input type="text" id="fromX" hidden/>
             <input type="text" id="fromY" hidden/>
         <%--add all paths here! --%>
-            <input type="button" id="addPointOnPath" value="Add point on path">
-            <input type="button" id="updateCurrentPath" value="Update current path" disabled>
+            <input type="button" id="addPathPoint" value="Add path point">
             <input type="button" id="removeCurrentPath" value="Remove current path" disabled>
+            <input type="button" id="submitUpdate" value="Submit update" disabled>
             <input type="button" id="completeCurrentPath" value="Complete current path">
             <input type="button" id="completeOrder" value="Complete order" disabled><br>
         </div>
