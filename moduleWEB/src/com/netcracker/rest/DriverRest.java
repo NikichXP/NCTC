@@ -3,6 +3,7 @@ package com.netcracker.rest;
 import com.netcracker.classes.OrderJson;
 import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
+import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
@@ -225,6 +226,30 @@ public class DriverRest {
             return Response.status(200).entity("You assign on this Order.").build();
         } else {
             return Response.status(404).entity("Bad response order not assign.").build();
+        }
+    }
+
+    @POST
+    @Path("inProgress")
+    @Consumes("application/json")
+    public Response getOrderInProgress(OrderJson orderJson) {
+        OrderEntity orderEntity = order.read(new BigInteger(orderJson.getId()));
+        if(orderEntity.getOrderStateEntity().getName() == orderState.findByName("assigned").getName()){
+
+            OrderStateEntity orderStateEntity = orderState.findByName("in progress");
+            List<OrderEntity> orderEntities = order.getOrdersByStateAndDriverUuid(orderStateEntity, orderJson.getDriverUserUuid());
+            if(orderEntities.isEmpty()) {
+                orderEntity.setOrderStateEntity(orderState.findByName("in progress"));
+                orderEntity.setTimeStarted(new Timestamp(new Date().getTime()));
+                order.update(orderEntity);
+                return Response.status(200).entity("You start this Order.").build();
+            } else return Response.status(200).entity("Already you have order in progress.").build();
+        } else {
+            if (orderEntity != null) {
+                return Response.status(200).entity("This order not assigned is now.").build();
+            } else {
+                return Response.status(404).entity("Bad response. Order not found in DB.").build();
+            }
         }
     }
 }
