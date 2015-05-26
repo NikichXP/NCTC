@@ -249,7 +249,7 @@ public class UserRest {
         userEntity.setEmail("a@mial.com");
         user.update(userEntity);
         String randomUuid = UUID.randomUUID().toString();
-        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+        if (!user.isEmailUsed(userJson.getEmail()) || !user.isPhoneUsed(userJson.getPhone())) {
             userEntity.setFirstName(userJson.getFirstName());
             userEntity.setLastName(userJson.getLastName());
             userEntity.setPassword(userJson.getPass());

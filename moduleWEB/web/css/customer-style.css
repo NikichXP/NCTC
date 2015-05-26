@@ -122,12 +122,48 @@ body{
   display: inline-block;
   width: 30%;
 }
+
+#centralButton:hover {
+    background-color: orange;
+}
 /**/
 #rightButton {
 
   display: inline-block;
   right: 10px;
   width: 30%;
+}
+
+#leftButtonHistory {
+    display: inline-block;
+    margin-left: 4.5%;
+    left: 20px;
+    width: 30%;
+
+}
+/**/
+#centralButtonHistory {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    width: 30%;
+}
+/**/
+#rightButtonHistory {
+
+    display: inline-block;
+    right: 10px;
+    width: 30%;
+}
+
+#centralButtonBack {
+    background-color: #40A136;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+#centralButtonBack:hover {
+    background-color: orange;
 }
 
 li {
