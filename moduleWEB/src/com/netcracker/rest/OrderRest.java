@@ -153,6 +153,7 @@ public class OrderRest {
     public Response completeOrder(String orderId) {
         OrderEntity orderEntity = order.read(new BigInteger(orderId));
         orderEntity.setOrderStateEntity(orderState.findByName("completed"));
+        orderEntity.setTimeCompleted(new Timestamp(new Date().getTime()));
         order.update(orderEntity);
         if (orderEntity == null) {
             return Response.status(404).entity("orderEntity is null.").build();
