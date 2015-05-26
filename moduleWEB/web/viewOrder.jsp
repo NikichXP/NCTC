@@ -12,7 +12,7 @@
     <link href="css/order-style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
-    <script src="js/mapSearchByAddressViewOrder.js" type="text/javascript"></script>
+    <script src="js/mapSearchByAddressWOLocate.js" type="text/javascript"></script>
     <script src="js/view-order.js"></script>
 </head>
 <body>
@@ -29,22 +29,19 @@
             <input id="fromAddress" type="text" disabled/>
             <input type="text" id="fromX" hidden/>
             <input type="text" id="fromY" hidden/>
-            <input id="toAddress0" type="text" disabled/>
-            <input type="text" id="toX0" hidden/>
-            <input type="text" id="toY0" hidden/>
-            <input type="text" id="distance0" disabled/>
-            <input type="button" id="addressAdder" value="Add" onclick="createToAddress();" disabled><br>
+
+
+            <input type="button" id="addPathPoint" value="" hidden>
         </div>
         <div id="timeOption">
-            <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()" disabled>As soon as
-            possible</input>
+            Time Requested:
             <input id="timeRequested" type="text" disabled style="visibility: visible"/>
-        </div>
-        <div id="genderOption">
-            <%--Driver sex:--%>
-            <div id="musicTypeBox">
-                <br>
-            </div>
+            Time of Driver Arrival:
+            <input id="timeOfDriverArrival" type="text" disabled style="visibility: visible"/>
+            Time Started:
+            <input id="timeStarted" type="text" disabled style="visibility: visible"/>
+            Time Completed:
+            <input id="timeCompleted" type="text" disabled style="visibility: visible"/>
         </div>
 
         <div id="carClassBox">
