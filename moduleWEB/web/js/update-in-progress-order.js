@@ -17,19 +17,34 @@ $(document).ready(function () {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('You have no "in progress" order.');
-            //TODO Add redirect
+            document.location.href = "driver.jsp";
         }
     });
     $('body').click(updatePrice);
     $('#addPathPoint').click(addPathPoint);
-    $('#removeCurrentPath').click();
+    $('#removeCurrentPath').click(removeCurrentPath);
     $("#submitUpdate").click(submitUpdate);
+    $("#revertUpdate").click(fillPageWithData);
     $('#completeCurrentPath').click();
     $('#completeOrder').click();
 });
 
+function removeCurrentPath() {
+    var currentPathIndex  = getCurrentPathIndex();
+    $("input[id$='"+currentPathIndex+"']").remove();
+    alert("+currentPathIndex + 1 " + $("input[id$='"+currentPathIndex + 1+"']").length);
+    while($("input[id$='"+currentPathIndex + 1 + "']").length > 0) {
+        $("input[id$='"+currentPathIndex + 1 + "']")//todo -1 to all ids
+    }
+}
+
+function getCurrentPathIndex() {
+    return $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
+}
+
 function fillPageWithData() {
     $.get("api/order/view?id=" + id, function (data) {
+        disableAllButtons();
         if ($("#fromY").nextAll().filter($("[type='text']")).length > 0) {
             $("#fromY").nextAll().filter($("[type='text']")).remove();
         }
@@ -116,12 +131,19 @@ function fillPageWithData() {
         $("#totalPrice").attr("value", obj.totalPrice);
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+
+        setUnlock("#addPathPoint");
+        if (!isAllPathsCompleted()) {
+            setUnlock("#removeCurrentPath");
+            setUnlock("#completeCurrentPath");
+        } else {
+            setUnlock("#completeOrder");
+        }
     });
 }
 
 function submitUpdate() {
-    setLock("#submitUpdate");
-    alert("pathsCompleted " + $("[id^=pathCompleted]").filter($("[value=true]")).length)
+    disableAllButtons();
 
     var JSONdata = {
         id: id,
@@ -162,12 +184,9 @@ function submitUpdate() {
             alert(data);
             alert("Order successfully updated.");
             fillPageWithData();
-            //document.location.href = document.href;
             setUnlock("#addPathPoint");
             setUnlock("#removeCurrentPath");
-            setUnlock("#completeCurrentPath");
-            setLock("#completeOrder");
-            setLock("#submitUpdate");
+            setUnlock("#completeCurrentPath"); //TODO MANAGE BUTTON UNLOCKS DEPENDING ON COMPLETED PATHS
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $("#submitUpdate").prop('disabled', false);
@@ -175,8 +194,6 @@ function submitUpdate() {
         }
     })
 }
-
-var dateTime = /^([1-9]|([012][0-9])|(3[01]))\/([0]?[1-9]|1[012])\/\d\d\d\d [012]?[0-9]:[0-6][0-9]$/;
 
 function validateBasicOrderData() {
     if (getCookie("uuid").length != 36) {
@@ -208,8 +225,6 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-var counter = 0;
-var isDeleteExists = false;
 function addPathPoint() {
     var outer = document.getElementById("importantInfo");
 
@@ -268,30 +283,23 @@ function addPathPoint() {
     setLock("#completeCurrentPath");
     setLock("#completeOrder");
     setUnlock("#submitUpdate");
+    setUnlock("#revertUpdate");
 }
 
-function deleteToAddress() {
-    document.getElementById("toAddress" + (counter)).remove();
-    document.getElementById("toX" + (counter)).remove();
-    document.getElementById("toY" + (counter)).remove();
-    document.getElementById("distance" + (counter)).remove();
-    counter--;
-    buildPath(counter);
-    if (counter == 0) {
-        setUnlock("#fromAddress");
-        setUnlock("#toAddress0");
-        document.getElementById("addressRemover").remove();
-        isDeleteExists = false;
-    } else {
-        setUnlock("#toAddress" + (counter));
-    }
+function disableAllButtons() {
+    $("[type='button']").prop('disabled', true);
 }
 
 function setLock(name) {
     $(name).prop('disabled', true);
 }
+
 function setUnlock(name) {
     $(name).prop('disabled', false);
+}
+
+function isAllPathsCompleted() {
+    return $("[id^='toAddress']").filter($("[disabled!='disabled']")).length == 0;
 }
 
 function clearToXY(element) {
