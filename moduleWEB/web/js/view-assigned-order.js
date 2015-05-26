@@ -23,7 +23,12 @@ $(document).ready(function () {
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 alert(data);
-                document.location.href = "driver.jsp";
+                if (jqXHR.status == 200) {
+                    document.location.href = "updateInProgressOrder.jsp";
+                }
+                if (jqXHR.status == 201) {
+                    document.location.href = "driver.jsp";
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText);

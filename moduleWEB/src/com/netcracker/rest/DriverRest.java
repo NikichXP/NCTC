@@ -243,10 +243,10 @@ public class DriverRest {
                 orderEntity.setTimeStarted(new Timestamp(new Date().getTime()));
                 order.update(orderEntity);
                 return Response.status(200).entity("You start this Order.").build();
-            } else return Response.status(200).entity("Already you have order in progress.").build();
+            } else return Response.status(201).entity("Already you have order in progress.").build();
         } else {
             if (orderEntity != null) {
-                return Response.status(200).entity("This order not assigned is now.").build();
+                return Response.status(201).entity("This order not assigned is now.").build();
             } else {
                 return Response.status(404).entity("Bad response. Order not found in DB.").build();
             }
