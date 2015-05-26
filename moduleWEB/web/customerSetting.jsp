@@ -124,4 +124,5 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/user-data-by-uuid.js"></script>
 <script src="js/cookie.js"></script>
+<script src="js/customer-setting.js"></script>
 </body>
