@@ -307,31 +307,43 @@ public class UserRest {
     @POST
     @Path("getUserDataById")
     @Consumes("text/plain")
-    public Response getDriverDataByID(String id) {
+    public Response getUserDataByID(String id) {
         UserEntity userEntity = user.read(new BigInteger(id));
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("{\"userData\":[")
-                .append("{\"firstName\":\"")
-                .append(userEntity.getFirstName())
-                .append("\",\"lastName\":\"")
-                .append(userEntity.getLastName())
-                .append("\",\"phone\":\"")
-                .append(userEntity.getPhone())
-                .append("\",\"userId\":\"")
-                .append(userEntity.getId())
-                .append("\",\"email\":\"")
-                .append(userEntity.getEmail())
-                .append("\",\"getPassword\":\"")
-                .append(userEntity.getPassword())
-                .append("\" },");
-        sb.replace(sb.length() - 1, sb.length(), "");
-        sb.append("]}");
+        UserJson json = new UserJson();
+        json.setFirstName(userEntity.getFirstName());
+        json.setLastName(userEntity.getLastName());
+        json.setPhone(userEntity.getPhone());
+        json.setAlternativePhone(userEntity.getAlternativePhone());
+        json.setId(userEntity.getId().toString());
+        json.setEmail(userEntity.getEmail());
+        json.setPass(userEntity.getPassword());
         if (userEntity != null) {
-            return Response.status(200).entity(sb.toString()).build();
+            return Response.status(200).entity(json.toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
         }
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("{\"userData\":[")
+//                .append("{\"firstName\":\"")
+//                .append(userEntity.getFirstName())
+//                .append("\",\"lastName\":\"")
+//                .append(userEntity.getLastName())
+//                .append("\",\"phone\":\"")
+//                .append(userEntity.getPhone())
+//                .append("\",\"userId\":\"")
+//                .append(userEntity.getId())
+//                .append("\",\"email\":\"")
+//                .append(userEntity.getEmail())
+//                .append("\",\"getPassword\":\"")
+//                .append(userEntity.getPassword())
+//                .append("\" },");
+//        sb.replace(sb.length() - 1, sb.length(), "");
+//        sb.append("]}");
+//        if (userEntity != null) {
+//            return Response.status(200).entity(sb.toString()).build();
+//        } else {
+//            return Response.status(404).entity("Bad response.").build();
+//        }
     }
 
 

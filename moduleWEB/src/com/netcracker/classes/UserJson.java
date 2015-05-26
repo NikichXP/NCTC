@@ -22,6 +22,16 @@ public class UserJson {
     private String alternativePhone;
     private String carId;
 
+    private String access;
+
+    public String getAccess() {
+        return access;
+    }
+
+    public void setAccess(String access) {
+        this.access = access;
+    }
+
     public String getAlternativePhone() {
         return alternativePhone;
     }
@@ -119,19 +129,20 @@ public class UserJson {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserJson{");
-        sb.append("cred='").append(cred).append('\'');
-        sb.append(", pass='").append(pass).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", uuid='").append(uuid).append('\'');
-        sb.append(", userSex='").append(userSex).append('\'');
-        sb.append(", alternativePhone='").append(alternativePhone).append('\'');
-        sb.append(", animalFriendly='").append(animalFriendly).append('\'');
-        sb.append(", smokingFriendly='").append(smokingFriendly).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", phone='").append(phone).append('\'');
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder("{\"userData\":[{");
+        sb.append("\"cred\":\"").append(cred).append("\"");
+        sb.append(",\"pass\":\"").append(pass).append("\"");
+        sb.append(",\"email\":\"").append(email).append("\"");
+        sb.append(",\"firstName\":\"").append(firstName).append("\"");
+        sb.append(",\"access\":\"").append(access).append("\"");
+        sb.append(",\"uuid\":\"").append(uuid).append("\"");
+        sb.append(",\"userSex\":\"").append(userSex).append("\"");
+        sb.append(",\"alternativePhone\":\"").append(alternativePhone).append("\"");
+        sb.append(",\"animalFriendly\":\"").append(animalFriendly).append("\"");
+        sb.append(",\"smokingFriendly\":\"").append(smokingFriendly).append("\"");
+        sb.append(",\"lastName\":\"").append(lastName).append("\"");
+        sb.append(",\"phone\":\"").append(phone).append("\"");
+        sb.append("}]}");
         return sb.toString();
     }
 }

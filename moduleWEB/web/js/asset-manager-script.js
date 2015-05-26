@@ -267,6 +267,7 @@ function setEditDriverById(driverId) {
         data: driverId,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
+            alert(data);
             var obj = JSON.parse(data);
             drawInputForDriver(obj.userData[0]);
         },
@@ -283,8 +284,8 @@ function drawInputForDriver(rowData) {
     document.getElementById("lastName").value = rowData.lastName;
     document.getElementById("phone").value = rowData.phone;
     document.getElementById("email").value = rowData.email;
-    document.getElementById("regpass").value = rowData.getPassword;
-    document.getElementById("passconfirm").value = rowData.getPassword;
+    document.getElementById("regpass").value = rowData.pass;
+    document.getElementById("passconfirm").value = rowData.pass;
 
 }
 
