@@ -100,8 +100,7 @@ function createTableQueuedOrders(data, table) {
 }
 
 function redirectAssignedOrder(id) {
-    document.location.href = "viewOrder.jsp?id=" + id;
-    //document.location.href = "viewAssignedOrder.jsp?id=" + id;
+    document.location.href = "viewAssignedOrder.jsp?id=" + id;
 };
 
 function redirectQueuedOrder(id) {
