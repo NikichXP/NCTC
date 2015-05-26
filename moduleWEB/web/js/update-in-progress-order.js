@@ -103,7 +103,7 @@ function fillPageWithData() {
             else flag = true;
             input.setAttribute("type", "text");
             input.setAttribute("id", "toAddress" + i);
-            input.setAttribute("onchange", "clearToXY(this)");
+            input.setAttribute("onchange", "clearToXY(this); makeSearch(this)");
             input.setAttribute("placeholder", "To address " + i);
             input.setAttribute("value", obj.toAddress[i]);
 
@@ -149,6 +149,9 @@ function fillPageWithData() {
             makeSearch(input);
             $("#toAddress" + i).change(function () {
                 buildPath($("[id^='toAddress']").length - 1);
+                disableAllButtons();
+                setUnlock("#submitUpdate");
+                setUnlock("#revertUpdate");
             });
         }
 
@@ -167,6 +170,7 @@ function fillPageWithData() {
         $("#totalPrice").attr("value", obj.totalPrice);
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+        updatePrice();
 
         setUnlock("#addPathPoint");
         if (!isAllPathsCompleted()) {
@@ -207,7 +211,8 @@ function submitUpdate() {
     }
 
     if (!validateBasicOrderData()) {
-        $("#basic-order-submit").prop('disabled', false);
+        setUnlock("#submitUpdate");
+        setUnlock("#revertUpdate");
         return;
     }
     $.ajax({
@@ -217,7 +222,6 @@ function submitUpdate() {
         data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert(data);
             alert("Order successfully updated.");
             fillPageWithData();
             setUnlock("#addPathPoint");
@@ -235,22 +239,16 @@ function submitUpdate() {
     })
 }
 
-var counter = 0;
 function validateBasicOrderData() {
+    var counter = 0;
+    if (!isAllPathsCompleted) counter = getCurrentPathIndex();
     if (getCookie("uuid").length != 36) {
         alert("Wrong uuid cookie");
         return false;
     }
-    if ($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0) {
-        alert($("#toAddress0").val().length);
-        alert($("#toX0").val().length);
-        alert($("#toY0").val().length);
-        alert("1 Select proper destination address.");
-        return false;
-    }
-    if ($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
-        || $("#toY" + counter).val().length == 0) {//todo iterate through all coords
-        alert("2 Select proper destination address.");
+    if ( $("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
+        || $("#toY" + counter).val().length == 0) {
+        alert("Select proper destination address.");
         return false;
     }
     if (!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0) {

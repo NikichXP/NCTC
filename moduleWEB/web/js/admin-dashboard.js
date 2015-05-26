@@ -3,17 +3,15 @@ $("#orderHistory").click(function(){
     document.location.href = "adminHistory.jsp";
 });
 $("#makeReport").click(function(){
-    //makeReport
     alert("#makeReport")
 });
 $("#setting").click(function(){
     //setting
-    alert("#setting")
+    document.location.href = "setting.jsp"
 });
 $("#assetManagement").click(function(){
     document.location.href = "assets-managment.jsp";
 });
 $("#fareManagement").click(function(){
-    //fareManagement
-    alert("#fareManagement")
+    document.location.href = "adminFareManagement.html";
 });
