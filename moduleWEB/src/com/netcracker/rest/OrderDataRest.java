@@ -63,6 +63,108 @@ public class OrderDataRest {
     }
 
     @POST
+    @Path("historyByDate")
+    @Consumes("text/plain")
+    public Response getOrderHistoryDataByDate(String uuid) {
+        List<OrderEntity> list = order.getOrdersByStateAndCustomerUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("refused"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"orderHistory\":[");
+        for (OrderEntity orderEntity : list) {
+            List<Point> points = order.getFirstAndLastPoints(orderEntity);
+            sb.append("{\"startOrder\":\"")
+                    .append(points.get(0).getAddress())
+                    .append("\",\"endOrder\":\"")
+                    .append(points.get(1).getAddress())
+                    .append("\",\"dateOrderCreate\":\"")
+                    .append(orderEntity.getTimeCreated().toString())
+                    .append("\",\"id\":\"")
+                    .append(orderEntity.getId())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
+                    .append("\",\"price\":\"")
+                    .append(orderEntity.getFinalPrice())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (!list.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
+
+    @POST
+    @Path("historyByPrice")
+    @Consumes("text/plain")
+    public Response getOrderHistoryDataByPrice(String uuid) {
+        List<OrderEntity> list = order.getOrdersByStateAndCustomerUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("refused"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getFinalPrice().compareTo(o1.getFinalPrice()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"orderHistory\":[");
+        for (OrderEntity orderEntity : list) {
+            List<Point> points = order.getFirstAndLastPoints(orderEntity);
+            sb.append("{\"startOrder\":\"")
+                    .append(points.get(0).getAddress())
+                    .append("\",\"endOrder\":\"")
+                    .append(points.get(1).getAddress())
+                    .append("\",\"dateOrderCreate\":\"")
+                    .append(orderEntity.getTimeCreated().toString())
+                    .append("\",\"id\":\"")
+                    .append(orderEntity.getId())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
+                    .append("\",\"price\":\"")
+                    .append(orderEntity.getFinalPrice())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (!list.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
+
+    @POST
+    @Path("historyByLength")
+    @Consumes("text/plain")
+    public Response getOrderHistoryDataByLength(String uuid) {
+        List<OrderEntity> list = order.getOrdersByStateAndCustomerUuid(orderState.findByName("completed"), uuid);
+        list.addAll(order.getOrdersByStateAndCustomerUuid(orderState.findByName("refused"), uuid));
+        Collections.sort(list, (o1, o2) -> o2.getTotalLength().compareTo(o1.getTotalLength()));
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"orderHistory\":[");
+        for (OrderEntity orderEntity : list) {
+            List<Point> points = order.getFirstAndLastPoints(orderEntity);
+            sb.append("{\"startOrder\":\"")
+                    .append(points.get(0).getAddress())
+                    .append("\",\"endOrder\":\"")
+                    .append(points.get(1).getAddress())
+                    .append("\",\"dateOrderCreate\":\"")
+                    .append(orderEntity.getTimeCreated().toString())
+                    .append("\",\"id\":\"")
+                    .append(orderEntity.getId())
+                    .append("\",\"distance\":\"")
+                    .append(orderEntity.getTotalLength())
+                    .append("\",\"price\":\"")
+                    .append(orderEntity.getFinalPrice())
+                    .append("\" },");
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (!list.isEmpty()) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
+
+    @POST
     @Path("customer_list")
     @Consumes("text/plain")
     public Response getOrderListData(String uuid) {
