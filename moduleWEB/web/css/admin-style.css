@@ -125,9 +125,13 @@ body{
 
 #table{
     margin-top: 11%;
+
 }
 
 #form{
     margin-top: 15%;
     align:center;
+}
+.button{
+    width: 50px;
 }

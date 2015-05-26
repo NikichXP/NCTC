@@ -5,19 +5,35 @@
     <title></title>
     <script src="js/jquery.js"></script>
     <script src="js/multiplierChanger.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/admin-style.css" rel="stylesheet">
 
 
 </head>
-<body >
-<div id="tariffs" >
+<body align="center" class="container">
+<div class="header">
+    <div class="header-text">
+        <h1 id="name-line"></h1>
+        <h5 id="phone-line"></h5>
+        <h5 id="email-line"></h5>
+    </div>
+
+    <div class="header-logout" id="logout-button">
+        <h2>Log Out</h2>
+    </div>
+</div>
+
+<div id="tariffs" style="margin-top: 20%">
 
 </div>
 
 <p>OrderTypeRates:</p>
 
-<div id="OrderTypeRates">
+<div id="OrderTypeRates" >
 
 </div>
+<script src="js/cookie.js"></script>
+<script src="js/user-data-by-uuid.js"></script>
 
 </body>
 </html>
