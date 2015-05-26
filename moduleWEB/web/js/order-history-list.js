@@ -1,7 +1,64 @@
 $(document).ready(function(){setHistory()});
 
+var uuid = getCookie("uuid");
+
+$('#leftButtonHistory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user_dash/historyByDate',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+$('#centralButtonHistory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user_dash/historyByPrice',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+
+$('#rightButtonHistory').click(function(){
+    if (uuid != null) {
+        $.ajax({
+            method: 'POST',
+            url: 'api/user_dash/historyByLength',
+            contentType: "text/plain; charset=utf-8",
+            dataType: 'text',
+            data: uuid,
+            success: function (data, textStatus, jqXHR) {
+                var obj = JSON.parse(data);
+                createTable(obj.orderHistory, "driverOrdersHistory");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR.responseText + " Error! driverAssignedOrders");
+            }
+        })
+    }
+});
+
 function setHistory(){
-    var uuid = getCookie("uuid");
     $.ajax({
         method: 'POST',
         url: 'api/user_dash/history',

@@ -8,6 +8,11 @@ public class UserJson {
     private String cred;
 
     private String id;
+    private String uuid;
+
+    private String userSex;
+    private String animalFriendly;
+    private String smokingFriendly;
 
     private String pass;
     private String email;
@@ -16,6 +21,38 @@ public class UserJson {
     private String phone;
 
     private String carId;
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getSmokingFriendly() {
+        return smokingFriendly;
+    }
+
+    public void setSmokingFriendly(String smokingFriendly) {
+        this.smokingFriendly = smokingFriendly;
+    }
+
+    public String getAnimalFriendly() {
+        return animalFriendly;
+    }
+
+    public void setAnimalFriendly(String animalFriendly) {
+        this.animalFriendly = animalFriendly;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getCarId() {
         return carId;
@@ -79,6 +116,10 @@ public class UserJson {
         sb.append(", pass='").append(pass).append('\'');
         sb.append(", email='").append(email).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
+        sb.append(", uuid='").append(uuid).append('\'');
+        sb.append(", userSex='").append(userSex).append('\'');
+        sb.append(", animalFriendly='").append(animalFriendly).append('\'');
+        sb.append(", smokingFriendly='").append(smokingFriendly).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", phone='").append(phone).append('\'');
         sb.append('}');

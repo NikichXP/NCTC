@@ -39,7 +39,7 @@
 <div class="mainSection" id="customerOrdersPanel">
   <div class="col-md-12 mt">
 
-    <h4> History orders</h4>
+    <h4> Edition </h4>
     <hr>
     <table id="historyOrderTable" class="table">
       <thead>
@@ -124,4 +124,5 @@
 <script src="js/bootstrap.js"></script>
 <script src="js/user-data-by-uuid.js"></script>
 <script src="js/cookie.js"></script>
+<script src="js/customer-setting.js"></script>
 </body>

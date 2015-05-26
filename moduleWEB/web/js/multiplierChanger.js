@@ -18,18 +18,18 @@ function getTariffs(orderTypeName) {
             alert("1");
             var obj = JSON.parse(data);
             var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
-
+alert(data);
                 var innerObj = obj.hourlyRates[0];
-                str += "1"+':<br><input id="dayHourlyRate" value="' + innerObj.multiplier + '" /><button id="dayHourlyRateButton"></button><br>';
+                str += "1"+':<br><input id="dayHourlyRate" value="' + innerObj.multiplier + '" /><button id="dayHourlyRateButton" style="width: 40px;height:20px "></button><br>';
                 innerObj = obj.hourlyRates[1];
-                str += "2"+':<br><input id="nightHourlyRate" value="' + innerObj.multiplier + '" /><button id="nightHourlyRateButton"></button><br>';
+                str += "2"+':<br><input id="nightHourlyRate" value="' + innerObj.multiplier + '" /><button id="nightHourlyRateButton" style="width: 40px;height:20px "></button><br>';
 
 
 
                 innerObj = obj.distanceRates[0];
-                str += "1"+'<br><input id="dayDistanceRate" value="' + innerObj.multiplier + '" /><button id="dayDistanceRateButton"></button><br>';
+                str += "1"+'<br><input id="dayDistanceRate" value="' + innerObj.multiplier + '" /><button id="dayDistanceRateButton" style="width: 40px;height:20px "></button><br>';
                 innerObj = obj.distanceRates[1];
-                str += "2"+'<br><input id="nightDistanceRate" value="' + innerObj.multiplier + '" /><button id="nightDistanceRateButton"></button><br>';
+                str += "2"+'<br><input id="nightDistanceRate" value="' + innerObj.multiplier + '" /><button id="nightDistanceRateButton" style="width: 40px;height:20px "></button><br>';
 
 
             document.getElementById("tariffs").innerHTML = str;
@@ -57,12 +57,12 @@ function getOrderTypeMultipliers(){
         success: function (data) {
             var obj = JSON.parse(data);
             alert(data);
-            var str ='Basic:<input id="basic" value="'+obj.OrderTypeMultipliers[0].basic+'"/><button id="basicButton"></button><br>' +
-                'Cargo:<input id="cargo" value="'+obj.OrderTypeMultipliers[0].cargo+'"/><button id="cargoButton"></button><br>' +
-                'Sober driver:<input id="sober" value="'+obj.OrderTypeMultipliers[0].sober_driver+'"/><button id="soberButton"></button><br>' +
-                'Guest delivery:<input id="guest" value="'+obj.OrderTypeMultipliers[0].guest_delivery+'"/><button id="guestButton"></button><br>' +
-                'Meet my guest:<input id="meet" value="'+obj.OrderTypeMultipliers[0].meet_my_guest+'"/><button id="meetButton"></button><br>' +
-                'Celebration taxi:<input id="celebration" value="'+obj.OrderTypeMultipliers[0].celebration_taxi+'"/><button id="celebrationButton"></button><br>'
+            var str ='Basic:<input id="basic" value="'+obj.OrderTypeMultipliers[0].basic+'"/><button id="basicButton" style="width: 40px;height:20px "></button><br>' +
+                'Cargo:<input id="cargo" value="'+obj.OrderTypeMultipliers[0].cargo+'"/><button id="cargoButton" style="width: 40px;height:20px "></button><br>' +
+                'Sober driver:<input id="sober" value="'+obj.OrderTypeMultipliers[0].sober_driver+'"/><button id="soberButton" style="width: 40px;height:20px "></button><br>' +
+                'Guest delivery:<input id="guest" value="'+obj.OrderTypeMultipliers[0].guest_delivery+'"/><button id="guestButton" style="width: 40px;height:20px "></button><br>' +
+                'Meet my guest:<input id="meet" value="'+obj.OrderTypeMultipliers[0].meet_my_guest+'"/><button id="meetButton" style="width: 40px;height:20px "></button><br>' +
+                'Celebration taxi:<input id="celebration" value="'+obj.OrderTypeMultipliers[0].celebration_taxi+'"/><button id="celebrationButton" style="width: 40px;height:20px "></button><br>'
             document.getElementById("OrderTypeRates").innerHTML = str;
 
             $(":button").click(function () {

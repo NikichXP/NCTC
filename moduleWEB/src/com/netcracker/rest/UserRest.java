@@ -335,4 +335,42 @@ public class UserRest {
     }
 
 
+    @POST
+    @Path("getAllUserByUUID")
+    @Consumes("text/plain")
+    public Response editUserByUUID(String uuid) {
+        UserEntity userEntity = user.findByUuid(uuid);
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"userData\":[")
+                .append("{\"firstName\":\"")
+                .append(userEntity.getFirstName())
+                .append("\",\"lastName\":\"")
+                .append(userEntity.getLastName())
+                .append("\",\"phone\":\"")
+                .append(userEntity.getPhone())
+                .append("\",\"userId\":\"")
+                .append(userEntity.getId())
+                .append("\",\"email\":\"")
+                .append(userEntity.getEmail())
+                .append("\",\"userSex\":\"")
+                .append(userEntity.getSex())
+                .append("\",\"animalFriendly\":\"")
+                .append(userEntity.getAnimalFriendly())
+                .append("\",\"smokingFriendly\":\"")
+                .append(userEntity.getSmokingFriendly())
+                .append("\",\"alternativePhone\":\"")
+                .append(userEntity.getAlternativePhone())
+                .append("\",\"getPassword\":\"")
+                .append(userEntity.getPassword())
+                .append("\" },");
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append("]}");
+        if (userEntity != null) {
+            return Response.status(200).entity(sb.toString()).build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
+
+
 }
