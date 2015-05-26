@@ -16,6 +16,10 @@ $("#leftButton").click(function () {
 	document.location.href = "customerOrderHistory.jsp";
 });
 
+$("#rightButton").click(function () {
+	document.location.href = "customerSetting.jsp";
+});
+
 
 //Apply style to dynamically creater divs (Order Blocks).
 //TO BE COMPLETED. Style constant must be developed
