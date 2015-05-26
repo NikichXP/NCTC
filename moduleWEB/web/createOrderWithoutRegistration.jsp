@@ -25,6 +25,7 @@
         <div id="contacts">
             <input id="contactName" type="text" placeholder="Contact name"/>
             <input id="contactPhone" type="text" placeholder="Contact phone"/>
+            <input id="email" type="text" placeholder="E-mail"/>
         </div>
         <div id="importantInfo">
             <input id="requestedSeatsCount" type="text" placeholder="Requested seats count"/>

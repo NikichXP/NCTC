@@ -42,4 +42,5 @@ public interface Order {
 
 	List<OrderEntity> sortByLengthAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
 
+	OrderEntity getOrderByPublicToken(String publicToken);
 }

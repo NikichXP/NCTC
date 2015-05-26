@@ -47,6 +47,10 @@ $('#registration-submit').click(function(){
 $('#order-wo-reg-submit').click(function(){
 	document.location.href = "createOrderWithoutRegistration.jsp";
 });
+$('#track-TO-submit').click(function(){
+	//TODO for Alexander
+	document.location.href = "api/order/viewOrderWithoutRegistration?publicToken=" + $('#tracking-id').val();
+});
 
 function redirectWithAccessLevels(userData, url) {
 	$.ajax({
@@ -89,27 +93,13 @@ function getAccessLevels(uuid) {
 		}
 	})
 }
-//AJAX POST for
-$('#track-TO-submit').click(function(){
-	var JSONdata = {
-		'orderid': $("#tracking-id").val()
-	};
-	$.ajax({
-		method: 'POST',
-		url: url,
-		data: JSONdata,
-		dataType:'json'
-	})
-		.done(function(){alert("success!!");})
-		.fail(function(){alert("fail!");});
-});
-
 
 var phoneRegEx = /^\+?[0-9]{6,12}$/;
 var namesRegEx = /^[a-zA-Z\s'\-]+$/;
 var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 var passRegEx = /^....+$/;
 
+//TODO need add publicToken validation
 function validateRegistrationData() {
 	//validates login credentials (e-mail or phone number) field
 	if(!validateNames($("#firstName").val(), namesRegEx)){

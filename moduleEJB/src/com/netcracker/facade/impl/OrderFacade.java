@@ -46,6 +46,8 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
 
     }
 
+
+
     @Override
     public List<OrderEntity> sortByPriceAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity) {
         return em.createNamedQuery("Order.sortByPriceAndUUIDAndStat")
@@ -79,6 +81,16 @@ public class OrderFacade extends AbstractFacade<OrderEntity> implements Order {
                 .setParameter("id", new BigInteger(orderId))
                 .setParameter("uuid", uuid)
                 .getResultList();
+        if(result.isEmpty())
+            return null;
+        else
+            return (OrderEntity) result.get(0);
+    }
+
+    @Override
+    public OrderEntity getOrderByPublicToken(String publicToken) {
+        List result = em.createNamedQuery("Order.getOrderByPublicToken")
+                .setParameter("publicToken", publicToken).getResultList();
         if(result.isEmpty())
             return null;
         else

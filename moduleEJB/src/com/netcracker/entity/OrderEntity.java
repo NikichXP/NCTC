@@ -15,6 +15,8 @@ import java.util.Collection;
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.customerUserEntity.uuid = :customerUuid"),
 		@NamedQuery(name = "Order.getOrdersByState", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity"),
+		@NamedQuery(name = "Order.getOrderByPublicToken", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.publicToken = :publicToken"),
 		@NamedQuery(name = "Order.getOrdersByStateAndDriverUuid", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :driverUuid"),
 		@NamedQuery(name = "Order.getByUUIDAndID", query = "SELECT f FROM OrderEntity f " +
