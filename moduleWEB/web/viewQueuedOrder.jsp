@@ -11,6 +11,7 @@
     <title>Order Test</title>
     <link href="css/order-style.css" rel="stylesheet">
     <script src="js/jquery.js"></script>
+    <script src="js/jquery.maskedinput.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=en-US" type="text/javascript"></script>
     <script src="js/mapSearchByAddressViewOrder.js" type="text/javascript"></script>
     <script src="js/view-queued-order.js"></script>
@@ -33,18 +34,12 @@
             <input type="text" id="toX0" hidden/>
             <input type="text" id="toY0" hidden/>
             <input type="text" id="distance0" disabled/>
-            <input type="button" id="addressAdder" value="Add" onclick="createToAddress();" disabled><br>
         </div>
         <div id="timeOption">
-            <input id="asSoonAsPossible" type="checkbox" onchange="showOrHideDatePicker()" disabled>As soon as
-            possible</input>
+            Time Requested:
             <input id="timeRequested" type="text" disabled style="visibility: visible"/>
-        </div>
-        <div id="genderOption">
-            <%--Driver sex:--%>
-            <div id="musicTypeBox">
-                <br>
-            </div>
+            Time of Driver Arrival:
+            <input id="timeOfDriverArrival" type="text"  style="visibility: visible"/>
         </div>
 
         <div id="carClassBox">
@@ -91,7 +86,7 @@
         </div>
 
         <div class="submitButtonContainer">
-            <input id="basic-order-submit" type="button" value="Ok" disabled/>
+            <input id="assignButton" type="button" value="Assign"/>
         </div>
     </div>
     <div id="map"></div>

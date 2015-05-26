@@ -34,8 +34,10 @@ public class OrderJson {
     private String[] toY;
     private String[] pathId;
     private String[] pathCompleted;
+    private String pathsCompleted;
 
     private String sex;
+
     private String carClass;
     private String musicType;
     private boolean asSoonAsPossible;
@@ -43,22 +45,21 @@ public class OrderJson {
     private boolean animalFriendly;
     private boolean wifi;
     private boolean airConditioner;
-
     private String customerPreCreateComment;
+
     private String customerPostCompleteComment;
     private String customerRefuseCause;
     private String driverRefuseCause;
     private String customerRefuseComment;
     private String driverRefuseComment;
-
     private String totalLength;
+
     private String totalMultiplier;
     private String totalPrice;
-
-
     public String getId() {
         return id;
     }
+
 
     public void setId(String id) {
         this.id = id;
@@ -178,6 +179,14 @@ public class OrderJson {
 
     public String getTimeStarted() {
         return timeStarted;
+    }
+
+    public String getPathsCompleted() {
+        return pathsCompleted;
+    }
+
+    public void setPathsCompleted(String pathsCompleted) {
+        this.pathsCompleted = pathsCompleted;
     }
 
     public void setTimeStarted(String timeStarted) {
@@ -480,6 +489,7 @@ public class OrderJson {
                 "\"toY\":" + arrayToJson(toY) + ", " +
                 "\"pathId\":" + arrayToJson(pathId) + ", " +
                 "\"pathCompleted\":" + arrayToJson(pathCompleted) + ", " +
+                "\"pathsCompleted\":" + (pathsCompleted == null ? "null" : "\"" + pathsCompleted + "\"") + ", " +
                 "\"sex\":" + (sex == null ? "null" : "\"" + sex + "\"") + ", " +
                 "\"carClass\":" + (carClass == null ? "null" : "\"" + carClass + "\"") + ", " +
                 "\"musicType\":" + (musicType == null ? "null" : "\"" + musicType + "\"") + ", " +

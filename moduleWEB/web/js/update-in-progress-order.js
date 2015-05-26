@@ -21,15 +21,19 @@ $(document).ready(function () {
         }
     });
     $('body').click(updatePrice);
-    $('#addPointOnPath').click(addPointOnPath);
-    $("#updateCurrentPath").click(submitUpdate);
-    $('#removeCurrentPath').click(updatePrice);
-    $('#completeCurrentPath').click(updatePrice);
-    $('#completeOrder').click(updatePrice);
+    $('#addPathPoint').click(addPathPoint);
+    $('#removeCurrentPath').click();
+    $("#submitUpdate").click(submitUpdate);
+    $('#completeCurrentPath').click();
+    $('#completeOrder').click();
 });
 
 function fillPageWithData() {
     $.get("api/order/view?id=" + id, function (data) {
+        if ($("#fromY").nextAll().filter($("[type='text']")).length > 0) {
+            $("#fromY").nextAll().filter($("[type='text']")).remove();
+        }
+
         var obj = JSON.parse(data);
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
@@ -82,7 +86,7 @@ function fillPageWithData() {
             input6.setAttribute("id", "pathCompleted" + i);
             input6.setAttribute("value", obj.pathCompleted[i]);
 
-            var button = document.getElementById("addPointOnPath");
+            var button = document.getElementById("addPathPoint");
 
             outer.insertBefore(input, button);
             outer.insertBefore(input2, button);
@@ -116,13 +120,11 @@ function fillPageWithData() {
 }
 
 function submitUpdate() {
-    $("#addPointOnPath").prop('disabled', true);
-    $("#updateCurrentPath").prop('disabled', true);
-    $("#removeCurrentPath").prop('disabled', true);
-    $("#completeCurrentPath").prop('disabled', true);
-    $("#completeOrder").prop('disabled', true);
+    setLock("#submitUpdate");
+    alert("pathsCompleted " + $("[id^=pathCompleted]").filter($("[value=true]")).length)
 
     var JSONdata = {
+        id: id,
         driverUserUuid: getCookie("uuid"),
 
         fromAddress: $("#fromAddress").val(),
@@ -132,7 +134,7 @@ function submitUpdate() {
         distance: getArrayOfToAddresses("distance"),
         toX: getArrayOfToAddresses("toX"),
         toY: getArrayOfToAddresses("toY"),
-        pathId: getArrayOfToAddresses("pathId"),
+        pathsCompleted: $("[id^=pathCompleted]").filter($("[value=true]")).length,
 
         totalLength: $("#totalLength").val(),
         totalPrice: $("#totalPrice").val()
@@ -157,12 +159,19 @@ function submitUpdate() {
         data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert("Order successfully created.\nOrder details were sent to your email.");
-            document.location.href = "customer.jsp";
+            alert(data);
+            alert("Order successfully updated.");
+            fillPageWithData();
+            //document.location.href = document.href;
+            setUnlock("#addPathPoint");
+            setUnlock("#removeCurrentPath");
+            setUnlock("#completeCurrentPath");
+            setLock("#completeOrder");
+            setLock("#submitUpdate");
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            $("#basic-order-submit").prop('disabled', false);
-            alert("Bad response from server.");
+            $("#submitUpdate").prop('disabled', false);
+            alert(jqXHR.responseText);
         }
     })
 }
@@ -175,12 +184,15 @@ function validateBasicOrderData() {
         return false;
     }
     if ($("#toAddress0").val().length == 0 || $("#toX0").val().length == 0 || $("#toY0").val().length == 0) {
-        alert("Select proper destination address.");
+        alert($("#toAddress0").val().length);
+        alert($("#toX0").val().length);
+        alert($("#toY0").val().length);
+        alert("1 Select proper destination address.");
         return false;
     }
     if ($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
         || $("#toY" + counter).val().length == 0) {
-        alert("Select proper destination address.");
+        alert("2 Select proper destination address.");
         return false;
     }
     if (!$("#totalLength").val() > 0 || !$("#totalMultiplier").val() > 0 || !$("#totalPrice").val() > 0) {
@@ -198,7 +210,7 @@ function getCookie(name) {
 
 var counter = 0;
 var isDeleteExists = false;
-function addPointOnPath() {
+function addPathPoint() {
     var outer = document.getElementById("importantInfo");
 
     var indexOfInProgress = $("[id^='toAddress']").filter($("[disabled!='disabled']")).attr("id").match(/\d+/);
@@ -219,14 +231,14 @@ function addPointOnPath() {
         var input4 = document.getElementById("distance" + i);
         input4.setAttribute("id", "distance" + (i + 1));
 
-        document.getElementById("pathId" + i).remove();
-        document.getElementById("pathCompleted" + i).remove();
+        var input4 = document.getElementById("pathId" + i);
+        input4.setAttribute("id", "distance" + (i + 1));
     }
 
     var addedInput = document.createElement("input");
     addedInput.setAttribute("type", "text");
     addedInput.setAttribute("id", "toAddress" + indexOfInProgress);
-    addedInput.setAttribute("onchange", "clearToXY(this), buildPath(" + (parseInt(lastIndex) + 1) + ")");
+    addedInput.setAttribute("onchange", "clearToXY(this); makeSearch(this); buildPath(" + (parseInt(lastIndex) + 1) + ")");
     addedInput.setAttribute("placeholder", "To address " + indexOfInProgress);
 
     var addedInput2 = document.createElement("input");
@@ -250,6 +262,12 @@ function addPointOnPath() {
     outer.insertBefore(addedInput2, lastToAddress);
     outer.insertBefore(addedInput3, lastToAddress);
     outer.insertBefore(addedInput4, lastToAddress);
+
+    setLock("#addPathPoint");
+    setLock("#removeCurrentPath");
+    setLock("#completeCurrentPath");
+    setLock("#completeOrder");
+    setUnlock("#submitUpdate");
 }
 
 function deleteToAddress() {

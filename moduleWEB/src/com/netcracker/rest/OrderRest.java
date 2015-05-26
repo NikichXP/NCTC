@@ -152,79 +152,70 @@ public class OrderRest {
     @javax.ws.rs.Path("updateInProgress")
     @Consumes("application/json")
     public Response updateInProgress(OrderJson orderJson) {
-        OrderEntity orderEntity = order.getByUUIDAndId(orderJson.getId(), orderJson.getDriverUserUuid());
+        OrderEntity orderEntity = order.getByDriverUUIDAndID(orderJson.getId(), orderJson.getDriverUserUuid());
 
         List<PathEntity> pathEntities = new LinkedList<>(orderEntity.getPathEntities());
-        pathEntities.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));
-
-        for (int i = 0; i < pathEntities.size(); i++) {
-            if (pathEntities.get(i).isCompleted()) {
-                pathEntities.remove(i);
-                i--;
-            }
+        pathEntities.sort((o1, o2) -> o2.getId().compareTo(o1.getId()));
+        for (int i = pathEntities.size() - 1; i >= 0; i--) {
+            path.delete(pathEntities.get(i));
         }
 
-        if (pathEntities.size() > 0) {
-            int lastCompletedPathIndex = pathEntities.size() - 1;
-            for (int i = lastCompletedPathIndex; i < orderJson.getToAddress().length; i++) {
-                PathEntity pathEntity = new PathEntity();
-                pathEntity.setStartAddress(orderJson.getToAddress()[i]);
-                pathEntity.setStartX(new BigDecimal(orderJson.getToX()[i]));
-                pathEntity.setStartY(new BigDecimal(orderJson.getToY()[i]));
+        pathEntities = new LinkedList<>();
 
-                pathEntity.setEndAddress(orderJson.getToAddress()[i + 1]);
-                pathEntity.setEndX(new BigDecimal(orderJson.getToX()[i + 1]));
-                pathEntity.setEndY(new BigDecimal(orderJson.getToY()[i + 1]));
+        PathEntity firstPathEntity = new PathEntity();
 
-                pathEntity.setLength(new BigDecimal(orderJson.getDistance()[i + 1]));
-                pathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(pathEntity.getLength()));
-                pathEntity.setOrderEntity(orderEntity);
+        firstPathEntity.setCompleted(false);
+        firstPathEntity.setStartAddress(orderJson.getFromAddress());
+        firstPathEntity.setStartX(new BigDecimal(orderJson.getFromX()));
+        firstPathEntity.setStartY(new BigDecimal(orderJson.getFromY()));
 
-                pathEntities.get(i).setNextPathEntity(pathEntity);
+        firstPathEntity.setEndAddress(orderJson.getToAddress()[0]);
+        firstPathEntity.setEndX(new BigDecimal(orderJson.getToX()[0]));
+        firstPathEntity.setEndY(new BigDecimal(orderJson.getToY()[0]));
+
+        firstPathEntity.setLength(new BigDecimal(orderJson.getDistance()[0]));
+        firstPathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(firstPathEntity.getLength()));
+        firstPathEntity.setOrderEntity(orderEntity);
+
+        path.create(firstPathEntity);
+
+        pathEntities.add(firstPathEntity);
+
+        for (int i = 0; i < orderJson.getToAddress().length - 1; i++) {
+            PathEntity pathEntity = new PathEntity();
+            pathEntity.setCompleted(false);
+            if (i < Integer.parseInt(orderJson.getPathsCompleted())) {
+                pathEntities.get(i).setCompleted(true);
+                path.update(pathEntities.get(i));
             }
-        } else {
-            PathEntity firstPathEntity = new PathEntity();
 
-            firstPathEntity.setStartAddress(orderJson.getFromAddress());
-            firstPathEntity.setStartX(new BigDecimal(orderJson.getFromX()));
-            firstPathEntity.setStartY(new BigDecimal(orderJson.getFromY()));
+            pathEntity.setStartAddress(orderJson.getToAddress()[i]);
+            pathEntity.setStartX(new BigDecimal(orderJson.getToX()[i]));
+            pathEntity.setStartY(new BigDecimal(orderJson.getToY()[i]));
 
-            firstPathEntity.setEndAddress(orderJson.getToAddress()[0]);
-            firstPathEntity.setEndX(new BigDecimal(orderJson.getToX()[0]));
-            firstPathEntity.setEndY(new BigDecimal(orderJson.getToY()[0]));
+            pathEntity.setEndAddress(orderJson.getToAddress()[i + 1]);
+            pathEntity.setEndX(new BigDecimal(orderJson.getToX()[i + 1]));
+            pathEntity.setEndY(new BigDecimal(orderJson.getToY()[i + 1]));
 
-            firstPathEntity.setLength(new BigDecimal(orderJson.getDistance()[0]));
-            firstPathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(firstPathEntity.getLength()));
-            firstPathEntity.setOrderEntity(orderEntity);
+            pathEntity.setLength(new BigDecimal(orderJson.getDistance()[i + 1]));
+            pathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(pathEntity.getLength()));
+            pathEntity.setOrderEntity(orderEntity);
 
-            pathEntities.add(firstPathEntity);
+            pathEntities.add(pathEntity);
 
-            for (int i = 0; i < orderJson.getToAddress().length - 1; i++) {
-                PathEntity pathEntity = new PathEntity();
-                pathEntity.setStartAddress(orderJson.getToAddress()[i]);
-                pathEntity.setStartX(new BigDecimal(orderJson.getToX()[i]));
-                pathEntity.setStartY(new BigDecimal(orderJson.getToY()[i]));
+            path.create(pathEntity);
 
-                pathEntity.setEndAddress(orderJson.getToAddress()[i + 1]);
-                pathEntity.setEndX(new BigDecimal(orderJson.getToX()[i + 1]));
-                pathEntity.setEndY(new BigDecimal(orderJson.getToY()[i + 1]));
+            pathEntities.get(i).setNextPathEntity(pathEntity);
 
-                pathEntity.setLength(new BigDecimal(orderJson.getDistance()[i + 1]));
-                pathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(pathEntity.getLength()));
-                pathEntity.setOrderEntity(orderEntity);
-
-                pathEntities.add(pathEntity);
-
-                pathEntities.get(i).setNextPathEntity(pathEntity);
-            }
+            path.update(pathEntities.get(i));
         }
+
         orderEntity.setPathEntities(pathEntities);
 
         BigDecimal totalPrice = new BigDecimal(0);
         BigDecimal totalLength = new BigDecimal(0);
 
         for (PathEntity pathEntity : pathEntities) {
-            pathEntity.setCompleted(false);
             totalPrice = totalPrice.add(pathEntity.getPrice());
             totalLength = totalLength.add(pathEntity.getLength());
         }
@@ -235,7 +226,7 @@ public class OrderRest {
         if (orderJson == null) {
             return Response.status(404).entity("OrderJson is null.").build();
         } else {
-            return Response.status(201).entity(orderJson.toString() + "Order id: " + orderEntity.getId()).build();
+            return Response.status(201).entity(orderJson.toString()).build();
         }
     }
 

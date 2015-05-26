@@ -42,5 +42,7 @@ public interface Order {
 
 	List<OrderEntity> sortByLengthAndUUIDAndState(String uuid, OrderStateEntity orderStateEntity);
 
+	OrderEntity getByDriverUUIDAndID(String orderId, String driverUuid);
+
 	OrderEntity getOrderByPublicToken(String publicToken);
 }

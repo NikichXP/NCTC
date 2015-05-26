@@ -6,6 +6,7 @@ import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
+import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -30,9 +31,14 @@ public class DriverRest {
     @EJB
     private OrderState orderState;
 
+    @EJB
+    private User user;
+
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
     @POST
     @Path("getQueuedOrders")
-    public Response getQueuedOrders(){
+    public Response getQueuedOrders() {
         List<OrderEntity> list = order.getOrdersByState(orderState.findByName("queued"));
         Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
@@ -65,7 +71,7 @@ public class DriverRest {
     @POST
     @Path("getAssignedOrders")
     @Consumes("text/plain")
-    public Response getAssignedOrders(String uuid){
+    public Response getAssignedOrders(String uuid) {
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("assigned"), uuid);
         Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
@@ -129,12 +135,13 @@ public class DriverRest {
             return Response.status(404).entity("Bad response.").build();
         }
     }
+
     @POST
     @Path("historyByDate")
     @Consumes("text/plain")
     public Response getOrderHistoryByDate(String uuid) {
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
-        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"),uuid));
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"), uuid));
         Collections.sort(list, (o1, o2) -> o2.getTimeCreated().toString().compareTo(o1.getTimeCreated().toString()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
@@ -163,12 +170,13 @@ public class DriverRest {
             return Response.status(404).entity("Bad response.").build();
         }
     }
+
     @POST
     @Path("historyByPrice")
     @Consumes("text/plain")
     public Response getOrderHistoryByPrice(String uuid) {
         List<OrderEntity> list = order.getOrdersByStateAndDriverUuid(orderState.findByName("completed"), uuid);
-        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"),uuid));
+        list.addAll(order.getOrdersByStateAndDriverUuid(orderState.findByName("refused"), uuid));
         Collections.sort(list, (o1, o2) -> o2.getFinalPrice().compareTo(o1.getFinalPrice()));
         StringBuilder sb = new StringBuilder();
         sb.append("{\"orderHistory\":[");
@@ -195,6 +203,28 @@ public class DriverRest {
             return Response.status(200).entity(sb.toString()).build();
         } else {
             return Response.status(404).entity("Bad response.").build();
+        }
+    }
+
+    @POST
+    @Path("assign")
+    @Consumes("application/json")
+    public Response getOrderAssign(OrderJson orderJson) {
+        OrderEntity orderEntity = order.read(new BigInteger(orderJson.getId()));
+        orderEntity.setDriverUserEntity(user.findByUuid(orderJson.getDriverUserUuid()));
+        try {
+            orderEntity.setTimeOfDriverArrival(new Timestamp(
+                    simpleDateFormat.parse(orderJson.getTimeOfDriverArrival()).getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        orderEntity.setOrderStateEntity(orderState.findByName("assigned"));
+        order.update(orderEntity);
+
+        if (orderEntity != null) {
+            return Response.status(200).entity("You assign on this Order.").build();
+        } else {
+            return Response.status(404).entity("Bad response order not assign.").build();
         }
     }
 }
