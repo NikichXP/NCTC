@@ -149,6 +149,19 @@ public class OrderRest {
     }
 
     @POST
+    @javax.ws.rs.Path("completeOrder")
+    public Response completeOrder(String orderId) {
+        OrderEntity orderEntity = order.read(new BigInteger(orderId));
+        orderEntity.setOrderStateEntity(orderState.findByName("completed"));
+        order.update(orderEntity);
+        if (orderEntity == null) {
+            return Response.status(404).entity("orderEntity is null.").build();
+        } else {
+            return Response.status(201).entity("Order completed.").build();
+        }
+    }
+
+    @POST
     @javax.ws.rs.Path("updateInProgress")
     @Consumes("application/json")
     public Response updateInProgress(OrderJson orderJson) {
@@ -177,17 +190,20 @@ public class OrderRest {
         firstPathEntity.setPrice(orderEntity.getTotalMultiplier().multiply(firstPathEntity.getLength()));
         firstPathEntity.setOrderEntity(orderEntity);
 
+        if (Integer.parseInt(orderJson.getPathsCompleted()) > 0)
+            firstPathEntity.setCompleted(true);
+
         path.create(firstPathEntity);
 
         pathEntities.add(firstPathEntity);
 
+
+
         for (int i = 0; i < orderJson.getToAddress().length - 1; i++) {
             PathEntity pathEntity = new PathEntity();
             pathEntity.setCompleted(false);
-            if (i < Integer.parseInt(orderJson.getPathsCompleted())) {
-                pathEntities.get(i).setCompleted(true);
-                path.update(pathEntities.get(i));
-            }
+            if ((i + 1) < Integer.parseInt(orderJson.getPathsCompleted()))
+                pathEntity.setCompleted(true);
 
             pathEntity.setStartAddress(orderJson.getToAddress()[i]);
             pathEntity.setStartX(new BigDecimal(orderJson.getToX()[i]));
