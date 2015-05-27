@@ -1,12 +1,34 @@
 /**
  * Created by Ubuntu on 20.05.2015.
  */
+
+var orderId;
 $(document).ready(function () {
-    ymaps.ready(function(){
+    ymaps.ready(function () {
         init();
         getOrderById(getUrlVars()["publicToken"]);
     });
+    $('#refuseOrder').click(refuseOrder);
 });
+
+function refuseOrder() {
+    disableAllButtons();
+    $.ajax({
+        method: 'POST',
+        url: 'api/order/refuseOrder',
+        contentType: "text/plain",
+        data: orderId,
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+            document.location.href = "index.html";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Error occurred, order wasn't refused");
+            setUnlock("#refuseOrder");
+        }
+    })
+}
 
 function getOrderById(publicToken) {
     $.ajax({
@@ -15,6 +37,15 @@ function getOrderById(publicToken) {
         dataType: 'text',
         success: function (data) {
             var obj = JSON.parse(data);
+            orderId = obj.id;
+
+            $("#orderState").text("Status: " + obj.state);
+            if ((obj.state != "refused") && (obj.state != "completed")) {
+                setUnlock("#refuseOrder");
+            } else {
+                setLock("#refuseOrder");
+            }
+
             $("#contactName").attr("value", obj.contactName);
             $("#contactPhone").attr("value", obj.contactPhone);
             $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
@@ -22,7 +53,7 @@ function getOrderById(publicToken) {
             $("#fromX").attr("value", obj.fromX);
             $("#fromY").attr("value", obj.fromY);
 
-            for(var i = 0; i < obj.toAddress.length; i++){
+            for (var i = 0; i < obj.toAddress.length; i++) {
                 var outer = document.getElementById("importantInfo");
                 var input = document.createElement("input");
 
@@ -74,16 +105,16 @@ function getOrderById(publicToken) {
             $("#car").attr("value", obj.carClass);
             $("#music").attr("value", obj.musicType);
 
-            if(obj.smokingFriendly == "true") {
+            if (obj.smokingFriendly == "true") {
                 $('input:checkbox[id=smokingFriendly]').prop('checked', true);
             }
-            if(obj.animalFriendly == "true") {
+            if (obj.animalFriendly == "true") {
                 $('input:checkbox[id=animalFriendly]').prop('checked', true);
             }
-            if(obj.wifi == "true") {
+            if (obj.wifi == "true") {
                 $('input:checkbox[id=wifi]').prop('checked', true);
             }
-            if(obj.airConditioner == "true") {
+            if (obj.airConditioner == "true") {
                 $('input:checkbox[id=airConditioner]').prop('checked', true);
             }
 
@@ -91,7 +122,7 @@ function getOrderById(publicToken) {
             $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
             $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
-            $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+            $("#customerPreCreateComment").text(obj.customerPreCreateComment);
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
@@ -106,4 +137,16 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function disableAllButtons() {
+    $("[type='button']").prop('disabled', true);
+}
+
+function setLock(name) {
+    $(name).prop('disabled', true);
+}
+
+function setUnlock(name) {
+    $(name).prop('disabled', false);
 }

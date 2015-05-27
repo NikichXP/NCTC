@@ -19,6 +19,7 @@
 <div id="container">
     <div id="order-form">
         <div id="contacts">
+            <div id="orderState"></div>
             <input id="contactName" type="text" disabled/>
             <input id="contactPhone" type="text" disabled/>
         </div>
@@ -82,7 +83,10 @@
         </div>
 
         <div class="commentaryContainer">
-            <textarea id="customerPreCreateComment" placeholder="Additional comments to your order" disabled></textarea>
+            <textarea id="customerPreCreateComment"  disabled></textarea>
+        </div>
+        <div class="submitButtonContainer">
+            <input id="refuseOrder" type="button" value="Refuse order"/>
         </div>
     </div>
     <div id="map"></div>

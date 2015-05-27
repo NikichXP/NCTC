@@ -191,7 +191,7 @@ function fillPageWithData() {
         $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
         $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
-        $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+        $("#customerPreCreateComment").text(obj.customerPreCreateComment);
         updatePrice();
 
         setUnlock("#addPathPoint");

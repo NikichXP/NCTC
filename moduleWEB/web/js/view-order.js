@@ -11,6 +11,8 @@ $(document).ready(function () {
 function getOrderById(id) {
     $.get("api/order/view?id=" + id, function (data) {
         var obj = JSON.parse(data);
+        $("#orderState").text("Status: " + obj.state);
+
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
@@ -87,7 +89,7 @@ function getOrderById(id) {
         $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
         $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
-        $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+        $("#customerPreCreateComment").text(obj.customerPreCreateComment);
     });
 }
 
