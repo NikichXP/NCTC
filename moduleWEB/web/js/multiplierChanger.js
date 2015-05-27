@@ -16,19 +16,37 @@ function getTariffs(orderTypeName) {
         dataType: 'text',
         success: function (data) {
             var obj = JSON.parse(data);
-            var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
-alert(data);
-                var innerObj = obj.hourlyRates[0];
-                str += "1"+':<br><input id="dayHourlyRate" value="' + innerObj.multiplier + '" /><button id="dayHourlyRateButton" style="width: 40px;height:20px "></button><br>';
-                innerObj = obj.hourlyRates[1];
-                str += "2"+':<br><input id="nightHourlyRate" value="' + innerObj.multiplier + '" /><button id="nightHourlyRateButton" style="width: 40px;height:20px "></button><br>';
+            var i;
+
+            var day;
+            var night;
+            for(i=0;i<obj.hourlyRates.length;i++){
+                if(obj.hourlyRates[i].fromTimeHHmm=="07:00" ) day=obj.hourlyRates[i].multiplier;
+                else night=obj.hourlyRates[i].multiplier;
+
+            }
+
+
+          //  var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
+             alert(data);
+
+
+              var  str = "1"+':<br><input id="dayHourlyRate" value="' + day + '" /><button id="dayHourlyRateButton" style="width: 40px;height:20px "></button><br>';
+
+                str += "2"+':<br><input id="nightHourlyRate" value="' + night + '" /><button id="nightHourlyRateButton" style="width: 40px;height:20px "></button><br>';
+
+            for(i=0;i<obj.distanceRates.length;i++){
+                if(obj.distanceRates[i].fromTimeHHmm=="07:00" ) day=obj.distanceRates[i].multiplier;
+                else night=obj.distanceRates[i].multiplier;
+
+            }
 
 
 
-                innerObj = obj.distanceRates[0];
-                str += "1"+'<br><input id="dayDistanceRate" value="' + innerObj.multiplier + '" /><button id="dayDistanceRateButton" style="width: 40px;height:20px "></button><br>';
-                innerObj = obj.distanceRates[1];
-                str += "2"+'<br><input id="nightDistanceRate" value="' + innerObj.multiplier + '" /><button id="nightDistanceRateButton" style="width: 40px;height:20px "></button><br>';
+
+                str += "1"+'<br><input id="dayDistanceRate" value="' + day + '" /><button id="dayDistanceRateButton" style="width: 40px;height:20px "></button><br>';
+
+                str += "2"+'<br><input id="nightDistanceRate" value="' + night + '" /><button id="nightDistanceRateButton" style="width: 40px;height:20px "></button><br>';
 
 
             document.getElementById("tariffs").innerHTML = str;
