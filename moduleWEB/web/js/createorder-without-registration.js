@@ -237,7 +237,7 @@ function createToAddress() {
         outer.insertBefore(input3, addressRemover);
         outer.insertBefore(input4, addressRemover);
     } else {
-        alert("Enter valid <b>From address</b> and <b>To address</b>.")
+        alert("Enter valid \"From address\" and \"To address\".")
     }
 }
 

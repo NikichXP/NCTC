@@ -27,7 +27,26 @@ $(document).ready(function () {
     $("#revertUpdate").click(fillPageWithData);
     $('#completeCurrentPath').click(completeCurrentPath);
     $('#completeOrder').click(completeOrder);
+    $('#refuseOrder').click(refuseOrder);
 });
+
+function refuseOrder() {
+    disableAllButtons();
+    $.ajax({
+        method: 'POST',
+        url: 'api/order/refuseOrder',
+        contentType: "text/plain",
+        data: id,
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+            document.location.href = "driver.html";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Error occurred, order wasn't refused");
+        }
+    })
+}
 
 function completeOrder() {
     disableAllButtons();
@@ -63,6 +82,7 @@ function removeCurrentPath() {
     buildPath($("[id^='toAddress']").length - 1);
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
+    setUnlock("#refuseOrder");
 }
 
 function completeCurrentPath() {
@@ -72,6 +92,7 @@ function completeCurrentPath() {
     $("#pathCompleted" + currentPathIndex).attr("value", true);
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
+    setUnlock("#refuseOrder");
 }
 
 function getCurrentPathIndex() {
@@ -152,6 +173,7 @@ function fillPageWithData() {
                 disableAllButtons();
                 setUnlock("#submitUpdate");
                 setUnlock("#revertUpdate");
+                setUnlock("#refuseOrder");
             });
         }
 
@@ -173,6 +195,7 @@ function fillPageWithData() {
         updatePrice();
 
         setUnlock("#addPathPoint");
+        setUnlock("#refuseOrder");
         if (!isAllPathsCompleted()) {
             setUnlock("#completeCurrentPath");
             if ($("[id^='toAddress']").length > 1) {
@@ -216,6 +239,7 @@ function submitUpdate() {
     if (!validateBasicOrderData()) {
         setUnlock("#submitUpdate");
         setUnlock("#revertUpdate");
+        setUnlock("#refuseOrder");
         return;
     }
     $.ajax({
@@ -228,9 +252,12 @@ function submitUpdate() {
             alert("Order successfully updated.");
             fillPageWithData();
             setUnlock("#addPathPoint");
+            setUnlock("#refuseOrder");
             if (!isAllPathsCompleted()) {
-                setUnlock("#removeCurrentPath");
                 setUnlock("#completeCurrentPath");
+                if ($("[id^='toAddress']").length > 1) {
+                    setUnlock("#removeCurrentPath");
+                }
             } else {
                 setUnlock("#completeOrder");
             }
@@ -351,6 +378,7 @@ function addPathPoint() {
     disableAllButtons();
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
+    setUnlock("#refuseOrder");
 }
 
 function disableAllButtons() {

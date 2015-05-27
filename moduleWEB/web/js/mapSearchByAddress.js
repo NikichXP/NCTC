@@ -106,7 +106,7 @@ function buildPath(index) {
             document.getElementById('totalLength').value = parseFloat(route.getLength() / 1000).toFixed(2);
             updateMultiplierAndPrice();
         }, function (error) {
-            //alert("An error occurred: " + error.message);
+            alert("Unable to build path. Input correct addresses.");
         });
     return false;
 }

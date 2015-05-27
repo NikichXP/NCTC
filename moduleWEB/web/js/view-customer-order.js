@@ -14,12 +14,30 @@ $(document).ready(function () {
         getOrderById(getUrlVars()["id"]);
     });
 
-    $("#submitButton").click(function () {
-        $("#submitButton").prop('disabled', true);
-            document.location.href = "customer.html";
+    $("#refuseOrder").click(function () {
+        $("#refuseOrder").prop('disabled', true);
+        refuseOrder();
     });
 
 });
+
+function refuseOrder() {
+    $.ajax({
+        method: 'POST',
+        url: 'api/order/refuseOrder',
+        contentType: "text/plain",
+        data: getUrlVars()["id"],
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
+            alert(data);
+            document.location.href = "customer.html";
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Error occurred, order wasn't refused");
+            $("#refuseOrder").prop('disabled', false);
+        }
+    })
+}
 
 function getOrderById(id) {
     $.get("api/order/viewQueuedOrder?id=" + id, function (data) {

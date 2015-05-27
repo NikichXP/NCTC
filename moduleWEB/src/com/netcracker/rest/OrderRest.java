@@ -163,6 +163,20 @@ public class OrderRest {
     }
 
     @POST
+    @javax.ws.rs.Path("refuseOrder")
+    public Response refuseOrder(String orderId) {
+        OrderEntity orderEntity = order.read(new BigInteger(orderId));
+        orderEntity.setOrderStateEntity(orderState.findByName("refused"));
+        orderEntity.setTimeCompleted(new Timestamp(new Date().getTime()));
+        order.update(orderEntity);
+        if (orderEntity == null) {
+            return Response.status(404).entity("orderEntity is null.").build();
+        } else {
+            return Response.status(201).entity("Order refused.").build();
+        }
+    }
+
+    @POST
     @javax.ws.rs.Path("updateInProgress")
     @Consumes("application/json")
     public Response updateInProgress(OrderJson orderJson) {
