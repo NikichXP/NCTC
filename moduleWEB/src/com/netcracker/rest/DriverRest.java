@@ -8,6 +8,7 @@ import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
 import com.netcracker.facade.local_int.User;
+import com.netcracker.service.Mail;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -221,6 +222,14 @@ public class DriverRest {
         }
         orderEntity.setOrderStateEntity(orderState.findByName("assigned"));
         order.update(orderEntity);
+        StringBuilder msg = new StringBuilder();
+
+        msg.append("You order status changed.").append("Status: ").append(orderEntity.getOrderStateEntity().getName())
+                .append("\n");
+        msg.append("Your tracking number: http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken=")
+                .append(orderEntity.getPublicToken());
+        String mail = user.findByUuid(orderEntity.getCustomerUserEntity().getUuid()).getEmail();
+        Mail.sendMail(mail, "Taxi Service: order status changed ", msg.toString());
 
         if (orderEntity != null) {
             return Response.status(200).entity("You assigned on this Order.").build();
