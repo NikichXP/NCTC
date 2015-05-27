@@ -1,13 +1,13 @@
 $("#centralButton").click(function () {
-	document.location.href = "updateInProgressOrder.jsp";
+	document.location.href = "updateInProgressOrder.html";
 });
 
 $("#leftButton").click(function(){
-	document.location.href = "driverHystory.jsp";
+	document.location.href = "driverHistory.html";
 })
 
 $("#rightButton").click(function(){
-	document.location.href = "setting.jsp";
+	document.location.href = "setting.html";
 })
 //Apply style to dynamically creater divs (Order Blocks).
 //TO BE COMPLETED. Style constant must be developed
@@ -29,5 +29,5 @@ $(".mainSection").on('click', 'div.orderPlate', function(event) {
 });
 
 function goBack () {
-	document.location.href = 'driver.jsp'
+	document.location.href = 'driver.html'
 }

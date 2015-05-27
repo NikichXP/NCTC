@@ -17,7 +17,7 @@ $(document).ready(function () {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert('You have no "in progress" order.');
-            document.location.href = "driver.jsp";
+            document.location.href = "driver.html";
         }
     });
     $('body').click(updatePrice);
@@ -39,7 +39,7 @@ function completeOrder() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert(data);
-            document.location.href = "driver.jsp";
+            document.location.href = "driver.html";
         },
         error: function (jqXHR, textStatus, errorThrown) {
             fillPageWithData();

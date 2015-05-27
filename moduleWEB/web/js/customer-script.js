@@ -3,7 +3,7 @@ var counter = 0;
 //Creating Order Blocks (in form of div in html code) by pressing MAKE ORDER button.
 //Do not delete! This function will be required later
 $("#centralButton").click(function () {
-	document.location.href = "createOrder.jsp";
+	document.location.href = "createOrder.html";
 	//var newOrderPlate = document.createElement('div');
 	//newOrderPlate.className = 'orderPlate';
 	//newOrderPlate.id = 'taxiOrder'  + counter++;
@@ -13,11 +13,11 @@ $("#centralButton").click(function () {
 });
 
 $("#leftButton").click(function () {
-	document.location.href = "customerOrderHistory.jsp";
+	document.location.href = "customerOrderHistory.html";
 });
 
 $("#rightButton").click(function () {
-	document.location.href = "setting.jsp";
+	document.location.href = "setting.html";
 });
 
 

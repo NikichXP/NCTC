@@ -27,10 +27,10 @@ $(document).ready(function () {
             success: function (data, textStatus, jqXHR) {
                 alert(data);
                 if (jqXHR.status == 200) {
-                    document.location.href = "updateInProgressOrder.jsp";
+                    document.location.href = "updateInProgressOrder.html";
                 }
                 if (jqXHR.status == 201) {
-                    document.location.href = "driver.jsp";
+                    document.location.href = "driver.html";
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {

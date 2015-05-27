@@ -107,9 +107,9 @@ function createTable(data, table) {
 }
 
 function redirect(id) {
-    document.location.href = "viewOrder.jsp?id=" + id;
+    document.location.href = "viewOrder.html?id=" + id;
 };
 
 function goBack(){
-    document.location.href = "customer.jsp"
+    document.location.href = "customer.html"
 }

@@ -93,7 +93,7 @@ function setDataToUserField(date) {
 
 
 $("#back").click(function () {
-    document.location.href = "customer.jsp";
+    document.location.href = "customer.html";
 })
 
 $("#edit").click(function () {
@@ -123,7 +123,7 @@ function editUser(stringify) {
         data: stringify,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            document.location.href = "customer.jsp"
+            document.location.href = "customer.html"
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);

@@ -45,12 +45,12 @@ $('#registration-submit').click(function(){
 });
 
 $('#order-wo-reg-submit').click(function(){
-	document.location.href = "createOrderWithoutRegistration.jsp";
+	document.location.href = "createOrderWithoutRegistration.html";
 });
 
 $('#track-TO-submit').click(function(){
 	if(!validatePublicTokenData()) return;
-	document.location.href = "viewOrderByPublicToken.jsp?publicToken=" + $('#tracking-id').val();
+	document.location.href = "viewOrderByPublicToken.html?publicToken=" + $('#tracking-id').val();
 });
 
 function redirectWithAccessLevels(userData, url) {
@@ -83,9 +83,9 @@ function getAccessLevels(uuid) {
 			//alert("User access levels: " + jqXHR.responseText);
 			var obj = JSON.parse(data);
 			if (obj.userAccessLevel.length == 1) {
-				document.location.href = obj.userAccessLevel[0].level + '.jsp';
+				document.location.href = obj.userAccessLevel[0].level + '.html';
 			} else {
-				document.location.href = "accessLevel.jsp";
+				document.location.href = "accessLevel.html";
 			}
 
 		},

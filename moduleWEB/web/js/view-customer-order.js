@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $("#submitButton").click(function () {
         $("#submitButton").prop('disabled', true);
-            document.location.href = "customer.jsp";
+            document.location.href = "customer.html";
     });
 
 });

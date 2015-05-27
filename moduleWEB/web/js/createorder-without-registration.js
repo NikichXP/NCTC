@@ -63,7 +63,7 @@ function submitOrder() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert("Order successfully created.\nOrder details were sent to your email.");
-            document.location.href = "index.jsp";
+            document.location.href = "index.html";
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $("#basic-order-submit").prop('disabled', false);

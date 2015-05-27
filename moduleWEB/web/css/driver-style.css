@@ -73,7 +73,7 @@ body{
   max-height: 220px;
   overflow: scroll;
 }
-.mainSectionHystory {
+.mainSectionHistory {
   width: 99%;
   height: 100%;
   position: absolute;
@@ -94,7 +94,7 @@ body{
   padding-left: 10px;
 }
 
-.mainSectionHystory h4 {
+.mainSectionHistory h4 {
   line-height: 50%;
   color: white;
   padding-left: 10px;
@@ -162,20 +162,20 @@ body{
   right: 10px;
   width: 30%;
 }
-#leftButtonHystory {
+#leftButtonHistory {
   display: inline-block;
   margin-left: 4.5%;
   left: 60px;
   width: 30%;
 
 }
-#centralButtonHystory {
+#centralButtonHistory {
   margin-left: auto;
   margin-right: auto;
   display: inline-block;
   width: 30%;
 }
-#rightButtonHystory {
+#rightButtonHistory {
 
   display: inline-block;
   right: 30px;

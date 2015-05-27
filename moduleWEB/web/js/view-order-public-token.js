@@ -95,7 +95,7 @@ function getOrderById(publicToken) {
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
-            document.location.href = "index.jsp";
+            document.location.href = "index.html";
         }
     });
 }

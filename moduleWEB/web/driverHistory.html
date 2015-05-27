@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<!--
+  Created by IntelliJ IDEA.
+  User: Juger
+  Date: 15.05.2015
+  Time: 14:24
+  To change this template use File | Settings | File Templates.
+-->
 <html lang="en" ng-app="nctc">
 <head>
     <meta charset="utf-8">
@@ -17,6 +23,12 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body class="container">
 
@@ -37,32 +49,25 @@
 
 <!--Main section. On this particular page Taxi Orders appear in this section in form of divs.
 blocks contain brief information about order-->
-<div class="mainSectionHystory" id="customerOrdersPanel">
+<div class="mainSectionHistory" id="customerOrdersPanel">
     <div class="col-md-12 mt">
 
         <h4> History orders</h4>
-        <hr> <h5> Sort by</h5>
-        <div class="button" id="leftButtonHystory">
+        <hr>
+        <h5> Sort by</h5>
+
+        <div class="button" id="leftButtonHistory">
             DATE
         </div>
-        <div class="button" id="centralButtonHystory">
+        <div class="button" id="centralButtonHistory">
             COST
         </div>
-        <div class="button" id="rightButtonHystory">
+        <div class="button" id="rightButtonHistory">
             DISTANCE
         </div>
-        <table id="historyOrderTable" class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>StartOrder</th>
-                <th>EndOrder</th>
-                <th>Cost</th>
-                <th>Distance</th>
-            </tr>
-            </thead>
-        </table>
+        <hr>
+        <div id="driverOrdersHistory">
+        </div>
     </div>
 
 </div>
@@ -70,7 +75,7 @@ blocks contain brief information about order-->
 
 <!--footer-->
 <div class="footer">
-    <div class="button" id="centralButtonBack">
+    <div class="button" id="centralButtonBack" onclick="goBack()">
         BACK
     </div>
 </div>
@@ -83,5 +88,7 @@ blocks contain brief information about order-->
 <script src="js/driver-script.js"></script>
 <!--set information about user-->
 <script src="js/user-data-by-uuid.js" type="text/javascript"></script>
+
+<script src="js/driver-history.js" type="text/javascript"></script>
 
 </body>

@@ -29,7 +29,7 @@ $(document).ready(function () {
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 alert(data);
-                document.location.href = "driver.jsp";
+                document.location.href = "driver.html";
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert(jqXHR.responseText);

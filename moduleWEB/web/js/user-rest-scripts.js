@@ -9,7 +9,7 @@ $("#order-history-submit").click(function(){
 });
 
 $("#create-order-submit").click(function(){
-	document.location.href = "createOrder.jsp";
+	document.location.href = "createOrder.html";
 });
 
 function setTableHistoryOrder(url) {
@@ -56,13 +56,13 @@ function setUserData(userData, url){
 			var index = 0;
 			for (var i = 0; i < obj.userAccessLevel.length; i++) {
 				str = str + '<a href="' + obj.userAccessLevel[i].level
-					+ '.jsp">Login as: '
+					+ '.html">Login as: '
 					+ obj.userAccessLevel[i].level
 					+ '</a>' + '<br>';
 				index++;
 			}
 			if (index == 1) {
-				document.location.href = obj.userAccessLevel[0].level + '.jsp';
+				document.location.href = obj.userAccessLevel[0].level + '.html';
 			} else {
 				document.getElementById("accessLevel").innerHTML = str;
 			}

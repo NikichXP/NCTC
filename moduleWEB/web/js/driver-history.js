@@ -13,7 +13,7 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-$('#leftButtonHystory').click(function(){
+$('#leftButtonHistory').click(function(){
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -31,7 +31,7 @@ $('#leftButtonHystory').click(function(){
         })
     }
 });
-$('#centralButtonHystory').click(function(){
+$('#centralButtonHistory').click(function(){
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -49,7 +49,7 @@ $('#centralButtonHystory').click(function(){
         })
     }
 });
-$('#rightButtonHystory').click(function(){
+$('#rightButtonHistory').click(function(){
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -113,5 +113,5 @@ function createTable(data, table) {
 }
 
 function redirect(id) {
-    document.location.href = "viewOrder.jsp?id=" + id;
+    document.location.href = "viewOrder.html?id=" + id;
 };

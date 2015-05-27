@@ -13,7 +13,7 @@ function checkCookie(name) {
     if (myCookie == null) {
         // do cookie doesn't exist stuff;
         alert("Please log in");
-        document.location.href = "index.jsp";
+        document.location.href = "index.html";
     }
     else {
         // do cookie exists stuff
@@ -35,5 +35,5 @@ function deleteAllCookies() {
         var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     }
-    document.location.href = "index.jsp";
+    document.location.href = "index.html";
 }

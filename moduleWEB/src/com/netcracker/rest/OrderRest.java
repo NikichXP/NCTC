@@ -342,17 +342,17 @@ public class OrderRest {
         switch ("local") {
             case "local":
                 //TODO local port may be different
-                msg = "http://localhost:8081/moduleWEB_war_archive/viewOrderByPublicToken.jsp?publicToken="
+                msg = "http://localhost:8081/moduleWEB_war_archive/viewOrderByPublicToken.html?publicToken="
                         + orderEntity.getPublicToken();
                 Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
                 break;
             case "remote":
-                msg = "http://178.151.17.247/nctc/viewOrderByPublicToken.jsp?publicToken="
+                msg = "http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken="
                         + orderEntity.getPublicToken();
                 Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
                 break;
             default:
-                msg = "http://localhost:8081/moduleWEB_war_archive/viewOrderByPublicToken.jsp?publicToken="
+                msg = "http://localhost:8081/moduleWEB_war_archive/viewOrderByPublicToken.html?publicToken="
                         + orderEntity.getPublicToken();
                 Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
         }
