@@ -30,9 +30,9 @@ public class JSON {
         json.setId(userEntity.getId().toString());
         json.setEmail(userEntity.getEmail());
         json.setPass(userEntity.getPassword());
-        json.setUserSex(userEntity.getSex());
-        json.setAnimalFriendly(userEntity.getAnimalFriendly().toString());
-        json.setSmokingFriendly(userEntity.getSmokingFriendly().toString());
+//        json.setUserSex(userEntity.getSex());
+//        json.setAnimalFriendly(userEntity.getAnimalFriendly().toString());
+//        json.setSmokingFriendly(userEntity.getSmokingFriendly().toString());
         json.setUuid(userEntity.getUuid());
         return json;
     }
