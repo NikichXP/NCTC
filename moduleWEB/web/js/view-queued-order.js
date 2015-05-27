@@ -5,44 +5,52 @@
 var obj;
 
 $(document).ready(function () {
-    $(function ($) {
-        $("#timeOfDriverArrival").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy HH:mm"});
-    });
-    getUrlVars();
-    ymaps.ready(function(){
-        init();
-        getOrderById(getUrlVars()["id"]);
-    });
+    var uuid = getCookie("uuid");
 
-    $("#assignButton").click(function () {
-        $("#assignButton").prop('disabled', true);
-        var JSONdata = {
-            id: obj.id,
-            driverUserUuid: getCookie("uuid"),
-            timeOfDriverArrival: $("#timeOfDriverArrival").val()
-        }
-        $.ajax({
-            method: 'POST',
-            url: 'api/driver/assign',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(JSONdata),
-            dataType: 'text',
-            success: function (data, textStatus, jqXHR) {
-                alert(data);
-                document.location.href = "driver.html";
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText);
-                $("#assignButton").prop('disabled', false);
+    if(uuid != null) {
+        $(function ($) {
+            $("#timeOfDriverArrival").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy HH:mm"});
+        });
+
+        getUrlVars();
+        ymaps.ready(function () {
+            init();
+            getOrderById(getUrlVars()["id"]);
+        });
+
+        $("#assignButton").click(function () {
+            $("#assignButton").prop('disabled', true);
+            var JSONdata = {
+                id: obj.id,
+                driverUserUuid: uuid,
+                timeOfDriverArrival: $("#timeOfDriverArrival").val()
             }
-        })
-    });
-
+            $.ajax({
+                method: 'POST',
+                url: 'api/driver/assign',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(JSONdata),
+                dataType: 'text',
+                success: function (data, textStatus, jqXHR) {
+                    alert(data);
+                    document.location.href = "driver.html";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    $("#assignButton").prop('disabled', false);
+                }
+            })
+        });
+    } else {
+        document.location.href = "index.html";
+    }
 });
 
 function getOrderById(id) {
     $.get("api/order/viewQueuedOrder?id=" + id, function (data) {
         obj = JSON.parse(data);
+        $("#orderState").text("Status: " + obj.state);
+
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
@@ -117,7 +125,7 @@ function getOrderById(id) {
         $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
         $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
-        $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
+        $("#customerPreCreateComment").text(obj.customerPreCreateComment);
     });
 }
 

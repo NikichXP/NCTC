@@ -107,6 +107,8 @@ function fillPageWithData() {
         }
 
         var obj = JSON.parse(data);
+        $("#orderState").text("Status: " + obj.state);
+
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
 

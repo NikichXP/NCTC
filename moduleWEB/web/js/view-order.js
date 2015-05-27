@@ -2,10 +2,15 @@
  * Created by Ubuntu on 20.05.2015.
  */
 $(document).ready(function () {
-    ymaps.ready(function(){
-        init();
-        getOrderById(getUrlVars()["id"]);
-    });
+    var uuid = getCookie("uuid");
+    if(uuid != null) {
+        ymaps.ready(function () {
+            init();
+            getOrderById(getUrlVars()["id"]);
+        });
+    } else {
+        document.location.href = "index.html";
+    }
 });
 
 function getOrderById(id) {
@@ -99,4 +104,10 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
 }
