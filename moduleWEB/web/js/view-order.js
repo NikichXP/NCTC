@@ -83,9 +83,9 @@ function getOrderById(id) {
             $('input:checkbox[id=airConditioner]').prop('checked', true);
         }
 
-        $("#totalMultiplier").attr("value", obj.totalMultiplier);
-        $("#totalLength").attr("value", obj.totalLength);
-        $("#totalPrice").attr("value", obj.totalPrice);
+        $("#totalMultiplier").attr("value", parseFloat(obj.totalMultiplier).toFixed(2));
+        $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
+        $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
     });

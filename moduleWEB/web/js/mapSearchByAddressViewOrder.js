@@ -11,7 +11,6 @@ function init() {
 }
 
 function makeSearch(element) {
-    alert(element.value + " " + element.id);
     var myGeocoder = ymaps.geocode(element.value, {
         results: 1
     });
@@ -53,11 +52,11 @@ function buildPath(index) {
         myMap.geoObjects.add(route);
             var Paths=route.getPaths();
             for(var i = 0; i < Paths.getLength(); i++) {
-                document.getElementById('distance'+i).value = Paths.get(i).getLength()/1000;
+                document.getElementById('distance'+i).value = parseFloat(Paths.get(i).getLength()/1000).toFixed(2);
                 console.log(Paths.get(i).getLength());
             }
             //console.log(Paths);
-            document.getElementById('totalLength').value = route.getLength()/1000;
+            document.getElementById('totalLength').value = parseFloat(route.getLength()/1000).toFixed(2);
     }, function (error) {
         //alert("An error occurred: " + error.message);
     });

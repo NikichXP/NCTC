@@ -39,7 +39,7 @@ public class OrderRest {
     @EJB
     private com.netcracker.facade.local_int.Path path;
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     @POST
     @javax.ws.rs.Path("getOrderInProgressByDriverUUID")

@@ -60,6 +60,7 @@ function removeCurrentPath() {
         }
         index++;
     }
+    buildPath($("[id^='toAddress']").length - 1);
     setUnlock("#submitUpdate");
     setUnlock("#revertUpdate");
 }
@@ -67,7 +68,6 @@ function removeCurrentPath() {
 function completeCurrentPath() {
     disableAllButtons();
     var currentPathIndex = getCurrentPathIndex();
-    alert("#toAddress" + currentPathIndex);
     $("#toAddress" + currentPathIndex).attr("disabled", "disabled");
     $("#pathCompleted" + currentPathIndex).attr("value", true);
     setUnlock("#submitUpdate");
@@ -165,21 +165,24 @@ function fillPageWithData() {
         if (obj.wifi == "true") $('input:checkbox[id=wifi]').prop('checked', true);
         if (obj.airConditioner == "true") $('input:checkbox[id=airConditioner]').prop('checked', true);
 
-        $("#totalMultiplier").attr("value", obj.totalMultiplier);
-        $("#totalLength").attr("value", obj.totalLength);
-        $("#totalPrice").attr("value", obj.totalPrice);
+        $("#totalMultiplier").attr("value", parseFloat(obj.totalMultiplier).toFixed(2));
+        $("#totalLength").attr("value", parseFloat(obj.totalLength).toFixed(2));
+        $("#totalPrice").attr("value", parseFloat(obj.totalPrice).toFixed(2));
 
         $("#customerPreCreateComment").attr("value", obj.customerPreCreateComment);
         updatePrice();
 
         setUnlock("#addPathPoint");
         if (!isAllPathsCompleted()) {
-            setUnlock("#removeCurrentPath");
             setUnlock("#completeCurrentPath");
+            if ($("[id^='toAddress']").length > 1) {
+                setUnlock("#removeCurrentPath");
+            }
         } else {
             setUnlock("#completeOrder");
         }
     });
+    updatePrice();
 }
 
 function submitUpdate() {
@@ -246,7 +249,7 @@ function validateBasicOrderData() {
         alert("Wrong uuid cookie");
         return false;
     }
-    if ( $("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
+    if ($("#toAddress" + counter).val().length == 0 || $("#toX" + counter).val().length == 0
         || $("#toY" + counter).val().length == 0) {
         alert("Select proper destination address.");
         return false;
@@ -312,7 +315,6 @@ function addPathPoint() {
         addedInput4.setAttribute("id", "distance" + indexOfInProgress);
 
         var lastToAddress = document.getElementById("toAddress" + (parseInt(indexOfInProgress) + 1));
-        alert(lastToAddress.id);
         outer.insertBefore(addedInput, lastToAddress);
         outer.insertBefore(addedInput2, lastToAddress);
         outer.insertBefore(addedInput3, lastToAddress);
@@ -374,5 +376,5 @@ function clearToXY(element) {
 
 function updatePrice() {
     var totalMultiplier = $("#totalMultiplier").val();
-    $("#totalPrice").val(totalMultiplier * $("#totalLength").val());
+    $("#totalPrice").val(parseFloat(totalMultiplier * $("#totalLength").val()).toFixed(2));
 }

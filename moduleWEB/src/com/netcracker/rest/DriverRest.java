@@ -35,7 +35,7 @@ public class DriverRest {
     @EJB
     private User user;
 
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     @POST
     @Path("getQueuedOrders")
@@ -223,9 +223,9 @@ public class DriverRest {
         order.update(orderEntity);
 
         if (orderEntity != null) {
-            return Response.status(200).entity("You assign on this Order.").build();
+            return Response.status(200).entity("You assigned on this Order.").build();
         } else {
-            return Response.status(404).entity("Bad response order not assign.").build();
+            return Response.status(404).entity("Bad response. You didn't assign on this Order.").build();
         }
     }
 
@@ -242,11 +242,11 @@ public class DriverRest {
                 orderEntity.setOrderStateEntity(orderState.findByName("in progress"));
                 orderEntity.setTimeStarted(new Timestamp(new Date().getTime()));
                 order.update(orderEntity);
-                return Response.status(200).entity("You start this Order.").build();
-            } else return Response.status(201).entity("Already you have order in progress.").build();
+                return Response.status(200).entity("You started this order.").build();
+            } else return Response.status(201).entity("You have \"in progress\" order already.").build();
         } else {
             if (orderEntity != null) {
-                return Response.status(201).entity("This order not assigned is now.").build();
+                return Response.status(201).entity("Customer refused or updated this order.").build();
             } else {
                 return Response.status(404).entity("Bad response. Order not found in DB.").build();
             }

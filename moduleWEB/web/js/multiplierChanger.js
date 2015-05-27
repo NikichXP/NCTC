@@ -15,7 +15,6 @@ function getTariffs(orderTypeName) {
         data: orderTypeName,
         dataType: 'text',
         success: function (data) {
-            alert("1");
             var obj = JSON.parse(data);
             var str = 'OrderTypeRate:<br><input id="orderTypeRate" value="' + obj.orderTypeRate + '" /><br>1-Day,2-Night<br>';
 alert(data);

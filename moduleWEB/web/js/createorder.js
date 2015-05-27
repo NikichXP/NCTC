@@ -193,7 +193,7 @@ function getCookie(name) {
 }
 
 jQuery(function ($) {
-    $("#timeRequested").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy hh:mm"});
+    $("#timeRequested").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy HH:mm"});
 });
 var counter = 0;
 var isDeleteExists = false;
@@ -308,8 +308,8 @@ function updateMultiplierAndPrice() {
     if ($("#animalFriendly").is(':checked')) totalMultiplier *= $("#animalFriendly").attr("multiplier");
     if ($("#wifi").is(':checked')) totalMultiplier *= $("#wifi").attr("multiplier");
     if ($("#airConditioner").is(':checked')) totalMultiplier *= $("#airConditioner").attr("multiplier");
-    $("#totalMultiplier").val(totalMultiplier);
-    $("#totalPrice").val(totalMultiplier * $("#totalLength").val());
+    $("#totalMultiplier").val(parseFloat(totalMultiplier).toFixed(2));
+    $("#totalPrice").val(parseFloat(totalMultiplier * $("#totalLength").val()).toFixed(2));
 }
 
 function validateTime(input) {
