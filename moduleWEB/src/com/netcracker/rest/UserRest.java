@@ -277,7 +277,7 @@ public class UserRest {
         return Response.status(201).entity("" +
                 "<script>" +
                 "alert('Email confirmed');" +
-                "document.location.href = \"http://localhost:8080/moduleWEB_war_archive/customer.html\";" +
+                "document.location.href = \"http://178.151.17.247/nctc/customer.html\";" +
                 "</script>").build(); //TODO change to real url
     }
 
