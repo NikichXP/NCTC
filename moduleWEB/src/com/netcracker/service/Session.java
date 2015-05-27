@@ -2,7 +2,7 @@ package com.netcracker.service;
 
 import com.netcracker.entity.UserEntity;
 
-import java.time.*;
+import java.time.LocalDateTime;
 
 /** Created by NikichXP on 04.05.2015. */
 public class Session {

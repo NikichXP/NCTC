@@ -1,9 +1,7 @@
 package com.netcracker.rest;
 
 import com.netcracker.entity.CarClassEntity;
-import com.netcracker.entity.MusicTypeEntity;
 import com.netcracker.facade.local_int.CarClass;
-import com.netcracker.facade.local_int.MusicType;
 
 import javax.ejb.EJB;
 import javax.ws.rs.POST;

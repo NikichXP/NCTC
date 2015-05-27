@@ -1,8 +1,11 @@
 package com.netcracker.service;
 
 import com.netcracker.entity.UserEntity;
+
 import javax.ejb.Singleton;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.UUID;
 
 /**
  * Created by NikichXP on 04.05.2015.

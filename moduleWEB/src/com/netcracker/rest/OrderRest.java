@@ -5,12 +5,13 @@ import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.*;
-import com.netcracker.rest.utils.SecuritySettings;
 import com.netcracker.service.Mail;
-import org.glassfish.jersey.internal.util.collection.StringIgnoreCaseKeyComparator;
 
 import javax.ejb.EJB;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 import java.math.BigInteger;

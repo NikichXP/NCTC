@@ -1,9 +1,5 @@
 package com.netcracker.classes;
 
-import com.netcracker.entity.CarEntity;
-
-import java.math.BigInteger;
-
 /**
  * Created by Juger on 20.05.2015.
  */

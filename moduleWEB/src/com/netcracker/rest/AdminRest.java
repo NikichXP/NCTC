@@ -1,7 +1,5 @@
 package com.netcracker.rest;
 
-import com.netcracker.classes.Point;
-import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.User;
 

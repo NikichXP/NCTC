@@ -1,9 +1,9 @@
 package com.netcracker.rest;
 
-import com.netcracker.entity.*;
+import com.netcracker.entity.CarEntity;
+import com.netcracker.entity.UserEntity;
 import com.netcracker.facade.local_int.Car;
 import com.netcracker.facade.local_int.DriverCategory;
-import com.netcracker.facade.local_int.MusicType;
 import com.netcracker.facade.local_int.User;
 
 import javax.ejb.EJB;

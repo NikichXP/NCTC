@@ -2,15 +2,11 @@ package com.netcracker.facade.impl;
 
  /* 18:42 28.04.2015 by Viktor Taranenko */
 
-import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.PathEntity;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
 
 @Stateless
 public class PathFacade extends AbstractFacade<PathEntity> implements com.netcracker.facade.local_int.Path {

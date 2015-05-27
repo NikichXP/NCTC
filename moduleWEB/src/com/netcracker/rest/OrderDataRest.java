@@ -2,7 +2,6 @@ package com.netcracker.rest;
 
 import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
-import com.netcracker.entity.OrderStateEntity;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
 import com.netcracker.facade.local_int.User;

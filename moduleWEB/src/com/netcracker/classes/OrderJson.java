@@ -1,7 +1,5 @@
 package com.netcracker.classes;
 
-import java.util.Arrays;
-
 public class OrderJson {
 
     private String id;

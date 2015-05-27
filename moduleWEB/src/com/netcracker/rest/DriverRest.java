@@ -4,22 +4,23 @@ import com.netcracker.classes.OrderJson;
 import com.netcracker.classes.Point;
 import com.netcracker.entity.OrderEntity;
 import com.netcracker.entity.OrderStateEntity;
-import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.Order;
 import com.netcracker.facade.local_int.OrderState;
 import com.netcracker.facade.local_int.User;
 import com.netcracker.service.Mail;
 
 import javax.ejb.EJB;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.io.File;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Ubuntu on 19.05.2015.

@@ -3,7 +3,6 @@ package com.netcracker.rest;
 import com.netcracker.entity.DriverCategoryEntity;
 import com.netcracker.facade.local_int.DriverCategory;
 
-
 import javax.ejb.EJB;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
