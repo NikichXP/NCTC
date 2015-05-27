@@ -26,6 +26,8 @@ function setList(){
                 //alert(jqXHR.responseText + " Error!");
             }
         })
+    } else {
+        document.location.href = "index.html";
     }
 }
 

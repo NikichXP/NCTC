@@ -70,7 +70,7 @@ function setHistory(){
             createTable(obj.orderHistory, "driverOrdersHistory");
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText + " Error!");
+            //alert(jqXHR.responseText + " Error!");
         }
     })
 }

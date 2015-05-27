@@ -68,7 +68,6 @@ function getDataToUserField() {
             dataType: 'text',
             success: function (data, textStatus, jqXHR) {
                 var obj = JSON.parse(data);
-                alert(data);
                 setDataToUserField(obj.userData[0]);
             },
             error: function (jqXHR, textStatus, errorThrown) {
