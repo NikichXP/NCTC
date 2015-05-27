@@ -42,6 +42,7 @@ public class OrderRest {
     private com.netcracker.facade.local_int.Path path;
 
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private static String url = "http://178.151.17.247/nctc/";
 
     @POST
     @javax.ws.rs.Path("getOrderInProgressByDriverUUID")
@@ -145,7 +146,8 @@ public class OrderRest {
         StringBuilder msg = new StringBuilder();
         msg.append("You created order. ").append("Status: ").append(orderEntity.getOrderStateEntity().getName())
                 .append("\n");
-        msg.append("Your tracking number: http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken=")
+        msg.append("Your tracking number: ").append(url)
+                .append("viewOrderByPublicToken.html?publicToken=")
                 .append(orderEntity.getPublicToken());
         String mail = user.findByUuid(orderJson.getCustomerUserUuid()).getEmail();
         Mail.sendMail(mail, "Taxi Service: order status changed ", msg.toString());
@@ -220,7 +222,6 @@ public class OrderRest {
         path.create(firstPathEntity);
 
         pathEntities.add(firstPathEntity);
-
 
 
         for (int i = 0; i < orderJson.getToAddress().length - 1; i++) {
@@ -360,27 +361,14 @@ public class OrderRest {
         orderEntity.setFinalPrice(totalPrice);
         orderEntity.setTotalLength(totalLength);
         order.create(orderEntity);
-
-        String msg;
-        switch ("remote") {
-            case "local":
-                //TODO local port may be different
-                msg = "Your tracking number: http://localhost:8081/"
-                        + "moduleWEB_war_archive/viewOrderByPublicToken.html?publicToken="
-                        + orderEntity.getPublicToken();
-                Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
-                break;
-            case "remote":
-                msg = "Your tracking number: http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken="
-                        + orderEntity.getPublicToken();
-                Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
-                break;
-            default:
-                msg = "Your tracking number: http://localhost:8081/"
-                        +"moduleWEB_war_archive/viewOrderByPublicToken.html?publicToken="
-                        + orderEntity.getPublicToken();
-                Mail.sendMail(orderJson.getEmail(), "Taxi Service: View order ", msg);
-        }
+        StringBuilder msg = new StringBuilder();
+        msg.append("You created order. ").append("Status: ").append(orderEntity.getOrderStateEntity().getName())
+                .append("\n");
+        msg.append("Your tracking number: ").append(url)
+                .append("viewOrderByPublicToken.html?publicToken=")
+                .append(orderEntity.getPublicToken());
+        String mail = orderJson.getEmail();
+        Mail.sendMail(mail, "Taxi Service: order status changed ", msg.toString());
 
         if (orderJson == null) {
             return Response.status(404).entity("OrderJson is null.").build();

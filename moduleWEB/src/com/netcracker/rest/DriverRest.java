@@ -38,6 +38,7 @@ public class DriverRest {
     private User user;
 
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private static String url = "http://178.151.17.247/nctc/";
 
     @POST
     @Path("getQueuedOrders")
@@ -227,7 +228,8 @@ public class DriverRest {
 
         msg.append("You order status changed.").append("Status: ").append(orderEntity.getOrderStateEntity().getName())
                 .append("\n");
-        msg.append("Your tracking number: http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken=")
+        msg.append("Your tracking number: ").append(url)
+                .append("viewOrderByPublicToken.html?publicToken=")
                 .append(orderEntity.getPublicToken());
         String mail = user.findByUuid(orderEntity.getCustomerUserEntity().getUuid()).getEmail();
         Mail.sendMail(mail, "Taxi Service: order status changed ", msg.toString());
