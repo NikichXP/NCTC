@@ -17,7 +17,7 @@ public class JSON {
         json.setAirConditioner(carEntity.getAirCondition().toString());
         json.setRequiredDriverCategory(carEntity.getDriverCategoryEntity().getName());
         json.setSeatCount(carEntity.getSeatsCount().toString());
-        json.setUserId(carEntity.getUserEntity().getId().toString());
+        //json.setUserId(carEntity.getUserEntity().getId().toString());
         return json;
     }
 

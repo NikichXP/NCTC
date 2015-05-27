@@ -246,11 +246,13 @@ public class UserRest {
 
     private UserEntity editUserEntityByJson(UserJson userJson){
         UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
-        userEntity.setPhone("380000000000");
-        userEntity.setEmail("a@mial.com");
-        user.update(userEntity);
+//        userEntity.setPhone("380000000000");
+//        userEntity.setEmail("a@mial.com");
+//        user.update(userEntity);
         String randomUuid = UUID.randomUUID().toString();
-        if (!user.isEmailUsed(userJson.getEmail()) || !user.isPhoneUsed(userJson.getPhone())) {
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone()) ||
+                userEntity.getEmail().equals(userJson.getEmail()) ||
+                userEntity.getPhone().equals(userJson.getPhone().replace("+", "").replace(" ", ""))) {
             userEntity.setFirstName(userJson.getFirstName());
             userEntity.setLastName(userJson.getLastName());
             userEntity.setPassword(userJson.getPass());
@@ -391,7 +393,8 @@ public class UserRest {
 //        userEntity.setEmail("a@mial.com");
 //        user.update(userEntity);
         if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone()) ||
-                userEntity.getEmail().equals(userJson.getEmail()) || userEntity.getPhone().equals(userJson.getPhone().replace("+", "").replace(" ", ""))) {
+                userEntity.getEmail().equals(userJson.getEmail()) ||
+                userEntity.getPhone().equals(userJson.getPhone().replace("+", "").replace(" ", ""))) {
             userEntity.setFirstName(userJson.getFirstName());
             userEntity.setLastName(userJson.getLastName());
             userEntity.setPassword(userJson.getPass());
