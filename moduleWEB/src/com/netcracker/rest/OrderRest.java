@@ -7,6 +7,7 @@ import com.netcracker.entity.PathEntity;
 import com.netcracker.facade.local_int.*;
 import com.netcracker.rest.utils.SecuritySettings;
 import com.netcracker.service.Mail;
+import org.glassfish.jersey.internal.util.collection.StringIgnoreCaseKeyComparator;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -140,6 +141,13 @@ public class OrderRest {
         orderEntity.setFinalPrice(totalPrice);
         orderEntity.setTotalLength(totalLength);
         order.create(orderEntity);
+        StringBuilder msg = new StringBuilder();
+        msg.append("You created order. ").append("Status: ").append(orderEntity.getOrderStateEntity().getName())
+                .append("\n");
+        msg.append("Your tracking number: http://178.151.17.247/nctc/viewOrderByPublicToken.html?publicToken=")
+                .append(orderEntity.getPublicToken());
+        String mail = user.findByUuid(orderJson.getCustomerUserUuid()).getEmail();
+        Mail.sendMail(mail, "Taxi Service: order status changed ", msg.toString());
 
         if (orderJson == null) {
             return Response.status(404).entity("OrderJson is null.").build();
