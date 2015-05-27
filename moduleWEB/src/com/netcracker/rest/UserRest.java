@@ -16,7 +16,10 @@ import com.netcracker.service.SessionHandler;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collection;
@@ -171,9 +174,13 @@ public class UserRest {
             userEntity.setUuid(randomUuid);
             userEntity.setUserAccessLevelEntities(Arrays.asList(userAccessLevel.read(new BigInteger("2"))));
             user.create(userEntity);
-            Mail.sendMail(userJson.getEmail(), "Taxi Service confirmation",
-                    "http://178.151.17.247/nctc/api/user/confirm?encryptedUuid="
-                            + SecuritySettings.encrypt(randomUuid));
+            try {
+                Mail.sendMail(userJson.getEmail(), "Taxi Service confirmation",
+                        "http://178.151.17.247/nctc/api/user/confirm?encryptedUuid="
+                                + URLEncoder.encode(SecuritySettings.encrypt(randomUuid), "UTF-8" ));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             //TODO Replace with real URL
         }
         if (userEntity == null) {
@@ -269,8 +276,9 @@ public class UserRest {
     @Path("confirm")
     public Response confirm(@QueryParam("encryptedUuid") String encryptedUuid) {
         UserEntity userEntity = user.findByUuid(SecuritySettings.decrypt(encryptedUuid));
+
         if (userEntity == null) {
-            return Response.status(404).entity("Wrong user uuid passed").build();
+            return Response.status(404).entity("Wrong user uuid passed\n" + encryptedUuid).build();
         }
         userEntity.setConfirmed(true);
         user.update(userEntity);

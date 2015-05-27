@@ -90,7 +90,8 @@ function getAccessLevels(uuid) {
 
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
-			alert("Seems like DB error.");
+			alert("Seems like DB error. No access.");
+			document.location.href = "index.html";
 		}
 	})
 }
