@@ -19,7 +19,7 @@ function setForm() {
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert(data);
+
             drawForm(obj.userData[0], "#form");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -64,9 +64,9 @@ function drawForm(rowData, table) {
 
 $("#test").click(function () {
 
-    alert("driver add....");
+
     if (!validateRegistrationData()) return;
-    alert("12")
+
     var queryString = window.location.search;
     queryString = queryString.substring(4);
     var JSONdata = {
@@ -79,6 +79,8 @@ $("#test").click(function () {
     };
 
     updateUser(JSONdata);
+    alert("Updated");
+
 
 });
 
@@ -117,7 +119,7 @@ function validateRegistrationData() {
 
 function updateUser(JSONdata) {
 
-    alert(JSON.stringify(JSONdata))
+
     $.ajax({
         method: 'POST',
         url: "api/user/resUpUser",
@@ -125,7 +127,7 @@ function updateUser(JSONdata) {
         data: JSON.stringify(JSONdata),
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
-            alert(data);
+
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -143,11 +145,14 @@ $("#delete").click(function () {
     var queryString = window.location.search;
     queryString = queryString.substring(4);
     deleteDriver(queryString);
+
+
+
 });
 
 
 function deleteDriver(id){
-    alert(id);
+
     var JSONdata = {
         id: id
     };
@@ -161,7 +166,7 @@ function deleteDriver(id){
             alert(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert("Wrong user credentials.");
+            alert("This driver have orders!");
         }
     })
 }

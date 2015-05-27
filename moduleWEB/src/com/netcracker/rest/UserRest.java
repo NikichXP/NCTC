@@ -215,9 +215,9 @@ public class UserRest {
     public Response deleteUserById(UserJson id) {
         user.delete(new BigInteger(id.getId()));
         if (user.read(new BigInteger(id.getId())) == null) {
-            return Response.status(200).entity("Driver is delete").build();
+            return Response.status(200).entity("User is delete").build();
         } else {
-            return Response.status(404).entity("driver is not delete").build();
+            return Response.status(404).entity("User is not delete").build();
         }
     }
 
@@ -434,5 +434,24 @@ public class UserRest {
 //        return userEntity;
 //    }
 //
+
+    @POST
+    @Path("resUpUser")
+    @Consumes("application/json")
+    public Response resUpUser(UserJson userJson) {
+        UserEntity userEntity = user.read(new BigInteger(userJson.getId()));
+        userEntity.setFirstName(userJson.getFirstName());
+        userEntity.setLastName(userJson.getLastName());
+        userEntity.setEmail(userJson.getEmail());
+        userEntity.setPhone(userJson.getPhone());
+        user.update(userEntity);
+
+
+        if (userEntity != null) {
+            return Response.status(200).entity("User updated").build();
+        } else {
+            return Response.status(404).entity("Bad response.").build();
+        }
+    }
 
 }

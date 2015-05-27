@@ -37,6 +37,8 @@ public class AdminRest {
                     .append(userEntity.getLastName())
                     .append("\",\"phone\":\"")
                     .append(userEntity.getPhone())
+                    .append("\",\"email\":\"")
+                    .append(userEntity.getEmail())
                     .append("\",\"id_d\":\"")
                     .append(userEntity.getId())
                     .append("\" },");

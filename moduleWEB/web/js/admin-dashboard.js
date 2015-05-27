@@ -15,3 +15,9 @@ $("#assetManagement").click(function(){
 $("#fareManagement").click(function(){
     document.location.href = "adminFareManagement.html";
 });
+$("#multiplierChanger").click(function(){
+    document.location.href = "multiplierChanger.html";
+});
+$("#users").click(function(){
+    document.location.href = "admin_dashboard.html";
+});

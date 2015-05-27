@@ -16,7 +16,7 @@ function setHistory(){
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             var obj = JSON.parse(data);
-            alert("1")
+
             drawTable(obj.users_tb, "#table");
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -53,12 +53,14 @@ function drawBody(rowData, table) {
     //
     //$(table).append(btn);
 
-    row.append($("<td>" + rowData.phone + "</td></tbody></tr>"));
+    row.append($("<td>" + rowData.phone + "</td>"));
+    row.append($("<td>" + rowData.email + "</td></tbody></tr>"));
 
     row.append($("<td id="+rowData.id_d+'d'+"></td></tr></tbody>"));
     var td = document.getElementById(rowData.id_d+'d');
     var btn = document.createElement('div');
     btn.className = "button";
+
 
     btn.appendChild(document.createTextNode("Modify"));
     td.appendChild(btn);
