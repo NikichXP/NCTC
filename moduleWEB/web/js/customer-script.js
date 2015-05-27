@@ -17,7 +17,7 @@ $("#leftButton").click(function () {
 });
 
 $("#rightButton").click(function () {
-	document.location.href = "../setting.jsp";
+	document.location.href = "setting.jsp";
 });
 
 

@@ -4,7 +4,7 @@ $(document).ready(function () {
 });
 
 var fix = false;
-
+var idRegEx = /^[0-9]{6,12}$/;
 var phoneRegEx = /^\+?[0-9]{6,12}$/;
 var namesRegEx = /^[a-zA-Z\s'\-]+$/;
 var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;

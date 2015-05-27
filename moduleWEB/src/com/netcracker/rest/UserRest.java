@@ -387,10 +387,11 @@ public class UserRest {
     @Consumes("application/json")
     public Response editUser(UserJson userJson) {
         UserEntity userEntity = user.findByUuid(userJson.getUuid());
-        userEntity.setPhone("389999999999");
-        userEntity.setEmail("a@mial.com");
-        user.update(userEntity);
-        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone())) {
+//        userEntity.setPhone("389999999999");
+//        userEntity.setEmail("a@mial.com");
+//        user.update(userEntity);
+        if (!user.isEmailUsed(userJson.getEmail()) && !user.isPhoneUsed(userJson.getPhone()) ||
+                userEntity.getEmail().equals(userJson.getEmail()) || userEntity.getPhone().equals(userJson.getPhone().replace("+", "").replace(" ", ""))) {
             userEntity.setFirstName(userJson.getFirstName());
             userEntity.setLastName(userJson.getLastName());
             userEntity.setPassword(userJson.getPass());
