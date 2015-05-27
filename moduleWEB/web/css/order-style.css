@@ -9,17 +9,23 @@ input {
 }
 
 input[type = text] {
+	font-weight: bold;
 	margin: 5px;
 	width: 98%;
 	height: 27px;
 }
 
 input[type = button] {
+	font-weight: bold;
 	margin: 5px;
 	width: 30%;
 }
 
-input[type = checkbox], input[type = checkbox] {
+input[disabled] {
+	font-weight: unset;
+}
+
+input[type = checkbox] {
 	margin: 7px;
 }
 
