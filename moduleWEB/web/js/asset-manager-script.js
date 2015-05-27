@@ -190,7 +190,7 @@ function drawInputForCar(rowData) {
     document.getElementById("seatCount").value = rowData.seatCount;
     document.getElementById("licencePlate").value = rowData.licencePlate;
     //document.getElementById("classCar").value = rowData.classId;
-    document.getElementById("userId").value = rowData.userId;
+    //document.getElementById("userId").value = rowData.userId;
     //document.getElementById("requiredDriverCategory").value = rowData.requiredDriverCategory;
     document.getElementById("conditioner").value = rowData.airConditioner;
 }
