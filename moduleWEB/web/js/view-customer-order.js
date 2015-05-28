@@ -27,19 +27,20 @@ $(document).ready(function () {
 });
 
 function refuseOrder() {
+    disableAllButtons();
     $.ajax({
         method: 'POST',
         url: 'api/order/refuseOrder',
         contentType: "text/plain",
-        data: getUrlVars()["id"],
+        data: orderId,
         dataType: 'text',
         success: function (data, textStatus, jqXHR) {
             alert(data);
-            document.location.href = "customer.html";
+            document.location.href = "index.html";
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Error occurred, order wasn't refused");
-            $("#refuseOrder").prop('disabled', false);
+            setUnlock("#refuseOrder");
         }
     })
 }
@@ -49,6 +50,12 @@ function getOrderById(id) {
         obj = JSON.parse(data);
         $("#orderState").text("Status: " + obj.state);
 
+        $("#orderState").text("Status: " + obj.state);
+        if ((obj.state != "refused") && (obj.state != "completed")) {
+            setUnlock("#refuseOrder");
+        } else {
+            setLock("#refuseOrder");
+        }
         $("#contactName").attr("value", obj.contactName);
         $("#contactPhone").attr("value", obj.contactPhone);
         $("#requestedSeatsCount").attr("value", obj.requestedSeatsCount);
@@ -139,4 +146,16 @@ function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function disableAllButtons() {
+    $("[type='button']").prop('disabled', true);
+}
+
+function setLock(name) {
+    $(name).prop('disabled', true);
+}
+
+function setUnlock(name) {
+    $(name).prop('disabled', false);
 }
