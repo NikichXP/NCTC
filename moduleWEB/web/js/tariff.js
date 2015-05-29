@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     getTariffs("basic");
 });
 
@@ -15,16 +15,16 @@ function getTariffs(orderTypeName) {
             var str = '<p id="orderTypeRate" multiplier="' + obj.orderTypeRate + '" />';
             for (var i = 0; i < obj.hourlyRates.length; i++) {
                 var innerObj = obj.hourlyRates[i];
-                str += '<p id="hourlyRates'+i+'" fromTimeHHmm="' + innerObj.fromTimeHHmm
-                    +'" toTimeHHmm="' + innerObj.toTimeHHmm
-                    +'" multiplier="' + innerObj.multiplier + '" />';
+                str += '<p id="hourlyRates' + i + '" fromTimeHHmm="' + innerObj.fromTimeHHmm
+                    + '" toTimeHHmm="' + innerObj.toTimeHHmm
+                    + '" multiplier="' + innerObj.multiplier + '" />';
             }
 
             for (var i = 0; i < obj.distanceRates.length; i++) {
                 var innerObj = obj.distanceRates[i];
-                str += '<p id="distanceRates'+i+'" fromTimeHHmm="' + innerObj.fromTimeHHmm
-                    +'" toTimeHHmm="' + innerObj.toTimeHHmm
-                    +'" multiplier="' + innerObj.multiplier + '" />';
+                str += '<p id="distanceRates' + i + '" fromTimeHHmm="' + innerObj.fromTimeHHmm
+                    + '" toTimeHHmm="' + innerObj.toTimeHHmm
+                    + '" multiplier="' + innerObj.multiplier + '" />';
             }
 
             document.getElementById("tariffs").innerHTML = str;

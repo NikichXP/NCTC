@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 13:42 30.04.2015 by Viktor Taranenko */
+
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -22,7 +22,7 @@ public class UserAccessLevelEntity {
 	@OneToMany(mappedBy = "userAccessLevelEntity")
 	private Collection<UserUserAccessLevelEntity> user$UserAccessLevelEntities;
 
-	@ManyToMany (mappedBy = "userAccessLevelEntities")
+	@ManyToMany(mappedBy = "userAccessLevelEntities")
 	private Collection<UserEntity> userEntities;
 
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)

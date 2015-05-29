@@ -1,7 +1,5 @@
 package com.netcracker.classes;
 
-/* 0:15 14.05.2015 by Viktor Taranenko */
-
 import java.math.BigDecimal;
 
 public class Point {

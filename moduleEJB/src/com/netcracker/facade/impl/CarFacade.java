@@ -1,6 +1,6 @@
 package com.netcracker.facade.impl;
 
- /* 18:42 28.04.2015 by Viktor Taranenko */
+
 
 import com.netcracker.entity.CarEntity;
 
@@ -11,26 +11,26 @@ import java.math.BigInteger;
 
 @Stateless
 public class CarFacade extends AbstractFacade<CarEntity> implements com.netcracker.facade.local_int.Car {
-    @PersistenceContext(unitName = "TaxiPU")
-    private EntityManager em;
+	@PersistenceContext(unitName = "TaxiPU")
+	private EntityManager em;
 
-    @Override
-    public void delete(BigInteger bigInteger) {
-        em.createNamedQuery("Car.deleteById").setParameter("id", bigInteger).executeUpdate();
-    }
+	@Override
+	public void delete(BigInteger bigInteger) {
+		em.createNamedQuery("Car.deleteById").setParameter("id", bigInteger).executeUpdate();
+	}
 
-    @Override
-    public boolean isLicenceUsed(String licencePlate) {
-        return !em.createNamedQuery("Car.isLicenceUsed").setParameter("licence", licencePlate).getResultList().isEmpty();
-    }
+	@Override
+	public boolean isLicenceUsed(String licencePlate) {
+		return !em.createNamedQuery("Car.isLicenceUsed").setParameter("licence", licencePlate).getResultList().isEmpty();
+	}
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public CarFacade() {
-        super(CarEntity.class);
-    }
-    
+	public CarFacade() {
+		super(CarEntity.class);
+	}
+
 }

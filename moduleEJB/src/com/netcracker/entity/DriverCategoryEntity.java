@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 13:42 30.04.2015 by Viktor Taranenko */
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -30,7 +30,7 @@ public class DriverCategoryEntity {
 	@OneToMany(mappedBy = "driverCategoryEntity")
 	private Collection<UserDriverCategoryEntity> user$DriverCategoryEntities;
 
-	@ManyToMany (mappedBy = "driverCategoryEntities")
+	@ManyToMany(mappedBy = "driverCategoryEntities")
 	private Collection<UserEntity> userEntities;
 
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)

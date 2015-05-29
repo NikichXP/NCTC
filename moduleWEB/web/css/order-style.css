@@ -1,71 +1,71 @@
 body {
-	margin: 0px;
-	padding: 10px;
-	background-color: #9CB8DE;
+    margin: 0px;
+    padding: 10px;
+    background-color: #9CB8DE;
 }
 
 input {
-	padding: 5px;
+    padding: 5px;
 }
 
 input[type = text] {
-	font-weight: bold;
-	margin: 5px;
-	width: 98%;
-	height: 27px;
+    font-weight: bold;
+    margin: 5px;
+    width: 98%;
+    height: 27px;
 }
 
 input[type = button] {
-	font-weight: bold;
-	margin: 5px;
-	width: 30%;
+    font-weight: bold;
+    margin: 5px;
+    width: 30%;
 }
 
 input[disabled] {
-	font-weight: unset;
+    font-weight: unset;
 }
 
 input[type = checkbox] {
-	margin: 7px;
+    margin: 7px;
 }
 
 select {
-	margin: 7px;
-	padding: 5px;
+    margin: 7px;
+    padding: 5px;
 }
 
 textarea {
-	margin: 10px;
-	min-width: 30%;
-	max-width: 97%;
-	max-height: 400px;
-	width: 80%;
+    margin: 10px;
+    min-width: 30%;
+    max-width: 97%;
+    max-height: 400px;
+    width: 80%;
 }
 
 #container {
-	width: 100%;
+    width: 100%;
 }
 
 #order-form {
-	border-radius: 20px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #254B6F;
-	width: 40%;
-	padding: 5px;
-	margin-right: 10px;
-	float: left;
+    border-radius: 20px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #254B6F;
+    width: 40%;
+    padding: 5px;
+    margin-right: 10px;
+    float: left;
 }
 
 #order-form div {
-	padding: 0px 3px;
-	margin: auto;
-	background-color: #9CB8DE;
+    padding: 0px 3px;
+    margin: auto;
+    background-color: #9CB8DE;
 }
 
 #map {
-	border-radius: 20px;
-	overflow: hidden;
-	width: 55%;
-	height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 55%;
+    height: 100%;
 }

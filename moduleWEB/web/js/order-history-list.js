@@ -1,8 +1,10 @@
-$(document).ready(function(){setHistory()});
+$(document).ready(function () {
+    setHistory()
+});
 
 var uuid = getCookie("uuid");
 
-$('#leftButtonHistory').click(function(){
+$('#leftButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -20,7 +22,7 @@ $('#leftButtonHistory').click(function(){
         })
     }
 });
-$('#centralButtonHistory').click(function(){
+$('#centralButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -39,7 +41,7 @@ $('#centralButtonHistory').click(function(){
     }
 });
 
-$('#rightButtonHistory').click(function(){
+$('#rightButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -58,7 +60,7 @@ $('#rightButtonHistory').click(function(){
     }
 });
 
-function setHistory(){
+function setHistory() {
     $.ajax({
         method: 'POST',
         url: 'api/user_dash/history',
@@ -110,6 +112,6 @@ function redirect(id) {
     document.location.href = "viewOrder.html?id=" + id;
 };
 
-function goBack(){
+function goBack() {
     document.location.href = "customer.html"
 }

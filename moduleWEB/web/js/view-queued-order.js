@@ -1,13 +1,9 @@
-/**
- * Created by Ubuntu on 20.05.2015.
- */
-
 var obj;
 
 $(document).ready(function () {
     var uuid = getCookie("uuid");
 
-    if(uuid != null) {
+    if (uuid != null) {
         $(function ($) {
             $("#timeOfDriverArrival").mask("99/99/9999 99:99", {placeholder: "dd/mm/yyyy HH:mm"});
         });
@@ -58,7 +54,7 @@ function getOrderById(id) {
         $("#fromX").attr("value", obj.fromX);
         $("#fromY").attr("value", obj.fromY);
 
-        for(var i = 0; i < obj.toAddress.length; i++){
+        for (var i = 0; i < obj.toAddress.length; i++) {
             var outer = document.getElementById("importantInfo");
             var input = document.createElement("input");
 
@@ -108,16 +104,16 @@ function getOrderById(id) {
         $("#car").attr("value", obj.carClass);
         $("#music").attr("value", obj.musicType);
 
-        if(obj.smokingFriendly == "true") {
+        if (obj.smokingFriendly == "true") {
             $('input:checkbox[id=smokingFriendly]').prop('checked', true);
         }
-        if(obj.animalFriendly == "true") {
+        if (obj.animalFriendly == "true") {
             $('input:checkbox[id=animalFriendly]').prop('checked', true);
         }
-        if(obj.wifi == "true") {
+        if (obj.wifi == "true") {
             $('input:checkbox[id=wifi]').prop('checked', true);
         }
-        if(obj.airConditioner == "true") {
+        if (obj.airConditioner == "true") {
             $('input:checkbox[id=airConditioner]').prop('checked', true);
         }
 

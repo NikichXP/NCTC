@@ -1,7 +1,3 @@
-/**
- * Created by Ubuntu on 11.05.2015.
- */
-
 function getAccessLevels() {
     var uuid = getCookie("uuid");
     $.ajax({

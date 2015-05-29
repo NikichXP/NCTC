@@ -1,6 +1,3 @@
-/**
- * Created by Ubuntu on 19.05.2015.
- */
 var uuid = getCookie("uuid");
 
 $(document).ready(function () {
@@ -13,7 +10,7 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-$('#leftButtonHistory').click(function(){
+$('#leftButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -31,7 +28,7 @@ $('#leftButtonHistory').click(function(){
         })
     }
 });
-$('#centralButtonHistory').click(function(){
+$('#centralButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',
@@ -49,7 +46,7 @@ $('#centralButtonHistory').click(function(){
         })
     }
 });
-$('#rightButtonHistory').click(function(){
+$('#rightButtonHistory').click(function () {
     if (uuid != null) {
         $.ajax({
             method: 'POST',

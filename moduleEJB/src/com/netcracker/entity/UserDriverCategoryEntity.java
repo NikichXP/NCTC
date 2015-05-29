@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 13:42 30.04.2015 by Viktor Taranenko */
+
 
 import javax.persistence.*;
 import java.math.BigInteger;

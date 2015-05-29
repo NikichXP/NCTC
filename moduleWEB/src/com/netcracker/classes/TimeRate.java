@@ -1,7 +1,5 @@
 package com.netcracker.classes;
 
-/* 16:43 17.05.2015 by Viktor Taranenko */
-
 public class TimeRate {
 	private String fromTimeHHmm;
 	private String toTimeHHmm;

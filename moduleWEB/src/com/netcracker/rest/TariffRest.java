@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-/* 15:37 17.05.2015 by Viktor Taranenko */
 @Path("tariff")
 public class TariffRest {
 	@EJB
@@ -43,7 +42,7 @@ public class TariffRest {
 
 		for (TariffEntity tariffEntity : allTariffs) {
 			if (tariffEntity.getWifi() != null) tariffJson.setWifi(tariffEntity.getMultiplier().toString());
-			else if (tariffEntity.getAnimalFriendly()  != null)
+			else if (tariffEntity.getAnimalFriendly() != null)
 				tariffJson.setAnimalFriendly(tariffEntity.getMultiplier().toString());
 			else if (tariffEntity.getWifi() != null)
 				tariffJson.setWifi(tariffEntity.getMultiplier().toString());
@@ -75,7 +74,6 @@ public class TariffRest {
 	}
 
 
-
 	@POST
 	@Path("getOrderTypeMultipliers")
 	@Consumes("text/plain")
@@ -87,7 +85,6 @@ public class TariffRest {
 		OrderTypeEntity orderTypeEntity4 = orderType.findByName("guest delivery");
 		OrderTypeEntity orderTypeEntity5 = orderType.findByName("meet my guest");
 		OrderTypeEntity orderTypeEntity6 = orderType.findByName("celebration taxi");
-
 
 
 		StringBuilder sb = new StringBuilder();
@@ -114,6 +111,7 @@ public class TariffRest {
 			return Response.status(404).entity("Bad response.").build();
 		}
 	}
+
 	@POST
 	@Path("basicButton")
 	@Consumes("text/plain")
@@ -124,6 +122,7 @@ public class TariffRest {
 		orderType.update(orderTypeEntity);
 
 	}
+
 	@POST
 	@Path("cargoButton")
 	@Consumes("text/plain")
@@ -133,6 +132,7 @@ public class TariffRest {
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
 	}
+
 	@POST
 	@Path("soberButton")
 	@Consumes("text/plain")
@@ -142,6 +142,7 @@ public class TariffRest {
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
 	}
+
 	@POST
 	@Path("guestButton")
 	@Consumes("text/plain")
@@ -151,6 +152,7 @@ public class TariffRest {
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
 	}
+
 	@POST
 	@Path("meetButton")
 	@Consumes("text/plain")
@@ -160,6 +162,7 @@ public class TariffRest {
 		orderTypeEntity.setTariffMultiplier(new BigDecimal(mul));
 		orderType.update(orderTypeEntity);
 	}
+
 	@POST
 	@Path("celebrationButton")
 	@Consumes("text/plain")
@@ -175,7 +178,7 @@ public class TariffRest {
 	@Consumes("text/plain")
 	@Produces("text/plain")
 	public void setDayHourlyRate(String mul) {
-		 tariff.setDayHourlyMultiplier(new BigDecimal(mul));
+		tariff.setDayHourlyMultiplier(new BigDecimal(mul));
 	}
 
 	@POST

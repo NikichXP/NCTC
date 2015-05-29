@@ -1,7 +1,3 @@
-/**
- * Created by Ubuntu on 11.05.2015.
- */
-
 $(document).ready(function () {
     getCarClass();
     getMusicType();

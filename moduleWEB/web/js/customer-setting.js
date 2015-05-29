@@ -1,6 +1,3 @@
-/**
- * Created by Ubuntu on 26.05.2015.
- */
 $(document).ready(function () {
     getDataToUserField();
 });

@@ -16,7 +16,7 @@ function setUserDataInHeader() {
                 setData(obj.userData);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-               alert(uuid + "Error!");
+                alert(uuid + "Error!");
             }
         })
     }

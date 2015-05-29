@@ -1,6 +1,6 @@
 var uuid = getCookie("uuid");
 
-$(document).ready(function(){
+$(document).ready(function () {
     getQueuedOrders();
     getAssignedOrders();
 });
@@ -11,8 +11,8 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-function getQueuedOrders(){
-    if(uuid != null) {
+function getQueuedOrders() {
+    if (uuid != null) {
         $.ajax({
             method: 'POST',
             url: 'api/driver/getQueuedOrders',
@@ -29,8 +29,8 @@ function getQueuedOrders(){
     }
 }
 
-function getAssignedOrders(){
-    if(uuid != null) {
+function getAssignedOrders() {
+    if (uuid != null) {
         $.ajax({
             method: 'POST',
             url: 'api/driver/getAssignedOrders',

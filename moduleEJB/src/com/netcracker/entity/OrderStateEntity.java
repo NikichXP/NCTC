@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 13:42 30.04.2015 by Viktor Taranenko */
+
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -22,7 +22,7 @@ public class OrderStateEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
-	@OneToMany(mappedBy="orderStateEntity")
+	@OneToMany(mappedBy = "orderStateEntity")
 	private Collection<OrderEntity> orderEntities;
 
 	@Column(name = "name", nullable = false, insertable = true, updatable = true, length = 2147483647)

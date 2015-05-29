@@ -1,6 +1,6 @@
 package com.netcracker.entity;
 
-/* 13:42 30.04.2015 by Viktor Taranenko */
+
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,10 +19,10 @@ import java.util.Collection;
 				"WHERE f.publicToken = :publicToken"),
 		@NamedQuery(name = "Order.getOrdersByStateAndDriverUuid", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :driverUuid"),
-        @NamedQuery(name = "Order.getByUUIDAndID", query = "SELECT f FROM OrderEntity f " +
-                "WHERE f.id = :id AND f.customerUserEntity.uuid = :uuid"),
-        @NamedQuery(name = "Order.getByDriverUUIDAndID", query = "SELECT f FROM OrderEntity f " +
-                "WHERE f.id = :id AND f.driverUserEntity.uuid = :uuid"),
+		@NamedQuery(name = "Order.getByUUIDAndID", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.id = :id AND f.customerUserEntity.uuid = :uuid"),
+		@NamedQuery(name = "Order.getByDriverUUIDAndID", query = "SELECT f FROM OrderEntity f " +
+				"WHERE f.id = :id AND f.driverUserEntity.uuid = :uuid"),
 		@NamedQuery(name = "Order.sortByDateAndUUIDAndState", query = "SELECT f FROM OrderEntity f " +
 				"WHERE f.orderStateEntity = :orderStateEntity AND f.driverUserEntity.uuid = :uuid " +
 				"ORDER BY f.timeCreated DESC"),
@@ -44,7 +44,7 @@ public class OrderEntity {
 	@Column(name = "id", nullable = false, insertable = true, updatable = true, precision = 0)
 	private BigInteger id;
 
-	@OneToMany(mappedBy="orderEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Collection<PathEntity> pathEntities;
 
 	@ManyToOne

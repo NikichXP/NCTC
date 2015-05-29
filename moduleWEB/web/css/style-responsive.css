@@ -15,7 +15,6 @@
 
     /*chat room*/
 
-
 }
 
 @media (max-width: 768px) {
@@ -25,7 +24,6 @@
     }
 
     /*sidebar*/
-
     #sidebar {
         height: auto;
         overflow: hidden;
@@ -34,10 +32,9 @@
         z-index: 1001;
     }
 
-
     /* body container */
     #main-content {
-        margin: 0px!important;
+        margin: 0px !important;
         position: none !important;
     }
 
@@ -48,13 +45,15 @@
     #sidebar > ul > li {
         margin: 0 10px 5px 10px;
     }
+
     #sidebar > ul > li > a {
-        height:35px;
-        line-height:35px;
+        height: 35px;
+        line-height: 35px;
         padding: 0 10px;
         text-align: left;
     }
-    #sidebar > ul > li > a i{
+
+    #sidebar > ul > li > a i {
         /*display: none !important;*/
     }
 
@@ -64,20 +63,21 @@
     }
 
     #sidebar ul > li.active > a .arrow, #sidebar ul > li > a:hover .arrow, #sidebar ul > li > a:focus .arrow,
-    #sidebar > ul > li.active > a .arrow.open, #sidebar > ul > li > a:hover .arrow.open, #sidebar > ul > li > a:focus .arrow.open{
+    #sidebar > ul > li.active > a .arrow.open, #sidebar > ul > li > a:hover .arrow.open, #sidebar > ul > li > a:focus .arrow.open {
         margin-top: 15px;
     }
 
     #sidebar > ul > li > a, #sidebar > ul > li > ul.sub > li {
         width: 100%;
     }
+
     #sidebar > ul > li > ul.sub > li > a {
-        background: transparent !important ;
-    }
-    #sidebar > ul > li > ul.sub > li > a:hover {
-        
+        background: transparent !important;
     }
 
+    #sidebar > ul > li > ul.sub > li > a:hover {
+
+    }
 
     /* sidebar */
     #sidebar {
@@ -94,15 +94,13 @@
         right: 35px;
         width: 0;
         height: 0;
-        top:48px;
+        top: 48px;
         border-bottom: 15px solid #282e36;
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
     }
 
-
     /*---------*/
-
     .modal-footer .btn {
         margin-bottom: 0px !important;
     }
@@ -111,10 +109,9 @@
         margin-bottom: 5px;
     }
 
-
     /* full calendar fix */
     .fc-header-right {
-        left:25px;
+        left: 25px;
         position: absolute;
     }
 
@@ -194,15 +191,13 @@
     }
 
     .fc-header {
-        margin-bottom:0px !important;
+        margin-bottom: 0px !important;
     }
 
     /*--*/
-
     /*.chart-position {*/
-        /*margin-top: 0px;*/
+    /*margin-top: 0px;*/
     /*}*/
-
     .stepy-titles li {
         margin: 10px 3px;
     }
@@ -216,45 +211,44 @@
     .dcjq-icon {
         top: 10px;
     }
+
     ul.sidebar-menu li ul.sub li a {
         padding: 0;
     }
 
     /*---*/
-
     .img-responsive {
         width: 100%;
     }
 
 }
 
-
-
 @media (max-width: 480px) {
 
-    .notify-row, .search, .dont-show , .inbox-head .sr-input, .inbox-head .sr-btn{
+    .notify-row, .search, .dont-show, .inbox-head .sr-input, .inbox-head .sr-btn {
         display: none;
     }
 
     #top_menu .nav > li, ul.top-menu > li {
         float: right;
     }
+
     .hidden-phone {
         display: none !important;
     }
 
     .chart-position {
-       margin-top: 0px;
-     }
+        margin-top: 0px;
+    }
 
     .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
         background-color: #ccc;
-        border-color:#ccc ;
+        border-color: #ccc;
     }
 
 }
 
-@media (max-width:320px) {
+@media (max-width: 320px) {
     .login-social-link a {
         padding: 15px 17px !important;
     }
@@ -279,6 +273,7 @@
         margin: 10% auto;
         max-width: 310px;
     }
+
     .lock-input {
         width: 82%;
     }

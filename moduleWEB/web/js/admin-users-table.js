@@ -1,12 +1,12 @@
 /**
  * Created by Евгений on 16.05.2015.
  */
-$(document).ready(function(){
- setHistory();
+$(document).ready(function () {
+    setHistory();
 });
 
 
-function setHistory(){
+function setHistory() {
 
     $.ajax({
         method: 'POST',
@@ -56,19 +56,19 @@ function drawBody(rowData, table) {
     row.append($("<td>" + rowData.phone + "</td>"));
     row.append($("<td>" + rowData.email + "</td></tbody></tr>"));
 
-    row.append($("<td id="+rowData.id_d+'d'+"></td></tr></tbody>"));
-    var td = document.getElementById(rowData.id_d+'d');
+    row.append($("<td id=" + rowData.id_d + 'd' + "></td></tr></tbody>"));
+    var td = document.getElementById(rowData.id_d + 'd');
     var btn = document.createElement('div');
     btn.className = "button";
 
 
     btn.appendChild(document.createTextNode("Modify"));
     td.appendChild(btn);
-    btn.onclick = function(){
-        document.location.href = "adminForm.html?id="+rowData.id_d;
-    } ;
+    btn.onclick = function () {
+        document.location.href = "adminForm.html?id=" + rowData.id_d;
+    };
 
-   // <div class='button' id="+rowData.id_d+" >Modify</div>
+    // <div class='button' id="+rowData.id_d+" >Modify</div>
 }
 
 

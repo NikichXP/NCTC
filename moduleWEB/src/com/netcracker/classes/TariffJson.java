@@ -1,7 +1,5 @@
 package com.netcracker.classes;
 
-/* 15:43 17.05.2015 by Viktor Taranenko */
-
 import java.util.Arrays;
 
 public class TariffJson {

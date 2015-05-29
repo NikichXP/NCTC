@@ -1,6 +1,6 @@
 package com.netcracker.rest.utils;
 
-/* 23:01 09.05.2015 by Viktor Taranenko */
+
 
 import javax.crypto.*;
 import java.io.IOException;
@@ -49,6 +49,7 @@ public final class SecuritySettings {
 
 	/**
 	 * encrypt function
+	 *
 	 * @param str - String to encrypt
 	 * @return encrypted String in Base64 format
 	 */
@@ -69,10 +70,11 @@ public final class SecuritySettings {
 
 	/**
 	 * decrypt function
+	 *
 	 * @param str - String to encrypt
 	 * @return deccrypted String
 	 */
-	public static String decrypt(String str)  {
+	public static String decrypt(String str) {
 		try {
 			byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
 			byte[] utf8 = dcipher.doFinal(dec);

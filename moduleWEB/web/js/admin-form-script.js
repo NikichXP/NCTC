@@ -71,7 +71,7 @@ $("#test").click(function () {
     queryString = queryString.substring(4);
     var JSONdata = {
 
-        id:queryString,
+        id: queryString,
         firstName: $("#in1").val(),
         lastName: $("#in2").val(),
         phone: $("#in3").val(),
@@ -147,11 +147,10 @@ $("#delete").click(function () {
     deleteDriver(queryString);
 
 
-
 });
 
 
-function deleteDriver(id){
+function deleteDriver(id) {
 
     var JSONdata = {
         id: id
@@ -161,8 +160,8 @@ function deleteDriver(id){
         url: "api/user/delete",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(JSONdata),
-        dataType:'text',
-        success: function (data,textStatus,jqXHR ) {
+        dataType: 'text',
+        success: function (data, textStatus, jqXHR) {
             alert(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {

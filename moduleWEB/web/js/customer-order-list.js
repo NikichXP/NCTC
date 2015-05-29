@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     setList()
 });
 
@@ -9,9 +9,9 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-function setList(){
+function setList() {
     var uuid = getCookie("uuid");
-    if(uuid != null) {
+    if (uuid != null) {
         $.ajax({
             method: 'POST',
             url: 'api/user_dash/customer_list',

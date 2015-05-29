@@ -1,6 +1,3 @@
-/**
- * Created by Ann on 09.05.2015.
- */
 var myMap;
 var myPath;
 // Дождёмся загрузки API и готовности DOM.

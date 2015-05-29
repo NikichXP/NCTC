@@ -1,11 +1,10 @@
-$(document).ready(function(){
+$(document).ready(function () {
     checkCookie("uuid");
 });
 
-$("#logout-button").click(function(){
+$("#logout-button").click(function () {
     deleteAllCookies();
 });
-
 
 
 function checkCookie(name) {

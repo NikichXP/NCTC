@@ -1,7 +1,3 @@
-/**
- * Created by Ubuntu on 20.05.2015.
- */
-
 var orderId;
 $(document).ready(function () {
     ymaps.ready(function () {

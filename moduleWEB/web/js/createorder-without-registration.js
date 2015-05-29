@@ -1,7 +1,3 @@
-/**
- * Created by Ubuntu on 11.05.2015.
- */
-
 $(document).ready(function () {
     getCarClass();
     getMusicType();
@@ -148,7 +144,7 @@ function validateBasicOrderData() {
         alert("Phone number:\nPlease, use only digits. Length from 6 to 12.");
         return false;
     }
-    if(!validateNames($("#email").val(), emailRegEx)){
+    if (!validateNames($("#email").val(), emailRegEx)) {
         alert("E-mail:\nPlease, enter a valid e-mail.");
         return false;
     }

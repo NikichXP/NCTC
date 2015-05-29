@@ -11,7 +11,7 @@ var emailRegEx = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,
 var passRegEx = /^....+$/;
 //var license = /
 
-function validateCar(){
+function validateCar() {
 
 }
 function validateRegistrationData() {
@@ -44,8 +44,8 @@ function validateRegistrationData() {
     }
     return true;
 }
-function validateNames (input, regEx) {
-    if(input.length > 0){
+function validateNames(input, regEx) {
+    if (input.length > 0) {
         return regEx.test(input);
     }
     return false;
@@ -297,12 +297,12 @@ function removeAll() {
     $("#delete-my-car").remove();
     fix = false;
 }
-function removeChild(element){
+function removeChild(element) {
     var myNode = document.getElementById(element);
     var fc = myNode.firstChild;
 
-    while( fc ) {
-        myNode.removeChild( fc );
+    while (fc) {
+        myNode.removeChild(fc);
         fc = myNode.firstChild;
     }
 }

@@ -1,6 +1,3 @@
-/**
- * Created by Ann on 09.05.2015.
- */
 var myMap;
 var myPath;
 
@@ -11,7 +8,7 @@ function init() {
     myMap = new ymaps.Map('map', {
         // При инициализации карты обязательно нужно указать
         // её центр и коэффициент масштабирования.
-        center: [50.45,30.52], // Киев
+        center: [50.45, 30.52], // Киев
         zoom: 11
     });
 }
@@ -33,8 +30,8 @@ function makeSearch(element) {
         var coords = firstGeoObject.geometry.getCoordinates();
         // Область видимости геообъекта.
         //var bounds = firstGeoObject.properties.get('boundedBy');
-         document.getElementById("toX" + element.id.slice(-1)).value = coords[0];
-         document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
+        document.getElementById("toX" + element.id.slice(-1)).value = coords[0];
+        document.getElementById("toY" + element.id.slice(-1)).value = coords[1];
 
         // Добавляем первый найденный геообъект на карту.
         myMap.geoObjects.add(firstGeoObject);
@@ -60,27 +57,27 @@ function buildPath(index) {
     var pointsArray = [];
     pointsArray.push(document.getElementById('fromAddress').value);
 
-    for(var i = 0; i <= index; i++) {
+    for (var i = 0; i <= index; i++) {
         pointsArray.push(document.getElementById('toAddress' + i).value);
         //alert(pointsArray);
     }
-    myPath= new ymaps.route(
+    myPath = new ymaps.route(
         pointsArray
-    , {
-        // Router options
-        mapStateAutoApply: true // automatically position the map
-    }).then(function (route) {
-        myMap.geoObjects.add(route);
-            var Paths=route.getPaths();
-            for(var i = 0; i < Paths.getLength(); i++) {
-                document.getElementById('distance'+i).value = parseFloat(Paths.get(i).getLength() / 1000).toFixed(2);
+        , {
+            // Router options
+            mapStateAutoApply: true // automatically position the map
+        }).then(function (route) {
+            myMap.geoObjects.add(route);
+            var Paths = route.getPaths();
+            for (var i = 0; i < Paths.getLength(); i++) {
+                document.getElementById('distance' + i).value = parseFloat(Paths.get(i).getLength() / 1000).toFixed(2);
                 console.log(Paths.get(i).getLength());
             }
             //console.log(Paths);
-            document.getElementById('totalLength').value = parseFloat(route.getLength()/1000).toFixed(2);
+            document.getElementById('totalLength').value = parseFloat(route.getLength() / 1000).toFixed(2);
             updatePrice();
-    }, function (error) {
-        alert("Unable to build path. Input correct addresses.");
-    });
+        }, function (error) {
+            alert("Unable to build path. Input correct addresses.");
+        });
     return false;
 }
